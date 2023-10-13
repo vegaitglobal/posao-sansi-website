@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+
+  django:
+    container_name: opportunity_job_api-django
+    build:
+      target: production
