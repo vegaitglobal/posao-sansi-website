@@ -30,5 +30,16 @@ services:
       - opportunity_job_api-postgres-data:/var/lib/postgresql/data
     restart: always
 
+  nextjs:
+    container_name: opportunity_job_api-nextjs
+    ports:
+      - "3000:3000"
+    build:
+      context: ./opportunity_job_app
+    volumes:
+      - ./opportunity_job_app:/usr/app/
+    command: sh -c 'npm install; npm run dev'
+    restart: always
+
 volumes:
   opportunity_job_api-postgres-data:

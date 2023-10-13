@@ -1,0 +1,61 @@
+// ----------  variables
+// ------------------------------------------------------------------------------
+
+$font-default: aeonik, sans-serif;
+
+
+// Colors
+$white: #fff;
+$white-2: #FDFCFC;
+$black: #141414;
+$purple-primary: #6C5478;
+$purple-hover: #886B97;
+$purple-active: #563E62;
+$purple-bg: #563E62;
+$yellow-primary: #EB9F42;
+$yellow-hover: #F1B469;
+$yellow-active: #C97815;
+$blue-accent: #77DAF0;
+$gray-light: #ECEBEB;
+$gray-medium: #D7D5D5;
+$gray-3: #D7D5D5;
+$gray-4: #C0BFBF;
+$red: #E93017;
+$red-light: #FFEDEB;
+$blue: #1756B5;
+$blue-light: #B8D4FD;
+$green: #03CF61;
+$green-light: #DCFFEC;
+
+
+// ----------  Bootstrap grid
+// ------------------------------------------------------------------------------
+
+$enable-grid-classes: true !default;
+
+// ----------  Media queries breakpoints - Grid breakpoint
+// ------------------------------------------------------------------------------
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px
+) !default;
+
+// ----------  Grid containers
+// ------------------------------------------------------------------------------
+
+$container-max-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1140px
+) !default;
+
+// ----------  Grid columns
+// ------------------------------------------------------------------------------
+
+$grid-columns: 12 !default;
+$grid-gutter-width: 30px !default;
