@@ -3,7 +3,7 @@ version: "3.7"
 services:
 
   django:
-    container_name: opportunity_job_api-django
+    container_name: opportunity_job-django
     build:
       context: opportunity_job_api
       target: development
@@ -20,18 +20,18 @@ services:
     restart: always
 
   postgres:
-    container_name: opportunity_job_api-postgres
+    container_name: opportunity_job-postgres
     image: postgres:16
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_DB=${DB_NAME}
     volumes:
-      - opportunity_job_api-postgres-data:/var/lib/postgresql/data
+      - opportunity_job-postgres-data:/var/lib/postgresql/data
     restart: always
 
   nextjs:
-    container_name: opportunity_job_api-nextjs
+    container_name: opportunity_job-nextjs
     ports:
       - "3000:3000"
     build:
@@ -42,4 +42,4 @@ services:
     restart: always
 
 volumes:
-  opportunity_job_api-postgres-data:
+  opportunity_job-postgres-data:
