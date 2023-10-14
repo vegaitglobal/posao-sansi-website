@@ -7,7 +7,6 @@ from apps.users.enums import Education, WorkExperience
 
 
 class JobOffer(BaseModel):
-
     class Meta:
         verbose_name = _("Job Offer")
         verbose_name_plural = _("Job Offers")
@@ -71,6 +70,7 @@ class JobOffer(BaseModel):
     additional_skills = models.CharField(
         verbose_name=_("additional skills"),
         max_length=250,
+        blank=True
     )
     is_active = models.BooleanField(
         verbose_name=_("is active"),

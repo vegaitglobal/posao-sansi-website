@@ -1,0 +1,54 @@
+- model: jobs.JobOffer
+  pk: 1
+  fields:
+    job_name: Job A
+    job_description: This is Job A
+    employer: 1
+    location: NS
+    application_deadline: 2999-01-01T00:00:00
+    created: 2023-01-01T00:00:00
+    modified: 2023-01-01T00:00:00
+
+- model: jobs.JobOffer
+  pk: 2
+  fields:
+    job_name: Job B
+    job_description: This is Job B
+    employer: 1
+    location: BG
+    application_deadline: 2999-01-01T00:00:00
+    created: 2023-02-02T00:00:00
+    modified: 2023-02-02T00:00:00
+
+- model: jobs.JobOffer
+  pk: 3
+  fields:
+    job_name: Job C
+    job_description: This is Job C
+    employer: 1
+    location: Zrenjanin
+    application_deadline: 2999-01-01T00:00:00
+    created: 2023-03-03T00:00:00
+    modified: 2023-03-03T00:00:00
+
+- model: jobs.JobOffer
+  pk: 4
+  fields:
+    job_name: Job D
+    job_description: This is Job D
+    employer: 1
+    location: Nis
+    application_deadline: 2999-01-01T00:00:00
+    created: 2023-04-04T00:00:00
+    modified: 2023-04-04T00:00:00
+
+- model: jobs.JobOffer
+  pk: 5
+  fields:
+    job_name: Job E
+    job_description: This is Job E
+    employer: 1
+    location: Subotica
+    application_deadline: 2999-01-01T00:00:00
+    created: 2023-05-05T00:00:00
+    modified: 2023-05-05T00:00:00
