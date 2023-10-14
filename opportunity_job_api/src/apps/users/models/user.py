@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import BaseModel
+from apps.users.models import ApplicantAccount, EmployerAccount
 
 
 class UserManager(BaseUserManager):
@@ -28,6 +29,8 @@ class User(BaseModel, AbstractUser):
         unique=True
     )
     username = None
+    first_name = None
+    last_name = None
 
     objects = UserManager()
 
@@ -37,3 +40,8 @@ class User(BaseModel, AbstractUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+    def get_account(self) -> EmployerAccount | ApplicantAccount | None:
+        if employer_account := EmployerAccount.objects.filter(user=self).first():
+            return employer_account
+        return ApplicantAccount.objects.filter(user=self).first()

@@ -4,5 +4,41 @@ services:
 
   django:
     container_name: opportunity_job_api-django
-    build:
-      target: production
+    image: codeforacause/posaosansi:api-#{TAG_NUMBER}#
+    environment:
+      - DB_NAME=#{DB_NAME}#
+      - DB_USERNAME=#{DB_USERNAME}#
+      - DB_PASSWORD=#{DB_PASSWORD}#
+      - DB_HOSTNAME=postgres
+      - SECRET_KEY=#{SECRET_KEY}#
+      - EMAIL_HOST=#{EMAIL_HOST}#
+      - EMAIL_PORT=#{EMAIL_PORT}#
+      - EMAIL_HOST_USER=#{EMAIL_HOST_USER}#
+      - EMAIL_HOST_PASSWORD=#{EMAIL_HOST_PASSWORD}#
+      - EMAIL_USE_TLS=True
+    ports:
+      - 9010:8000
+    restart: always
+  
+  postgres:
+    container_name: opportunity_job_api-postgres
+    image: postgres:16
+    environment:
+      - POSTGRES_PASSWORD=#{DB_PASSWORD}#
+      - POSTGRES_USER=#{DB_USERNAME}#
+      - POSTGRES_DB=#{DB_NAME}#
+    volumes:
+      - opportunity_job_api-postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432/tcp
+    restart: always
+  
+  nextjs:
+    container_name: opportunity_job-nextjs
+    image: codeforacause/posaosansi:ui-#{TAG_NUMBER}#
+    ports:
+      - "9011:3000"
+    restart: always
+  
+volumes:
+  opportunity_job_api-postgres-data:
