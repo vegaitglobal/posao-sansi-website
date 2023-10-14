@@ -1,7 +1,9 @@
 @import '../../scss/style.scss';
 .header {
+    position: relative;
     height: 94px;
     padding: 0 46px;
+    box-shadow: 0px 4px 4px 0px rgba($black, 0.25);
 }
 .header__container {
     display: flex;
@@ -59,7 +61,7 @@
 .header__nav-list {
     display: flex;
     @include media-breakpoint-down(md) {
-        display: none;
+        display: block;
         position: absolute;
         top: 58px;
         right: 0;
@@ -87,6 +89,7 @@
 
 }
 .header__nav-icon {
+    width: 20px;
     @include media-breakpoint-up(md) {
         display: none;
     }

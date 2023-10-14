@@ -1,0 +1,42 @@
+@import '../../scss/style.scss';
+
+.statistics {
+    padding: 32px 0;
+}
+// .statistics__container {
+// }
+.statistics__title {
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.statistics__holder {
+    max-width: 550px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+    }
+}
+.statistics__box {
+    display: block;
+    @include media-breakpoint-down(sm) {
+        &:first-child {
+            margin-bottom: 30px;
+        }
+    }
+}
+.statistics__box-number {
+    display: block;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 36px;
+    color: $purple-primary;
+}
+.statistics__box-text {
+    display: block;
+    color: $black;
+}

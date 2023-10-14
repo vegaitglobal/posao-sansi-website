@@ -7,6 +7,7 @@ import { setLocalStorage } from "@/api/baseApi"
 import { AuthService } from "@/api/authService"
 import Banner from "../components/Banner/Banner"
 import Mission from "@/components/Mission/Mission";
+import Statistics from "@/components/Statistics/Statistics";
 
 type User = {
   token: string;
@@ -32,6 +33,7 @@ export default function Home() {
       <main>
           <Banner />
           <Mission />
+          <Statistics />
       </main>
       <Footer />
     </>
