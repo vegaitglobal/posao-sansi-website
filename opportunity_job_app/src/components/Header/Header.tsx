@@ -10,6 +10,7 @@ type LinkItem = {
     label: string;
     url: string;
     iconPath: string;
+    isLogged?: null | object;
 };
 
 type LanguageItem = {
@@ -18,23 +19,71 @@ type LanguageItem = {
     flagPath: string;
 };
 
-const Header = () => {
-    const [logged, setLogged] = useState<boolean>(false);
+type User = {
+    token: string;
+    id: number;
+    accountType: string;
+};
+
+type HeaderProps = {
+users: User | undefined;
+};
+
+type linksObjectTypes = {
+    [x:string]:LinkItem[]
+}
+
+const Header = ({users}:HeaderProps) => {
+    const initialLinks: LinkItem[] = [
+        { label: 'Pocetna', url: '/', iconPath: '/images/home.svg', },
+        { label: 'FAQ', url: '/faq', iconPath: '/images/faq.svg'},
+    ]
 
     const links:LinkItem[] = [
-        { label: 'Pocetna', url: '/', iconPath: '/images/home.svg'},
-        { label: 'FAQ', url: '/faq', iconPath: '/images/faq.svg' },
-        { label: 'Prijava', url: '/login', iconPath: '/images/log-in.svg' },
-        { label: 'Registracija', url: '/register', iconPath: '/images/sign-in.svg' },
+        ...initialLinks,
+        { label: 'Prijava', url: '/login', iconPath: '/images/log-in.svg'},
+        { label: 'Registracija', url: '/register', iconPath: '/images/sign-in.svg'},
     ];
+
+    const linksLoggedUser:LinkItem[] = [
+        ...initialLinks,
+        { label: 'Moji poslovi', url: '/register', iconPath: '/images/jobs.svg'},
+        { label: 'Odjava', url: '/login', iconPath: '/images/sing-out.svg'},
+    ];
+
+    
+    const linksLoggedCompany:LinkItem[] = [
+        ...initialLinks,
+        { label: 'Ponuda poslova', url: '/register', iconPath: '/images/jobs.svg'},
+        { label: 'Odjava', url: '/login', iconPath: '/images/sing-out.svg'},
+    ];
+    
+    const linksObject:linksObjectTypes = {
+        "undefined": links,
+        "Company": linksLoggedCompany,
+        "User": linksLoggedUser
+    }
 
     const languages: LanguageItem[] = [
         { label: 'ENG', code: 'en', flagPath: '/images/en-flag.png' },
         { label: 'SRB', code: 'srb', flagPath: '/images/srb-flag.png' },
     ];
+
+    const mapItems = (items: LinkItem[]) => {
+        return  items.map((link:LinkItem,index:number) => (
+            <li className='header__nav-item' key={index}>
+                <Link className="header__nav-link" href={link.url}>
+                    <img src={link.iconPath} alt="icon" />
+                    <span className="header__nav-link-text">
+                        {link.label}
+                    </span>
+                </Link>
+            </li>
+        ))
+    }
+
     return (
         <header className="header">
-
             <div className="header__container">
                 <div className="header__logo">
                     <a className="header__logo-link" href="/">
@@ -43,20 +92,11 @@ const Header = () => {
                     </a>
                 </div>
                 <nav className="header__nav">
-                    <ul className="header__nav-list">
-                        {links.map((link, index) => (
-                            <li className='header__nav-item' key={index}>
-                                <Link className="header__nav-link" href={link.url}>
-                                    <img src={link.iconPath} alt="icon" />
-                                    <span className="header__nav-link-text">
-                                        {link.label}
-                                    </span>
-                                </Link>
-                            </li>
-                        ))}
+                    <ul className="header__nav-list">       
+                        { users ? mapItems(linksObject[users.accountType]) : mapItems(links)}
                     </ul>
                     <button className='header__hamburger-btn' type='button'>
-                        {logged ? <img src="/images/user.svg" alt="user" /> : <img src="/images/hamburger-btn.svg" alt="hamburgerBtn"/>}
+                        {users ? <img src="/images/user.svg" alt="user" /> : <img src="/images/hamburger-btn.svg" alt="hamburger-btn" /> }
                     </button>
                 </nav>
                 <div className="header__language">
