@@ -22,7 +22,7 @@ const Mission = () => {
                 <div className="mission__content">
                    <ul className="mission__content-list">
                     {content.map((cont, index) => (
-                        <li className="mission__content-item">
+                        <li key={index} className="mission__content-item">
                             <img src={cont.urlImg} alt="icon" />
                             <p>{cont.text}</p>
                         </li>
