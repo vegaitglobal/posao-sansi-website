@@ -52,6 +52,15 @@ class JobOffer(BaseModel):
             "This field represents requiered work experience"
         ),
     )
+    required_education = models.CharField(
+        verbose_name=_("required education"),
+        max_length=20,
+        choices=Education.choices,
+        default=Education.NONE,
+        help_text=_(
+            "This field represents requiered education"
+        ),
+    )
     additional_skills = models.CharField(
         verbose_name=_("additional skills"),
         max_length=250,
