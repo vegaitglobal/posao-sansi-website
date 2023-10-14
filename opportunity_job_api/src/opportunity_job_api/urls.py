@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from opportunity_job_api.views import index_api_view
 
 urlpatterns = i18n_patterns(
@@ -12,6 +13,9 @@ urlpatterns = i18n_patterns(
 
 api_urlpatterns = [
     path("", index_api_view, name="index"),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name="api:schema"), name="swagger-ui"),
+    path("schema/redoc/", SpectacularRedocView.as_view(url_name="api:schema"), name="redoc"),
 ]
 
 urlpatterns += [
