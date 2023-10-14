@@ -6,4 +6,4 @@ class FAQSerializer(ModelSerializer):
 
     class Meta:
         model = FAQ
-        fields = '__all__' 
+        fields = "__all__"

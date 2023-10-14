@@ -9,8 +9,8 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
-from apps.users.urls import urlpatterns as user_api_urlpatterns
 from apps.jobs.urls import urlpatterns as jobs_api_urlpatterns
+from apps.users.urls import urlpatterns as user_api_urlpatterns
 from opportunity_job_api.views import index_api_view
 
 urlpatterns = i18n_patterns(
