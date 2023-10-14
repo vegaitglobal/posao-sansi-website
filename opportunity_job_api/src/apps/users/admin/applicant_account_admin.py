@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.db.models import QuerySet
 from django.db.models.functions import Collate
 
-from apps.users.models import ApplicantAccount
 from apps.common.admin import ModelAdmin
+from apps.users.models import ApplicantAccount
 
 
 @admin.register(ApplicantAccount)
