@@ -73,7 +73,7 @@ const Header = ({users}:HeaderProps) => {
         return  items.map((link:LinkItem,index:number) => (
             <li className='header__nav-item' key={index}>
                 <Link className="header__nav-link" href={link.url}>
-                    <img src={link.iconPath} alt="icon" />
+                    <img className="header__nav-icon" src={link.iconPath} alt="icon" />
                     <span className="header__nav-link-text">
                         {link.label}
                     </span>
@@ -91,14 +91,6 @@ const Header = ({users}:HeaderProps) => {
                         <span className="header__logo-text">POSAO ŠANSI</span>
                     </a>
                 </div>
-                <nav className="header__nav">
-                    <ul className="header__nav-list">       
-                        { users ? mapItems(linksObject[users.accountType]) : mapItems(links)}
-                    </ul>
-                    <button className='header__hamburger-btn' type='button'>
-                        {users ? <img src="/images/user.svg" alt="user" /> : <img src="/images/hamburger-btn.svg" alt="hamburger-btn" /> }
-                    </button>
-                </nav>
                 <div className="header__language">
                     <button className="header__language-button" type='button'>
                         <img src="/images/language-icon.svg" alt="icon"/>
@@ -106,12 +98,20 @@ const Header = ({users}:HeaderProps) => {
                     <ul className="header__language-list">
                         {languages.map((language, index) => (
                             <li className='header__language-item' key={index}>
-                                <img src={language.flagPath} alt="flag" />
+                                <img className="header__laanguage-flag" src={language.flagPath} alt="flag" />
                                 {language.label}
                             </li>
                         ))}
                     </ul>
                 </div>
+                <nav className="header__nav">
+                    <ul className="header__nav-list">       
+                        { users ? mapItems(linksObject[users.accountType]) : mapItems(links)}
+                    </ul>
+                    <button className='header__hamburger-btn' type='button'>
+                        {users ? <img src="/images/hamburger-btn.svg" alt="user" /> : <img src="/images/hamburger-btn.svg" alt="hamburger-btn" /> }
+                    </button>
+                </nav>
             </div>
         </header>
     )
