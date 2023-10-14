@@ -1,6 +1,7 @@
 @import "../../scss/style.scss";
 
 .banner{
+    font-family: Mirza;
     background-color: $purple-bg;
     @include media-breakpoint-up(lg) {
         padding: 80px 100px 40px 100px;

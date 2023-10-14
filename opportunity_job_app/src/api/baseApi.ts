@@ -5,7 +5,7 @@ import { AuthService } from "./authService";
 const userData = {
     token: "test",
     id: 1,
-    accountType: "User"
+    accountType: "Company"
 }
 
 const api = axios.create({

@@ -1,10 +1,8 @@
 "use client"
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import API, {setLocalStorage} from "@/api/baseApi";
-import { AuthService } from "@/api/authService";
-import { log } from "console";
+import { useState } from "react";
 import './Header.scss'
+import { links, linksLoggedUser, linksLoggedCompany } from "./HeaderData";
 
 type LinkItem = {
     label: string;
@@ -26,37 +24,27 @@ type User = {
 };
 
 type HeaderProps = {
-users: User | undefined;
+user: User | undefined;
 };
 
 type linksObjectTypes = {
     [x:string]:LinkItem[]
 }
 
-const Header = ({users}:HeaderProps) => {
-    const initialLinks: LinkItem[] = [
-        { label: 'Pocetna', url: '/', iconPath: '/images/home.svg', },
-        { label: 'FAQ', url: '/faq', iconPath: '/images/faq.svg'},
-    ]
-
-    const links:LinkItem[] = [
-        ...initialLinks,
-        { label: 'Prijava', url: '/login', iconPath: '/images/log-in.svg'},
-        { label: 'Registracija', url: '/register', iconPath: '/images/sign-in.svg'},
-    ];
-
-    const linksLoggedUser:LinkItem[] = [
-        ...initialLinks,
-        { label: 'Moji poslovi', url: '/register', iconPath: '/images/jobs.svg'},
-        { label: 'Odjava', url: '/login', iconPath: '/images/sing-out.svg'},
-    ];
-
+const Header = ({user}:HeaderProps) => {
+    const [isActive, setIsActive] = useState<boolean>(false);
+    const [navActive, setIsNavActive] = useState<boolean>(false);
     
-    const linksLoggedCompany:LinkItem[] = [
-        ...initialLinks,
-        { label: 'Ponuda poslova', url: '/register', iconPath: '/images/jobs.svg'},
-        { label: 'Odjava', url: '/login', iconPath: '/images/sing-out.svg'},
-    ];
+
+    const toggle = () => {
+        setIsActive(!isActive);
+        setIsNavActive(false)
+    };
+
+    const toggleNav = () => {
+        setIsNavActive(!navActive);
+        setIsActive(false)
+    };
     
     const linksObject:linksObjectTypes = {
         "undefined": links,
@@ -92,24 +80,26 @@ const Header = ({users}:HeaderProps) => {
                     </a>
                 </div>
                 <div className="header__language">
-                    <button className="header__language-button" type='button'>
+                    <button className="header__language-button"  type='button' onClick={toggle}>
                         <img src="/images/language-icon.svg" alt="icon"/>
                     </button>
-                    <ul className="header__language-list">
+                    {isActive && <ul className="header__language-list">
                         {languages.map((language, index) => (
                             <li className='header__language-item' key={index}>
-                                <img className="header__laanguage-flag" src={language.flagPath} alt="flag" />
-                                {language.label}
+                                <button className="header__language-btn" type="button">
+                                    <img className="header__laanguage-flag" src={language.flagPath} alt="flag" />
+                                    {language.label}
+                                </button>
                             </li>
                         ))}
-                    </ul>
+                    </ul>}
                 </div>
                 <nav className="header__nav">
-                    <ul className="header__nav-list">       
-                        { users ? mapItems(linksObject[users.accountType]) : mapItems(links)}
+                    <ul className={`header__nav-list ${navActive ? 'header__nav-list--active' : ''}`}>       
+                        { user ? mapItems(linksObject[user.accountType]) : mapItems(links)}
                     </ul>
-                    <button className='header__hamburger-btn' type='button'>
-                        {users ? <img src="/images/hamburger-btn.svg" alt="user" /> : <img src="/images/hamburger-btn.svg" alt="hamburger-btn" /> }
+                    <button className='header__hamburger-btn' type='button' onClick={toggleNav}>
+                        {user ? <img src="/images/user.svg" alt="user" /> : <img src="/images/hamburger-btn.svg" alt="hamburger-btn" /> }
                     </button>
                 </nav>
             </div>

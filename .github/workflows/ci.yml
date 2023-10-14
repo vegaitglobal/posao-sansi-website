@@ -16,9 +16,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build the Docker image api
-      run: docker build --target production --file opportunity_job_api/Dockerfile --tag codeforacause/posaosansi:api-${{ github.run_number }} opportunity_job_api/.
+      run: docker build --target production --file opportunity_job_api/Dockerfile.prod --tag codeforacause/posaosansi:api-${{ github.run_number }} opportunity_job_api/.
     - name: Build the Docker image ui
-      run: docker build --file opportunity_job_app/Dockerfile.prod --tag codeforacause/posaosansi:ui-${{ github.run_number }} opportunity_job_app/.
+      run: docker build --file opportunity_job_app/Dockerfile --tag codeforacause/posaosansi:ui-${{ github.run_number }} opportunity_job_app/.
     - name: Pushing docker image api to CR backend
       run: docker push codeforacause/posaosansi:api-${{ github.run_number }}
     - name: Pushing docker image ui to CR backend

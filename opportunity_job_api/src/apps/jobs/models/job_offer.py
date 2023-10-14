@@ -18,11 +18,19 @@ class JobOffer(BaseModel):
     job_description = models.TextField(
         verbose_name=_("job description"),
     )
+    employer = models.ForeignKey(
+        verbose_name=_("employer"),
+        to="users.EmployerAccount",
+        null=True,
+        on_delete=models.CASCADE
+    )
     location = models.CharField(
         verbose_name=_("location"),
         max_length=250,
     )
-    application_deadline = models.DateTimeField()
+    application_deadline = models.DateTimeField(
+        verbose_name=_("application deadline")
+    )
     engagement =  models.CharField(
         verbose_name=_("engagement"),
         max_length=20,
@@ -48,6 +56,15 @@ class JobOffer(BaseModel):
         default=WorkExperience.NONE,
         help_text=_(
             "This field represents requiered work experience"
+        ),
+    )
+    required_education = models.CharField(
+        verbose_name=_("required education"),
+        max_length=20,
+        choices=Education.choices,
+        default=Education.NONE,
+        help_text=_(
+            "This field represents requiered education"
         ),
     )
     additional_skills = models.CharField(
