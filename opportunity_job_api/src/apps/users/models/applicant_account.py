@@ -20,6 +20,8 @@ class ApplicantAccount(BaseModel):
         verbose_name = _("Applicant Account")
         verbose_name_plural = _("Applicant Accounts")
 
+    type = "applicant"
+
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         verbose_name=_("user"),
