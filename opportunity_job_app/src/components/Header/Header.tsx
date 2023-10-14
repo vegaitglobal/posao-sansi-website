@@ -1,10 +1,8 @@
 "use client"
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import API, {setLocalStorage} from "@/api/baseApi";
-import { AuthService } from "@/api/authService";
+import { useState } from "react";
 import './Header.scss'
-import { initialLinks, links, linksLoggedUser, linksLoggedCompany } from "./HeaderData";
+import { links, linksLoggedUser, linksLoggedCompany } from "./HeaderData";
 
 type LinkItem = {
     label: string;
@@ -26,14 +24,14 @@ type User = {
 };
 
 type HeaderProps = {
-users: User | undefined;
+user: User | undefined;
 };
 
 type linksObjectTypes = {
     [x:string]:LinkItem[]
 }
 
-const Header = ({users}:HeaderProps) => {
+const Header = ({user}:HeaderProps) => {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [navActive, setIsNavActive] = useState<boolean>(false);
     
@@ -98,10 +96,10 @@ const Header = ({users}:HeaderProps) => {
                 </div>
                 <nav className="header__nav">
                     <ul className={`header__nav-list ${navActive ? 'header__nav-list--active' : ''}`}>       
-                        { users ? mapItems(linksObject[users.accountType]) : mapItems(links)}
+                        { user ? mapItems(linksObject[user.accountType]) : mapItems(links)}
                     </ul>
                     <button className='header__hamburger-btn' type='button' onClick={toggleNav}>
-                        {users ? <img src="/images/user.svg" alt="user" /> : <img src="/images/hamburger-btn.svg" alt="hamburger-btn" /> }
+                        {user ? <img src="/images/user.svg" alt="user" /> : <img src="/images/hamburger-btn.svg" alt="hamburger-btn" /> }
                     </button>
                 </nav>
             </div>
