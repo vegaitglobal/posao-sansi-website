@@ -11,20 +11,9 @@ def create_applicant_user(serializer: ApplicantAccountSerializer, password: str)
     return user
 
 
-
-def get_applicant_count() -> int:
-    count = ApplicantAccount.objects.count()
-    return count
-
-
-def get_employer_count() -> int:
-    count = EmployerAccount.objects.count()
-    return count
-
 def create_employer_user(serializer: EmployerAccountSerializer, password: str) -> User:
     user_kwargs = serializer.validated_data.pop("user")
     user_kwargs["password"] = password
     user = User.objects.create_user(**user_kwargs)
     EmployerAccount.objects.create(user=user, **serializer.validated_data)
     return user
-
