@@ -28,6 +28,8 @@ CMD ["sh", "/app/scripts/entrypoint.sh", "start"]
 ########################
 
 FROM base AS production
+ENV COLLECT_STATIC_FILES=True
+ENV DEBUG=False
 
 RUN pip install --no-cache-dir -r /app/requirements/production.txt
 
