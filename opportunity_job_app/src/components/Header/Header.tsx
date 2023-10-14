@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import API, {setLocalStorage} from "@/api/baseApi";
 import { AuthService } from "@/api/authService";
 import { log } from "console";
+import './Header.scss'
 
 type LinkItem = {
     label: string;
