@@ -2,12 +2,18 @@
 // ------------------------------------------------------------------------------
 
 body {
-	font-family: $font-default;
-	font-size: 14px;
-	font-weight: 400;
-	color: $black;
+  font-family: $font-default;
+  font-size: 14px;
+  font-weight: 400;
+  color: $black;
 }
 
 .hidden {
-	display: none;
+  display: none;
+}
+
+.form-field-label {
+  font-size: 16px;
+  color: $purple-primary;
+  margin: 3px 0;
 }
