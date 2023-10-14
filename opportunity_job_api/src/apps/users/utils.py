@@ -10,6 +10,7 @@ def create_applicant_user(serializer: ApplicantAccountSerializer, password: str)
 
     return user
 
+
 def create_employer_user(serializer: EmployerAccountSerializer, password: str) -> User:
     user_kwargs = serializer.validated_data.pop("user")
     user_kwargs["password"] = password
