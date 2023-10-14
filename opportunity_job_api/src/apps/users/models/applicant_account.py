@@ -9,7 +9,7 @@ from apps.common.models import BaseModel
 TWO_MB_IN_BITES = 2 * 1024 * 1024
 
 
-def file_size(value):
+def file_size(value) -> None:
     limit = TWO_MB_IN_BITES
     if value.size > limit:
         raise ValidationError("File too large. Size should not exceed 2 MB.")
