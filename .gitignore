@@ -1,7 +1,5 @@
+# JetBrains IDE:
 .idea
-*.env
-!example.env
-
 
 # vscode
 .vscode/
@@ -19,7 +17,8 @@
 *.vsix
 
 # Environments
-.env
+*.env
+!example.env
 .venv
 env/
 venv/
