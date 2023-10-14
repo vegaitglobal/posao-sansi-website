@@ -52,6 +52,10 @@ class EmailAdmin(ModelAdmin):
             )
         },),
     )
+    readonly_fields = (
+        "recipient_user",
+        "colored_status"
+    )
 
     def has_change_permission(self, request, obj: Email = None) -> bool:
         return False
