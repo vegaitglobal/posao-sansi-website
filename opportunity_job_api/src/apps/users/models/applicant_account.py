@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from users.enums import Education, WorkExperience
+from apps.users.enums import Education, WorkExperience
 
 from apps.common.models import BaseModel
 
