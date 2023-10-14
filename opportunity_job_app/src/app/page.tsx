@@ -1,6 +1,7 @@
 "use client"
 
 import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 import { useEffect, useState } from "react";
 import { setLocalStorage } from "@/api/baseApi"
 import { AuthService } from "@/api/authService"
@@ -29,6 +30,7 @@ export default function Home() {
       <main>
           <h1 className='test'>LETS GOOO</h1>
       </main>
+      <Footer />
     </>
   )
 }
