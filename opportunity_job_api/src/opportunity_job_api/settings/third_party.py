@@ -1,3 +1,5 @@
+from decouple import Csv, config
+
 THIRD_PARTY_APPS = [
     "django_extensions",
     "rest_framework",
@@ -6,7 +8,9 @@ THIRD_PARTY_APPS = [
     "modeltranslation",
 ]
 
-THIRD_PARTY_MIDDLEWARE = []
+THIRD_PARTY_MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
@@ -21,3 +25,5 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default=None, cast=Csv())
