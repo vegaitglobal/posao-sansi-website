@@ -1,9 +1,9 @@
 from django import forms
 from django.contrib import admin
-from django.utils.translation import gettext_lazy as _
 
 from apps.common.admin import ModelAdmin
 from apps.jobs.models import FAQ
+
 
 class FAQForm(forms.ModelForm):
     class Meta:
