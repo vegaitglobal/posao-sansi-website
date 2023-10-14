@@ -1,16 +1,39 @@
-import Header from "../components/Header/Header";
-import Loading from "../components/Loading/Loading";
-import Banner from "../components/Banner/Banner";
+"use client"
+
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import { useEffect, useState } from "react";
+import { setLocalStorage } from "@/api/baseApi"
+import { AuthService } from "@/api/authService"
+import Banner from "../components/Banner/Banner"
+import Mission from "@/components/Mission/Mission";
+
+type User = {
+  token: string;
+  id: number;
+  accountType: string;
+};
 
 export default function Home() {
+  const [users, setUsers] = useState<User>()
+  useEffect(() => {
+    const isLogged = () => {
+        setLocalStorage()
+        if(AuthService.getUser() !== null){
+            setUsers(AuthService.getUser())
+        }
+    }
+    isLogged()
+},[])
+
   return (
     <>
-      <Loading>
-        <Header />
-        <main>
+      <Header users={users}/>
+      <main>
           <Banner />
-        </main>
-      </Loading>
+          <Mission />
+      </main>
+      <Footer />
     </>
   )
 }
