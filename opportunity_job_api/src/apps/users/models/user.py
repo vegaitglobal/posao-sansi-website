@@ -6,6 +6,8 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import BaseModel
 
+from users.enums import AccountType
+
 
 class UserManager(BaseUserManager):
     def create_superuser(self, email: str = None, **kwargs):
@@ -28,8 +30,17 @@ class User(BaseModel, AbstractUser):
         unique=True
     )
     username = None
+    first_name = None
+    last_name = None
 
     objects = UserManager()
+    account_type = models.CharField(
+        verbose_name=_("account_type"),
+        max_length=9,
+        choices=AccountType.choices,
+        default=AccountType.APPLICANT,
+
+    )
 
     class Meta:
         verbose_name = _("User")
