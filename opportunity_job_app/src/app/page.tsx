@@ -5,6 +5,8 @@ import Footer from "@/components/Footer/Footer";
 import { useEffect, useState } from "react";
 import { setLocalStorage } from "@/api/baseApi"
 import { AuthService } from "@/api/authService"
+import Banner from "../components/Banner/Banner"
+import Mission from "@/components/Mission/Mission";
 
 type User = {
   token: string;
@@ -28,7 +30,8 @@ export default function Home() {
     <>
       <Header users={users}/>
       <main>
-         
+          <Banner />
+          <Mission />
       </main>
       <Footer />
     </>
