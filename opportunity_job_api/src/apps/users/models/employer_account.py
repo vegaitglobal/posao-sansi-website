@@ -10,6 +10,8 @@ class EmployerAccount(BaseModel):
         verbose_name = _("Employer Account")
         verbose_name_plural = _("Employer Accounts")
 
+    type = "employer"
+
     user = models.OneToOneField(
         to=settings.AUTH_USER_MODEL,
         verbose_name=_("user"),

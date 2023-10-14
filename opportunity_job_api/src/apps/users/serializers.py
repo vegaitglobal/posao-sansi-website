@@ -13,11 +13,13 @@ class LoginSerializer(serializers.Serializer):
     def __init__(self, request: Request, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = None
+        self.account = None
         self.request = request
 
     def validate(self, attrs):
         self.user = User.objects.filter(email=attrs["email"], is_active=True).first()
-        if not (self.user and self.user.check_password(raw_password=attrs["password"])):
+        self.account = self.user.get_account()
+        if not (self.user and self.account and self.user.check_password(raw_password=attrs["password"])):
             raise serializers.ValidationError(_("Invalid credentials"))
 
         return attrs
@@ -28,7 +30,7 @@ class LoginSerializer(serializers.Serializer):
         return {
             "token": token.key,
             "id": self.user.id,
-            "account_type": "employer"  # TODO: dynamically set "employer" or "applicant"
+            "account_type": self.account.type
         }
 
     def update(self, instance, validated_data):
