@@ -9,4 +9,5 @@ CUSTOM_MIDDLEWARE = []
 
 FIXTURES = (
     "emails",
+    "users",
 )

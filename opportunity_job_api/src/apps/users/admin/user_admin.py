@@ -26,17 +26,11 @@ class UserAdmin(ModelAdmin, BaseUserAdmin):
         "is_staff",
         "is_superuser",
     )
-    search_fields = ("first_name", "last_name", "email_deterministic")
+    search_fields = ("email_deterministic",)
     ordering = ("email",)
     add_form = CreateUserForm
     fieldsets = (
         (None, {"fields": ("id", "email", "password")}),
-        (_("Personal info"), {
-            "fields": (
-                "first_name",
-                "last_name",
-            )
-        },),
         (_("Permissions"), {
             "fields": (
                 "is_active",
