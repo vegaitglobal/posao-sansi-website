@@ -1,9 +1,6 @@
 from django.urls import path
-from apps.jobs.views import (
-    JobOfferAPIView,
-    JobOfferDetailsAPIView,
-)
-from apps.jobs.views import FAQListView
+
+from apps.jobs.views import FAQListView, JobOfferAPIView, JobOfferDetailsAPIView
 
 urlpatterns = [
     path("job-offers/", JobOfferAPIView.as_view()),

@@ -19,14 +19,3 @@ class JobCategory(TextChoices):
     FOOD_TECHNOLOGY = "food_technology", _("Food technology")
     BEAUTY_CARE = "beauty_care", _("Beauty Care")
     OTHER = "other", _("Other")
-
-
-class JobCategory(TextChoices):
-    SALES_AND_TRADE = "sales_and_trade", _("Sales and Trade")
-    TOURISM_AND_CATERING = "tourism_and_catering", _("Tourism and Catering")
-    TRANSPORT_AND_LOGISTICS = "transport_and_logistics", _("Transport and Logistics")
-    CLEANING_AND_MAINTENANCE = "cleaning_and_maintenance", _("Cleaning nad Maintenance")
-    PRODUCTION_JOBS = "production_jobs", _("Jobs in production industry")
-    FOOD_TECHNOLOGY = "food_technology", _("Food technology")
-    BEAUTY_CARE = "beauty_care", _("Beauty Care")
-    OTHER = "other", _("Other")

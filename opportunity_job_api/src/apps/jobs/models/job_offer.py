@@ -1,9 +1,10 @@
 from django.db import models
-from apps.common.models import BaseModel
-from django.db import models
 from django.utils.translation import gettext_lazy as _
-from apps.jobs.enums import JobEngagement, JobCategory
+
+from apps.common.models import BaseModel
+from apps.jobs.enums import JobCategory, JobEngagement
 from apps.users.enums import Education, WorkExperience
+
 
 class JobOffer(BaseModel):
 
@@ -31,7 +32,7 @@ class JobOffer(BaseModel):
     application_deadline = models.DateTimeField(
         verbose_name=_("application deadline")
     )
-    engagement =  models.CharField(
+    engagement = models.CharField(
         verbose_name=_("engagement"),
         max_length=20,
         choices=JobEngagement.choices,
@@ -40,7 +41,7 @@ class JobOffer(BaseModel):
             "This field contains the type of Job Offer"
         ),
     )
-    category =  models.CharField(
+    category = models.CharField(
         verbose_name=_("category"),
         max_length=30,
         choices=JobCategory.choices,
