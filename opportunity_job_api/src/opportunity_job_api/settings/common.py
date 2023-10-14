@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -107,17 +106,6 @@ DATABASES = {
         "HOST": config("DB_HOSTNAME", default="postgres"),
         "PORT": config("DB_PORT", default=5432, cast=int),
     }
-}
-
-REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-}
-
-SPECTACULAR_SETTINGS = {
-    "TITLE": "Job Opportunity",
-    "DESCRIPTION": "Project for finding new job opportunities",
-    "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 ALLOWED_HOSTS = ["*"]

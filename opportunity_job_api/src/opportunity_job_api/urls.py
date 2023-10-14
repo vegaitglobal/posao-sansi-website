@@ -13,14 +13,13 @@ urlpatterns = i18n_patterns(
 
 api_urlpatterns = [
     path("", index_api_view, name="index"),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name="api:schema"), name="swagger-ui"),
+    path("schema/redoc/", SpectacularRedocView.as_view(url_name="api:schema"), name="redoc"),
 ]
 
 urlpatterns += [
     path("api/", include((api_urlpatterns, "opportunity_job"), namespace="api")),
-    path('api/schema/', SpectacularAPIView.as_view(), name="schema"),
-    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
-    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
-
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
