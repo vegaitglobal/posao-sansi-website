@@ -18,6 +18,9 @@ services:
       - EMAIL_USE_TLS=True
     ports:
       - 9010:8000
+    volumes:
+      - opportunity_job_api-django-static:/app/src/run/static
+      - opportunity_job_api-django-media:/app/src/run/media
     restart: always
   
   postgres:
@@ -42,3 +45,5 @@ services:
   
 volumes:
   opportunity_job_api-postgres-data:
+  opportunity_job_api-django-static:
+  opportunity_job_api-django-media:
