@@ -3,8 +3,13 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from apps.users.urls import urlpatterns as user_api_urlpatterns
 from opportunity_job_api.views import index_api_view
 
 urlpatterns = i18n_patterns(
@@ -19,7 +24,8 @@ api_schema_urlpatterns = [
 
 api_urlpatterns = [
     path("", index_api_view, name="index"),
-    path("schema/", include(api_schema_urlpatterns))
+    *user_api_urlpatterns,
+    path("schema/", include(api_schema_urlpatterns)),
 ]
 
 urlpatterns += [
