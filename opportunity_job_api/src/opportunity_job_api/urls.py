@@ -10,6 +10,7 @@ from drf_spectacular.views import (
 )
 
 from apps.users.urls import urlpatterns as user_api_urlpatterns
+from apps.jobs.urls import urlpatterns as jobs_api_urlpatterns
 from opportunity_job_api.views import index_api_view
 
 urlpatterns = i18n_patterns(
@@ -25,6 +26,7 @@ api_schema_urlpatterns = [
 api_urlpatterns = [
     path("", index_api_view, name="index"),
     *user_api_urlpatterns,
+    *jobs_api_urlpatterns,
     path("schema/", include(api_schema_urlpatterns)),
 ]
 
