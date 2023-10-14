@@ -11,11 +11,15 @@ urlpatterns = i18n_patterns(
     path("admin/", admin.site.urls),
 )
 
+api_schema_urlpatterns = [
+    path("", SpectacularAPIView.as_view(), name="schema"),
+    path("swagger-ui/", SpectacularSwaggerView.as_view(url_name="api:schema"), name="swagger-ui"),
+    path("redoc/", SpectacularRedocView.as_view(url_name="api:schema"), name="redoc"),
+]
+
 api_urlpatterns = [
     path("", index_api_view, name="index"),
-    path("schema/", SpectacularAPIView.as_view(), name="schema"),
-    path("schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name="api:schema"), name="swagger-ui"),
-    path("schema/redoc/", SpectacularRedocView.as_view(url_name="api:schema"), name="redoc"),
+    path("schema/", include(api_schema_urlpatterns))
 ]
 
 urlpatterns += [
