@@ -3,6 +3,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "drf_spectacular",
+    "modeltranslation",
 ]
 
 THIRD_PARTY_MIDDLEWARE = []
