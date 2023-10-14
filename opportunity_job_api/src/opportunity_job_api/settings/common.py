@@ -2,7 +2,7 @@ import sys
 from copy import deepcopy
 from os.path import abspath, basename, dirname, join, normpath
 
-from decouple import config
+from decouple import config, Csv
 from django.utils.log import DEFAULT_LOGGING
 from django.utils.translation import gettext_lazy as _
 
@@ -123,4 +123,4 @@ logging_dict = deepcopy(DEFAULT_LOGGING)
 logging_dict["loggers"]["django"]["handlers"] = ["console"]
 LOGGING = logging_dict
 
-CSRF_TRUSTED_ORIGINS = [config("CSRF_TRUSTED_ORIGINS", default=None)]
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default=None, cast=Csv())
