@@ -3,9 +3,9 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager as BaseUserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from users.enums import AccountType
 
 from apps.common.models import BaseModel
+from apps.users.models import EmployerAccount, ApplicantAccount
 
 
 class UserManager(BaseUserManager):
@@ -33,13 +33,6 @@ class User(BaseModel, AbstractUser):
     last_name = None
 
     objects = UserManager()
-    account_type = models.CharField(
-        verbose_name=_("account_type"),
-        max_length=9,
-        choices=AccountType.choices,
-        default=AccountType.APPLICANT,
-
-    )
 
     class Meta:
         verbose_name = _("User")
@@ -47,3 +40,8 @@ class User(BaseModel, AbstractUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+    def get_account(self) -> EmployerAccount | ApplicantAccount | None:
+        if employer_account := EmployerAccount.objects.filter(user=self).first():
+            return employer_account
+        return ApplicantAccount.objects.filter(user=self).first()
