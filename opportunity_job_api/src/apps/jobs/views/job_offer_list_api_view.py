@@ -6,7 +6,7 @@ from apps.jobs.models import JobOffer
 from apps.jobs.serializers import JobOfferSerializer
 
 
-class JobOfferAPIView(APIView):
+class JobOfferListAPIView(APIView):
 
     @staticmethod
     def get(request, **kwargs):

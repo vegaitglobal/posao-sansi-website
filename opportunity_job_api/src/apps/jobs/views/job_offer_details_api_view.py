@@ -10,16 +10,16 @@ from apps.jobs.serializers import JobOfferSerializer
 class JobOfferDetailsAPIView(APIView):
 
     @staticmethod
-    def get(request, id, **kwargs) -> JsonResponse:
+    def get(request, id, **kwargs):
         try:
             job_offer = JobOffer.objects.get(id=id)
             serializer = JobOfferSerializer(job_offer)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        except Exception:
+        except JobOffer.DoesNotExist:
             return Response({"message": "Job offer with that ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
 
     @staticmethod
-    def patch(request, id, **kwargs) -> JsonResponse:
+    def patch(request, id, **kwargs):
         try:
             job_offer = JobOffer.objects.get(id=id)
             new_job_offer = request.data
@@ -27,7 +27,7 @@ class JobOfferDetailsAPIView(APIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-        except Exception:
+        except JobOffer.DoesNotExist:
             return Response({"message": "Job offer with that ID doesn't exist."}, status=status.HTTP_400_BAD_REQUEST)
 
     @staticmethod
@@ -36,5 +36,5 @@ class JobOfferDetailsAPIView(APIView):
             job_offer = JobOffer.objects.get(id=id)
             job_offer.delete()
             return Response({"message": "Successfully deleted"})
-        except Exception:
+        except JobOffer.DoesNotExist:
             return Response({"message": "Job offer with the given ID doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
