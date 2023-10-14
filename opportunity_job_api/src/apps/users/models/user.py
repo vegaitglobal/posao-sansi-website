@@ -3,10 +3,9 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager as BaseUserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from users.enums import AccountType
 
 from apps.common.models import BaseModel
-
-from users.enums import AccountType
 
 
 class UserManager(BaseUserManager):

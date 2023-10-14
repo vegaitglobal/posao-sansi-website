@@ -1,8 +1,11 @@
 from django.db.models import TextChoices
+from django.utils.translation import gettext_lazy as _
+
 
 class AccountType(TextChoices):
     APPLICANT = "applicant", _("Applicant")
     EMPLOYER = "employer", _("Employer")
+
 
 class Education(TextChoices):
     NONE = "none", _("No formal education")
@@ -13,6 +16,7 @@ class Education(TextChoices):
     FIFTH_DEGREE = "fifth_degree", _("High school")
     SIXTH_DEGREE = "sixth_degree", _("VSS")
     SEVENTH_DEGREE = "seventh_degree", _("VSS")
+
 
 class WorkExperience(TextChoices):
     NONE = "none", _("No work experience")

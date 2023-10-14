@@ -1,13 +1,27 @@
-from users.enums import WorkExperience, Education
+from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+from users.enums import Education, WorkExperience
 
-class ApplicantAccount(models.BaseModel):
+from apps.common.models import BaseModel
+
+TWO_MB_IN_BITES = 2 * 1024 * 1024
+
+
+def file_size(value):
+    limit = TWO_MB_IN_BITES
+    if value.size > limit:
+        raise ValidationError("File too large. Size should not exceed 2 MB.")
+
+
+class ApplicantAccount(BaseModel):
     class Meta:
         verbose_name = _("Applicant Account")
         verbose_name_plural = _("Applicant Accounts")
 
-    user = models.ForeignKey(
-        "User",
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
         verbose_name=_("user"),
         on_delete=models.CASCADE,
     )
@@ -21,14 +35,14 @@ class ApplicantAccount(models.BaseModel):
     )
     work_experience = models.CharField(
         verbose_name=_("work experience"),
-        max_length=13,
+        max_length=14,
         choices=WorkExperience.choices,
         default=WorkExperience.NONE,
         help_text=_("Work experience of the applicant"),
     )
     education = models.CharField(
         verbose_name=_("education level"),
-        max_length=13,
+        max_length=14,
         choices=Education.choices,
         default=Education.NONE,
         help_text=_("Education of the applicant"),
@@ -40,7 +54,8 @@ class ApplicantAccount(models.BaseModel):
         null=True,
     )
     cv = models.FileField(
-        upload_to="uploads/users/applicant-account/",
+        upload_to="uploads/users/applicant_account/",
         blank=True,
         default=None,
+        validators=[file_size],
     )
