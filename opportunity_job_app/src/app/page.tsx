@@ -28,7 +28,7 @@ export default function Home() {
     <>
       <Header users={users}/>
       <main>
-          <h1 className='test'>LETS GOOO</h1>
+         
       </main>
       <Footer />
     </>
