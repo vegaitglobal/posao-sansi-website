@@ -122,4 +122,5 @@ EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=None, cast=bool)
 logging_dict = deepcopy(DEFAULT_LOGGING)
 logging_dict["loggers"]["django"]["handlers"] = ["console"]
 LOGGING = logging_dict
-CSRF_TRUSTED_ORIGINS = ["*"]
+
+CSRF_TRUSTED_ORIGINS = [config("CSRF_TRUSTED_ORIGINS", default=None)]
