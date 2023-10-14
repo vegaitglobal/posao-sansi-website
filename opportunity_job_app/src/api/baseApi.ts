@@ -2,19 +2,9 @@
 import axios from "axios";
 import { AuthService } from "./authService";
 
-const userData = {
-    token: "test",
-    id: 1,
-    accountType: "Company"
-}
-
 const api = axios.create({
     baseURL: "http://localhost:8000/api", // TODO: get from env vars
 });
-
-export function setLocalStorage() {
-    localStorage.setItem("testUser", JSON.stringify(userData));
-}
 
 const API = {
     getAllResources: (resource, queryParams = "") => {
