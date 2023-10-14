@@ -27,7 +27,6 @@
 }
 
 .header__language-list {
-    display: none;
     position: absolute;
     top: 63px;
     right: 0;
@@ -74,6 +73,13 @@
         padding: 8px 0;
     }
 }
+
+.header__nav-list--active {
+    @include media-breakpoint-down(lg) {
+        display: block;
+    }
+}
+
 .header__nav-item {
     padding: 8px 20px;
     &:active {

@@ -16,12 +16,12 @@ type User = {
 };
 
 export default function Home() {
-  const [users, setUsers] = useState<User>()
+  const [user, setUser] = useState<User>()
   useEffect(() => {
     const isLogged = () => {
         setLocalStorage()
         if(AuthService.getUser() !== null){
-            setUsers(AuthService.getUser())
+            setUser(AuthService.getUser())
         }
     }
     isLogged()
@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <Header users={users}/>
+      <Header user={user}/>
       <main>
           <Banner />
           <Mission />
