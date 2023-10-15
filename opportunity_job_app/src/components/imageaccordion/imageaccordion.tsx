@@ -1,35 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { FaqService } from '../../api/faqService';
+import { Faq } from '../../api/models/Faq'
 
-const faqItems = [
-    {
-    question: "Prvo pitanje",
-    answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in.",
-    // isOpen: true
-    },
-    {
-    question: "Drugo pitanje",
-    answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in.",
-    // isOpen: false
-    },
-    {
-    question: "Drugo pitanje",
-    answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in.",
-    // isOpen: false
-    },
-    {
-    question: "Drugo pitanje",
-    answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in.",
-    // isOpen: false
-    },
-   ]
-const ImageAccordion = ({ title, content }) => {
-    const [isOpen, setIsOpen] = useState(null);
-
-    const toggleAccordion = (index) => {
-        if (isOpen === index) {
-            return setIsOpen(null)
+const ImageAccordion = () => {
+    const [isOpen, setIsOpen] = useState<number>(0);
+    const[faqList, setFaqList] = useState<Faq[]>([])
+    
+    useEffect(() => {
+        async function getFaq() {
+            const faq = await FaqService.getFaq()
+            setFaqList(faq)
         }
-        setIsOpen(index);
+        getFaq();
+    }, [])
+
+    const toggleAccordion = (faqId: number) => {
+        if (isOpen === faqId) {
+            return setIsOpen(0)
+        }
+        setIsOpen(faqId);
     };
     return (
         <div className="faq">
@@ -41,18 +30,16 @@ const ImageAccordion = ({ title, content }) => {
                     <img className="faq__image" src="/images/faq-bg.svg" alt="Background image" />
                 </div>
                 <div className="faq__accordion">
-                    {faqItems.map((element, index) => 
-                        (
-                            <div className="faq__item">
-                                <button className="faq__label" onClick={() => toggleAccordion(index)} type='button'>
-                                    {element.question}
-                                    <span className='faq__icon'>{isOpen === index ? '-' : '+'}</span>
-                                </button>
-                                <div className={isOpen === index ? 'faq__content--active' : 'faq__content'}>
-                                    <div className='faq__content-inner'>{element.answer}</div></div>
-                            </div>
-                        )
-                    )}
+                    {faqList.map((faq, index) => {
+                        return (<div key={index} className="faq__item">
+                        <button className="faq__label" onClick={() => toggleAccordion(faq.id)} type='button'>
+                            {faq.question}
+                            <span className='faq__icon'>{isOpen === faq.id ? '-' : '+'}</span>
+                        </button>
+                        <div className={isOpen === faq.id ? 'faq__content--active' : 'faq__content'}>
+                            <div className='faq__content-inner'>{faq.answer}</div></div>
+                    </div>)
+                    })}
                 </div>
             </div>
         </div>
