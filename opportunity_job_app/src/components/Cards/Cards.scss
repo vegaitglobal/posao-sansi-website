@@ -52,10 +52,6 @@
     } 
 }
 
-.card__holder--sc {
-
-}
-
 .cards__left {
     display: flex;
     justify-content: center;
@@ -63,11 +59,11 @@
     width: 50%;
 }
 
-.cards__img{
+.cards__img {
    width: 100%;
 }
 
-.cards__title{
+.cards__title {
     text-transform: uppercase;
     color: $black;
     font-weight: 600;
@@ -80,15 +76,11 @@
     }
 }
 
-.cards__title--margin-0{
-    margin-bottom: 0;
-}
-
 .crads__info {
     color:  $purple-primary;
 }
 
-.cards__link{
+.cards__link {
     display: block;
     color: $purple-primary;
     font-weight: 700;
@@ -100,7 +92,7 @@
     margin-top: 16px;
 }
 
-.cards__arrow{
+.cards__arrow {
     margin-left: 10px;
 }
 
