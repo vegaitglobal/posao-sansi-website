@@ -4,5 +4,5 @@ from apps.jobs.models import JobEnrollment
 
 class JobEnrollmentSerializer(ModelSerializer):
     class Meta:
-        models = JobEnrollment
+        model = JobEnrollment
         fields = "__all__"

@@ -5,7 +5,7 @@ from apps.jobs.models import JobEnrollment
 from apps.jobs.serializers import JobEnrollmentSerializer
 
 
-class JobEnrollmentListAPIView(generics.ListAPIView):
+class JobEnrollmentListCreateAPIView(generics.ListCreateAPIView):
     queryset = JobEnrollment.objects.all()
     serializer_class = JobEnrollmentSerializer
     filter_backends = [DjangoFilterBackend]
