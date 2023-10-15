@@ -20,7 +20,7 @@ type LanguageItem = {
 };
 
 type HeaderProps = {
-    user: User | undefined;
+    user?: User;
 };
 
 type linksObjectTypes = {

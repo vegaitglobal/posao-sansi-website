@@ -29,7 +29,7 @@ export const JobOfferService = {
         const params = new URLSearchParams({
             ipp: 6,
             page: pageNumber,
-        });
+        } as any);
         const response = await API.getProtectedResourceList("job-offers", params.toString());
         return response.data;
     },
