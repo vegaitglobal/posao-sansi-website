@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from drf_spectacular.utils import extend_schema
 
 
 class LogoutAPIView(APIView):
