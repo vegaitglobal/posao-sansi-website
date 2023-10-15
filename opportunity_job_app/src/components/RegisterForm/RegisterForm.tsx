@@ -4,13 +4,13 @@ import "./register-form.scss";
 import InputField from "@/components/InputField/InputField";
 import SelectField from "@/components/SelectField/SelectField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { AuthService } from "@/api/authService";
 import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
     const router = useRouter()
-    const [responseError, setResponseError] = useState<object | null>(null);
+    const [responseError, setResponseError] = useState<string | null>("");
     const [formData, setFormData] = useState({
         type: "applicant",
         first_name: "",
@@ -43,6 +43,25 @@ const RegisterForm = () => {
         location: "",
         url: "",
     });
+
+    const clearForm = () => {
+        setFormData({
+            type: "applicant",
+            first_name: "",
+            last_name: "",
+            phone_number: "",
+            email: "",
+            password: "",
+            re_password: "",
+            work_experience: "",
+            education: "",
+            about: "",
+            company_name: "",
+            pib: "",
+            location: "",
+            url: "",
+        });
+    }
 
     const account_type_options = [
         {
@@ -144,13 +163,13 @@ const RegisterForm = () => {
         } else {
             errorsObject.email = "";
         }
-        if (!formData.first_name) {
+        if (!formData.first_name && formData.type==="applicant") {
             errorsObject.first_name = "Polje je obavezno";
             is_valid = false;
         } else {
             errorsObject.first_name = "";
         }
-        if (!formData.last_name) {
+        if (!formData.last_name && formData.type==="applicant") {
             errorsObject.last_name = "Polje je obavezno";
             is_valid = false;
         } else {
@@ -171,19 +190,19 @@ const RegisterForm = () => {
         if (!formData.re_password) {
             errorsObject.re_password = "Polje je obavezno";
             is_valid = false;
-        } else if (formData.password === formData.re_password) {
+        } else if (formData.password !== formData.re_password) {
             errorsObject.re_password = "Lozinke se ne podudaraju";
             is_valid = false;
         } else {
             errorsObject.re_password = "";
         }
-        if (!formData.pib) {
+        if (!formData.pib && formData.type==="employer") {
             errorsObject.pib = "Polje je obavezno";
             is_valid = false;
         } else {
             errorsObject.pib = "";
         }
-        if (!formData.company_name) {
+        if (!formData.company_name && formData.type==="employer") {
             errorsObject.company_name = "Polje je obavezno";
             is_valid = false;
         } else {
@@ -199,16 +218,15 @@ const RegisterForm = () => {
         e.preventDefault();
 
         if (validateForm()) {
-            
+            try {
+                const userData = formData;
+                const response = AuthService.register(userData, formData.type);
+                //TODO implement dialog
+                clearForm();
+            } catch (error: any) {
+                setResponseError(error.response?.data?.errors?.non_field_errors);
+            }
         };
-        //TODO: Validate data, send request and handle response
-        // e.preventDefault()
-        // try {
-        //     await AuthService.login(formData.email, formData.password);
-        //     router.push("/")
-        // } catch (error) {
-        //     setResponseError(error.response?.data?.errors?.non_field_errors);
-        // }
     }
 
     const updateFormData = (fieldValue: string, fieldName: string) => {
@@ -304,10 +322,10 @@ const RegisterForm = () => {
                     />
                 { formErrors.password && <p className="error-message">{ formErrors.password }</p> }
                 <InputField
-                    label="Ponoviteo lozinku:"
+                    label="Ponovite lozinku:"
                     placeholder="Ponovite lozinku"
                     type="password"
-                    onChange={ (value) => updateFormData(value, "re-password") }
+                    onChange={ (value) => updateFormData(value, "re_password") }
                     />
                 { formErrors.re_password && <p className="error-message">{ formErrors.re_password }</p> }
                 { 
