@@ -30,11 +30,11 @@ def send_password_reset_email(email: str) -> None:
         "password_reset_url": f"{settings.FE_APP_ORIGIN}/password-reset/{url_hash}/",
         "website_url": settings.FE_APP_ORIGIN,
     }
-    email_thread = Email.objects.create(
+    email = Email.objects.create(
         subject=_("Reset your password"),
         recipient=email,
         context=email_context,
         template_path="emails/password_reset.html",
         category="password_reset",
     )
-    email_thread.send()
+    email.send()
