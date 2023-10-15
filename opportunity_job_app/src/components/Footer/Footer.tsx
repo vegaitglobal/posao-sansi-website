@@ -17,15 +17,15 @@ type ContactLinks = {
 const Footer = () => {
 
     const links:SocialIcon[] = [
-        { url: '/', iconPath: '/images/facebook.svg', alt: 'Facebook icon'},
-        { url: '/', iconPath: '/images/linkedin.svg', alt: 'Linkedin icon' },
-        { url: '/', iconPath: '/images/twitter.svg', alt: 'Twitter icon' },
-        { url: '/', iconPath: '/images/web.svg', alt: 'Web icon'},
+        { url: 'https://www.facebook.com/NGOAtina', iconPath: '/images/facebook.svg', alt: 'Facebook icon'},
+        { url: 'https://rs.linkedin.com/in/ngo-atina-129948216', iconPath: '/images/linkedin.svg', alt: 'Linkedin icon' },
+        { url: 'https://twitter.com/atinango', iconPath: '/images/twitter.svg', alt: 'Twitter icon' },
+        { url: 'http://atina.org.rs/', iconPath: '/images/web.svg', alt: 'Web icon'},
     ];
 
     const contacts:ContactLinks[] = [
-        { href: 'mailto:mail@mail.com', iconPath: '/images/mail.svg', alt: 'Mail icon', label: 'mail@mail.com'},
-        { href: 'phone:+38164123456', iconPath: '/images/phone.svg', alt: 'Phone icon', label: '+381 23 23 23 233 33' },
+        { href: 'atina@atina.org.rs', iconPath: '/images/mail.svg', alt: 'Mail icon', label: 'atina@atina.org.rs'},
+        { href: '+381 61 63 84 071', iconPath: '/images/phone.svg', alt: 'Phone icon', label: '+381 61 63 84 071' },
     ];
 
     return (
@@ -37,7 +37,7 @@ const Footer = () => {
                     <ul className="footer__social-icon-holder">
                         {links.map((link, index) => (
                             <li className='footer__social-item' key={index}>
-                                <Link className="footer__social-link" href={link.url}>
+                                <Link className="footer__social-link" target="_blank" href={link.url}>
                                     <img className="footer__social-img" src={link.iconPath} alt={link.alt} />
                                 </Link>
                             </li>

@@ -29,19 +29,19 @@ export const AuthService = {
         const user = userJSON ? JSON.parse(userJSON) : null;
         return user ? { Authorization: `Bearer ${ user?.token }` } : {};
     },
-//   logout: async () => {
-//     try {
-//       await API.post("logout/", null, { headers: AuthService.getAuthorizationHeaders() });
-//     } catch (e) {}
-//     localStorage.removeItem("user");
-//   },
-//   register: (userData, type) => {
-//     return API.post(`register-${type}/`, userData);
-//   },
-//   forgotPassword: (email) => {
-//     return API.post("/password-forgotten/", { email: email });
-//   },
-//   resetPassword: (hash, password) => {
-//     return API.post(`/password-reset/${hash}/`, { password: password });
-//   },
+  logout: async () => {
+    try {
+      await API.post("logout/", {}, { headers: AuthService.getAuthorizationHeaders() });
+    } catch (e) {}
+    localStorage.removeItem("user");
+  },
+  register: (userData: Object, type: any) => {
+    return API.post(`register-${type}/`, userData, {});
+  },
+  forgotPassword: (email: string) => {
+    return API.post("/password-forgotten/", { email: email }, {});
+  },
+  resetPassword: (hash: string, password: string) => {
+    return API.post(`/password-reset/${hash}/`, { password: password }, {});
+  },
 };

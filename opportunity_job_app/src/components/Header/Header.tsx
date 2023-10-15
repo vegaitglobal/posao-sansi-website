@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./Header.scss";
 import { anonymousUserLinks, employerLinks, applicantLinks } from "./HeaderData";
+import { useRouter } from "next/navigation";
 import { User } from "@/api/models/User";
+import { AuthService } from "@/api/authService";
 
 type LinkItem = {
     label: string;
@@ -28,6 +30,7 @@ type linksObjectTypes = {
 }
 
 const Header = ({ user }: HeaderProps) => {
+    const router = useRouter();
     const [isActive, setIsActive] = useState<boolean>(false);
     const [navActive, setIsNavActive] = useState<boolean>(false);
 
@@ -40,6 +43,13 @@ const Header = ({ user }: HeaderProps) => {
         setIsNavActive(!navActive);
         setIsActive(false);
     };
+
+    const logout = useCallback(async () => {
+		await AuthService.logout();
+        if (!user) {
+            router.push("/login");
+        }
+	}, []);
 
     const linksObject: linksObjectTypes = {
         "anonymous": anonymousUserLinks,
@@ -55,7 +65,7 @@ const Header = ({ user }: HeaderProps) => {
     const mapItems = (items: LinkItem[]) => {
         return items && items.map((link: LinkItem, index: number) => (
             <li className="header__nav-item" key={ index }>
-                <Link className="header__nav-link" href={ link.url }>
+                <Link className="header__nav-link" href={ link.url } onClick={link.label === "Odjava" ? logout : undefined}>
                     <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
                     <span className="header__nav-link-text">
                         { link.label }
