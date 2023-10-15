@@ -23,7 +23,7 @@ class JobOfferSerializer(ModelSerializer):
         return False
 
     def _get_authenticated_applicant_account(self) -> ApplicantAccount | None:
-        if not (self.request.user.is_authenticated and self.request.user.is_active):
+        if not (self.request and self.request.user.is_authenticated and self.request.user.is_active):
             return None
 
         account = self.request.user.get_account()
