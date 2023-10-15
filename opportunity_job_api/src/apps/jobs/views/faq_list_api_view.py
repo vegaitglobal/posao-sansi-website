@@ -17,6 +17,6 @@ class FAQListView(generics.ListAPIView):
             return FAQ.objects.filter(display_to_applicants=True)
 
         if user.get_account().type == "employer":
-            return FAQ.objects.filter(display_to_employer=True)
+            return FAQ.objects.filter(display_to_employers=True)
 
         return FAQ.objects.all()

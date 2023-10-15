@@ -1,5 +1,5 @@
-from django_filters.rest_framework import DjangoFilterBackend, FilterSet
-from django_filters import CharFilter, BooleanFilter
+from django_filters import CharFilter
+from django_filters.rest_framework import FilterSet
 
 from apps.jobs.models import JobEnrollment
 

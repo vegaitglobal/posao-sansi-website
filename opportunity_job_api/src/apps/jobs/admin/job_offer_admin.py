@@ -1,10 +1,10 @@
 from django.contrib import admin
-
-from apps.common.admin import ModelAdmin
-from apps.jobs.models import JobOffer
-from apps.common.utils import get_model_admin_change_details_url
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+
+from apps.common.admin import ModelAdmin
+from apps.common.utils import get_model_admin_change_details_url
+from apps.jobs.models import JobOffer
 
 
 @admin.register(JobOffer)

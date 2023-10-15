@@ -1,12 +1,12 @@
 from django.contrib import admin
-
-from apps.common.admin import ModelAdmin
-from apps.jobs.models import JobEnrollment
-from apps.common.utils import get_model_admin_change_details_url
-from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
 from django.db.models import QuerySet
 from django.db.models.functions import Collate
+from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
+
+from apps.common.admin import ModelAdmin
+from apps.common.utils import get_model_admin_change_details_url
+from apps.jobs.models import JobEnrollment
 
 
 @admin.register(JobEnrollment)
@@ -18,9 +18,9 @@ class JobEnrollmentAdmin(ModelAdmin):
         "applicant_email"
     )
     search_fields = (
-       "job_offer__job_name",
-       "job_offer__employer__company_name",
-       "applicant_email_deterministic"
+        "job_offer__job_name",
+        "job_offer__employer__company_name",
+        "applicant_email_deterministic"
     )
 
     @admin.display(description=_("job name"))
@@ -30,7 +30,7 @@ class JobEnrollmentAdmin(ModelAdmin):
             href = get_model_admin_change_details_url(obj=job_offer)
             return mark_safe(f'<a href="{href}">{job_offer.job_name}</a>')
         return "-"
-    
+
     @admin.display(description=_("company name"))
     def company_name(self, obj: JobEnrollment = None) -> str:
         if obj:
@@ -38,7 +38,7 @@ class JobEnrollmentAdmin(ModelAdmin):
             href = get_model_admin_change_details_url(obj=job_offer.employer)
             return mark_safe(f'<a href="{href}">{job_offer.employer.company_name}</a>')
         return "-"
-    
+
     @admin.display(description=_("applicant_email"))
     def applicant_email(self, obj: JobEnrollment = None) -> str:
         if obj:
