@@ -5,7 +5,7 @@ import { Faq } from '../../api/models/Faq'
 const ImageAccordion = () => {
     const [isOpen, setIsOpen] = useState<number>(0);
     const[faqList, setFaqList] = useState<Faq[]>([])
-    
+
     useEffect(() => {
         async function getFaq() {
             const faq = await FaqService.getFaq()

@@ -13,7 +13,7 @@ import { User } from "@/api/models/User";
 export default function JobOffersPage() {
     const router = useRouter();
 
-    const [employer, setEmployer] = useState<User>(null);
+    const [employer, setEmployer] = useState<User>();
     const [jobOffers, setJobOffers] = useState<JobOffer[]>([]);
     const [pageNumber, setPageNumber] = useState<number>(0);
     const [totalJobOfferNumber, setTotalJobOfferNumber] = useState<number>(0);
