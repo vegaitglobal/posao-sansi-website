@@ -13,11 +13,17 @@ $wrapper-max-widths: 1600px;
 
 .job-offers {
   display: grid;
+  gap: 40px;
   grid-template-columns: auto auto auto;
+  width: fit-content;
   max-width: $wrapper-max-widths;
   margin: 0 auto 50px auto;
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: auto auto;
+  }
+
+  @include media-breakpoint-down(md) {
     display: flex;
     flex-direction: column;
     width: 100%;
