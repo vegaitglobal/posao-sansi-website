@@ -5,7 +5,9 @@ CUSTOM_APPS = [
     "apps.jobs",
 ]
 
-CUSTOM_MIDDLEWARE = []
+CUSTOM_MIDDLEWARE = [
+    "apps.common.middleware.LanguageMiddleware",
+]
 
 FIXTURES = (
     "emails",
