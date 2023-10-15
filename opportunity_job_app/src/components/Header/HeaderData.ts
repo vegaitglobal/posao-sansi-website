@@ -6,7 +6,7 @@ type LinkItem = {
 };
 
 export const publicLinks: LinkItem[] = [
-    { label: "Pocetna", url: "/", iconPath: "/images/home.svg" },
+    { label: "Početna", url: "/", iconPath: "/images/home.svg" },
     { label: "FAQ", url: "/faq", iconPath: "/images/faq.svg" },
 ];
 

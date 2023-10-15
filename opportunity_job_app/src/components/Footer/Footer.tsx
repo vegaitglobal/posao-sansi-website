@@ -65,10 +65,10 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="footer__links-page">
-                    <Link className="footer__links-link" href='#'>
+                    <Link className="footer__links-link" href='/files/uslovi.pdf'>
                         Uslovi korišćenja
                     </Link>
-                    <Link className="footer__links-link" href='#'>
+                    <Link className="footer__links-link" href='/files/privatnost.pdf'>
                         Politika privatnosti
                     </Link>
                 </div>
