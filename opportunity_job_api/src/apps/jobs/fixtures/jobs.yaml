@@ -24,7 +24,7 @@
   pk: 3
   fields:
     job_name: Job C
-    job_description: This is Job C
+    job_description: This is Job C This is Job C This is Job C This is Job C This is Job C
     employer: 1
     location: Zrenjanin
     application_deadline: 2999-01-01T00:00:00
@@ -35,7 +35,7 @@
   pk: 4
   fields:
     job_name: Job D
-    job_description: This is Job D
+    job_description: This is Job D. This is Job D. This is Job D. This is Job D. This is Job D.
     employer: 1
     location: Nis
     application_deadline: 2999-01-01T00:00:00
