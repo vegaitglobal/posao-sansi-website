@@ -33,7 +33,7 @@ const Cards = ({ user }: HeaderProps) => {
                     ? initialCards.map((card, index) => {
                         return (
                             <div className="card__holder" key={index}>
-                                    <Link className="card__link" href="#"></Link>
+                                    <Link className="card__link" href="/register"></Link>
                                         <div className="cards__left">
                                             <img className="cards__img" src={card.imgUrl} alt="Card 1" />
                                         </div>
@@ -50,7 +50,7 @@ const Cards = ({ user }: HeaderProps) => {
                     : (user && user.accountType === "employer")
                         ?
                             <div className="card__holder">
-                                <Link className="card__link" href="#" ></Link>
+                                <Link className="card__link" href="/my-job-offers" ></Link>
                                     <div className="cards__left">
                                         <img className="cards__img" src={logedUserCard.imgUrl} alt="Card 2" />
                                     </div>
@@ -64,7 +64,7 @@ const Cards = ({ user }: HeaderProps) => {
                             </div>
                         :
                             <div className="card__holder">
-                                <Link className="card__link" href="#"></Link>
+                                <Link className="card__link" href="/job-offers"></Link>
                                     <div className="cards__left">
                                         <img className="cards__img" src={loggedCompanyCard.imgUrl} alt="Card 1" />
                                     </div>
