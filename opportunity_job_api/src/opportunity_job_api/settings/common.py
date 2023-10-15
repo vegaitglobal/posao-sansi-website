@@ -124,9 +124,3 @@ logging_dict["loggers"]["django"]["handlers"] = ["console"]
 LOGGING = logging_dict
 
 CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default=None, cast=Csv())
-
-# ##### SECURITY CONFIGURATION ############################
-FE_APP_ORIGIN = config("FE_APP_ORIGIN")
-CORS_ALLOWED_ORIGINS = [
-    FE_APP_ORIGIN,
-]
