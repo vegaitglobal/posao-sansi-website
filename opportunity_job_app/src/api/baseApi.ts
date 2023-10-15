@@ -15,7 +15,7 @@ const API = {
         return api.get(`${ resource }/?${ queryParams }`, config);
     },
     getResourceDetails: (resource: string, resourceId: number) => {
-        return api.get(`${ resource }/${ resourceId }`);
+        return api.get(`${ resource }/${ resourceId }/`);
     },
     getProtectedResourceDetails: (resource: string, resourceId: number) => {
         const config = { headers: AuthService.getAuthorizationHeaders() };

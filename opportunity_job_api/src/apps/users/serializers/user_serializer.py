@@ -9,4 +9,9 @@ class UserSerializer(ModelSerializer):
             "password",
             "groups",
             "user_permissions",
+            "last_login",
+            "date_joined",
+            "is_active",
+            "is_superuser",
+            "is_staff"
         )
