@@ -22,14 +22,13 @@ const faqItems = [
     // isOpen: false
     },
    ]
-const ImageAccordion = ({ title, content }) => {
-    const [isOpen, setIsOpen] = useState(null);
+const ImageAccordion = () => {
+    const [isOpen, setIsOpen] = useState<number>();
 
-    const toggleAccordion = (index) => {
-        if (isOpen === index) {
-            return setIsOpen(null)
+    const toggleAccordion = (index: number) => {
+        if (isOpen !== index) {
+            setIsOpen(index);
         }
-        setIsOpen(index);
     };
     return (
         <div className="faq">
