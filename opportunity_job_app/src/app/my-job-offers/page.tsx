@@ -13,7 +13,7 @@ import { User } from "@/api/models/User";
 export default function JobOffersPage() {
     const router = useRouter();
 
-    const [employer, setEmployer] = useState<User>();
+    const [employer, setEmployer] = useState<User>(null);
     const [jobOffers, setJobOffers] = useState<JobOffer[]>([]);
     const [pageNumber, setPageNumber] = useState<number>(0);
     const [totalJobOfferNumber, setTotalJobOfferNumber] = useState<number>(0);
@@ -27,17 +27,17 @@ export default function JobOffersPage() {
             } else if (user.accountType !== "employer") {
                 router.push("/");
             } else {
-                setEmployer(user.id);
-                loadMoreJobOffers(user.id);
+                setEmployer(user);
+                loadMoreJobOffers();
             }
         };
         fetchJobOffers();
     }, []);
 
-    async function loadMoreJobOffers(employerID) {
+    async function loadMoreJobOffers() {
         const nextPageNumber = pageNumber + 1;
         setPageNumber(nextPageNumber);
-        const response = await JobOfferService.getMyJobsOffers(nextPageNumber, employerID);
+        const response = await JobOfferService.getMyJobsOffers(nextPageNumber);
         setJobOffers([...jobOffers, ...response.items]);
         setHasNextPage(nextPageNumber < response.pagination.total_pages);
         setTotalJobOfferNumber(response.pagination.total_items);
@@ -47,14 +47,12 @@ export default function JobOffersPage() {
         <>
             <Header user={ employer }/>
             <main>
-                { employer && (
-                    <JobOffers
-                        onLoadMore={ () => loadMoreJobOffers(employer.id) }
-                        jobOffers={ jobOffers }
-                        hasNextPage={ hasNextPage }
-                        totalJobOfferNumber={ totalJobOfferNumber }
-                    />
-                ) }
+                <JobOffers
+                    onLoadMore={ loadMoreJobOffers }
+                    jobOffers={ jobOffers }
+                    hasNextPage={ hasNextPage }
+                    totalJobOfferNumber={ totalJobOfferNumber }
+                />
             </main>
             <Footer/>
         </>

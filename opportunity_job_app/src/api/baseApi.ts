@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import axios from "axios";
 import { AuthService } from "./authService";
 
@@ -7,13 +7,17 @@ const api = axios.create({
 });
 
 const API = {
-    getAllResources: (resource, queryParams = "") => {
+    getResourceList: (resource, queryParams = "") => {
         return api.get(`${ resource }/?${ queryParams }`);
     },
-    getResourceById: (resource, resourceId) => {
+    getProtectedResourceList: (resource, queryParams = "") => {
+        const config = { headers: AuthService.getAuthorizationHeaders() };
+        return api.get(`${ resource }/?${ queryParams }`, config);
+    },
+    getResourceDetails: (resource, resourceId) => {
         return api.get(`${ resource }/${ resourceId }`);
     },
-    getProtectedResourceById: (resource, resourceId) => {
+    getProtectedResourceDetails: (resource, resourceId) => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
         return api.get(`${ resource }/${ resourceId }`, config);
     },

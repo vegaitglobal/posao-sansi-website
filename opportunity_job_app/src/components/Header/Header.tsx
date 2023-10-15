@@ -31,7 +31,6 @@ const Header = ({ user }: HeaderProps) => {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [navActive, setIsNavActive] = useState<boolean>(false);
 
-
     const toggle = () => {
         setIsActive(!isActive);
         setIsNavActive(false);

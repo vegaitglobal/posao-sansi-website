@@ -21,7 +21,7 @@ export const jobOfferFlags = {
             backgroundColor: "#D7D5D5"
         }
     },
-    applied: {
+    enrolled: {
         label: "KONKURISALI STE",
         style: {
             labelColor: "black",
@@ -45,6 +45,7 @@ export interface JobOffer {
     additional_skills: string;
     is_active: boolean;
     employer: number;
+    has_enrolled: boolean;
     flag?: JobOfferFlag;
 }
 
