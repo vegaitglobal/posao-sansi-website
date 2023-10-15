@@ -28,7 +28,8 @@ class LoginSerializer(serializers.Serializer):
         return {
             "token": token.key,
             "id": self.user.id,
-            "account_type": self.account.type
+            "profile_id": self.user.get_account().id,
+            "account_type": self.account.type,
         }
 
     def update(self, instance, validated_data):
