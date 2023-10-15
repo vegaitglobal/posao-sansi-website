@@ -14,7 +14,7 @@ export const JobEnrollmentService = {
         const params = new URLSearchParams({
             applicant: applicantID
         });
-        const response = await API.getAllResources("job-enrollments", params.toString());
+        const response = await API.getResourceList("job-enrollments", params.toString());
         return response.data;
     }
 
