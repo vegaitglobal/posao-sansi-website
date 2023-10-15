@@ -1,6 +1,6 @@
 import "./job-offers.scss";
 import { JobOffer } from "@/api/models/JobOffer";
-import JobOfferCard from "@/components/JobOffer/JobOfferCard";
+import JobOfferCard from "@/components/JobOfferCard/JobOfferCard";
 
 interface JobOffersProps {
     jobOffers?: JobOffer[];

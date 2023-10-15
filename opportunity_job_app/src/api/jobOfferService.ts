@@ -33,4 +33,9 @@ export const JobOfferService = {
         const response = await API.getProtectedResourceList("job-offers", params.toString());
         return response.data;
     },
+
+    findJobOffer: async (jobOfferID: number): Promise<JobOffer> => {
+        const response = await API.getResourceDetails("job-offers", jobOfferID);
+        return response.data;
+    }
 };
