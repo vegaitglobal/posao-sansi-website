@@ -23,3 +23,19 @@ $wrapper-max-widths: 1600px;
     width: 100%;
   }
 }
+
+.job-offers-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 50px 0;
+}
+
+.load-more-button {
+  background-color: #E99E41;
+  color: white;
+  padding: 20px 50px 10px;
+  border-radius: 4px;
+  font-size: 22px;
+}
