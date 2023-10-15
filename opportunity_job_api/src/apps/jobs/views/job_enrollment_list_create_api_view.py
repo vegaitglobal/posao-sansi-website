@@ -1,10 +1,11 @@
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 from apps.common.views import ListCreateAPIView
 from apps.jobs.filtersets import JobEnrollmentFilterSet
 from apps.jobs.models import JobEnrollment
 from apps.jobs.serializers import JobEnrollmentSerializer
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework import status
 from apps.users.models import ApplicantAccount
 
 

@@ -5,7 +5,6 @@ from rest_framework.views import APIView
 
 from apps.jobs.models import JobEnrollment
 from apps.jobs.serializers import JobEnrollmentSerializer
-
 from apps.users.models import EmployerAccount
 
 
@@ -20,7 +19,6 @@ class JobEnrollmentDetailsAPIView(APIView):
                 return Response(status=status.HTTP_403_FORBIDDEN)
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-
 
         if job_enrollment := JobEnrollment.objects.filter(id=pk).filter():
             job_enrollment.delete()
