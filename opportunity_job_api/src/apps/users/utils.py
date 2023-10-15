@@ -20,4 +20,4 @@ def create_employer_user(serializer: EmployerAccountSerializer, password: str) -
 
 def get_email_from_hash(url_hash: str) -> str:
     decoded_key = signing.loads(url_hash)
-    return decoded_key.get('email')
+    return decoded_key.get("email")
