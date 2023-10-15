@@ -60,7 +60,7 @@
 .header__nav-list {
     display: flex;
     @include media-breakpoint-down(md) {
-        display: block;
+        display: none;
         position: absolute;
         top: 58px;
         right: 0;
