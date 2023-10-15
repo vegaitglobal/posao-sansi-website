@@ -4,7 +4,8 @@ import "./login-form.scss"
 import InputField from "@/components/InputField/InputField";
 import { useState } from "react";
 import { AuthService } from "@/api/authService";
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const LoginForm = () => {
     const router = useRouter()
@@ -28,6 +29,7 @@ const LoginForm = () => {
         setFormData({ ...formData, [fieldName]: fieldValue });
     };
 
+
     return (
         <div className="wrapper">
             <p className="welcome-sentence">Dobrodošli nazad!</p>
@@ -46,6 +48,10 @@ const LoginForm = () => {
                 />
                 { responseError && <p className="error-message">{ responseError }</p> }
                 <button className="login-form__button" onClick={ login }>Uloguj se</button>
+
+                <Link className="login-form__link" target="_blank" href="/password-forgotten">
+                Zaboravili ste lozinku?
+                </Link>
             </form>
         </div>
     )
