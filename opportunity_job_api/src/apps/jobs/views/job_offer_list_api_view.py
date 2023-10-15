@@ -1,16 +1,19 @@
-from rest_framework import status
+from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from apps.common.paginator import Paginator
 from apps.jobs.models import JobOffer
 from apps.jobs.serializers import JobOfferSerializer
 
 
-class JobOfferListAPIView(APIView):
+class JobOfferListCreateAPIView(generics.ListCreateAPIView):
+    queryset = JobOffer.objects.all()
+    serializer_class = JobOfferSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['is_active', 'employer']
 
-    @staticmethod
-    def get(request, **kwargs):
+    def list(self, request, *args, **kwargs) -> Response:
         queryset = JobOffer.objects.order_by('-created').all()
         paginator = Paginator(queryset=queryset, request=request)
         serializer = JobOfferSerializer(
@@ -18,11 +21,3 @@ class JobOfferListAPIView(APIView):
             request=request
         )
         return Response(data=serializer.data)
-
-    @staticmethod
-    def post(request, **kwargs):
-        serializer = JobOfferSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)

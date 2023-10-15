@@ -9,31 +9,34 @@ from apps.jobs.serializers import JobOfferSerializer
 class JobOfferDetailsAPIView(APIView):
 
     @staticmethod
-    def get(request, id, **kwargs):
+    def get(request, pk: int, **kwargs):
         try:
-            job_offer = JobOffer.objects.get(id=id)
+            job_offer = JobOffer.objects.get(id=pk)
             serializer = JobOfferSerializer(job_offer)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except JobOffer.DoesNotExist:
-            return Response({"message": "Job offer with that ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                data={"message": "Not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
     @staticmethod
-    def patch(request, id, **kwargs):
+    def patch(request, pk: int, **kwargs):
         try:
-            job_offer = JobOffer.objects.get(id=id)
+            job_offer = JobOffer.objects.get(id=pk)
             new_job_offer = request.data
             serializer = JobOfferSerializer(instance=job_offer, data=new_job_offer, partial=True)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
         except JobOffer.DoesNotExist:
-            return Response({"message": "Job offer with that ID doesn't exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                data={"message": "Not found"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
     @staticmethod
-    def delete(request, id, **kwargs):
-        try:
-            job_offer = JobOffer.objects.get(id=id)
+    def delete(request, pk: int, **kwargs):
+        if job_offer := JobOffer.objects.filter(id=pk).filter():
             job_offer.delete()
-            return Response({"message": "Successfully deleted"})
-        except JobOffer.DoesNotExist:
-            return Response({"message": "Job offer with the given ID doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
