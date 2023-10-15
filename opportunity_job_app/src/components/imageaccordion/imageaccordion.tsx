@@ -33,8 +33,8 @@ const ImageAccordion = ({ title, content }) => {
     };
     return (
         <div className="faq">
-            <img className="faq__details faq__details--left" src="/images/detail.png" alt="" />
-            <img className="faq__details faq__details--right" src="/images/detail-2.png" alt="" />
+            <img className="faq__details faq__details--left" src="/images/detail.png" alt="Detail image" />
+            <img className="faq__details faq__details--right" src="/images/detail-2.png" alt="Detail image" />
             <h2 className="faq__heading">NAJČEŠĆE POSTAVLJENA PITANJA</h2>
             <div className="faq__holder">
                 <div className="faq__image-holder">

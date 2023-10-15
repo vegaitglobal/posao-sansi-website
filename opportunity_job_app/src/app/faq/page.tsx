@@ -11,9 +11,7 @@ export default function Page() {
  <>
  <Header/>
  <main>
-<div className="faq__container">
     <ImageAccordion />
-</div>
  </main>
  <Footer/>
  </>
