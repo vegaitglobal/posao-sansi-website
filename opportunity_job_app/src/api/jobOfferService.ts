@@ -1,11 +1,7 @@
 import API from "./baseApi";
-import { JobOffer } from "@/api/models/JobOffer";
+import { JobOffer, jobOfferFlags } from "@/api/models/JobOffer";
+import { Pagination } from "@/api/models/Pagination";
 
-
-interface Pagination {
-    total_items: number;
-    total_pages: number;
-}
 
 interface JobOfferListResponse {
     items: JobOffer[],
@@ -13,10 +9,25 @@ interface JobOfferListResponse {
 }
 
 export const JobOfferService = {
-    getActiveJobs: async (pageNumber: number): Promise<JobOfferListResponse> => {
-        const itemsPerPage = 6;
-        const queryParams = `is_active=true&page=${ pageNumber }&ipp=${ itemsPerPage }`;
-        const response = await API.getAllResources("job-offers", queryParams);
+    getActiveJobOffers: async (pageNumber: number): Promise<JobOfferListResponse> => {
+        return JobOfferService.getJobOffers(pageNumber, { is_active: true });
+    },
+
+    getMyJobsOffers: async (pageNumber: number, employerID: number): Promise<JobOfferListResponse> => {
+        const listResponse = await JobOfferService.getJobOffers(pageNumber, { employer: employerID });
+        listResponse.items = listResponse.items.map(jobOffer => {
+            return { ...jobOffer, flag: jobOffer.is_active ? jobOfferFlags.active : jobOfferFlags.archived };
+        });
+        return listResponse;
+    },
+
+    getJobOffers: async (pageNumber: number, filters: object): Promise<JobOfferListResponse> => {
+        const params = new URLSearchParams({
+            ipp: 6,
+            page: pageNumber,
+            ...filters,
+        });
+        const response = await API.getAllResources("job-offers", params.toString());
         return response.data;
     },
 };

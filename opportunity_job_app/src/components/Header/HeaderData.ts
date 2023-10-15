@@ -18,7 +18,7 @@ export const anonymousUserLinks: LinkItem[] = [
 
 export const employerLinks: LinkItem[] = [
     ...publicLinks,
-    { label: "Moji poslovi", url: "/my-jobs", iconPath: "/images/jobs.svg" },
+    { label: "Moji poslovi", url: "/my-job-offers", iconPath: "/images/jobs.svg" },
     { label: "Odjava", url: "/logout", iconPath: "/images/sing-out.svg" },
 ];
 

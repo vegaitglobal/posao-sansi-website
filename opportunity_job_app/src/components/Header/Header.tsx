@@ -1,8 +1,10 @@
-"use client"
+"use client";
+
 import Link from "next/link";
 import { useState } from "react";
-import "./Header.scss"
+import "./Header.scss";
 import { anonymousUserLinks, employerLinks, applicantLinks } from "./HeaderData";
+import { User } from "@/api/models/User";
 
 type LinkItem = {
     label: string;
@@ -15,12 +17,6 @@ type LanguageItem = {
     label: string;
     code: string;
     flagPath: string;
-};
-
-type User = {
-    token: string;
-    id: number;
-    accountType: string;
 };
 
 type HeaderProps = {
@@ -38,19 +34,19 @@ const Header = ({ user }: HeaderProps) => {
 
     const toggle = () => {
         setIsActive(!isActive);
-        setIsNavActive(false)
+        setIsNavActive(false);
     };
 
     const toggleNav = () => {
         setIsNavActive(!navActive);
-        setIsActive(false)
+        setIsActive(false);
     };
 
     const linksObject: linksObjectTypes = {
         "anonymous": anonymousUserLinks,
         "employer": employerLinks,
         "applicant": applicantLinks
-    }
+    };
 
     const languages: LanguageItem[] = [
         { label: "ENG", code: "en", flagPath: "/images/en-flag.png" },
@@ -67,8 +63,8 @@ const Header = ({ user }: HeaderProps) => {
                     </span>
                 </Link>
             </li>
-        ))
-    }
+        ));
+    };
 
     return (
         <header className="header">
@@ -105,8 +101,8 @@ const Header = ({ user }: HeaderProps) => {
                 </nav>
             </div>
         </header>
-    )
-}
+    );
+};
 
 
-export default Header
+export default Header;

@@ -4,10 +4,9 @@ import { useRouter } from "next/navigation";
 
 interface JobOfferProps {
     jobOffer: JobOffer;
-    hasApplied?: boolean;
 }
 
-const JobOfferCard = ({ jobOffer, hasApplied = false }: JobOfferProps) => {
+const JobOfferCard = ({ jobOffer }: JobOfferProps) => {
     const router = useRouter();
 
     function openJobOfferDetails(jobID: number): void {
@@ -16,6 +15,11 @@ const JobOfferCard = ({ jobOffer, hasApplied = false }: JobOfferProps) => {
 
     return (
         <div key={ jobOffer.id } className="job-offer" onClick={ () => openJobOfferDetails(jobOffer.id) }>
+            { jobOffer.flag && (
+                <div className="job-offer__flag" style={ jobOffer.flag.style }>
+                    { jobOffer.flag.label }
+                </div>
+            ) }
             <div className="job-offer__row job-offer__name">{ jobOffer.job_name.toUpperCase() }</div>
             <div className="job-offer__row">
                 Opis posla:&nbsp;
