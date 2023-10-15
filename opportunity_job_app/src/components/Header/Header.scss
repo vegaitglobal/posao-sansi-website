@@ -81,7 +81,8 @@
 }
 
 .header__nav-item {
-    padding: 8px 20px;
+    padding: 3px 20px 8px 20px;
+    margin-left: 40px;
     &:active {
         background-color: $purple-hover;
         .header__nav-link-text {
@@ -92,7 +93,6 @@
 .header__nav-link {
     display: flex;
     align-items: center;
-
 }
 .header__nav-icon {
     width: 20px;
@@ -117,7 +117,6 @@
     font-weight: 600;
     line-height: normal;
     color: $purple-primary;
-    margin-left: 40px;
     @include media-breakpoint-down(md) {
         margin-left: 10px;
     }
