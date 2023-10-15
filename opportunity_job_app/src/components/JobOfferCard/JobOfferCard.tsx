@@ -1,6 +1,5 @@
 import "./job-offer-card.scss";
 import { JobOffer, JobOfferEngagements } from "@/api/models/JobOffer";
-import { useRouter } from "next/navigation";
 import { mapStringToLocalDateString } from "@/utils";
 
 interface JobOfferProps {
@@ -8,10 +7,9 @@ interface JobOfferProps {
 }
 
 const JobOfferCard = ({ jobOffer }: JobOfferProps) => {
-    const router = useRouter();
 
     function openJobOfferDetails(jobID: number): void {
-        window.location.href = `/job-offers/?id=${ jobID }`;
+        window.location.href = `/job-offers/${ jobID }/`;
     }
 
     return (
