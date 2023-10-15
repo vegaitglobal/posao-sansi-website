@@ -4,7 +4,7 @@ from django_filters import CharFilter, BooleanFilter
 from apps.jobs.models import JobOffer
 
 
-class DonationFilterSet(FilterSet):
+class JobOfferFilterSet(FilterSet):
     employer = CharFilter(field_name="employer__user", lookup_expr="exact")
 
     class Meta:
