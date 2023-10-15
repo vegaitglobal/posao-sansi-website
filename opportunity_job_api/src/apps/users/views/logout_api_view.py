@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 
 class LogoutAPIView(APIView):
     permission_classes = [IsAuthenticated]
+    serializer_class = None
 
     @staticmethod
     def post(request, **kwargs) -> JsonResponse:

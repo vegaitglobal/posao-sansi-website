@@ -8,6 +8,7 @@ from apps.users.utils import create_employer_user
 
 
 class EmployerRegistrationAPIView(APIView):
+    serializer_class = EmployerAccountSerializer
 
     @staticmethod
     def post(request, **kwargs) -> JsonResponse:
