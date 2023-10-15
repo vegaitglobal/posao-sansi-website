@@ -17,7 +17,7 @@ export const AuthService = {
         return !!AuthService.getUser();
     },
     getUser: () => {
-        const userData = localStorage.getItem("testUser");
+        const userData = localStorage.getItem("user");
         if (userData) {
             return JSON.parse(userData);
         } else {

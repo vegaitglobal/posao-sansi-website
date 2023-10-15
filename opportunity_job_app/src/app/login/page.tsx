@@ -7,7 +7,7 @@ import { AuthService } from "@/api/authService"
 import LoginForm from "@/components/LoginForm/LoginForm";
 import { useRouter } from "next/navigation";
 
-export default function Page() {
+export default function LoginPage() {
     const router = useRouter()
 
     useEffect(() => {

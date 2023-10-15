@@ -1,0 +1,25 @@
+@import '../../scss/style.scss';
+
+$wrapper-max-widths: 1600px;
+
+.job-offers-title {
+  margin: 50px 40px 10px;
+  color: $purple-primary;
+
+  @include media-breakpoint-down(sm) {
+    width: 90%;
+  }
+}
+
+.job-offers {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  max-width: $wrapper-max-widths;
+  margin: 0 auto 50px auto;
+
+  @include media-breakpoint-down(sm) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}

@@ -1,0 +1,37 @@
+@import '../../scss/style.scss';
+
+.job-offer {
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 450px;
+  margin: 20px auto;
+  padding: 45px 35px;
+  cursor: pointer;
+
+  @include media-breakpoint-down(sm) {
+    width: 90%;
+  }
+}
+
+.job-offer__row {
+  padding: 5px 0;
+  font-size: 18px;
+}
+
+.job-offer__name {
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.job-offer__description {
+  font-size: 16px;
+}
+
+.job-offer__engagement-value {
+  color: $purple-primary;
+  font-weight: bold;
+}
+
+.job-offer__application-deadline {
+  color: $gray-4;
+}
