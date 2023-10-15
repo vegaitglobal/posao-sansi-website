@@ -30,7 +30,7 @@ const LoginForm = () => {
 
     return (
         <div className="wrapper">
-            <p className="welcome-sentence">Dobrodošli naza!</p>
+            <p className="welcome-sentence">Dobrodošli nazad!</p>
             <p className="welcome-sentence">Ulogujte se da biste nastavili.</p>
             <form className="login-form">
                 <InputField

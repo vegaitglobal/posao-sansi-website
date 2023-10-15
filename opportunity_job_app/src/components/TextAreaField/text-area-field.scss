@@ -1,0 +1,21 @@
+@import '../../scss/style.scss';
+
+.text-area-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.text-area-field__input {
+    font-family: 'Jost';
+    height: 103x;
+    border: 1px solid $purple-primary;
+    border-radius: 4px;
+    resize: vertical;
+    max-height: 500px;
+}
+
+.text-area__input::placeholder {
+    color: #a8a8a8;
+}

@@ -1,0 +1,27 @@
+@import '../../scss/style.scss';
+
+.select-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.select-field__input {
+  height: 40px;
+  border: 1px solid $purple-primary;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+
+.select-field__input::placeholder {
+  color: #a8a8a8;
+}
+
+.select-field.invert-color {
+    .select-field__input {
+        background-color: $purple-primary;
+        color: $white;
+        font-weight: 600;
+    }
+}

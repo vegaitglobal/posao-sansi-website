@@ -5,6 +5,7 @@ import Footer from "@/components/Footer/Footer";
 import { useEffect } from "react";
 import { AuthService } from "@/api/authService";
 import { useRouter } from "next/navigation";
+import RegisterForm from "@/components/RegisterForm/RegisterForm";
 
 export default function Page() {
     const router = useRouter()
@@ -23,7 +24,7 @@ export default function Page() {
         <>
             <Header/>
             <main>
-                Hello
+                <RegisterForm />
             </main>
             <Footer/>
         </>
