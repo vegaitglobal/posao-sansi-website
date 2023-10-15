@@ -11,7 +11,7 @@ class PasswordResetSerializer(serializers.Serializer):
     password = serializers.CharField(validators=[MinLengthValidator(8)])
 
     def __init__(self, *args, **kwargs):
-        super(PasswordResetSerializer, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.user = None
 
     def validate(self, attrs):
