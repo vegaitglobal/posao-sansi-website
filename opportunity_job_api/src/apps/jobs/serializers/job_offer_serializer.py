@@ -1,5 +1,4 @@
-from rest_framework.serializers import ModelSerializer
-
+from apps.common.serializers import ModelSerializer
 from apps.jobs.models import JobOffer
 
 

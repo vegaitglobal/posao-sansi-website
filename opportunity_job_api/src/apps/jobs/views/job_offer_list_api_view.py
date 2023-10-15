@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from apps.common.paginator import Paginator
 from apps.jobs.models import JobOffer
 from apps.jobs.serializers import JobOfferSerializer
 
@@ -10,9 +11,13 @@ class JobOfferListAPIView(APIView):
 
     @staticmethod
     def get(request, **kwargs):
-        job_offers = JobOffer.objects.all()
-        serializer = JobOfferSerializer(job_offers, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        queryset = JobOffer.objects.order_by('-created').all()
+        paginator = Paginator(queryset=queryset, request=request)
+        serializer = JobOfferSerializer(
+            paginator=paginator,
+            request=request
+        )
+        return Response(data=serializer.data)
 
     @staticmethod
     def post(request, **kwargs):
