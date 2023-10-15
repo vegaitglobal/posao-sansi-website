@@ -9,6 +9,7 @@ class JobEnrollment(BaseModel):
     class Meta:
         verbose_name = _("Job Enrollment")
         verbose_name_plural = _("Job Enrollments")
+        unique_together = ("job_offer", "applicant_account")
 
     job_offer = models.ForeignKey(
         verbose_name=_("job offer"),
