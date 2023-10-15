@@ -5,6 +5,8 @@ from apps.users.models import ApplicantAccount, EmployerAccount
 
 
 class StatisticsAPIView(APIView):
+    serializer_class = None
+
     @staticmethod
     def get(request) -> JsonResponse:
         applicant_count = ApplicantAccount.objects.count()

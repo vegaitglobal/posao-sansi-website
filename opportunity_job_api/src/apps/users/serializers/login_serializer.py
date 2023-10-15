@@ -10,11 +10,10 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
 
-    def __init__(self, request: Request, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = None
         self.account = None
-        self.request = request
 
     def validate(self, attrs):
         self.user = User.objects.filter(email=attrs["email"], is_active=True).first()

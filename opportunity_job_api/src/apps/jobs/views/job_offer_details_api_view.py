@@ -8,6 +8,7 @@ from apps.jobs.serializers import JobOfferSerializer
 
 
 class JobOfferDetailsAPIView(APIView):
+    serializer_class = JobOfferSerializer
 
     @staticmethod
     def get(request, pk: int, **kwargs):
