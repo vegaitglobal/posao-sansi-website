@@ -9,5 +9,5 @@ class LogoutAPIView(APIView):
 
     @staticmethod
     def post(request, **kwargs) -> JsonResponse:
-        Token.objects.get(key=request.headers.get('Authorization').split(" ")[1]).delete()
-        return JsonResponse(data={'message': 'success'})
+        Token.objects.get(key=request.headers.get("Authorization").split(" ")[1]).delete()
+        return JsonResponse(data={"message": "success"})
