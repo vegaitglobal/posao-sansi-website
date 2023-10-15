@@ -2,7 +2,7 @@ import sys
 from copy import deepcopy
 from os.path import abspath, basename, dirname, join, normpath
 
-from decouple import config, Csv
+from decouple import Csv, config
 from django.utils.log import DEFAULT_LOGGING
 from django.utils.translation import gettext_lazy as _
 

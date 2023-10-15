@@ -1,3 +1,3 @@
 from apps.jobs.serializers.faq_serializer import FAQSerializer
-from apps.jobs.serializers.job_offer_serializer import JobOfferSerializer
 from apps.jobs.serializers.job_enrollment_serializer import JobEnrollmentSerializer
+from apps.jobs.serializers.job_offer_serializer import JobOfferSerializer

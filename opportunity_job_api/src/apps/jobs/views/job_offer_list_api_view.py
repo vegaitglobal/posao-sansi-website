@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from apps.common.views import ListCreateAPIView
 from apps.jobs.models import JobOffer
 from apps.jobs.serializers import JobOfferSerializer
-from apps.users.models import EmployerAccount, ApplicantAccount
+from apps.users.models import ApplicantAccount, EmployerAccount
 
 
 class JobOfferListCreateAPIView(ListCreateAPIView):

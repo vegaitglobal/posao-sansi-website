@@ -3,9 +3,9 @@ from django.urls import path
 from apps.users.views import (
     ApplicantRegistrationAPIView,
     EmployerRegistrationAPIView,
-    StatisticsAPIView,
     LoginAPIView,
-    LogoutAPIView
+    LogoutAPIView,
+    StatisticsAPIView,
 )
 
 urlpatterns = [
