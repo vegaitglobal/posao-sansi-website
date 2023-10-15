@@ -5,7 +5,7 @@ export const AuthService = {
         const response = await API.post("login/", {
             email: email,
             password: password,
-        });
+        },{});
         const userDataString = JSON.stringify({
             token: response.data.token,
             id: response.data.id,

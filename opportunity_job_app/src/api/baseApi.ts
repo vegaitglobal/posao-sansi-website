@@ -7,27 +7,25 @@ const api = axios.create({
 });
 
 const API = {
-    getResourceList: (resource, queryParams = "") => {
+    getResourceList: (resource: string, queryParams = "") => {
         return api.get(`${ resource }/?${ queryParams }`);
     },
-    getProtectedResourceList: (resource, queryParams = "") => {
+    getProtectedResourceList: (resource: string, queryParams = "") => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
         return api.get(`${ resource }/?${ queryParams }`, config);
     },
-    getResourceDetails: (resource, resourceId) => {
+    getResourceDetails: (resource: string, resourceId: number) => {
         return api.get(`${ resource }/${ resourceId }`);
     },
-    getProtectedResourceDetails: (resource, resourceId) => {
+    getProtectedResourceDetails: (resource: string, resourceId: number) => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
         return api.get(`${ resource }/${ resourceId }`, config);
     },
-    post: (url, data, config) => {
+    post: (url:string, data: Object, config: Object) => {
         return api.post(url, data, config);
     },
-    patch: (url, data) => {
-        const config = {};
-        config.headers = AuthService.getAuthorizationHeaders();
-        return api.patch(url, data, config);
+    patch: (url: string, data: Object) => {
+        return api.patch(url, data);
     },
 };
 
