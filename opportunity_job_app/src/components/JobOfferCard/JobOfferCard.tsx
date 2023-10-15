@@ -1,6 +1,7 @@
 import "./job-offer-card.scss";
 import { JobOffer, JobOfferEngagements } from "@/api/models/JobOffer";
 import { useRouter } from "next/navigation";
+import { mapStringToLocalDateString } from "@/utils";
 
 interface JobOfferProps {
     jobOffer: JobOffer;
@@ -10,7 +11,7 @@ const JobOfferCard = ({ jobOffer }: JobOfferProps) => {
     const router = useRouter();
 
     function openJobOfferDetails(jobID: number): void {
-        router.push(`/job-offers/${ jobID }`);
+        window.location.href = `/job-offers/?id=${ jobID }`;
     }
 
     return (
@@ -32,7 +33,7 @@ const JobOfferCard = ({ jobOffer }: JobOfferProps) => {
                 </span>
             </div>
             <div className="job-offer__row job-offer__application-deadline">
-                Rok za prijavu: { new Date(Date.parse(jobOffer.application_deadline)).toLocaleDateString("de") }
+                Rok za prijavu: { mapStringToLocalDateString(jobOffer.application_deadline) }
             </div>
         </div>
     );

@@ -12,6 +12,7 @@ class JobOfferSerializer(ModelSerializer):
 
     has_enrolled = SerializerMethodField("_has_enrolled")
     company_name = SerializerMethodField("_get_company_name")
+    company_url = SerializerMethodField("_get_company_url")
 
     def _has_enrolled(self, obj: JobOffer) -> bool:
         if account := self._get_authenticated_applicant_account():
@@ -31,3 +32,6 @@ class JobOfferSerializer(ModelSerializer):
 
     def _get_company_name(self, obj: JobOffer) -> str:
         return obj.employer.company_name
+
+    def _get_company_url(self, obj: JobOffer) -> str:
+        return obj.employer.url
