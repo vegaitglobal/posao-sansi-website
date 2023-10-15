@@ -33,26 +33,6 @@ class ModelSerializer(serializers.ModelSerializer):
         list_kwargs.update({key: value for key, value in kwargs.items() if key in LIST_SERIALIZER_KWARGS})
         return ListModelSerializer(*args, **list_kwargs)
 
-    def __init__(self, request=None, exclude_sensitive_fields: bool = True, **kwargs):
+    def __init__(self, request=None, **kwargs):
         super().__init__(**kwargs)
         self.request = request
-        self.exclude_sensitive_fields = exclude_sensitive_fields
-        for nested_serializer in self.nested_serializers:
-            nested_serializer.exclude_sensitive_fields = self.exclude_sensitive_fields
-
-    @property
-    def nested_serializers(self) -> list["ModelSerializer"]:
-        return [field for key, field in self.fields.items() if isinstance(field, ModelSerializer)]
-
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-
-        if self.exclude_sensitive_fields:
-            sensitive_fields = self.get_sensitive_fields()
-            data = {key: value for key, value in data.items() if key not in sensitive_fields}
-
-        return data
-
-    def get_sensitive_fields(self) -> tuple:
-        """ Returns names of the fields with sensitive data """
-        return tuple()

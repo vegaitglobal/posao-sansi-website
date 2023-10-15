@@ -46,6 +46,8 @@ export interface JobOffer {
     is_active: boolean;
     employer: number;
     has_enrolled: boolean;
+    company_name: string;
+    company_url: string;
     flag?: JobOfferFlag;
 }
 
