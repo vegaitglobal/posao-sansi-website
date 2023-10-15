@@ -1,0 +1,44 @@
+@import '../../scss/style.scss';
+
+.job-offer {
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 450px;
+  margin: auto;
+  padding: 45px 35px;
+  cursor: pointer;
+  position: relative;
+
+  @include media-breakpoint-down(sm) {
+    width: 90%;
+    max-width: 450px;
+  }
+}
+
+.job-offer__flag {
+  padding: 12px 20px;
+  width: fit-content;
+  position: absolute;
+  top: 15px;
+  right: 0;
+}
+
+.job-offer__row {
+  padding: 5px 0;
+  font-size: 18px;
+}
+
+.job-offer__name {
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.job-offer__engagement-value {
+  color: $purple-primary;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.job-offer__application-deadline {
+  color: $gray-4;
+}

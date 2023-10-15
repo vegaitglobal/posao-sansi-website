@@ -8,23 +8,23 @@ import { useRouter } from "next/navigation"
 
 const LoginForm = () => {
     const router = useRouter()
-    const [responseError, setResponseError] = useState<object | null>(null);
+    const [responseError, setResponseError] = useState<string>("");
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
 
-    async function login(e) {
+    async function login(e: React.SyntheticEvent<EventTarget>) {
         e.preventDefault()
         try {
             await AuthService.login(formData.email, formData.password);
             router.push("/")
-        } catch (error) {
+        } catch (error: any) {
             setResponseError(error.response?.data?.errors?.non_field_errors);
         }
     }
 
-    const updateFormData = (fieldValue, fieldName) => {
+    const updateFormData = (fieldValue: string, fieldName: string) => {
         setFormData({ ...formData, [fieldName]: fieldValue });
     };
 

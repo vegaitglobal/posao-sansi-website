@@ -35,7 +35,7 @@
     modified: 2023-10-14T00:00:00+00:00
 
 - model: users.EmployerAccount
-  pk: 2
+  pk: 1
   fields:
     user: 3
     company_name: Vincic
@@ -46,3 +46,24 @@
     about: Damjan's company
     created: 2023-10-14T00:00:00+00:00
     modified: 2023-10-14T00:00:00+00:00
+
+- model: users.User
+  pk: 4
+  fields:
+    email: milan@example.com
+    password: pbkdf2_sha256$260000$2IjFBdqCkWpi0Hs7la0UFG$UOGWoe6P41gCTfCmmbWoS/slytH+vpy3pf6wguCR/d0= # raw: pass4user
+    created: 2023-10-15T00:00:00+00:00
+    modified: 2023-10-15T00:00:00+00:00
+
+- model: users.EmployerAccount
+  pk: 2
+  fields:
+    user: 4
+    company_name: Lukić
+    pib: N3232323
+    address: NS, Cara Dušana
+    phone_number: +232323232323
+    url: https://google.com/
+    about: Miki's company
+    created: 2023-10-15T00:00:00+00:00
+    modified: 2023-10-15T00:00:00+00:00

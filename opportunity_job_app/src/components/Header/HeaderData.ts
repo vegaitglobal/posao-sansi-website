@@ -5,25 +5,25 @@ type LinkItem = {
     isLogged?: null | object;
 };
 
-export const initialLinks: LinkItem[] = [
-    { label: 'Pocetna', url: '/', iconPath: '/images/home.svg' },
-    { label: 'FAQ', url: '/faq', iconPath: '/images/faq.svg' },
-  ];
-  
-  export const links: LinkItem[] = [
-    ...initialLinks,
-    { label: 'Prijava', url: '/login', iconPath: '/images/log-in.svg' },
-    { label: 'Registracija', url: '/register', iconPath: '/images/sign-in.svg' },
-  ];
-  
-  export const linksLoggedUser: LinkItem[] = [
-    ...initialLinks,
-    { label: 'Moji poslovi', url: '/register', iconPath: '/images/jobs.svg' },
-    { label: 'Odjava', url: '/login', iconPath: '/images/sing-out.svg' },
-  ];
-  
-  export const linksLoggedCompany: LinkItem[] = [
-    ...initialLinks,
-    { label: 'Ponuda poslova', url: '/register', iconPath: '/images/jobs.svg' },
-    { label: 'Odjava', url: '/login', iconPath: '/images/sing-out.svg' },
-  ];
+export const publicLinks: LinkItem[] = [
+    { label: "Pocetna", url: "/", iconPath: "/images/home.svg" },
+    { label: "FAQ", url: "/faq", iconPath: "/images/faq.svg" },
+];
+
+export const anonymousUserLinks: LinkItem[] = [
+    ...publicLinks,
+    { label: "Prijava", url: "/login", iconPath: "/images/log-in.svg" },
+    { label: "Registracija", url: "/register", iconPath: "/images/sign-in.svg" },
+];
+
+export const employerLinks: LinkItem[] = [
+    ...publicLinks,
+    { label: "Moji poslovi", url: "/my-job-offers", iconPath: "/images/jobs.svg" },
+    { label: "Odjava", url: "/logout", iconPath: "/images/sing-out.svg" },
+];
+
+export const applicantLinks: LinkItem[] = [
+    ...publicLinks,
+    { label: "Ponuda poslova", url: "/job-offers", iconPath: "/images/jobs.svg" },
+    { label: "Odjava", url: "/logout", iconPath: "/images/sing-out.svg" },
+];

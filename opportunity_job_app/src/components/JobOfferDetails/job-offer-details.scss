@@ -1,0 +1,27 @@
+@import '../../scss/style.scss';
+
+.page {
+  padding: 50px 100px;
+}
+
+.page__back-button {
+  display: flex;
+  cursor: pointer;
+  margin-left: -48px;
+}
+
+.page__back-button-image {
+  margin: 0 10px;
+  width: 25px;
+}
+
+.page__back-button-text {
+  font-size: 20px;
+  color: $purple-primary;
+  font-weight: bold;
+}
+
+.page__title {
+  color: $purple-primary;
+  margin: 50px 0 10px 0;
+}

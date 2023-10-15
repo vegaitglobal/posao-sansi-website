@@ -1,23 +1,23 @@
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from django.db.models import QuerySet
+from rest_framework.permissions import IsAuthenticated
 
+from apps.common.views import ListCreateAPIView
 from apps.jobs.models import JobOffer
 from apps.jobs.serializers import JobOfferSerializer
+from apps.users.models import ApplicantAccount, EmployerAccount
 
 
-class JobOfferListAPIView(APIView):
+class JobOfferListCreateAPIView(ListCreateAPIView):
+    queryset = JobOffer.objects.all()
+    serializer_class = JobOfferSerializer
+    model_class = JobOffer
+    permission_classes = [IsAuthenticated]
 
-    @staticmethod
-    def get(request, **kwargs):
-        job_offers = JobOffer.objects.all()
-        serializer = JobOfferSerializer(job_offers, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @staticmethod
-    def post(request, **kwargs):
-        serializer = JobOfferSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    def filter_queryset(self, queryset: QuerySet) -> QuerySet:
+        queryset = super().filter_queryset(queryset=queryset)
+        account = self.request.user.get_account()
+        if account.type == EmployerAccount.type:
+            return queryset.filter(employer=account)
+        elif account.type == ApplicantAccount.type:
+            return queryset.filter(is_active=True)
+        return queryset.none()
