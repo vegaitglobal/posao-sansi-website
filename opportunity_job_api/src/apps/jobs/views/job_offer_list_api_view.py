@@ -1,9 +1,10 @@
 from django.db.models import QuerySet
 from rest_framework import generics
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 from rest_framework.response import Response
 
 from apps.common.paginator import Paginator
+from apps.jobs.filters import DonationFilterSet
 from apps.jobs.models import JobOffer
 from apps.jobs.serializers import JobOfferSerializer
 
@@ -12,7 +13,7 @@ class JobOfferListCreateAPIView(generics.ListCreateAPIView):
     queryset = JobOffer.objects.all()
     serializer_class = JobOfferSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['is_active', 'employer']
+    filterset_class = DonationFilterSet
 
     def list(self, request, *args, **kwargs) -> Response:
         queryset = self.filter_queryset(queryset=JobOffer.objects.order_by('-created').all())
