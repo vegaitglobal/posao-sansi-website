@@ -1,11 +1,11 @@
 import sys
 from copy import deepcopy
 from os.path import abspath, basename, dirname, join, normpath
-from os import getenv
 
-from decouple import config, Csv
+from decouple import Csv, config
 from django.utils.log import DEFAULT_LOGGING
 from django.utils.translation import gettext_lazy as _
+from os import getenv
 
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 
@@ -127,7 +127,7 @@ LOGGING = logging_dict
 CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default=None, cast=Csv())
 
 # ##### SECURITY CONFIGURATION ############################
-FE_APP_ORIGIN = getenv('CORS_ALLOWED_ORIGIN')
+FE_APP_ORIGIN = config("FE_APP_ORIGIN")
 CORS_ALLOWED_ORIGINS = [
     FE_APP_ORIGIN,
 ]

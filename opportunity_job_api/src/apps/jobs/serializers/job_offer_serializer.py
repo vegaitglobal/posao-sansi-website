@@ -1,7 +1,7 @@
 from rest_framework.fields import SerializerMethodField
 
 from apps.common.serializers import ModelSerializer
-from apps.jobs.models import JobOffer, JobEnrollment
+from apps.jobs.models import JobEnrollment, JobOffer
 from apps.users.models import ApplicantAccount
 
 

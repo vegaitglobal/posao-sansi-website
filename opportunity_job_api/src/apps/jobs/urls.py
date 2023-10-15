@@ -1,9 +1,11 @@
 from django.urls import path
 
-from apps.jobs.views import FAQListView
-from apps.jobs.views import JobOfferListCreateAPIView
-from apps.jobs.views import JobOfferDetailsAPIView
-from apps.jobs.views import JobEnrollmentListCreateAPIView
+from apps.jobs.views import (
+    FAQListView,
+    JobEnrollmentListCreateAPIView,
+    JobOfferDetailsAPIView,
+    JobOfferListCreateAPIView,
+)
 
 urlpatterns = [
     path("job-offers/", JobOfferListCreateAPIView.as_view()),
