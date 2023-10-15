@@ -21,7 +21,7 @@ const API = {
         const config = { headers: AuthService.getAuthorizationHeaders() };
         return api.get(`${ resource }/${ resourceId }`, config);
     },
-    post: (url:string, data: Object, config: Object) => {
+    post: (url: string, data: Object, config: Object) => {
         return api.post(url, data, config);
     },
     patch: (url: string, data: Object) => {
