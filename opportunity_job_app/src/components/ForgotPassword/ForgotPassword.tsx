@@ -31,8 +31,7 @@ const ForgotPassword = () => {
 
     return (
         <div className="wrapper">
-            <p className="welcome-sentence">Dobrodošli nazad!</p>
-            <p className="welcome-sentence">Ulogujte se da biste nastavili.</p>
+            <p className="welcome-sentence">Unesite Vašu e-mail adresu kako bismo Vam poslali podatke za resetovanje lozinke.</p>
             <form className="login-form">
                 <InputField
                     label="E-mail adresa:"
