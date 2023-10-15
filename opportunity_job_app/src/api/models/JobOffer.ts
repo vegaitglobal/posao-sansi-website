@@ -1,3 +1,35 @@
+export interface JobOfferFlag {
+    label: string;
+    style: {
+        labelColor: string;
+        backgroundColor: string;
+    };
+}
+
+export const jobOfferFlags = {
+    active: {
+        label: "AKTIVAN",
+        style: {
+            labelColor: "black",
+            backgroundColor: "#77DAF0"
+        }
+    },
+    archived: {
+        label: "ARHIVIRAN",
+        style: {
+            labelColor: "white",
+            backgroundColor: "#D7D5D5"
+        }
+    },
+    applied: {
+        label: "KONKURISALI STE",
+        style: {
+            labelColor: "black",
+            backgroundColor: "#77DAF0"
+        }
+    }
+};
+
 export interface JobOffer {
     id: number;
     created: string;
@@ -13,6 +45,7 @@ export interface JobOffer {
     additional_skills: string;
     is_active: boolean;
     employer: number;
+    flag?: JobOfferFlag;
 }
 
 export enum JobOfferEngagements {

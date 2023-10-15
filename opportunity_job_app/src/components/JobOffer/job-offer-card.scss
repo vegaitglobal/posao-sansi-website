@@ -7,11 +7,20 @@
   margin: auto;
   padding: 45px 35px;
   cursor: pointer;
+  position: relative;
 
   @include media-breakpoint-down(sm) {
     width: 90%;
     max-width: 450px;
   }
+}
+
+.job-offer__flag {
+  padding: 12px 20px;
+  width: fit-content;
+  position: absolute;
+  top: 15px;
+  right: 0;
 }
 
 .job-offer__row {

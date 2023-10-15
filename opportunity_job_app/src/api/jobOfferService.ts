@@ -1,11 +1,7 @@
 import API from "./baseApi";
-import { JobOffer } from "@/api/models/JobOffer";
+import { JobOffer, jobOfferFlags } from "@/api/models/JobOffer";
+import { Pagination } from "@/api/models/Pagination";
 
-
-interface Pagination {
-    total_items: number;
-    total_pages: number;
-}
 
 interface JobOfferListResponse {
     items: JobOffer[],
@@ -18,7 +14,11 @@ export const JobOfferService = {
     },
 
     getMyJobsOffers: async (pageNumber: number, employerID: number): Promise<JobOfferListResponse> => {
-        return JobOfferService.getJobOffers(pageNumber, { employer: employerID });
+        const listResponse = await JobOfferService.getJobOffers(pageNumber, { employer: employerID });
+        listResponse.items = listResponse.items.map(jobOffer => {
+            return { ...jobOffer, flag: jobOffer.is_active ? jobOfferFlags.active : jobOfferFlags.archived };
+        });
+        return listResponse;
     },
 
     getJobOffers: async (pageNumber: number, filters: object): Promise<JobOfferListResponse> => {
@@ -29,5 +29,5 @@ export const JobOfferService = {
         });
         const response = await API.getAllResources("job-offers", params.toString());
         return response.data;
-    }
+    },
 };
