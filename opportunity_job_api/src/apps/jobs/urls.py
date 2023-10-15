@@ -2,10 +2,10 @@ from django.urls import path
 
 from apps.jobs.views import (
     FAQListView,
+    JobEnrollmentDetailsAPIView,
     JobEnrollmentListCreateAPIView,
     JobOfferDetailsAPIView,
     JobOfferListCreateAPIView,
-    JobEnrollmentDetailsAPIView
 )
 
 urlpatterns = [
