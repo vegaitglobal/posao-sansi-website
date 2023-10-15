@@ -3,39 +3,37 @@
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { useEffect, useState } from "react";
-import { setLocalStorage } from "@/api/baseApi"
 import { AuthService } from "@/api/authService"
 import Banner from "../components/Banner/Banner"
 import Mission from "@/components/Mission/Mission";
 import Statistics from "@/components/Statistics/Statistics";
 
 type User = {
-  token: string;
-  id: number;
-  accountType: string;
+    token: string;
+    id: number;
+    accountType: string;
 };
 
 export default function Home() {
-  const [user, setUser] = useState<User>()
-  useEffect(() => {
-    const isLogged = () => {
-        setLocalStorage()
-        if(AuthService.getUser() !== null){
-            setUser(AuthService.getUser())
+    const [user, setUser] = useState<User>()
+    useEffect(() => {
+        const isLogged = () => {
+            if (AuthService.getUser() !== null) {
+                setUser(AuthService.getUser())
+            }
         }
-    }
-    isLogged()
-},[])
+        isLogged()
+    }, [])
 
-  return (
-    <>
-      <Header user={user}/>
-      <main>
-          <Banner />
-          <Mission />
-          <Statistics />
-      </main>
-      <Footer />
-    </>
-  )
+    return (
+        <>
+            <Header user={ user }/>
+            <main>
+                <Banner/>
+                <Mission/>
+                <Statistics/>
+            </main>
+            <Footer/>
+        </>
+    )
 }
