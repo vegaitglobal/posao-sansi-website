@@ -7,3 +7,4 @@ from apps.users.serializers.employer_account_serializer import (
     EmployerAccountSerializer
 )
 from apps.users.serializers.login_serializer import LoginSerializer
+from apps.users.serializers.password_forgotten_serializer import PasswordForgottenSerializer
