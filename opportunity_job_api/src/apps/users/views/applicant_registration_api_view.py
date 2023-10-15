@@ -8,6 +8,7 @@ from apps.users.utils import create_applicant_user
 
 
 class ApplicantRegistrationAPIView(APIView):
+    serializer_class = ApplicantAccountSerializer
 
     @staticmethod
     def post(request, **kwargs) -> JsonResponse:

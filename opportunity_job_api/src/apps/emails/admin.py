@@ -17,6 +17,7 @@ class EmailAdmin(ModelAdmin):
         "__str__",
         "subject",
         "recipient",
+        "modified",
         "recipient_user",
         "colored_status",
         "category",

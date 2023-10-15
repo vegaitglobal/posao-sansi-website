@@ -1,6 +1,6 @@
 from django.db.models import QuerySet
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
-from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 from rest_framework.response import Response
 
 from apps.common.models import BaseModel
@@ -12,7 +12,7 @@ class ListCreateAPIView(generics.ListCreateAPIView):
     model_class: type[BaseModel]
 
     def list(self, request, *args, **kwargs) -> Response:
-        queryset = self.filter_queryset(queryset=self.model_class.objects.order_by('-created').all())
+        queryset = self.filter_queryset(queryset=self.model_class.objects.order_by("-created").all())
         paginator = Paginator(queryset=queryset, request=request)
         serializer_kwargs = self.get_serializer_kwargs(paginator=paginator)
         serializer = self.serializer_class(**serializer_kwargs)
@@ -24,5 +24,5 @@ class ListCreateAPIView(generics.ListCreateAPIView):
         return queryset
 
     def get_serializer_kwargs(self, **kwargs) -> dict:
-        kwargs['request'] = self.request
+        kwargs["request"] = self.request
         return kwargs
