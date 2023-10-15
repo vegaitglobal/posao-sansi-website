@@ -1,3 +1,5 @@
+from rest_framework.permissions import IsAuthenticated
+
 from apps.common.views import ListCreateAPIView
 from apps.jobs.filtersets import JobOfferFilterSet
 from apps.jobs.models import JobOffer
@@ -9,3 +11,4 @@ class JobOfferListCreateAPIView(ListCreateAPIView):
     serializer_class = JobOfferSerializer
     filterset_class = JobOfferFilterSet
     model_class = JobOffer
+    permission_classes = [IsAuthenticated]
