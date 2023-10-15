@@ -4,7 +4,7 @@ import "./register-form.scss";
 import InputField from "@/components/InputField/InputField";
 import SelectField from "@/components/SelectField/SelectField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import { useRouter } from "next/navigation";
 
@@ -27,6 +27,23 @@ const RegisterForm = () => {
         location: "",
         url: "",
     });
+    const [formErrors, setFormErrors] = useState({
+        type: "",
+        first_name: "",
+        last_name: "",
+        phone_number: "",
+        email: "",
+        password: "",
+        re_password: "",
+        work_experience: "",
+        education: "",
+        about: "",
+        company_name: "",
+        pib: "",
+        location: "",
+        url: "",
+    });
+
     const account_type_options = [
         {
             text: "Aplikant",
@@ -99,8 +116,91 @@ const RegisterForm = () => {
         }
     ]
 
+    const validateForm = () => {
+        let is_valid = true;
+        let errorsObject = {
+            type: "",
+            first_name: "",
+            last_name: "",
+            phone_number: "",
+            email: "",
+            password: "",
+            re_password: "",
+            work_experience: "",
+            education: "",
+            about: "",
+            company_name: "",
+            pib: "",
+            location: "",
+            url: "",
+        }
+
+        if (!formData.email) {
+            errorsObject.email = "Polje je obavezno";
+            is_valid = false;
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formData.email)) {
+            errorsObject.email = "Molim vas unesite validan email";
+            is_valid = false;
+        } else {
+            errorsObject.email = "";
+        }
+        if (!formData.first_name) {
+            errorsObject.first_name = "Polje je obavezno";
+            is_valid = false;
+        } else {
+            errorsObject.first_name = "";
+        }
+        if (!formData.last_name) {
+            errorsObject.last_name = "Polje je obavezno";
+            is_valid = false;
+        } else {
+            errorsObject.last_name = "";
+        }
+        if (!formData.phone_number) {
+            errorsObject.phone_number = "Polje je obavezno";
+            is_valid = false;
+        } else {
+            errorsObject.phone_number = "";
+        }
+        if (!formData.password) {
+            errorsObject.password = "Polje je obavezno";
+            is_valid = false;
+        } else {
+            errorsObject.password = "";
+        }
+        if (!formData.re_password) {
+            errorsObject.re_password = "Polje je obavezno";
+            is_valid = false;
+        } else if (formData.password === formData.re_password) {
+            errorsObject.re_password = "Lozinke se ne podudaraju";
+            is_valid = false;
+        } else {
+            errorsObject.re_password = "";
+        }
+        if (!formData.pib) {
+            errorsObject.pib = "Polje je obavezno";
+            is_valid = false;
+        } else {
+            errorsObject.pib = "";
+        }
+        if (!formData.company_name) {
+            errorsObject.company_name = "Polje je obavezno";
+            is_valid = false;
+        } else {
+            errorsObject.company_name = "";
+        }
+
+        setFormErrors({...formErrors, ...errorsObject})
+
+        return is_valid;
+    }
+
     async function register(e) {
-        alert("Register")
+        e.preventDefault();
+
+        if (validateForm()) {
+            
+        };
         //TODO: Validate data, send request and handle response
         // e.preventDefault()
         // try {
@@ -111,7 +211,7 @@ const RegisterForm = () => {
         // }
     }
 
-    const updateFormData = (fieldValue, fieldName) => {
+    const updateFormData = (fieldValue: string, fieldName: string) => {
         setFormData({ ...formData, [fieldName]: fieldValue });
     };
     
@@ -128,48 +228,66 @@ const RegisterForm = () => {
                 />
                 { 
                     formData.type === "applicant" &&
-                    <InputField
-                        label="Ime:"
-                        placeholder="Vaše ime"
-                        onChange={ (value) => updateFormData(value, "first_name") }
-                    />
+                    <>
+                        <InputField
+                            label="Ime:"
+                            placeholder="Vaše ime"
+                            onChange={ (value) => updateFormData(value, "first_name") }
+                        />
+                        { formErrors.first_name && <p className="error-message">{ formErrors.first_name }</p> }
+                    </>
                 }
                 { 
                     formData.type === "applicant" &&
-                    <InputField
+                    <>
+                        <InputField
                         label="Prezime:"
                         placeholder="Vaše prezime"
                         onChange={ (value) => updateFormData(value, "last_name") }
-                    />
+                        />
+                        { formErrors.last_name && <p className="error-message">{ formErrors.last_name }</p> }
+                    </>
                 }
                 { 
                     formData.type === "employer" &&
+                    <>
                     <InputField
                         label="Naziv kompanije:"
                         placeholder="Naziv kompanije"
                         onChange={ (value) => updateFormData(value, "company_name") }
                     />
+                    { formErrors.company_name && <p className="error-message">{ formErrors.company_name }</p> }
+                    </>
                 }
+                
                 { 
                     formData.type === "employer" &&
+                    <>
                     <InputField
                         label="PIB:"
                         placeholder="PIB"
                         onChange={ (value) => updateFormData(value, "pib") }
                     />
+                     { formErrors.pib && <p className="error-message">{ formErrors.pib }</p> }
+                    </>
+                    
                 }
                 <InputField
                     label="Broj telefona:"
                     placeholder="Vaš broj telefona"
                     onChange={ (value) => updateFormData(value, "phone_number") }
                 />
+                { formErrors.phone_number && <p className="error-message">{ formErrors.phone_number }</p> }
                 { 
                     formData.type === "employer" &&
-                    <InputField
-                        label="Adresa kompanije:"
-                        placeholder="Adresa kompanije"
-                        onChange={ (value) => updateFormData(value, "pib") }
-                    />
+                    <>
+                        <InputField
+                            label="Adresa kompanije:"
+                            placeholder="Adresa kompanije"
+                            onChange={ (value) => updateFormData(value, "location") }
+                        />
+                        { formErrors.location && <p className="error-message">{ formErrors.location }</p> }
+                    </>
                 }
             
                 <InputField
@@ -177,27 +295,32 @@ const RegisterForm = () => {
                     placeholder="Vaš email"
                     onChange={ (value) => updateFormData(value, "email") }
                     />
+                { formErrors.email && <p className="error-message">{ formErrors.email }</p> }
                 <InputField
                     label="Lozinka:"
                     placeholder="Vaša lozinka"
                     type="password"
                     onChange={ (value) => updateFormData(value, "password") }
                     />
+                { formErrors.password && <p className="error-message">{ formErrors.password }</p> }
                 <InputField
                     label="Ponoviteo lozinku:"
                     placeholder="Ponovite lozinku"
                     type="password"
                     onChange={ (value) => updateFormData(value, "re-password") }
                     />
+                { formErrors.re_password && <p className="error-message">{ formErrors.re_password }</p> }
                 { 
                     formData.type === "applicant" &&
-                    <SelectField
-                        label="Radno iskustvo"
-                        placeholder="Radno iskustvo"
-                        onChange={ (value) => updateFormData(value, "work_experience") }
-                        options={work_experience_options}
-                        selectedValue={formData.work_experience}
-                    />
+                    <>
+                        <SelectField
+                            label="Radno iskustvo"
+                            placeholder="Radno iskustvo"
+                            onChange={ (value) => updateFormData(value, "work_experience") }
+                            options={work_experience_options}
+                            selectedValue={formData.work_experience}
+                        />
+                    </>
                 }
                 { 
                     formData.type === "applicant" &&

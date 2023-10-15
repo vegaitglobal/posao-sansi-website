@@ -23,7 +23,7 @@ const SelectField = ({ label, placeholder, onChange, options, selectedValue, inv
             <label className="form-field-label">{ label }</label>
             <select className="select-field__input" value={selectedValue} onChange={ (event) => onChange(event.target.value)}>
                 {placeholder && <option value="">{placeholder}</option>}
-                {options.map((option, i) => <option value={option.value}>{option.text}</option>)}
+                {options.map((option, i) => <option key={i} value={option.value}>{option.text}</option>)}
             </select>
         </div>
     )
