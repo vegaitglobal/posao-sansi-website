@@ -28,7 +28,7 @@ const JobOfferCard = ({ jobOffer }: JobOfferProps) => {
             <div className="job-offer__row">
                 Angažman:&nbsp;
                 <span className="job-offer__engagement-value">
-                    { JobOfferEngagements[jobOffer.engagement].toUpperCase() }
+                    { JobOfferEngagements[jobOffer.engagement as unknown as keyof typeof JobOfferEngagements].toUpperCase() }
                 </span>
             </div>
             <div className="job-offer__row job-offer__application-deadline">
