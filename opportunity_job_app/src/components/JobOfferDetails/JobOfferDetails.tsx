@@ -39,9 +39,9 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
         window.location.href = "/job-offers";
     }
 
-    function enroleForJob(jobOfferId:number, applicationAccountId: number) {
-        JobEnrollmentService.addJobEnrollment()
-    }
+    // function enroleForJob(jobOfferId:number, applicationAccountId: number) {
+       
+    // }
 
     return jobOffer && (
         <div className="page">

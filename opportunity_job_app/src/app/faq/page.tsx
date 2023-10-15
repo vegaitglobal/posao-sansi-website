@@ -23,16 +23,6 @@ export default function Page() {
        isLogged()
    }, [])
 
-   const [user, setUser] = useState<User>()
-   useEffect(() => {
-       const isLogged = () => {
-           if (AuthService.getUser() !== null) {
-               setUser(AuthService.getUser())
-           }
-       }
-       isLogged()
-   }, [])
-
  return (
  <>
  <Header user={user}/>
