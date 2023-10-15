@@ -5,3 +5,4 @@ from apps.users.views.employer_registration_api_view import EmployerRegistration
 from apps.users.views.login_api_view import LoginAPIView
 from apps.users.views.logout_api_view import LogoutAPIView
 from apps.users.views.statistics_api_view import StatisticsAPIView
+from apps.users.views.password_reset_api_view import PasswordResetAPIView
