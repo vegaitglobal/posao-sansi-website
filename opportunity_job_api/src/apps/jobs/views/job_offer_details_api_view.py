@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,8 +13,11 @@ class JobOfferDetailsAPIView(APIView):
     def get(request, pk: int, **kwargs):
         try:
             job_offer = JobOffer.objects.get(id=pk)
-            serializer = JobOfferSerializer(job_offer)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            serializer = JobOfferSerializer(
+                instance=job_offer,
+                request=request
+            )
+            return JsonResponse(serializer.data, status=status.HTTP_200_OK)
         except JobOffer.DoesNotExist:
             return Response(
                 data={"message": "Not found"},
@@ -25,7 +29,12 @@ class JobOfferDetailsAPIView(APIView):
         try:
             job_offer = JobOffer.objects.get(id=pk)
             new_job_offer = request.data
-            serializer = JobOfferSerializer(instance=job_offer, data=new_job_offer, partial=True)
+            serializer = JobOfferSerializer(
+                instance=job_offer,
+                data=new_job_offer,
+                partial=True,
+                request=request
+            )
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
