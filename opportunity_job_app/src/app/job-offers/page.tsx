@@ -17,9 +17,6 @@ export default function JobOffersPage() {
     const [totalJobOfferNumber, setTotalJobOfferNumber] = useState<number>(0);
     const [hasNextPage, setHasNextPage] = useState<boolean>(false);
 
-    // TODO: implement pagination (infinite scroll with a button)
-    // TODO: fetch job enrolments and mark applied ones
-
     useEffect(() => {
         const fetchJobOffers = async () => {
             const user = AuthService.getUser();

@@ -15,8 +15,7 @@ interface JobOfferListResponse {
 export const JobOfferService = {
     getActiveJobs: async (pageNumber: number): Promise<JobOfferListResponse> => {
         const itemsPerPage = 6;
-        // TODO: add is_active=true
-        const queryParams = `job-offers?page=${ pageNumber }&ipp=${ itemsPerPage }`;
+        const queryParams = `is_active=true&page=${ pageNumber }&ipp=${ itemsPerPage }`;
         const response = await API.getAllResources("job-offers", queryParams);
         return response.data;
     },

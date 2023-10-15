@@ -3,6 +3,7 @@
   fields:
     job_name: Job A
     job_description: This is Job A
+    is_active: true
     employer: 1
     location: NS
     application_deadline: 2999-01-01T00:00:00
@@ -14,6 +15,7 @@
   fields:
     job_name: Job B
     job_description: This is Job B
+    is_active: true
     employer: 1
     location: BG
     application_deadline: 2999-01-01T00:00:00
@@ -25,6 +27,7 @@
   fields:
     job_name: Job C
     job_description: This is Job C This is Job C This is Job C This is Job C This is Job C
+    is_active: true
     employer: 1
     location: Zrenjanin
     application_deadline: 2999-01-01T00:00:00
@@ -36,6 +39,7 @@
   fields:
     job_name: Job D
     job_description: This is Job D. This is Job D. This is Job D. This is Job D. This is Job D.
+    is_active: true
     employer: 1
     location: Nis
     application_deadline: 2999-01-01T00:00:00
@@ -129,3 +133,39 @@
     application_deadline: 2999-01-01T00:00:00
     created: 2023-12-12T00:00:00
     modified: 2023-12-12T00:00:00
+
+- model: jobs.JobOffer
+  pk: 13
+  fields:
+    job_name: Job M
+    job_description: This is Job M
+    employer: 2
+    is_active: true
+    location: Milano
+    application_deadline: 2999-01-01T00:00:00
+    created: 2023-01-02T00:00:00
+    modified: 2023-01-02T00:00:00
+
+- model: jobs.JobOffer
+  pk: 14
+  fields:
+    job_name: Job N
+    job_description: This is Job N. This is Job N. This is Job N. This is Job N.
+    employer: 2
+    is_active: true
+    location: Brazil
+    application_deadline: 2999-01-01T00:00:00
+    created: 2023-01-03T00:00:00
+    modified: 2023-01-03T00:00:00
+
+- model: jobs.JobOffer
+  pk: 15
+  fields:
+    job_name: Job Q
+    job_description: This is Job Q. This is Job Q. This is Job Q. This is Job Q.
+    employer: 2
+    is_active: true
+    location: London
+    application_deadline: 2999-01-01T00:00:00
+    created: 2023-01-04T00:00:00
+    modified: 2023-01-04T00:00:00
