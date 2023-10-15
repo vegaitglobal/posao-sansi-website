@@ -4,12 +4,13 @@
   border: 1px solid black;
   border-radius: 8px;
   width: 450px;
-  margin: 20px auto;
+  margin: auto;
   padding: 45px 35px;
   cursor: pointer;
 
   @include media-breakpoint-down(sm) {
     width: 90%;
+    max-width: 450px;
   }
 }
 
