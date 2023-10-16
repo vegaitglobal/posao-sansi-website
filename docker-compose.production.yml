@@ -20,6 +20,7 @@ services:
       - DJANGO_SUPERUSER_EMAIL=#{DJANGO_SUPERUSER_EMAIL}#
       - DJANGO_SUPERUSER_PASSWORD=#{DJANGO_SUPERUSER_PASSWORD}#
       - FE_APP_ORIGIN=#{FE_APP_ORIGIN}#
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
     ports:
       - 9010:8000
     volumes:
@@ -46,6 +47,6 @@ services:
     ports:
       - "9011:3000"
     restart: always
-  
+
 volumes:
   opportunity_job_api-postgres-data:

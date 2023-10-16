@@ -1,9 +1,10 @@
 "use client";
+
 import axios from "axios";
 import { AuthService } from "./authService";
 
 const api = axios.create({
-    baseURL: "http://localhost:8000/api", // TODO: get from env vars
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const API = {

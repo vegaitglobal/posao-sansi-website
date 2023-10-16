@@ -38,6 +38,8 @@ services:
       context: ./opportunity_job_app
     volumes:
       - ./opportunity_job_app:/usr/app/
+    env_file:
+      - .env
     command: sh -c 'npm install; npm run dev'
     restart: always
 
