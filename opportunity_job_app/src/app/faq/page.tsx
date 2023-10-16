@@ -4,7 +4,7 @@ import ImageAccordion from '../../components/imageaccordion/imageaccordion';
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import './faq.scss'
-import { AuthService } from '../../api/authService';
+import { AuthService } from '@/api/authService';
 
 type User = {
    token: string;
@@ -13,7 +13,6 @@ type User = {
 };
 
 export default function Page() {
-
    const [user, setUser] = useState<User>()
    useEffect(() => {
        const isLogged = () => {

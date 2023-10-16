@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 import "./Header.scss";
-import { anonymousUserLinks, employerLinks, applicantLinks } from "./HeaderData";
 import { useRouter } from "next/navigation";
 import { User } from "@/api/models/User";
 import { AuthService } from "@/api/authService";
+import { anonymousUserLinks, applicantLinks, employerLinks } from "@/appData/headerData";
 
 type LinkItem = {
     label: string;
@@ -45,11 +45,11 @@ const Header = ({ user }: HeaderProps) => {
     };
 
     const logout = useCallback(async () => {
-		await AuthService.logout();
+        await AuthService.logout();
         if (!user) {
             router.push("/login");
         }
-	}, []);
+    }, []);
 
     const linksObject: linksObjectTypes = {
         "anonymous": anonymousUserLinks,
@@ -65,7 +65,8 @@ const Header = ({ user }: HeaderProps) => {
     const mapItems = (items: LinkItem[]) => {
         return items && items.map((link: LinkItem, index: number) => (
             <li className="header__nav-item" key={ index }>
-                <Link className="header__nav-link" href={ link.url } onClick={link.label === "Odjava" ? logout : undefined}>
+                <Link className="header__nav-link" href={ link.url }
+                      onClick={ link.label === "Odjava" ? logout : undefined }>
                     <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
                     <span className="header__nav-link-text">
                         { link.label }

@@ -35,7 +35,7 @@ export const JobOfferService = {
     },
 
     findJobOffer: async (jobOfferID: number): Promise<JobOffer> => {
-        const response = await API.getResourceDetails("job-offers", jobOfferID);
+        const response = await API.getProtectedResourceDetails("job-offers", jobOfferID);
         return response.data;
     }
 };

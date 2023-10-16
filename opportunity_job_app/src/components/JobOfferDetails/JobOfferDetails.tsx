@@ -31,7 +31,7 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
             }
         };
         fetchJobOffer();
-    }, [jobOffer]);
+    }, []);
 
     function goBack() {
         window.location.href = "/job-offers";
@@ -43,17 +43,35 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 <img className="page__back-button-image" src="/images/left-arrow.svg" alt="flag"/>
                 <p className="page__back-button-text">Nazad na poslove</p>
             </div>
-            <h2 className="page__title">{ jobOffer?.job_name }</h2>
-            <p>Rok za prijavu: { mapStringToLocalDateString(jobOffer.application_deadline) }</p>
-            <p>KOMPANIJA: { jobOffer.company_name.toUpperCase() }</p>
-            <p>MESTO: { jobOffer.location.toUpperCase() }</p>
-            { jobOffer.company_url && <a href={ jobOffer.company_url }>{ jobOffer.company_url }</a> }
-            <p>Angažman: { jobOffer.engagement }</p>
-            <p>Opis posla: { jobOffer.job_description }</p>
-            <p>Uslovi: { jobOffer.required_work_experience }</p>
+            <div className="page__content">
+                <div className="page__content-left">
+                    <h2 className="page__title">{ jobOffer?.job_name }</h2>
+                    <p className="page__dedaline">Roksasdasd za
+                        prijavu: { mapStringToLocalDateString(jobOffer.application_deadline) }</p>
+                    <p className="page__company">KOMPANIJA: { jobOffer.company_name.toUpperCase() }</p>
+                    <p className="page__location">MESTO: { jobOffer.location.toUpperCase() }</p>
+                    { jobOffer.company_url &&
+                        <a className="page__link" href={ jobOffer.company_url }>{ jobOffer.company_url }</a> }
+                    <p className="page__engagement">Angažman: <span
+                        className="page__engagement-sub">{ jobOffer.engagement }</span></p>
+                </div>
+                <div className="page__content-right">
+                    <p>Opis posla: { jobOffer.job_description }</p>
+                    <div className="page__list-wrap">
+                        <span className="page__terms">Uslovi:</span>
+                        <p>{ jobOffer.required_work_experience }</p>
+                    </div>
+                </div>
+            </div>
             <div className="page__action-buttons">
-                { user?.accountType == "applicant" && (
-                    <button className="page__primary-button">KONKURIŠI</button>
+                { user?.accountType === "applicant" && (
+                    <>
+                        { jobOffer.has_enrolled ? (
+                            <button className="page__button page__button--secondary">ODUSTANI</button>
+                        ) : (
+                            <button className="page__button page__button--primary">KONKURIŠI</button>
+                        ) }
+                    </>
                 ) }
                 { user?.accountType == "employer" && (
                     // TODO: add "IZMENI" button later

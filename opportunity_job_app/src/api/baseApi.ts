@@ -1,9 +1,10 @@
 "use client";
+
 import axios from "axios";
 import { AuthService } from "./authService";
 
 const api = axios.create({
-    baseURL: "http://localhost:8000/api", // TODO: get from env vars
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const API = {
@@ -19,7 +20,7 @@ const API = {
     },
     getProtectedResourceDetails: (resource: string, resourceId: number) => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
-        return api.get(`${ resource }/${ resourceId }`, config);
+        return api.get(`${ resource }/${ resourceId }/`, config);
     },
     post: (url: string, data: Object, config: Object) => {
         return api.post(url, data, config);
