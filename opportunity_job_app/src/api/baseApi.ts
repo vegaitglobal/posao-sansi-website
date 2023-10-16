@@ -19,7 +19,7 @@ const API = {
     },
     getProtectedResourceDetails: (resource: string, resourceId: number) => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
-        return api.get(`${ resource }/${ resourceId }`, config);
+        return api.get(`${ resource }/${ resourceId }/`, config);
     },
     post: (url: string, data: Object, config: Object) => {
         return api.post(url, data, config);

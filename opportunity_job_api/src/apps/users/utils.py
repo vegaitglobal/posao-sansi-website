@@ -6,6 +6,7 @@ from apps.emails.models import Email
 from apps.users.models import ApplicantAccount, EmployerAccount, User
 from apps.users.serializers import ApplicantAccountSerializer, EmployerAccountSerializer
 
+
 def create_applicant_user(serializer: ApplicantAccountSerializer, password: str) -> User:
     user_kwargs = serializer.validated_data.pop("user")
     user_kwargs["password"] = password
@@ -25,7 +26,8 @@ def create_employer_user(serializer: EmployerAccountSerializer, password: str) -
 def get_email_from_hash(url_hash: str) -> str:
     decoded_key = signing.loads(url_hash)
     return decoded_key.get("email")
-  
+
+
 def send_password_reset_email(email: str) -> None:
     url_hash = signing.dumps({"email": email})
     email_context = {
