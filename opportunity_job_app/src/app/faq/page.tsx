@@ -10,6 +10,7 @@ type User = {
    token: string;
    id: number;
    accountType: string;
+   account_id: number
 };
 
 export default function Page() {

@@ -7,6 +7,7 @@ import { JobOffer } from "@/api/models/JobOffer";
 import { mapStringToLocalDateString } from "@/utils";
 import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
+import { JobEnrollmentService, cancelEnrollment } from "@/api/jobEnrollmentService";
 
 interface JobOfferDetailsProps {
     jobOfferID: number;
@@ -35,6 +36,42 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
 
     function goBack() {
         window.location.href = "/job-offers";
+    }
+
+    const fetchJobOffers = async () => {
+        try {
+            const newJobOffer = await JobOfferService.findJobOffer(jobOfferID)
+            setJobOffer(newJobOffer)
+        } catch (error) {
+            goBack()
+        }
+    }
+    
+
+    function enrollUser() {
+        if (user) {
+            const { account_id: account_id } = user;
+            JobEnrollmentService.addJobEnrollment(jobOfferID, account_id)
+            .then(() => {
+                fetchJobOffers()
+            })
+            .catch((error) => {
+                console.log("Enrollment error:", error)
+            })
+        }
+    }
+
+    function removeUser() {
+        if (user && jobOffer && jobOffer.job_enrollment) {
+            const {job_enrollment: job_enrollment} = jobOffer
+            cancelEnrollment.removeJobEnrollment(job_enrollment)
+            .then(() => {
+                fetchJobOffers()
+            })
+            .catch((error) => {
+                console.log("Enrollment error:", error)
+            })
+        }
     }
 
     return jobOffer && (
@@ -67,9 +104,9 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 { user?.accountType === "applicant" && (
                     <>
                         { jobOffer.has_enrolled ? (
-                            <button className="page__button page__button--secondary">ODUSTANI</button>
+                            <button className="page__button page__button--secondary" onClick={removeUser}>ODUSTANI</button>
                         ) : (
-                            <button className="page__button page__button--primary">KONKURIŠI</button>
+                            <button className="page__button page__button--primary" onClick={enrollUser}>KONKURIŠI</button>
                         ) }
                     </>
                 ) }
