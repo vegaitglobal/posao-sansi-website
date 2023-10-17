@@ -8,7 +8,6 @@ import Banner from "../components/Banner/Banner"
 import Mission from "@/components/Mission/Mission";
 import Statistics from "@/components/Statistics/Statistics";
 import Cards from "@/components/Cards/Cards";
-import Popup from "@/components/Popup/Popup";
 
 type User = {
     token: string;
@@ -35,7 +34,6 @@ export default function Home() {
                 <Cards user={user} />
                 <Mission/>
                 <Statistics/>
-                <Popup />
             </main>
             <Footer/>
         </>

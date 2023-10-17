@@ -6,7 +6,7 @@ import Link from "next/link";
 type PopupElemetDetails = {
     popup_visibility: boolean;
     paragraph_first_text: string;
-    paragraph_seccond_text: string;
+    paragraph_second_text: string;
     paragraph_second_visibility: boolean;
     link_visibility: boolean;
     link_text: string;
@@ -37,7 +37,7 @@ const Popup = (props:{elementsDetails:PopupElemetDetails}) => {
                     <img src="/images/close.svg" alt="Close icon" className="popup__img" />
                 </button>
                 <span className="popup__text">{elementsDetails.paragraph_first_text}</span>
-                <span className={`popup__text ${paragraphVis}`}>{elementsDetails.paragraph_seccond_text}</span>
+                <span className={`popup__text ${paragraphVis}`}>{elementsDetails.paragraph_second_text}</span>
                 <Link href={elementsDetails.link_url} className={`popup__link ${linkVis}`}>{elementsDetails.link_text}</Link>
             </div>
         </div>
