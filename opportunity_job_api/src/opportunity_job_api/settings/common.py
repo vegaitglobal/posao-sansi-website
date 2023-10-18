@@ -76,7 +76,7 @@ ENGLISH_LANG_SLUG = "en"
 SERBIAN_LANG_SLUG = "sr-latn"
 LANGUAGES = (
     (ENGLISH_LANG_SLUG, _("English")),
-    (SERBIAN_LANG_SLUG, _("Serbian (Latin)")),
+    (SERBIAN_LANG_SLUG, _("Serbian")),
 )
 
 LANGUAGE_CODE = ENGLISH_LANG_SLUG

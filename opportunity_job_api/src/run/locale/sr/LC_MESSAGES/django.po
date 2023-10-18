@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-18 13:47-0500\n"
+"POT-Creation-Date: 2023-10-18 14:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -405,7 +405,7 @@ msgstr "akaunt poslodavca"
 
 #: apps/users/models/employer_account.py:11
 msgid "Employer Accounts"
-msgstr "akaunti poslodavaca"
+msgstr "Akaunti Poslodavaca"
 
 #: apps/users/models/employer_account.py:25
 msgid "PIB"
@@ -460,20 +460,12 @@ msgid "English"
 msgstr "Engleski"
 
 #: opportunity_job_api/settings/common.py:79
-msgid "Serbian (Latin)"
-msgstr "Srpski (Latinica)"
+msgid "Serbian"
+msgstr "Srpski"
 
 #: opportunity_job_api/views.py:9
 msgid "Welcome to Opportunity Job web API"
 msgstr "Dobrodošli na web API za Posao Šansi"
-
-#: templates/admin/base_site.html:11
-msgid "Breadcrumbs"
-msgstr ""
-
-#: templates/admin/base_site.html:14
-msgid "Home"
-msgstr "Početna"
 
 #: templates/emails/password_reset.html:10
 msgid ""
