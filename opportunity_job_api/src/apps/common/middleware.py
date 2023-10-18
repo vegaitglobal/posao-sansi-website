@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 
@@ -9,8 +8,7 @@ class LanguageMiddleware:
         self.get_response = get_response
 
     def __call__(self, request: WSGIRequest) -> HttpResponse:
-        language = request.GET.get("language", settings.ENGLISH_LANG_SLUG)
-        if language:
+        if language := request.LANGUAGE_CODE:
             from django.utils.translation import activate
             activate(language)
             request.META["LANGUAGE_CODE"] = language

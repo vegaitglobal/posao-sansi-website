@@ -1,0 +1,485 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-18 13:47-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: apps/common/admin/model_admin.py:45
+msgid "id"
+msgstr "id"
+
+#: apps/emails/admin.py:46
+msgid "Details"
+msgstr "Detalji"
+
+#: apps/emails/admin.py:64
+msgid "recipient user"
+msgstr "korisnik primaoc"
+
+#: apps/emails/admin.py:72 apps/emails/models.py:48
+msgid "status"
+msgstr "status"
+
+#: apps/emails/admin.py:76
+msgid "Send selected emails"
+msgstr "Pošalji odabrane mejlove"
+
+#: apps/emails/admin.py:95
+#, python-brace-format
+msgid "Successfully sent {emails_count} {label}."
+msgstr "{emails_count} {label} uspešno poslato."
+
+#: apps/emails/admin.py:97
+msgid "emails"
+msgstr "mejlovi"
+
+#: apps/emails/admin.py:97 apps/users/models/user.py:27
+msgid "email"
+msgstr "mejl"
+
+#: apps/emails/admin.py:107
+msgid ""
+"You can select a maximum of 5 emails to send at once. Please reduce the "
+"number of selected emails and try again."
+msgstr ""
+"Možete odabrati maksimalno 5 mejlova za slanje. Molimo vas da smanjite broj "
+"odabranih mejlova i pokušate ponovo."
+
+#: apps/emails/models.py:15
+msgid "Email"
+msgstr "Mejl"
+
+#: apps/emails/models.py:16
+msgid "Emails"
+msgstr "Mejlovi"
+
+#: apps/emails/models.py:21
+msgid "waiting to send email"
+msgstr "čekanje na slanje mejla"
+
+#: apps/emails/models.py:22
+msgid "successfully sent email"
+msgstr "uspešno poslat mejl"
+
+#: apps/emails/models.py:23
+msgid "failed to send email"
+msgstr "neuspešno poslat mejl"
+
+#: apps/emails/models.py:26
+msgid "email subject"
+msgstr "naslov mejla"
+
+#: apps/emails/models.py:30
+msgid "recipient email address"
+msgstr "mejl adresa primaoca"
+
+#: apps/emails/models.py:34
+msgid "email context"
+msgstr "kontekst mejla"
+
+#: apps/emails/models.py:38
+msgid "template path"
+msgstr "putanja do templejta"
+
+#: apps/emails/models.py:42 apps/jobs/models/job_offer.py:44
+msgid "category"
+msgstr "kategorija"
+
+#: apps/emails/models.py:45
+msgid "For easier grouping and searching of specific emails"
+msgstr "Za lakše grupisanje i pretraživanje specifičnih mejlova"
+
+#: apps/emails/models.py:53
+msgid ""
+"Note that the email can successfully be sent even if the recipient email "
+"address does not exist"
+msgstr ""
+"Imajte u vidu da mejl može uspešno da bude poslat čak i kada mejl adresa ne "
+"postoji"
+
+#: apps/emails/models.py:58
+msgid "error"
+msgstr "greška"
+
+#: apps/emails/models.py:60
+msgid "An error occurred during the email sending process"
+msgstr "Greška koja se javila tokom procesa slanja mejla"
+
+#: apps/emails/templates/emails/example.html:15
+msgid "djangotainer on GitHub"
+msgstr "djangotainer na GitHub-u"
+
+#: apps/jobs/admin/job_enrollment_admin.py:26 apps/jobs/models/job_offer.py:15
+msgid "job name"
+msgstr ""
+
+#: apps/jobs/admin/job_enrollment_admin.py:34
+#: apps/jobs/admin/job_offer_admin.py:29
+#: apps/users/models/employer_account.py:21
+msgid "company name"
+msgstr ""
+
+#: apps/jobs/admin/job_enrollment_admin.py:42
+msgid "applicant_email"
+msgstr ""
+
+#: apps/jobs/enums.py:6
+msgid "Course or internship"
+msgstr ""
+
+#: apps/jobs/enums.py:7
+msgid "Unpaid internship"
+msgstr ""
+
+#: apps/jobs/enums.py:8
+msgid "Paid internship"
+msgstr ""
+
+#: apps/jobs/enums.py:9
+msgid "Part time job offer"
+msgstr ""
+
+#: apps/jobs/enums.py:10
+msgid "Full time job offer"
+msgstr ""
+
+#: apps/jobs/enums.py:14
+msgid "Sales and Trade"
+msgstr ""
+
+#: apps/jobs/enums.py:15
+msgid "Tourism and Catering"
+msgstr ""
+
+#: apps/jobs/enums.py:16
+msgid "Transport and Logistics"
+msgstr ""
+
+#: apps/jobs/enums.py:17
+msgid "Cleaning nad Maintenance"
+msgstr ""
+
+#: apps/jobs/enums.py:18
+msgid "Jobs in production industry"
+msgstr ""
+
+#: apps/jobs/enums.py:19
+msgid "Food technology"
+msgstr ""
+
+#: apps/jobs/enums.py:20
+msgid "Beauty Care"
+msgstr ""
+
+#: apps/jobs/enums.py:21
+msgid "Other"
+msgstr ""
+
+#: apps/jobs/models/faq.py:9
+msgid "FAQ"
+msgstr ""
+
+#: apps/jobs/models/faq.py:10
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: apps/jobs/models/faq.py:13
+msgid "question"
+msgstr ""
+
+#: apps/jobs/models/faq.py:17
+msgid "answer"
+msgstr ""
+
+#: apps/jobs/models/faq.py:20
+msgid "display to anonymous"
+msgstr ""
+
+#: apps/jobs/models/faq.py:24
+msgid "display to employers"
+msgstr ""
+
+#: apps/jobs/models/faq.py:28
+msgid "display to applicants"
+msgstr ""
+
+#: apps/jobs/models/job_enrollment.py:10
+msgid "Job Enrollment"
+msgstr ""
+
+#: apps/jobs/models/job_enrollment.py:11
+msgid "Job Enrollments"
+msgstr ""
+
+#: apps/jobs/models/job_enrollment.py:15
+msgid "job offer"
+msgstr ""
+
+#: apps/jobs/models/job_enrollment.py:21
+msgid "applicant account"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:11
+msgid "Job Offer"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:12
+msgid "Job Offers"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:19
+msgid "job description"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:22
+msgid "employer"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:28
+msgid "location"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:32
+msgid "application deadline"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:35
+msgid "engagement"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:40
+msgid "This field contains the type of Job Offer"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:49
+msgid "This field contains the category of Job Offer"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:53
+msgid "required work experience"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:58
+msgid "This field represents requiered work experience"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:62
+msgid "required education"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:67
+msgid "This field represents requiered education"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:71
+msgid "additional skills"
+msgstr ""
+
+#: apps/jobs/models/job_offer.py:76
+msgid "is active"
+msgstr ""
+
+#: apps/users/admin/user_admin.py:34
+msgid "Permissions"
+msgstr "Permisije"
+
+#: apps/users/admin/user_admin.py:41
+msgid "Important dates"
+msgstr "Važni datumi"
+
+#: apps/users/enums.py:6
+msgid "No formal education"
+msgstr ""
+
+#: apps/users/enums.py:7
+msgid "First degree, 4 years of primary school"
+msgstr ""
+
+#: apps/users/enums.py:8
+msgid "Second degree, primary school"
+msgstr ""
+
+#: apps/users/enums.py:9
+msgid "Third degree, high school"
+msgstr ""
+
+#: apps/users/enums.py:10
+msgid "Fourth degree, high school"
+msgstr ""
+
+#: apps/users/enums.py:11
+msgid "Fifth degree, highly qualified, high school"
+msgstr ""
+
+#: apps/users/enums.py:12
+msgid "Sixth degree, higher education, high school"
+msgstr ""
+
+#: apps/users/enums.py:13
+msgid "Seventh degree, higher vocational education, higher education school"
+msgstr ""
+
+#: apps/users/enums.py:17
+msgid "No work experience"
+msgstr ""
+
+#: apps/users/enums.py:18
+msgid "Less than a year"
+msgstr ""
+
+#: apps/users/enums.py:19
+msgid "More than one less than three years"
+msgstr ""
+
+#: apps/users/enums.py:20
+msgid "More than three less than five years"
+msgstr ""
+
+#: apps/users/enums.py:21
+msgid "More than five less than ten years"
+msgstr ""
+
+#: apps/users/enums.py:22
+msgid "More than ten years"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:20
+msgid "Applicant Account"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:21
+msgid "Applicant Accounts"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:27
+#: apps/users/models/employer_account.py:17
+msgid "user"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:31
+msgid "first name"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:35
+msgid "last name"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:39
+msgid "work experience"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:43
+msgid "Work experience of the applicant"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:46
+msgid "education level"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:50
+msgid "Education of the applicant"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:53
+msgid "about me"
+msgstr "o meni"
+
+#: apps/users/models/employer_account.py:10
+msgid "Employer Account"
+msgstr "akaunt poslodavca"
+
+#: apps/users/models/employer_account.py:11
+msgid "Employer Accounts"
+msgstr "akaunti poslodavaca"
+
+#: apps/users/models/employer_account.py:25
+msgid "PIB"
+msgstr "PIB"
+
+#: apps/users/models/employer_account.py:29
+msgid "company address"
+msgstr "adresa kompanije"
+
+#: apps/users/models/employer_account.py:33
+msgid "company phone number"
+msgstr "broj telefona kompanije"
+
+#: apps/users/models/employer_account.py:37
+msgid "company url"
+msgstr "URL kompanije"
+
+#: apps/users/models/employer_account.py:40
+msgid "about company"
+msgstr "o kompaniji"
+
+#: apps/users/models/user.py:38
+msgid "User"
+msgstr "Korisnik"
+
+#: apps/users/models/user.py:39
+msgid "Users"
+msgstr "Korisnici"
+
+#: apps/users/serializers/login_serializer.py:21
+msgid "Invalid credentials"
+msgstr "Pogrešni kredencijali"
+
+#: apps/users/serializers/password_forgotten_serializer.py:17
+msgid "Invalid email address"
+msgstr "Pogrešna mejl adresa"
+
+#: apps/users/serializers/password_reset_serializer.py:21
+msgid "Unable to retrieve an email address from the URL hash"
+msgstr "Nemoguće pronaći mejl adresu iz URL hash-a"
+
+#: apps/users/serializers/password_reset_serializer.py:25
+msgid "User does not exist"
+msgstr "Korisnik ne postoji"
+
+#: apps/users/utils.py:38 templates/emails/password_reset.html:19
+msgid "Reset your password"
+msgstr "Resetujte svoju lozinku"
+
+#: opportunity_job_api/settings/common.py:78
+msgid "English"
+msgstr "Engleski"
+
+#: opportunity_job_api/settings/common.py:79
+msgid "Serbian (Latin)"
+msgstr "Srpski (Latinica)"
+
+#: opportunity_job_api/views.py:9
+msgid "Welcome to Opportunity Job web API"
+msgstr "Dobrodošli na web API za Posao Šansi"
+
+#: templates/admin/base_site.html:11
+msgid "Breadcrumbs"
+msgstr ""
+
+#: templates/admin/base_site.html:14
+msgid "Home"
+msgstr "Početna"
+
+#: templates/emails/password_reset.html:10
+msgid ""
+"\n"
+"          We recived a request to reset the password for your account on "
+"Posao Šansi website.\n"
+"          Please click on the button below to enter a new password:\n"
+"        "
+msgstr ""
