@@ -1,4 +1,3 @@
-"use client";
 
 import "./job-offer-details.scss";
 import { useEffect, useState } from "react";
@@ -8,6 +7,8 @@ import { mapStringToLocalDateString } from "@/utils";
 import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
+import Popup from "../Popup/Popup";
+import { log } from "console";
 
 interface JobOfferDetailsProps {
     jobOfferID: number;
@@ -16,6 +17,16 @@ interface JobOfferDetailsProps {
 export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
     const [jobOffer, setJobOffer] = useState<JobOffer>();
     const [user, setUser] = useState<User>();
+    const [popupDetails, setPopupDetails] = useState({
+        popupVisibility: false,
+        paragraphFirstText: '',
+        paragraphSecondText: '',
+        paragraphSecondVisibility: false,
+        linkVisibility: false,
+        linkText: '',
+        linkUrl: '',
+      });
+      
 
     useEffect(() => {
         const fetchJobOffer = async () => {
@@ -54,8 +65,26 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 const { account_id } = user;
                 await JobEnrollmentService.addJobEnrollment(jobOfferID, account_id);
                 fetchJobOffers();
+                setPopupDetails({
+                    popupVisibility: true,
+                    paragraphFirstText: 'Vasa prijava je uspeno prosledjena!',
+                    paragraphSecondText: 'Uskoro ce Vam se javiti neko iz organizacije ATINA',
+                    paragraphSecondVisibility: true,
+                    linkVisibility: true,
+                    linkText: 'Nazad na poslove',
+                    linkUrl: '/job-offers',
+                  });
             } catch (error) {
                 console.log("Enrollment error:", error);
+                    setPopupDetails({
+                    popupVisibility: true,
+                    paragraphFirstText: 'Error: Your enrollment could not be processed',
+                    paragraphSecondText: 'Please try again later',
+                    paragraphSecondVisibility: true,
+                    linkVisibility: true,
+                    linkText: 'Nazad na poslove',
+                    linkUrl: '/job-offers',
+                });
             }
         }
     };
@@ -66,11 +95,31 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 const { job_enrollment } = jobOffer;
                 await JobEnrollmentService.removeJobEnrollment(job_enrollment);
                 fetchJobOffers();
+                setPopupDetails({
+                    popupVisibility: true,
+                    paragraphFirstText: 'Vasa prijava je uspeno otkazana! ',
+                    paragraphSecondText: '',
+                    paragraphSecondVisibility: false,
+                    linkVisibility: true,
+                    linkText: 'Nazad na poslove',
+                    linkUrl: '/job-offers',
+                  });
             } catch (error) {
                 console.log("Enrollment error:", error);
+                    setPopupDetails({
+                    popupVisibility: true,
+                    paragraphFirstText: 'Error: Your enrollment could not be processed',
+                    paragraphSecondText: 'Please try again later',
+                    paragraphSecondVisibility: true,
+                    linkVisibility: true,
+                    linkText: 'Nazad na poslove',
+                    linkUrl: '/job-offers',
+                });
             }
         }
     };
+    
+
 
     return jobOffer && (
         <div className="page">
@@ -102,9 +151,15 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 { user?.account_type === "applicant" && (
                     <>
                         { jobOffer.has_enrolled ? (
+                            <>
                             <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>ODUSTANI</button>
+                            <Popup elementsDetails={popupDetails} />
+                            </>
                         ) : (
+                            <>
                             <button className="page__button page__button--primary" onClick={addJobEnrollment}>KONKURIŠI</button>
+                            <Popup elementsDetails={popupDetails} />
+                            </>
                         ) }
                     </>
                 ) }
