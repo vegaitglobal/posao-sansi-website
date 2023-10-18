@@ -4,7 +4,7 @@ import { Statistics } from "@/api/models/Statistics";
 
 export const StatisticService = {
     getStatistics: async (): Promise<Statistics> => {
-        const response = await API.getResourceList("statistics");
+        const response = await API.getOne("statistics");
         return response.data
     },
 };

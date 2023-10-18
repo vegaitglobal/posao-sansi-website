@@ -7,6 +7,7 @@ import { JobOffer } from "@/api/models/JobOffer";
 import { mapStringToLocalDateString } from "@/utils";
 import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
+import { JobEnrollmentService } from "@/api/jobEnrollmentService";
 
 interface JobOfferDetailsProps {
     jobOfferID: number;
@@ -37,6 +38,40 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
         window.location.href = "/job-offers";
     }
 
+    const fetchJobOffers = async () => {
+        try {
+            const newJobOffer = await JobOfferService.findJobOffer(jobOfferID)
+            setJobOffer(newJobOffer)
+        } catch (error) {
+            goBack()
+        }
+    }
+    
+
+    const addJobEnrollment = async () => {
+        if (user) {
+            try {
+                const { account_id } = user;
+                await JobEnrollmentService.addJobEnrollment(jobOfferID, account_id);
+                fetchJobOffers();
+            } catch (error) {
+                console.log("Enrollment error:", error);
+            }
+        }
+    };
+
+    const removeJobEnrollment = async () => {
+        if (user && jobOffer && jobOffer.job_enrollment) {
+            try {
+                const { job_enrollment } = jobOffer;
+                await JobEnrollmentService.removeJobEnrollment(job_enrollment);
+                fetchJobOffers();
+            } catch (error) {
+                console.log("Enrollment error:", error);
+            }
+        }
+    };
+
     return jobOffer && (
         <div className="page">
             <div className="page__back-button" onClick={ goBack }>
@@ -64,16 +99,16 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 </div>
             </div>
             <div className="page__action-buttons">
-                { user?.accountType === "applicant" && (
+                { user?.account_type === "applicant" && (
                     <>
                         { jobOffer.has_enrolled ? (
-                            <button className="page__button page__button--secondary">ODUSTANI</button>
+                            <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>ODUSTANI</button>
                         ) : (
-                            <button className="page__button page__button--primary">KONKURIŠI</button>
+                            <button className="page__button page__button--primary" onClick={addJobEnrollment}>KONKURIŠI</button>
                         ) }
                     </>
                 ) }
-                { user?.accountType == "employer" && (
+                { user?.account_type == "employer" && (
                     // TODO: add "IZMENI" button later
                     <button className="page__secondary-button">ARHIVIRAJ</button>
                 ) }

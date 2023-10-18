@@ -3,30 +3,30 @@
 import axios from "axios";
 import { AuthService } from "./authService";
 
-const api = axios.create({
+const axiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const API = {
-    getResourceList: (resource: string, queryParams = "") => {
-        return api.get(`${ resource }/?${ queryParams }`);
-    },
-    getProtectedResourceList: (resource: string, queryParams = "") => {
+    getOne: (resource: string, queryParams = "") => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
-        return api.get(`${ resource }/?${ queryParams }`, config);
+        return axiosInstance.get(`${ resource }/?${ queryParams }`, config);
     },
-    getResourceDetails: (resource: string, resourceId: number) => {
-        return api.get(`${ resource }/${ resourceId }/`);
-    },
-    getProtectedResourceDetails: (resource: string, resourceId: number) => {
+    getList: (resource: string, resourceId: number) => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
-        return api.get(`${ resource }/${ resourceId }/`, config);
+        return axiosInstance.get(`${ resource }/${ resourceId }/`, config);
     },
-    post: (url: string, data: Object, config: Object) => {
-        return api.post(url, data, config);
+    post: (url: string, data: Object) => {
+        const config = { headers: AuthService.getAuthorizationHeaders() };
+        return axiosInstance.post(url, data, config);
     },
     patch: (url: string, data: Object) => {
-        return api.patch(url, data);
+        const config = { headers: AuthService.getAuthorizationHeaders() };
+        return axiosInstance.patch(url, data, config);
+    },
+    delete: (url: string) => {
+        const config = { headers: AuthService.getAuthorizationHeaders() };
+        return axiosInstance.delete(url, config);
     },
 };
 

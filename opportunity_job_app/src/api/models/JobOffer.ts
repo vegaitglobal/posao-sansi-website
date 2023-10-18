@@ -45,6 +45,7 @@ export interface JobOffer {
     additional_skills: string;
     is_active: boolean;
     employer: number;
+    job_enrollment: number;
     has_enrolled: boolean;
     company_name: string;
     company_url: string;

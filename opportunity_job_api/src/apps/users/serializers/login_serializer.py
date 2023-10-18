@@ -28,7 +28,7 @@ class LoginSerializer(serializers.Serializer):
         return {
             "token": token.key,
             "id": self.user.id,
-            "profile_id": self.user.get_account().id,
+            "account_id": self.user.get_account().id,
             "account_type": self.account.type,
         }
 

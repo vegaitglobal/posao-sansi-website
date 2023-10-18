@@ -9,7 +9,8 @@ export const AuthService = {
         const userDataString = JSON.stringify({
             token: response.data.token,
             id: response.data.id,
-            accountType: response.data.account_type
+            account_type: response.data.account_type,
+            account_id: response.data.account_id
         });
         localStorage.setItem("user", userDataString);
     },
