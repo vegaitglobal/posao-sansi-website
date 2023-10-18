@@ -1,12 +1,7 @@
 'use client'
-import "./Cards.scss";
+import { User } from "@/api/models/User";
+import "./HomepageCardLinks.scss";
 import Link from "next/link";
-
-type User = {
-    token: string;
-    id: number;
-    account_type: string;
-};
 
 type HeaderProps = {
     user: User | undefined;
@@ -18,7 +13,7 @@ type CardItem = {
     title: string;
 };
 
-const Cards = ({ user }: HeaderProps) => {
+const HomepageCardLinks = ({ user }: HeaderProps) => {
     const initialCards: CardItem[] = [
         { label: "unlogged", imgUrl: "/images/card-1-img.svg", title: "Tražim posao", },
         { label: "logged", imgUrl: "/images/card-2-img.svg", title: "Nudim posao", },
@@ -81,4 +76,4 @@ const Cards = ({ user }: HeaderProps) => {
     )
 }
 
-export default Cards;
+export default HomepageCardLinks;

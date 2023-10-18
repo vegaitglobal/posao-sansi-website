@@ -48,7 +48,7 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
     }
     
 
-    const enrollUser = async () => {
+    const addJobEnrollment = async () => {
         if (user) {
             try {
                 const { account_id } = user;
@@ -60,7 +60,7 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
         }
     };
 
-    const removeUser = async () => {
+    const removeJobEnrollment = async () => {
         if (user && jobOffer && jobOffer.job_enrollment) {
             try {
                 const { job_enrollment } = jobOffer;
@@ -102,9 +102,9 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 { user?.account_type === "applicant" && (
                     <>
                         { jobOffer.has_enrolled ? (
-                            <button className="page__button page__button--secondary" onClick={removeUser}>ODUSTANI</button>
+                            <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>ODUSTANI</button>
                         ) : (
-                            <button className="page__button page__button--primary" onClick={enrollUser}>KONKURIŠI</button>
+                            <button className="page__button page__button--primary" onClick={addJobEnrollment}>KONKURIŠI</button>
                         ) }
                     </>
                 ) }

@@ -8,29 +8,24 @@ const axiosInstance = axios.create({
 });
 
 const API = {
-    getResourceList: (resource: string, queryParams = "") => {
+    getOne: (resource: string, queryParams = "") => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
         return axiosInstance.get(`${ resource }/?${ queryParams }`, config);
     },
-    getProtectedResourceList: (resource: string, queryParams = "") => {
-        const config = { headers: AuthService.getAuthorizationHeaders() };
-        return axiosInstance.get(`${ resource }/?${ queryParams }`, config);
-    },
-    getResourceDetails: (resource: string, resourceId: number) => {
+    getList: (resource: string, resourceId: number) => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
         return axiosInstance.get(`${ resource }/${ resourceId }/`, config);
     },
-    getProtectedResourceDetails: (resource: string, resourceId: number) => {
+    post: (url: string, data: Object) => {
         const config = { headers: AuthService.getAuthorizationHeaders() };
-        return axiosInstance.get(`${ resource }/${ resourceId }/`, config);
-    },
-    post: (url: string, data: Object, config: Object) => {
         return axiosInstance.post(url, data, config);
     },
     patch: (url: string, data: Object) => {
-        return axiosInstance.patch(url, data);
+        const config = { headers: AuthService.getAuthorizationHeaders() };
+        return axiosInstance.patch(url, data, config);
     },
-    delete: (url: string, config: Object) => {
+    delete: (url: string) => {
+        const config = { headers: AuthService.getAuthorizationHeaders() };
         return axiosInstance.delete(url, config);
     },
 };

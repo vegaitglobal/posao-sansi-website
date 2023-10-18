@@ -7,7 +7,7 @@ import { AuthService } from "@/api/authService"
 import Banner from "../components/Banner/Banner"
 import Mission from "@/components/Mission/Mission";
 import Statistics from "@/components/Statistics/Statistics";
-import Cards from "@/components/Cards/Cards";
+import HomepageCardLinks from "@/components/HomepageCardLinks/HomepageCardLinks";
 import { User } from "@/api/models/User";
 
 export default function Home() {
@@ -26,7 +26,7 @@ export default function Home() {
             <Header user={ user }/>
             <main>
                 <Banner/>
-                <Cards user={user} />
+                <HomepageCardLinks user={user} />
                 <Mission/>
                 <Statistics/>
             </main>

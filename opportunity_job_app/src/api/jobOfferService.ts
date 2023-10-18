@@ -30,12 +30,12 @@ export const JobOfferService = {
             ipp: 6,
             page: pageNumber,
         } as any);
-        const response = await API.getProtectedResourceList("job-offers", params.toString());
+        const response = await API.getOne("job-offers", params.toString());
         return response.data;
     },
 
     findJobOffer: async (jobOfferID: number): Promise<JobOffer> => {
-        const response = await API.getProtectedResourceDetails("job-offers", jobOfferID);
+        const response = await API.getList("job-offers", jobOfferID);
         return response.data;
     }
 };
