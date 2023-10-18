@@ -2,6 +2,7 @@
 import { User } from "@/api/models/User";
 import "./HomepageCardLinks.scss";
 import Link from "next/link";
+import { useTranslation } from 'react-i18next';
 
 type HeaderProps = {
     user: User | undefined;
@@ -14,12 +15,13 @@ type CardItem = {
 };
 
 const HomepageCardLinks = ({ user }: HeaderProps) => {
+    const { t } = useTranslation();
     const initialCards: CardItem[] = [
-        { label: "unlogged", imgUrl: "/images/card-1-img.svg", title: "Tražim posao", },
-        { label: "logged", imgUrl: "/images/card-2-img.svg", title: "Nudim posao", },
+        { label: "unlogged", imgUrl: "/images/card-1-img.svg", title: t('card1_title'), },
+        { label: "logged", imgUrl: "/images/card-2-img.svg", title: t('card2_title'), },
     ]
-    const logedUserCard: CardItem = { label: "logged", imgUrl: "/images/card-2-img.svg", title: "moji poslovi", }
-    const loggedCompanyCard: CardItem = { label: "logged", imgUrl: "/images/card-1-img.svg", title: "aktivni poslovi", }
+    const logedUserCard: CardItem = { label: "logged", imgUrl: "/images/card-2-img.svg", title: t('card3_company_title'), }
+    const loggedCompanyCard: CardItem = { label: "logged", imgUrl: "/images/card-1-img.svg", title: t('card3_user_title'), }
 
     return (
         <section className="cards">
@@ -35,7 +37,7 @@ const HomepageCardLinks = ({ user }: HeaderProps) => {
                                         <div className="cards__right">
                                             <p className="cards__title">{card.title}</p>
                                             <div className="card__link-wrap">
-                                                <span className="card__text">Registruj se</span>
+                                                <span className="card__text">{t('card1_text')}</span>
                                                 <img className="cards__arrow" src="/images/right-arrow.svg" alt="Right arrow" />
                                             </div>
                                         </div>
@@ -52,7 +54,7 @@ const HomepageCardLinks = ({ user }: HeaderProps) => {
                                     <div className="cards__right">
                                         <p className="cards__title">{logedUserCard.title}</p>
                                         <div className="card__link-wrap">
-                                            <span className="card__text">Kreiraj posao</span>
+                                            <span className="card__text">{t('card3_company_text')}</span>
                                             <img className="cards__arrow" src="/images/right-arrow.svg" alt="Right arrow" />
                                         </div>
                                     </div>
@@ -66,7 +68,7 @@ const HomepageCardLinks = ({ user }: HeaderProps) => {
                                     <div className="cards__right">
                                         <p className="cards__title">{loggedCompanyCard.title}</p>
                                         <div className="card__link-wrap">
-                                            <span className="card__text">Vidi stranicu</span>
+                                            <span className="card__text">{t('card3_user_text')}</span>
                                             <img className="cards__arrow" src="/images/right-arrow.svg" alt="Right arrow" />
                                         </div>
                                     </div>

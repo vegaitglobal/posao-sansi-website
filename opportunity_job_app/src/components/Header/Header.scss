@@ -39,7 +39,6 @@
     padding: 8px 0;
 }
 .header__language-item {
-    padding: 8px 26px;
     color: $purple-primary;
     font-size: 14px;
     font-weight: 600;
@@ -50,6 +49,14 @@
         background-color: $purple-hover;
         color: $white;
     }
+}
+.header__language-btn {
+    padding: 8px 26px;
+    text-align: left;
+    width: 100%;
+}
+.header__language-btn--active {
+    background-color: $purple-hover;
 }
 .header__laanguage-flag {
     margin-right: 10px;

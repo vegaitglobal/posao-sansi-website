@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { User } from "@/api/models/User";
 import { AuthService } from "@/api/authService";
 import { anonymousUserLinks, applicantLinks, employerLinks } from "@/appData/headerData";
+import { useTranslation } from 'react-i18next';
+import i18n from "@/api/i18";
 
 type LinkItem = {
     label: string;
@@ -58,8 +60,8 @@ const Header = ({ user }: HeaderProps) => {
     };
 
     const languages: LanguageItem[] = [
-        { label: "ENG", code: "en", flagPath: "/images/en-flag.png" },
         { label: "SRB", code: "srb", flagPath: "/images/srb-flag.png" },
+        { label: "ENG", code: "en", flagPath: "/images/en-flag.png" },
     ];
 
     const mapItems = (items: LinkItem[]) => {
@@ -74,6 +76,13 @@ const Header = ({ user }: HeaderProps) => {
                 </Link>
             </li>
         ));
+
+    };
+
+    const { t } = useTranslation();
+
+    const changeLanguage = (lng:string) => {
+        i18n.changeLanguage(lng);
     };
 
     return (
@@ -82,7 +91,7 @@ const Header = ({ user }: HeaderProps) => {
                 <div className="header__logo">
                     <a className="header__logo-link" href="/">
                         <img className="header__logo-img" src="/images/logo.png" alt="logo"/>
-                        <span className="header__logo-text">POSAO ŠANSI</span>
+                        <span className="header__logo-text">{t('logo_title')}</span>
                     </a>
                 </div>
                 <div className="header__language">
@@ -92,7 +101,7 @@ const Header = ({ user }: HeaderProps) => {
                     { isActive && <ul className="header__language-list">
                         { languages.map((language, index) => (
                             <li className="header__language-item" key={ index }>
-                                <button className="header__language-btn" type="button">
+                                <button className={`header__language-btn ${language.code === i18n.language ? 'header__language-btn--active' : ''}`} type="button" onClick={() => changeLanguage(language.code)}>
                                     <img className="header__laanguage-flag" src={ language.flagPath } alt="flag"/>
                                     { language.label }
                                 </button>
