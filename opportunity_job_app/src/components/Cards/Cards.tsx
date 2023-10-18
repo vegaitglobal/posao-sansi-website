@@ -5,7 +5,7 @@ import Link from "next/link";
 type User = {
     token: string;
     id: number;
-    accountType: string;
+    account_type: string;
 };
 
 type HeaderProps = {
@@ -47,7 +47,7 @@ const Cards = ({ user }: HeaderProps) => {
                                 </div>
                         )
                     })
-                    : (user && user.accountType === "employer")
+                    : (user && user.account_type === "employer")
                         ?
                             <div className="card__holder">
                                 <Link className="card__link" href="/my-job-offers" ></Link>

@@ -102,7 +102,7 @@ const Header = ({ user }: HeaderProps) => {
                 </div>
                 <nav className="header__nav">
                     <ul className={ `header__nav-list ${ navActive ? "header__nav-list--active" : "" }` }>
-                        { user ? mapItems(linksObject[user.accountType]) : mapItems(anonymousUserLinks) }
+                        { user ? mapItems(linksObject[user.account_type]) : mapItems(anonymousUserLinks) }
                     </ul>
                     <button className="header__hamburger-btn" type="button" onClick={ toggleNav }>
                         { user ? <img src="/images/user.svg" alt="user"/> :

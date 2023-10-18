@@ -5,13 +5,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import './faq.scss'
 import { AuthService } from '@/api/authService';
-
-type User = {
-   token: string;
-   id: number;
-   accountType: string;
-   account_id: number
-};
+import { User } from '@/api/models/User';
 
 export default function Page() {
    const [user, setUser] = useState<User>()

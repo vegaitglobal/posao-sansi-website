@@ -1,6 +1,6 @@
 export interface User {
     token: string;
     id: number;
-    accountType: string;
+    account_type: string;
     account_id: number;
 }

@@ -8,13 +8,7 @@ import Banner from "../components/Banner/Banner"
 import Mission from "@/components/Mission/Mission";
 import Statistics from "@/components/Statistics/Statistics";
 import Cards from "@/components/Cards/Cards";
-
-type User = {
-    token: string;
-    id: number;
-    accountType: string;
-    account_id: number;
-};
+import { User } from "@/api/models/User";
 
 export default function Home() {
     const [user, setUser] = useState<User>()

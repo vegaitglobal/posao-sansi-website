@@ -24,7 +24,7 @@ export default function JobOffersPage({ params }: JobOffersPageProps) {
             const user = AuthService.getUser();
             if (!user) {
                 router.push("/login");
-            } else if (user.accountType !== "applicant") {
+            } else if (user.account_type !== "applicant") {
                 router.push("/");
             } else {
                 setApplicant(user);
