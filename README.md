@@ -24,7 +24,7 @@ Table of Contents
 
 2. Create `.env` using `example.com`:
 
-   `cp example.com .env`
+   `cp example.env .env`
 
 3. (Optional) change the values of environment variables in `.env` file
 
