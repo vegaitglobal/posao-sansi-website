@@ -8,7 +8,6 @@ import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
 import Popup from "../Popup/Popup";
-import { log } from "console";
 
 interface JobOfferDetailsProps {
     jobOfferID: number;
@@ -26,6 +25,19 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
         linkText: '',
         linkUrl: '',
       });
+
+      const commonPopupDetails = {
+        popupVisibility: true,
+        paragraphSecondVisibility: true,
+        linkVisibility: true,
+        linkText: 'Nazad na poslove',
+        linkUrl: '/job-offers',
+    }
+
+    const updatedPopupDetails = {
+        ...commonPopupDetails,
+        paragraphSecondVisibility: false,
+    }
       
 
     useEffect(() => {
@@ -66,24 +78,16 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 await JobEnrollmentService.addJobEnrollment(jobOfferID, account_id);
                 fetchJobOffers();
                 setPopupDetails({
-                    popupVisibility: true,
                     paragraphFirstText: 'Vasa prijava je uspeno prosledjena!',
                     paragraphSecondText: 'Uskoro ce Vam se javiti neko iz organizacije ATINA',
-                    paragraphSecondVisibility: true,
-                    linkVisibility: true,
-                    linkText: 'Nazad na poslove',
-                    linkUrl: '/job-offers',
+                    ...commonPopupDetails
                   });
             } catch (error) {
                 console.log("Enrollment error:", error);
                     setPopupDetails({
-                    popupVisibility: true,
-                    paragraphFirstText: 'Error: Your enrollment could not be processed',
-                    paragraphSecondText: 'Please try again later',
-                    paragraphSecondVisibility: true,
-                    linkVisibility: true,
-                    linkText: 'Nazad na poslove',
-                    linkUrl: '/job-offers',
+                    paragraphFirstText: 'Greška: Vaša prijava nije mogla biti obradjena',
+                    paragraphSecondText: 'Molim Vas pokušajte kasnije',
+                    ...commonPopupDetails
                 });
             }
         }
@@ -96,24 +100,17 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 await JobEnrollmentService.removeJobEnrollment(job_enrollment);
                 fetchJobOffers();
                 setPopupDetails({
-                    popupVisibility: true,
                     paragraphFirstText: 'Vasa prijava je uspeno otkazana! ',
                     paragraphSecondText: '',
-                    paragraphSecondVisibility: false,
-                    linkVisibility: true,
-                    linkText: 'Nazad na poslove',
-                    linkUrl: '/job-offers',
+                    ...updatedPopupDetails,
                   });
             } catch (error) {
                 console.log("Enrollment error:", error);
                     setPopupDetails({
-                    popupVisibility: true,
-                    paragraphFirstText: 'Error: Your enrollment could not be processed',
-                    paragraphSecondText: 'Please try again later',
+                    paragraphFirstText: 'Greška: Vaša prijava nije mogla biti obradjena',
+                    paragraphSecondText: 'Molim Vas pokušajte kasnije',
+                    ...updatedPopupDetails,
                     paragraphSecondVisibility: true,
-                    linkVisibility: true,
-                    linkText: 'Nazad na poslove',
-                    linkUrl: '/job-offers',
                 });
             }
         }
@@ -153,14 +150,13 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                         { jobOffer.has_enrolled ? (
                             <>
                             <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>ODUSTANI</button>
-                            <Popup elementsDetails={popupDetails} />
                             </>
                         ) : (
                             <>
                             <button className="page__button page__button--primary" onClick={addJobEnrollment}>KONKURIŠI</button>
-                            <Popup elementsDetails={popupDetails} />
                             </>
                         ) }
+                        <Popup elementsDetails={popupDetails} />
                     </>
                 ) }
                 { user?.account_type == "employer" && (
