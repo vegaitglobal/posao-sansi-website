@@ -43,6 +43,7 @@ jobs:
           DJANGO_SUPERUSER_EMAIL: "${{ secrets.DJANGO_SUPERUSER_EMAIL }}"
           DJANGO_SUPERUSER_PASSWORD: "${{ secrets.DJANGO_SUPERUSER_PASSWORD }}"
           FE_APP_ORIGIN: "${{ secrets.FE_APP_ORIGIN }}"
+          NEXT_PUBLIC_API_URL: "${{ secrets.NEXT_PUBLIC_API_URL }}"
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
         with:
