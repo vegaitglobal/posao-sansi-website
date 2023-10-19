@@ -1,60 +1,50 @@
 "use client";
 
-import "./login-form.scss";
+import "./password-forgotten-form.scss";
 import InputField from "@/components/InputField/InputField";
 import { useState } from "react";
 import { AuthService } from "@/api/authService";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
-const LoginForm = () => {
+const PasswordForgottenForm = () => {
   const router = useRouter();
   const [ responseError, setResponseError ] = useState<string>("");
   const [ formData, setFormData ] = useState({
-    email: "",
-    password: "",
+    email: ""
   });
 
-  async function login(e: React.SyntheticEvent<EventTarget>) {
+  async function forgotPassword(e: React.SyntheticEvent<EventTarget>) {
     e.preventDefault();
     try {
-      await AuthService.login(formData.email, formData.password);
+      await AuthService.forgotPassword(formData.email);
       router.push("/");
     } catch (error: any) {
       setResponseError(error.response?.data?.errors?.non_field_errors);
     }
+    console.log(formData.email);
+
   }
 
   const updateFormData = (fieldValue: string, fieldName: string) => {
     setFormData({ ...formData, [fieldName]: fieldValue });
   };
 
-
   return (
     <div className="wrapper">
-      <p className="welcome-sentence">Dobrodošli nazad!</p>
-      <p className="welcome-sentence">Ulogujte se da biste nastavili.</p>
-      <form className="login-form">
+      <p className="welcome-sentence">
+        Unesite Vašu e-mail adresu kako bismo Vam poslali podatke za resetovanje lozinke.
+      </p>
+      <form className="password-forgotten-form">
         <InputField
           label="E-mail adresa:"
           placeholder="Vaša e-mail adresa"
           onChange={ (value) => updateFormData(value, "email") }
         />
-        <InputField
-          label="Lozinka:"
-          placeholder="Vaša lozinka"
-          type="password"
-          onChange={ (value) => updateFormData(value, "password") }
-        />
         { responseError && <p className="error-message">{ responseError }</p> }
-        <button className="login-form__button" onClick={ login }>Uloguj se</button>
-
-        <Link className="login-form__link" target="_blank" href="/password-forgotten">
-          Zaboravili ste lozinku?
-        </Link>
+        <button className="password-forgotten-form__button" onClick={ forgotPassword }>ZAHTEVAJ LINK</button>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default PasswordForgottenForm;
