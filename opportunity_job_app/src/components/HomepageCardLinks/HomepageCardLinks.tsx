@@ -17,11 +17,11 @@ type CardItem = {
 const HomepageCardLinks = ({ user }: HeaderProps) => {
     const { t } = useTranslation();
     const initialCards: CardItem[] = [
-        { label: "unlogged", imgUrl: "/images/card-1-img.svg", title: t('card1_title'), },
-        { label: "logged", imgUrl: "/images/card-2-img.svg", title: t('card2_title'), },
+        { label: "unlogged", imgUrl: "/images/card-1-img.svg", title: t('app.components.homepageCardLinks.anonymousApplicantCard.title'), },
+        { label: "logged", imgUrl: "/images/card-2-img.svg", title: t('app.components.homepageCardLinks.anonymousEmployerCard.title'), },
     ]
-    const logedUserCard: CardItem = { label: "logged", imgUrl: "/images/card-2-img.svg", title: t('card3_company_title'), }
-    const loggedCompanyCard: CardItem = { label: "logged", imgUrl: "/images/card-1-img.svg", title: t('card3_user_title'), }
+    const logedUserCard: CardItem = { label: "logged", imgUrl: "/images/card-2-img.svg", title: t('app.components.homepageCardLinks.applicantCard.title'), }
+    const loggedCompanyCard: CardItem = { label: "logged", imgUrl: "/images/card-1-img.svg", title: t('app.components.homepageCardLinks.employerCard.title'), }
 
     return (
         <section className="cards">
@@ -37,7 +37,7 @@ const HomepageCardLinks = ({ user }: HeaderProps) => {
                                         <div className="cards__right">
                                             <p className="cards__title">{card.title}</p>
                                             <div className="card__link-wrap">
-                                                <span className="card__text">{t('card1_text')}</span>
+                                                <span className="card__text">{t('app.components.homepageCardLinks.anonymousCard.text')}</span>
                                                 <img className="cards__arrow" src="/images/right-arrow.svg" alt="Right arrow" />
                                             </div>
                                         </div>
@@ -54,7 +54,7 @@ const HomepageCardLinks = ({ user }: HeaderProps) => {
                                     <div className="cards__right">
                                         <p className="cards__title">{logedUserCard.title}</p>
                                         <div className="card__link-wrap">
-                                            <span className="card__text">{t('card3_company_text')}</span>
+                                            <span className="card__text">{t('app.components.homepageCardLinks.employerCard.text')}</span>
                                             <img className="cards__arrow" src="/images/right-arrow.svg" alt="Right arrow" />
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@ const HomepageCardLinks = ({ user }: HeaderProps) => {
                                     <div className="cards__right">
                                         <p className="cards__title">{loggedCompanyCard.title}</p>
                                         <div className="card__link-wrap">
-                                            <span className="card__text">{t('card3_user_text')}</span>
+                                            <span className="card__text">{t('app.components.homepageCardLinks.applicantCard.text')}</span>
                                             <img className="cards__arrow" src="/images/right-arrow.svg" alt="Right arrow" />
                                         </div>
                                     </div>

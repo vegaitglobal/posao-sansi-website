@@ -60,7 +60,7 @@ const Header = ({ user }: HeaderProps) => {
     };
 
     const languages: LanguageItem[] = [
-        { label: "SRB", code: "srb", flagPath: "/images/srb-flag.png" },
+        { label: "SR", code: "sr", flagPath: "/images/srb-flag.png" },
         { label: "ENG", code: "en", flagPath: "/images/en-flag.png" },
     ];
 
@@ -91,7 +91,7 @@ const Header = ({ user }: HeaderProps) => {
                 <div className="header__logo">
                     <a className="header__logo-link" href="/">
                         <img className="header__logo-img" src="/images/logo.png" alt="logo"/>
-                        <span className="header__logo-text">{t('logo_title')}</span>
+                        <span className="header__logo-text">{t('app.components.header.logoTitle')}</span>
                     </a>
                 </div>
                 <div className="header__language">

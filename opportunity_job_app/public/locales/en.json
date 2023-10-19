@@ -1,0 +1,33 @@
+{
+    "app": {
+        "components": {
+            "header":{
+                "logoTitle": "JOB OPPORTUNITIES"
+            },
+            "banner": {
+                "bannerHeading": "Job Opportunities",
+                "bannerContent": "Welcome to Job Opportunities - a platform that makes a difference in the world of employment! Our vision is simple - We want to create a space where every woman can achieve success and have equal opportunities to find dignified work. Whether you are looking for a job or offering employment opportunities, we invite you to join our platform so that we can work together to create a positive vision for the future of all women in the labor market. Job opportunities - because together we make a difference!"
+            },
+            "homepageCardLinks": {
+                "anonymousApplicantCard": {
+                    "title": "looking for a job",
+                    "text": "Sign up"
+                },
+                "anonymousEmployerCard": {
+                    "title": "Job offer"
+                },
+                "anonymousCard": {
+                    "text": "Sign up"
+                },
+                "applicantCard": {
+                    "title": "active jobs",
+                    "text": "See page"
+                },
+                "employerCard": {
+                    "title": "My jobs",
+                    "text": "Create a job"
+                }
+            }
+        }
+    }
+}

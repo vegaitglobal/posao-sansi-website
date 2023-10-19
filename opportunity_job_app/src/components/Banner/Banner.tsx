@@ -6,11 +6,11 @@ const Banner = () => {
     const { t } = useTranslation();
     return (
         <section className="banner">
-            <h1 className="banner__heading">{t('banner_heading')}</h1>
+            <h1 className="banner__heading">{t('app.components.banner.bannerHeading')}</h1>
             <div className="banner__content">
                 <img className="banner__img" src="/images/banner-img.svg" alt="Banner image" />
                 <p className="banner__text">
-                    {t('banner_content')}
+                    {t('app.components.banner.bannerContent')}
                 </p>
             </div>
         </section>
