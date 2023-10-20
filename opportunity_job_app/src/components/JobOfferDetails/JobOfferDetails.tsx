@@ -1,4 +1,3 @@
-"use client";
 
 import "./job-offer-details.scss";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { mapStringToLocalDateString } from "@/utils";
 import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
+import Popup from "../Popup/Popup";
 
 interface JobOfferDetailsProps {
     jobOfferID: number;
@@ -16,6 +16,29 @@ interface JobOfferDetailsProps {
 export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
     const [jobOffer, setJobOffer] = useState<JobOffer>();
     const [user, setUser] = useState<User>();
+    const [popupDetails, setPopupDetails] = useState({
+        popupVisibility: false,
+        paragraphFirstText: '',
+        paragraphSecondText: '',
+        paragraphSecondVisibility: false,
+        linkVisibility: false,
+        linkText: '',
+        linkUrl: '',
+      });
+
+      const commonPopupDetails = {
+        popupVisibility: true,
+        paragraphSecondVisibility: true,
+        linkVisibility: true,
+        linkText: 'Nazad na poslove',
+        linkUrl: '/job-offers',
+    }
+
+    const updatedPopupDetails = {
+        ...commonPopupDetails,
+        paragraphSecondVisibility: false,
+    }
+      
 
     useEffect(() => {
         const fetchJobOffer = async () => {
@@ -54,8 +77,18 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 const { account_id } = user;
                 await JobEnrollmentService.addJobEnrollment(jobOfferID, account_id);
                 fetchJobOffers();
+                setPopupDetails({
+                    paragraphFirstText: 'Vasa prijava je uspeno prosledjena!',
+                    paragraphSecondText: 'Uskoro ce Vam se javiti neko iz organizacije ATINA',
+                    ...commonPopupDetails
+                  });
             } catch (error) {
                 console.log("Enrollment error:", error);
+                    setPopupDetails({
+                    paragraphFirstText: 'Greška: Vaša prijava nije mogla biti obradjena',
+                    paragraphSecondText: 'Molim Vas pokušajte kasnije',
+                    ...commonPopupDetails
+                });
             }
         }
     };
@@ -66,11 +99,24 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 const { job_enrollment } = jobOffer;
                 await JobEnrollmentService.removeJobEnrollment(job_enrollment);
                 fetchJobOffers();
+                setPopupDetails({
+                    paragraphFirstText: 'Vasa prijava je uspeno otkazana! ',
+                    paragraphSecondText: '',
+                    ...updatedPopupDetails,
+                  });
             } catch (error) {
                 console.log("Enrollment error:", error);
+                    setPopupDetails({
+                    paragraphFirstText: 'Greška: Vaša prijava nije mogla biti obradjena',
+                    paragraphSecondText: 'Molim Vas pokušajte kasnije',
+                    ...updatedPopupDetails,
+                    paragraphSecondVisibility: true,
+                });
             }
         }
     };
+    
+
 
     return jobOffer && (
         <div className="page">
@@ -102,10 +148,15 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 { user?.account_type === "applicant" && (
                     <>
                         { jobOffer.has_enrolled ? (
+                            <>
                             <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>ODUSTANI</button>
+                            </>
                         ) : (
+                            <>
                             <button className="page__button page__button--primary" onClick={addJobEnrollment}>KONKURIŠI</button>
+                            </>
                         ) }
+                        <Popup elementsDetails={popupDetails} />
                     </>
                 ) }
                 { user?.account_type == "employer" && (
