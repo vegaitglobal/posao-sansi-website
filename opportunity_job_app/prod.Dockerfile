@@ -9,9 +9,6 @@ RUN npm ci
 
 COPY . .
 
-RUN echo "NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL" > .env
-RUN npm run build
-
 FROM node:18-alpine
 
 WORKDIR /app
@@ -26,4 +23,4 @@ COPY --from=build /app/node_modules ./node_modules
 
 EXPOSE 3000
 
-ENTRYPOINT [ "npm", "start" ]
+CMD ["sh", "/usr/app/scripts/entrypoint.sh", "prod"]

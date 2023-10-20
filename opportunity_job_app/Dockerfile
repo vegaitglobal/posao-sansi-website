@@ -1,15 +1,27 @@
-FROM node:18
+##################
+### Base image ###
+##################
 
-ENV PORT 3000
+FROM node:18 as base
 
-RUN mkdir -p /usr/app
+RUN mkdir -p    /usr/app
+COPY            ./  /usr/app/
+WORKDIR         /usr/app
+
+########################
+### Production image ###
+########################
+
+FROM base AS production
 
 RUN npm install -g serve
 
-WORKDIR /usr/app
+CMD ["sh", "/usr/app/scripts/entrypoint.sh", "prod"]
 
-COPY    ./  /usr/app/
+#########################
+### Development image ###
+#########################
 
-EXPOSE 3000
+FROM base AS development
 
-CMD ["/bin/sh", "-c", "npm install; npm run build; npm start"]
+CMD ["sh", "/usr/app/scripts/entrypoint.sh", "dev"]

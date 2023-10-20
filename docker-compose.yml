@@ -5,7 +5,7 @@ services:
   django:
     container_name: opportunity_job-django
     build:
-      context: opportunity_job_api
+      context: ./opportunity_job_api
       target: development
     env_file:
       - .env
@@ -36,11 +36,11 @@ services:
       - "3000:3000"
     build:
       context: ./opportunity_job_app
+      target: production
     volumes:
       - ./opportunity_job_app:/usr/app/
     env_file:
       - .env
-    command: sh -c 'npm install; npm run dev'
     restart: always
 
 volumes:
