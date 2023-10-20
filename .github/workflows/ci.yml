@@ -9,55 +9,55 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build the Docker image api
-      run: docker build --target production --file opportunity_job_api/Dockerfile --tag codeforacause/posaosansi:api-${{ github.run_number }} opportunity_job_api/.
-    - name: Build the Docker image ui
-      run: docker build --file opportunity_job_app/Dockerfile.prod --tag codeforacause/posaosansi:ui-${{ github.run_number }} opportunity_job_app/.
-    - name: Pushing docker image api to CR backend
-      run: docker push codeforacause/posaosansi:api-${{ github.run_number }}
-    - name: Pushing docker image ui to CR backend
-      run: docker push codeforacause/posaosansi:ui-${{ github.run_number }}
-    - name: Replace tokens
-      uses: cschleiden/replace-tokens@v1.1
-      with:
-        tokenPrefix: '#{'
-        tokenSuffix: '}#'
-        files: '["**docker-compose.production.yml"]'
-      env:
-        TAG_NUMBER: "${{ github.run_number }}"
-        DB_PASSWORD: "${{ secrets.DB_PASSWORD }}"
-        DB_USERNAME: "${{ secrets.DB_USERNAME }}"
-        DB_NAME: "${{ secrets.DB_NAME }}"
-        SECRET_KEY: "${{ secrets.SECRET_KEY }}"
-        EMAIL_HOST: "${{ secrets.EMAIL_HOST }}"
-        EMAIL_PORT: "${{ secrets.EMAIL_PORT }}"
-        EMAIL_HOST_USER: "${{ secrets.EMAIL_HOST_USER }}"
-        EMAIL_HOST_PASSWORD: "${{ secrets.EMAIL_HOST_PASSWORD }}"
-        CSRF_TRUSTED_ORIGINS: "${{ secrets.CSRF_TRUSTED_ORIGINS }}"
-        DJANGO_SUPERUSER_EMAIL: "${{ secrets.DJANGO_SUPERUSER_EMAIL }}"
-        DJANGO_SUPERUSER_PASSWORD: "${{ secrets.DJANGO_SUPERUSER_PASSWORD }}"
-        FE_APP_ORIGIN: "${{ secrets.FE_APP_ORIGIN }}"
-        NEXT_PUBLIC_API_URL: "${{ secrets.NEXT_PUBLIC_API_URL }}"
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        source: "docker-compose.production.yml"
-        target: "./Projects/posaosansi/"
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: docker compose -f ./Projects/posaosansi/docker-compose.production.yml up -d
+      - uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build the Docker image api
+        run: docker build --target production --file opportunity_job_api/Dockerfile --tag codeforacause/posaosansi:api-${{ github.run_number }} opportunity_job_api/.
+      - name: Build the Docker image ui
+        run: docker build --file opportunity_job_app/prod.Dockerfile --tag codeforacause/posaosansi:ui-${{ github.run_number }} opportunity_job_app/.
+      - name: Pushing docker image api to CR backend
+        run: docker push codeforacause/posaosansi:api-${{ github.run_number }}
+      - name: Pushing docker image ui to CR backend
+        run: docker push codeforacause/posaosansi:ui-${{ github.run_number }}
+      - name: Replace tokens
+        uses: cschleiden/replace-tokens@v1.1
+        with:
+          tokenPrefix: '#{'
+          tokenSuffix: '}#'
+          files: '["**docker-compose.production.yml"]'
+        env:
+          TAG_NUMBER: "${{ github.run_number }}"
+          DB_PASSWORD: "${{ secrets.DB_PASSWORD }}"
+          DB_USERNAME: "${{ secrets.DB_USERNAME }}"
+          DB_NAME: "${{ secrets.DB_NAME }}"
+          SECRET_KEY: "${{ secrets.SECRET_KEY }}"
+          EMAIL_HOST: "${{ secrets.EMAIL_HOST }}"
+          EMAIL_PORT: "${{ secrets.EMAIL_PORT }}"
+          EMAIL_HOST_USER: "${{ secrets.EMAIL_HOST_USER }}"
+          EMAIL_HOST_PASSWORD: "${{ secrets.EMAIL_HOST_PASSWORD }}"
+          CSRF_TRUSTED_ORIGINS: "${{ secrets.CSRF_TRUSTED_ORIGINS }}"
+          DJANGO_SUPERUSER_EMAIL: "${{ secrets.DJANGO_SUPERUSER_EMAIL }}"
+          DJANGO_SUPERUSER_PASSWORD: "${{ secrets.DJANGO_SUPERUSER_PASSWORD }}"
+          FE_APP_ORIGIN: "${{ secrets.FE_APP_ORIGIN }}"
+          NEXT_PUBLIC_API_URL: "${{ secrets.NEXT_PUBLIC_API_URL }}"
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "docker-compose.production.yml"
+          target: "./Projects/posaosansi/"
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: docker compose -f ./Projects/posaosansi/docker-compose.production.yml up -d

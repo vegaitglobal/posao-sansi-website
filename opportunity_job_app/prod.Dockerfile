@@ -9,8 +9,9 @@ COPY --chmod=777 package*.json .
 RUN npm ci
 
 COPY . .
-RUN npm run build
 
+RUN echo "NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL" > .env
+RUN npm run build
 
 FROM node:18-alpine
 
