@@ -20,7 +20,7 @@ jobs:
       - name: Build the Docker image ui
         env:
           NEXT_PUBLIC_API_URL: "${{ secrets.NEXT_PUBLIC_API_URL }}"
-        run: docker build --file opportunity_job_app/Dockerfile.prod --tag codeforacause/posaosansi:ui-${{ github.run_number }} opportunity_job_app/.
+        run: docker build --file opportunity_job_app/prod.Dockerfile --tag codeforacause/posaosansi:ui-${{ github.run_number }} opportunity_job_app/.
       - name: Pushing docker image api to CR backend
         run: docker push codeforacause/posaosansi:api-${{ github.run_number }}
       - name: Pushing docker image ui to CR backend
