@@ -1,34 +1,78 @@
-@import '../../scss/style.scss';
+@import "./../../scss/style.scss";
+
 .header {
-    position: relative;
-    height: 94px;
-    padding: 0 46px;
-    box-shadow: 0px 4px 4px 0px rgba($black, 0.25);
+  position: relative;
+  height: 94px;
+  padding: 0 46px;
+  box-shadow: 0px 4px 4px 0px rgba($black, 0.25);
 }
+
 .header__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
+
 .header__logo-img {
-    width: 78px;
+  width: 78px;
 }
+
 .header__logo-text {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 14px;
-    color: $purple-primary;
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  color: $purple-primary;
 }
+
 .header__language {
-    margin-left: auto;
-    position: relative;
+  margin-left: auto;
+  position: relative;
 }
 
 .header__language-list {
+  position: absolute;
+  top: 63px;
+  right: 0;
+  border: 1px solid $purple-primary;
+  border-radius: 4px;
+  box-shadow: 0px 8px 8px 0px rgba($white-2, 0.25);
+  z-index: 2;
+  width: 212px;
+  background-color: $white;
+  padding: 8px 0;
+}
+
+.header__language-item {
+  padding: 8px 26px;
+  color: $purple-primary;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:active {
+    background-color: $purple-hover;
+    color: $white;
+  }
+}
+
+.header__laanguage-flag {
+  margin-right: 10px;
+}
+
+.header__nav {
+  position: relative;
+}
+
+.header__nav-list {
+  display: flex;
+  @include media-breakpoint-down(md) {
+    display: none;
     position: absolute;
-    top: 63px;
+    top: 62px;
     right: 0;
     border: 1px solid $purple-primary;
     border-radius: 4px;
@@ -37,87 +81,59 @@
     width: 212px;
     background-color: $white;
     padding: 8px 0;
-}
-.header__language-item {
-    padding: 8px 26px;
-    color: $purple-primary;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 14px;
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-    &:active {
-        background-color: $purple-hover;
-        color: $white;
-    }
-}
-.header__laanguage-flag {
-    margin-right: 10px;
-}
-.header__nav {
-    position: relative;
-}
-.header__nav-list {
-    display: flex;
-    @include media-breakpoint-down(md) {
-        display: none;
-        position: absolute;
-        top: 62px;
-        right: 0;
-        border: 1px solid $purple-primary;
-        border-radius: 4px;
-        box-shadow: 0px 8px 8px 0px rgba($white-2, 0.25);
-        z-index: 2;
-        width: 212px;
-        background-color: $white;
-        padding: 8px 0;
-    }
+  }
 }
 
 .header__nav-list--active {
-    @include media-breakpoint-down(lg) {
-        display: block;
-    }
+  @include media-breakpoint-down(lg) {
+    display: block;
+  }
 }
 
 .header__nav-item {
-    padding: 3px 20px 8px 20px;
-    margin-left: 40px;
-    &:active {
-        background-color: $purple-hover;
-        .header__nav-link-text {
-            color: $white;
-        }
+  padding: 3px 20px 8px 20px;
+  margin-left: 40px;
+
+  &:active {
+    background-color: $purple-hover;
+
+    .header__nav-link-text {
+      color: $white;
     }
+  }
 }
+
 .header__nav-link {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
+
 .header__nav-icon {
-    width: 20px;
-    @include media-breakpoint-up(md) {
-        display: none;
-    }
-    @include media-breakpoint-down(md) {
-        display: block;
-    }
+  width: 20px;
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+  @include media-breakpoint-down(md) {
+    display: block;
+  }
 }
+
 .header__hamburger-btn {
-    @include media-breakpoint-up(md) {
-        display: none;
-    }
-    @include media-breakpoint-down(md) {
-        display: block;
-        margin-left: 36px;
-    }
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+  @include media-breakpoint-down(md) {
+    display: block;
+    margin-left: 36px;
+  }
 }
+
 .header__nav-link-text {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: normal;
-    color: $purple-primary;
-    @include media-breakpoint-down(md) {
-        margin-left: 10px;
-    }
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  color: $purple-primary;
+  @include media-breakpoint-down(md) {
+    margin-left: 10px;
+  }
 }

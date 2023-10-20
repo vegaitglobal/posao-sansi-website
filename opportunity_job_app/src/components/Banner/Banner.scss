@@ -1,69 +1,68 @@
-@import "../../scss/style.scss";
+@import "./../../scss/style.scss";
 
-.banner{
-    font-family: Mirza;
-    background-color: $purple-bg;
-    @include media-breakpoint-up(lg) {
-        padding: 80px 100px 40px 100px;
-    }
-    @include media-breakpoint-only(md) {
-        padding: 60px 36px 36px 36px; 
-    }
-    @include media-breakpoint-down(sm) {
-        padding: 60px 12px 26px 12px; 
-    }
+.banner {
+  font-family: Mirza;
+  background-color: $purple-bg;
+  @include media-breakpoint-up(lg) {
+    padding: 80px 100px 40px 100px;
+  }
+  @include media-breakpoint-only(md) {
+    padding: 60px 36px 36px 36px;
+  }
+  @include media-breakpoint-down(sm) {
+    padding: 60px 12px 26px 12px;
+  }
 }
 
-.banner__heading{
-    margin-bottom: 40px;
-    color: $white-2;
-    text-align: center;
-    font-family: $font-default;
-    @include media-breakpoint-down(md) {
-        margin-bottom: 36px;
-    }
-    @include media-breakpoint-down(sm) {
-        margin-bottom: 26px;
-    }
+.banner__heading {
+  margin-bottom: 40px;
+  color: $white-2;
+  text-align: center;
+  font-family: $font-default;
+  @include media-breakpoint-down(md) {
+    margin-bottom: 36px;
+  }
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 26px;
+  }
 }
 
-.banner__content{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    @include media-breakpoint-down(sm) {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: cenetr;
-    }
+.banner__content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: cenetr;
+  }
 }
 
 .banner__img {
-    width: 515px;
-    @include media-breakpoint-down(md) {
-        width: 351px; 
-    }
-    @include media-breakpoint-down(sm) {
-        width: 100%; 
-    }
+  width: 515px;
+  @include media-breakpoint-down(md) {
+    width: 351px;
+  }
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
 }
 
-.banner__text{
-    width: 563px;
-    color: $white-2;
-    font-size: 20px;
-    line-height: 29px;
-    @include media-breakpoint-down(md) {
-        width: 397px;
-        font-size: 16px;
-        line-height: 23px;
-    }
-    @include media-breakpoint-down(sm) {
-        width: 100%;
-        font-size: 14px;
-        line-height: 20px;
-        padding: 0 14px;
-    }
+.banner__text {
+  width: 563px;
+  color: $white-2;
+  font-size: 20px;
+  line-height: 29px;
+  @include media-breakpoint-down(md) {
+    width: 397px;
+    font-size: 16px;
+    line-height: 23px;
+  }
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0 14px;
+  }
 }
-
