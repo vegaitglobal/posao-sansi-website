@@ -15,8 +15,14 @@ WORKDIR         /usr/app
 FROM base AS production
 
 RUN npm install -g serve
+RUN npm run build
 
-CMD ["sh", "/usr/app/scripts/entrypoint.sh", "prod"]
+CMD [
+    # We are echoing environment variable into .env file because
+    # the variable will be available after the container is started:
+    "echo \"NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL\" > .env",
+    "npm start"
+]
 
 #########################
 ### Development image ###
@@ -24,4 +30,4 @@ CMD ["sh", "/usr/app/scripts/entrypoint.sh", "prod"]
 
 FROM base AS development
 
-CMD ["sh", "/usr/app/scripts/entrypoint.sh", "dev"]
+CMD ["/bin/sh", "-c", "npm install; npm run start"]

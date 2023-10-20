@@ -1,13 +1,13 @@
 FROM node:18 as build
 
-ENV NODE_ENV production
-
 WORKDIR /app
 
 COPY --chmod=777 package*.json .
 RUN npm ci
 
 COPY . .
+
+RUN npm run build
 
 FROM node:18-alpine
 
@@ -23,4 +23,4 @@ COPY --from=build /app/node_modules ./node_modules
 
 EXPOSE 3000
 
-CMD ["sh", "/usr/app/scripts/entrypoint.sh", "prod"]
+ENTRYPOINT [ "npm", "start" ]
