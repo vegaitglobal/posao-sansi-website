@@ -23,4 +23,4 @@ COPY --from=build /app/start_prod.sh    .
 
 EXPOSE 3000
 
-CMD [ "sh", "/usr/app/start_prod.sh" ]
+CMD [ "sh", "/app/start_prod.sh" ]
