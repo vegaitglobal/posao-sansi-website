@@ -38,6 +38,9 @@ const API = {
 
   // TODO: REMOVE WHEN FINISHED WITH DEVELOPMENT
   index: () => {
+    console.log("process.env.NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
+    console.log("axiosInstance.getUri():", axiosInstance.getUri());
+
     const config = API._getConfig();
     return axiosInstance.get("/", config);
   }
