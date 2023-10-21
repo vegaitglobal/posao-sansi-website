@@ -49,7 +49,7 @@ const LoginForm = () => {
         { responseError && <p className="error-message">{ responseError }</p> }
         <button className="login-form__button" onClick={ login }>Uloguj se</button>
 
-        <Link className="login-form__link" target="_blank" href="/password-forgotten">
+        <Link className="login-form__link" href="/password-forgotten">
           Zaboravili ste lozinku?
         </Link>
       </form>

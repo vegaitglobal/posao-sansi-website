@@ -1,4 +1,3 @@
-
 import "./job-offer-details.scss";
 import { useEffect, useState } from "react";
 import { JobOfferService } from "@/api/jobOfferService";
@@ -18,27 +17,26 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
     const [user, setUser] = useState<User>();
     const [popupDetails, setPopupDetails] = useState({
         popupVisibility: false,
-        paragraphFirstText: '',
-        paragraphSecondText: '',
+        paragraphFirstText: "",
+        paragraphSecondText: "",
         paragraphSecondVisibility: false,
         linkVisibility: false,
-        linkText: '',
-        linkUrl: '',
-      });
+        linkText: "",
+        linkUrl: "",
+    });
 
-      const commonPopupDetails = {
+    const commonPopupDetails = {
         popupVisibility: true,
         paragraphSecondVisibility: true,
         linkVisibility: true,
-        linkText: 'Nazad na poslove',
-        linkUrl: '/job-offers',
-    }
+        linkText: "Nazad na poslove",
+        linkUrl: "/job-offers",
+    };
 
     const updatedPopupDetails = {
         ...commonPopupDetails,
         paragraphSecondVisibility: false,
-    }
-      
+    };
 
     useEffect(() => {
         const fetchJobOffer = async () => {
@@ -63,13 +61,13 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
 
     const fetchJobOffers = async () => {
         try {
-            const newJobOffer = await JobOfferService.findJobOffer(jobOfferID)
-            setJobOffer(newJobOffer)
+            const newJobOffer = await JobOfferService.findJobOffer(jobOfferID);
+            setJobOffer(newJobOffer);
         } catch (error) {
-            goBack()
+            goBack();
         }
-    }
-    
+    };
+
 
     const addJobEnrollment = async () => {
         if (user) {
@@ -78,15 +76,15 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 await JobEnrollmentService.addJobEnrollment(jobOfferID, account_id);
                 fetchJobOffers();
                 setPopupDetails({
-                    paragraphFirstText: 'Vasa prijava je uspeno prosledjena!',
-                    paragraphSecondText: 'Uskoro ce Vam se javiti neko iz organizacije ATINA',
+                    paragraphFirstText: "Vasa prijava je uspeno prosledjena!",
+                    paragraphSecondText: "Uskoro ce Vam se javiti neko iz organizacije ATINA",
                     ...commonPopupDetails
-                  });
+                });
             } catch (error) {
                 console.log("Enrollment error:", error);
-                    setPopupDetails({
-                    paragraphFirstText: 'Greška: Vaša prijava nije mogla biti obradjena',
-                    paragraphSecondText: 'Molim Vas pokušajte kasnije',
+                setPopupDetails({
+                    paragraphFirstText: "Greška: Vaša prijava nije mogla biti obradjena",
+                    paragraphSecondText: "Molim Vas pokušajte kasnije",
                     ...commonPopupDetails
                 });
             }
@@ -100,69 +98,68 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 await JobEnrollmentService.removeJobEnrollment(job_enrollment);
                 fetchJobOffers();
                 setPopupDetails({
-                    paragraphFirstText: 'Vasa prijava je uspeno otkazana! ',
-                    paragraphSecondText: '',
+                    paragraphFirstText: "Vasa prijava je uspeno otkazana! ",
+                    paragraphSecondText: "",
                     ...updatedPopupDetails,
-                  });
+                });
             } catch (error) {
                 console.log("Enrollment error:", error);
-                    setPopupDetails({
-                    paragraphFirstText: 'Greška: Vaša prijava nije mogla biti obradjena',
-                    paragraphSecondText: 'Molim Vas pokušajte kasnije',
+                setPopupDetails({
+                    paragraphFirstText: "Greška: Vaša prijava nije mogla biti obradjena",
+                    paragraphSecondText: "Molim Vas pokušajte kasnije",
                     ...updatedPopupDetails,
                     paragraphSecondVisibility: true,
                 });
             }
         }
     };
-    
 
 
     return jobOffer && (
         <div className="page">
-            <div className="page__back-button" onClick={ goBack }>
+            <div className="page__back-button" onClick={goBack}>
                 <img className="page__back-button-image" src="/images/left-arrow.svg" alt="flag"/>
                 <p className="page__back-button-text">Nazad na poslove</p>
             </div>
             <div className="page__content">
                 <div className="page__content-left">
-                    <h2 className="page__title">{ jobOffer?.job_name }</h2>
+                    <h2 className="page__title">{jobOffer?.job_name}</h2>
                     <p className="page__dedaline">Roksasdasd za
-                        prijavu: { mapStringToLocalDateString(jobOffer.application_deadline) }</p>
-                    <p className="page__company">KOMPANIJA: { jobOffer.company_name.toUpperCase() }</p>
-                    <p className="page__location">MESTO: { jobOffer.location.toUpperCase() }</p>
-                    { jobOffer.company_url &&
-                        <a className="page__link" href={ jobOffer.company_url }>{ jobOffer.company_url }</a> }
+                        prijavu: {mapStringToLocalDateString(jobOffer.application_deadline)}</p>
+                    <p className="page__company">KOMPANIJA: {jobOffer.company_name.toUpperCase()}</p>
+                    <p className="page__location">MESTO: {jobOffer.location.toUpperCase()}</p>
+                    {jobOffer.company_url &&
+                        <a className="page__link" href={jobOffer.company_url}>{jobOffer.company_url}</a>}
                     <p className="page__engagement">Angažman: <span
-                        className="page__engagement-sub">{ jobOffer.engagement }</span></p>
+                        className="page__engagement-sub">{jobOffer.engagement}</span></p>
                 </div>
                 <div className="page__content-right">
-                    <p>Opis posla: { jobOffer.job_description }</p>
+                    <p>Opis posla: {jobOffer.job_description}</p>
                     <div className="page__list-wrap">
                         <span className="page__terms">Uslovi:</span>
-                        <p>{ jobOffer.required_work_experience }</p>
+                        <p>{jobOffer.required_work_experience}</p>
                     </div>
                 </div>
             </div>
             <div className="page__action-buttons">
-                { user?.account_type === "applicant" && (
+                {user?.account_type === "applicant" && (
                     <>
-                        { jobOffer.has_enrolled ? (
-                            <>
-                            <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>ODUSTANI</button>
-                            </>
+                        {jobOffer.has_enrolled ? (
+                            <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>
+                                ODUSTANI
+                            </button>
                         ) : (
-                            <>
-                            <button className="page__button page__button--primary" onClick={addJobEnrollment}>KONKURIŠI</button>
-                            </>
-                        ) }
-                        <Popup elementsDetails={popupDetails} />
+                            <button className="page__button page__button--primary" onClick={addJobEnrollment}>
+                                KONKURIŠI
+                            </button>
+                        )}
+                        <Popup elementsDetails={popupDetails}/>
                     </>
-                ) }
-                { user?.account_type == "employer" && (
+                )}
+                {user?.account_type == "employer" && (
                     // TODO: add "IZMENI" button later
                     <button className="page__secondary-button">ARHIVIRAJ</button>
-                ) }
+                )}
             </div>
         </div>
     );
