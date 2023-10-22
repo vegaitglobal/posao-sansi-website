@@ -2,35 +2,24 @@
 
 import "./password-forgotten-form.scss";
 import InputField from "@/components/InputField/InputField";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { AuthService } from "@/api/authService";
 import Popup from "@/components/Popup/Popup";
-
-const popupDetails = {
-    popupVisibility: false,
-    paragraphFirstText: "Ukoliko nalog sa ovom mejl adresom postoji, poslaćemo mejl za resetovanje lozinke.",
-    linkVisibility: true,
-    linkText: "Nazad na početnu",
-    linkUrl: "/",
-};
 
 
 const PasswordForgottenForm = () => {
     const [hasOpenedPopup, setHasOpenedPopup] = useState<boolean>(false);
-    const [responseError, setResponseError] = useState<string>("");
     const [formData, setFormData] = useState({
         email: ""
     });
 
-    async function forgotPassword(e: React.SyntheticEvent<EventTarget>) {
+    const forgotPassword = async (e: SyntheticEvent<EventTarget>) => {
         e.preventDefault();
         try {
             await AuthService.requestPasswordReset(formData.email);
             setHasOpenedPopup(true);
-        } catch (error: any) {
-            setResponseError(error.response?.data?.errors?.non_field_errors);
-        }
-    }
+        } catch (error: any) {}
+    };
 
     const updateFormData = (fieldValue: string, fieldName: string) => {
         setFormData({ ...formData, [fieldName]: fieldValue });
@@ -45,12 +34,17 @@ const PasswordForgottenForm = () => {
                 <InputField
                     label="E-mail adresa:"
                     placeholder="Vaša e-mail adresa"
-                    onChange={(value) => updateFormData(value, "email")}
+                    onChange={ (value) => updateFormData(value, "email") }
                 />
-                {responseError && <p className="error-message">{responseError}</p>}
-                <button className="password-forgotten-form__button" onClick={forgotPassword}>ZAHTEVAJ LINK</button>
-                <Popup elementsDetails={{ ...popupDetails, popupVisibility: hasOpenedPopup }}/>
+                <button className="password-forgotten-form__button" onClick={ forgotPassword }>
+                    ZAHTEVAJ LINK
+                </button>
             </form>
+            <Popup
+                isOpened={ hasOpenedPopup }
+                primaryText="Ukoliko nalog sa ovom mejl adresom postoji, poslaćemo mejl za resetovanje lozinke."
+                linkButton={ { label: "Nazad na početnu", url: "/" } }
+            />
         </div>
     );
 };
