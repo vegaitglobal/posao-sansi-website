@@ -31,6 +31,4 @@ const nextConfig = {
     },
 };
 
-console.log("nextConfig:", nextConfig);
-
 module.exports = nextConfig;

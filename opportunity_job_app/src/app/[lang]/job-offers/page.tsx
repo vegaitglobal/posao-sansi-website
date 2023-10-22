@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
@@ -8,12 +7,12 @@ import { useRouter } from "next/navigation";
 import { JobOffer } from "@/api/models/JobOffer";
 import { JobOfferService } from "@/api/jobOfferService";
 import JobOffers from "@/components/JobOffers/JobOffers";
-import { User } from "@/api/models/User";
+
+// TODO: refactor to server side component
 
 export default function JobOffersPage() {
     const router = useRouter();
-
-    const [applicant, setApplicant] = useState<User>();
+    const [hasAccess, setHasAccess] = useState<boolean>(false);
     const [jobOffers, setJobOffers] = useState<JobOffer[]>([]);
     const [pageNumber, setPageNumber] = useState<number>(0);
     const [totalJobOfferNumber, setTotalJobOfferNumber] = useState<number>(0);
@@ -21,18 +20,23 @@ export default function JobOffersPage() {
 
     useEffect(() => {
         const fetchJobOffers = async () => {
-            const user = AuthService.getUser();
-            if (!user) {
-                router.push("/login");
-            } else if (user.account_type !== "applicant") {
-                router.push("/");
-            } else {
-                setApplicant(user);
-                loadMoreJobOffers();
-            }
+            loadMoreJobOffers();
         };
+
+        checkAccess();
         fetchJobOffers();
     }, []);
+
+    const checkAccess = () => {
+        const user = AuthService.getUser();
+        if (!user) {
+            router.push("/login");
+        } else if (user.account_type !== "applicant") {
+            router.push("/");
+        } else {
+            setHasAccess(true);
+        }
+    };
 
     async function loadMoreJobOffers() {
         const nextPageNumber = pageNumber + 1;
@@ -45,14 +49,15 @@ export default function JobOffersPage() {
 
     return (
         <>
-            <Header user={ applicant }/>
             <main>
-                <JobOffers
-                    onLoadMore={ loadMoreJobOffers }
-                    jobOffers={ jobOffers }
-                    hasNextPage={ hasNextPage }
-                    totalJobOfferNumber={ totalJobOfferNumber }
-                />
+                { hasAccess && (
+                    <JobOffers
+                        onLoadMore={ loadMoreJobOffers }
+                        jobOffers={ jobOffers }
+                        hasNextPage={ hasNextPage }
+                        totalJobOfferNumber={ totalJobOfferNumber }
+                    />
+                ) }
             </main>
             <Footer/>
         </>
