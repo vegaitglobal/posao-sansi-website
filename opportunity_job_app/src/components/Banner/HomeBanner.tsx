@@ -1,8 +1,10 @@
+"use client";
+
 import "./HomeBanner.scss";
-import { getDictionary } from "@/app/[lang]/dictionaries";
+import { useLanguage } from "@/hooks/useDictionary";
 
 const HomeBanner = () => {
-    const dict = getDictionary("sr");
+    const { dict } = useLanguage();
 
     return (
         <section className="banner">
