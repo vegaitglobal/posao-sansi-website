@@ -1,9 +1,8 @@
 import { isPublicFile } from "@/utils";
-
-const locales = ["en", "sr"];
+import { locales } from "@/appData/locales";
 
 function getLocale(request): string {
-    return "en"; // TODO: get from request
+    return "sr"; // TODO: get from request
 }
 
 export function middleware(request): Response | undefined {

@@ -7,6 +7,8 @@ import { User } from "@/api/models/User";
 import { AuthService } from "@/api/authService";
 import { anonymousUserLinks, applicantLinks, employerLinks } from "@/appData/headerData";
 import API from "@/api/baseApi";
+import { useLanguage } from "@/hooks/useDictionary";
+import { usePathname, useRouter } from "next/navigation";
 
 interface LinkItem {
     label: string;
@@ -26,6 +28,9 @@ interface LinksObjectTypes {
 }
 
 const Header = () => {
+    const pathname = usePathname();
+    const { slug } = useLanguage();
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [user, setUser] = useState<User | undefined>();
     const [hasOpenedLanguageMenu, setHasOpenedLanguageMenu] = useState<boolean>(false);
@@ -69,8 +74,13 @@ const Header = () => {
 
     const languages: LanguageItem[] = [
         { label: "ENG", code: "en", flagPath: "/images/en-flag.png" },
-        { label: "SRB", code: "srb", flagPath: "/images/srb-flag.png" },
+        { label: "SRB", code: "sr", flagPath: "/images/srb-flag.png" },
     ];
+
+    const changeLanguage = (languageSlug: string) => {
+        // TODO: do not change the location if the language is already active
+        window.location.href = pathname.replace(`/${ slug }`, `/${ languageSlug }`);
+    };
 
     const mapItems = (items: LinkItem[]) => {
         return items && items.map((link: LinkItem, index: number) => (
@@ -100,7 +110,10 @@ const Header = () => {
                     </button>
                     { hasOpenedLanguageMenu && <ul className="header__language-list">
                         { languages.map((language, index) => (
-                            <li className="header__language-item" key={ index }>
+                            <li key={ index }
+                                className="header__language-item"
+                                onClick={ () => changeLanguage(language.code) }
+                            >
                                 <button className="header__language-btn" type="button">
                                     <img className="header__language-flag" src={ language.flagPath } alt="flag"/>
                                     { language.label }
