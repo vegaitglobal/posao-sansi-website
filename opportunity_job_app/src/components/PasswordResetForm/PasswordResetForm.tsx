@@ -1,9 +1,8 @@
 "use client";
 
 import "./PasswordResetForm.scss";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
-import { useRouter } from "next/navigation";
 import InputField from "../InputField/InputField";
 import Popup from "@/components/Popup/Popup";
 
@@ -12,7 +11,7 @@ interface PasswordResetFormProps {
 }
 
 const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
-    const router = useRouter();
+    const [hasAccess, setHasAccess] = useState<boolean>(false);
     const [hasOpenedPopup, setHasOpenedPopup] = useState<boolean>(false);
     const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
     const [formData, setFormData] = useState({
@@ -20,6 +19,19 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
         passwordConfirmation: { value: "", error: "" },
     });
     const [responseError, setResponseError] = useState<string>("");
+
+
+    useEffect(() => {
+        checkAccess();
+    }, []);
+
+    const checkAccess = () => {
+        if (AuthService.isAuthenticated()) {
+            window.location.href = "/";
+        } else {
+            setHasAccess(true);
+        }
+    };
 
     const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
         e.preventDefault();
@@ -54,6 +66,8 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
             : "";
         setFormData(newFormData);
     };
+
+    if (!hasAccess) return null;
 
     return (
         <div className="wrapper">

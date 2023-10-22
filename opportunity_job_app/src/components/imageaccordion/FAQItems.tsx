@@ -1,3 +1,5 @@
+"use client"
+
 import "./FAQItems.scss";
 import React, { useEffect, useState } from "react";
 import { FaqService } from "@/api/faqService";
