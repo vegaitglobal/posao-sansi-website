@@ -7,7 +7,7 @@ import { AuthService } from "@/api/authService";
 import { useRouter } from "next/navigation";
 import PasswordForgottenForm from "@/components/PasswordForgottenForm/PasswordForgottenForm";
 
-export default function PasswordForgottenFormPage() {
+export default function PasswordForgottenPage() {
   const router = useRouter();
 
   useEffect(() => {
