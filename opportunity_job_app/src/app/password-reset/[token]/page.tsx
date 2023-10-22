@@ -1,36 +1,37 @@
+"use client";
+
 import { AuthService } from "@/api/authService";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import ResetPassword from "@/components/ResetPassword/ResetPassword";
-import { useRouter } from "next/router";
+import PasswordResetForm from "@/components/PasswordResetForm/PasswordResetForm";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function ResetPasswordPage() {
-    
-  const router = useRouter();
-  const token  = router.query.token as string;
-  
-
-  useEffect(() => {
-    const checkAccess = () => {
-      if (AuthService.isAuthenticated()) {
-        router.push("/");
-      }
+interface ResetPasswordPageProps {
+    params: {
+        token: string
     };
-    checkAccess();
-  }, [router]);
+}
 
-  if (!token) {
-    return <p>Invalid reset token</p>;
-  }
+export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
+    const router = useRouter();
 
-  return (
-    <div>
-      <Header />
-      <main>
-        <ResetPassword token = {token}/>
-      </main>
-      <Footer />
-    </div>
-  );
+    useEffect(() => {
+        const checkAccess = () => {
+            if (AuthService.isAuthenticated()) {
+                router.push("/");
+            }
+        };
+        checkAccess();
+    }, [router]);
+
+    return (
+        <div>
+            <Header/>
+            <main>
+                <PasswordResetForm token={ params.token }/>
+            </main>
+            <Footer/>
+        </div>
+    );
 }
