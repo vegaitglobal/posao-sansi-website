@@ -12,35 +12,35 @@ import { User } from "@/api/models/User";
 import API from "@/api/baseApi";
 
 export default function Home() {
-  const [ user, setUser ] = useState<User>();
-  useEffect(() => {
+    const [user, setUser] = useState<User>();
+    useEffect(() => {
 
-    // TODO: REMOVE WHEN FINISHED WITH DEVELOPMENT
-    async function testIndexAPIEndpoint() {
-      const response = await API.index();
-      console.log("Index API endpoint response:", response.data);
-    }
+        // TODO: REMOVE WHEN FINISHED WITH DEVELOPMENT
+        async function testIndexAPIEndpoint() {
+            const response = await API.index();
+            console.log("Index API endpoint response:", response.data);
+        }
 
-    testIndexAPIEndpoint();
+        testIndexAPIEndpoint();
 
-    const isLogged = () => {
-      if (AuthService.getUser() !== null) {
-        setUser(AuthService.getUser());
-      }
-    };
-    isLogged();
-  }, []);
+        const isLogged = () => {
+            if (AuthService.getUser() !== null) {
+                setUser(AuthService.getUser());
+            }
+        };
+        isLogged();
+    }, []);
 
-  return (
-    <>
-      <Header user={ user }/>
-      <main>
-        <Banner/>
-        <HomepageCardLinks user={ user }/>
-        <Mission/>
-        <Statistics/>
-      </main>
-      <Footer/>
-    </>
-  );
+    return (
+        <>
+            <Header user={user}/>
+            <main>
+                <Banner/>
+                <HomepageCardLinks user={user}/>
+                <Mission/>
+                <Statistics/>
+            </main>
+            <Footer/>
+        </>
+    );
 }
