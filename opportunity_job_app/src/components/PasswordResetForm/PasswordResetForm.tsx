@@ -5,6 +5,7 @@ import { SyntheticEvent, useState } from "react";
 import { AuthService } from "@/api/authService";
 import { useRouter } from "next/navigation";
 import InputField from "../InputField/InputField";
+import Popup from "@/components/Popup/Popup";
 
 interface PasswordResetFormProps {
     token: string;
@@ -12,6 +13,7 @@ interface PasswordResetFormProps {
 
 const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
     const router = useRouter();
+    const [hasOpenedPopup, setHasOpenedPopup] = useState<boolean>(false);
     const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
     const [formData, setFormData] = useState({
         password: { value: "", error: "" },
@@ -36,7 +38,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
     const resetPassword = async () => {
         try {
             await AuthService.resetPassword(token, formData.password.value);
-            router.push("/");
+            setHasOpenedPopup(true);
         } catch (error: any) {
             setResponseError(error.response?.data?.errors?.non_field_errors);
         }
@@ -82,6 +84,12 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
                     RESETUJ LOZINKU
                 </button>
             </form>
+            <Popup
+                isOpened={ hasOpenedPopup }
+                primaryText="Uspešno ste promenili lozinku."
+                secondaryText="Sada se možete prijaviti sa novom lozinkom."
+                linkButton={ { label: "Prijava", url: "/login" } }
+            />
         </div>
     );
 };
