@@ -13,4 +13,5 @@ FIXTURES = (
     "emails",
     "users",
     "jobs",
+    "faqs",
 )

@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 import { User } from "@/api/models/User";
 import JobOffersDetails from "@/components/JobOfferDetails/JobOfferDetails";
 
-interface JobOffersPageProps {
+interface JobOfferPageProps {
     params: {
         jobOfferId: string
     };
 }
 
-export default function JobOffersPage({ params }: JobOffersPageProps) {
+export default function JobOfferPage({ params }: JobOfferPageProps) {
     const router = useRouter();
 
     const [applicant, setApplicant] = useState<User>();

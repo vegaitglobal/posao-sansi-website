@@ -1,0 +1,44 @@
+- model: jobs.FAQ
+  pk: 1
+  fields:
+    question: "Is this a legit site?"
+    question_en: "Is this a legit site?"
+    question_sr_latn: "Da li je ovaj sajt pouzdan?"
+    answer: "Yes! This site was created by legit people."
+    answer_en: "Yes! This site was created by legit people."
+    answer_sr_latn: "Da! Ovaj sajt je kreiran od strane pouzdanih ljudi."
+    display_to_anonymous: True
+    display_to_employers: True
+    display_to_applicants: True
+    created: 2023-01-01T00:00:00
+    modified: 2023-01-01T00:00:00
+
+- model: jobs.FAQ
+  pk: 2
+  fields:
+    question: "Question by applicant: Is there a lot of job offers on this site?"
+    question_en: "Question by applicant: Is there a lot of job offers on this site?"
+    question_sr_latn: "Pitanje od strane aplikanta: Da li na ovom sajtu ima puno ponuda za posao?"
+    answer: "Yes! There is a lot of job offers."
+    answer_en: "Yes! There is a lot of job offers."
+    answer_sr_latn: "Da! Ovde ima baš puno ponuda za posao."
+    display_to_anonymous: False
+    display_to_employers: False
+    display_to_applicants: True
+    created: 2023-01-02T00:00:00
+    modified: 2023-01-02T00:00:00
+
+- model: jobs.FAQ
+  pk: 3
+  fields:
+    question: "Question by employer: How many job offers can I add to this site?"
+    question_en: "Question by employer: How many job offers can I add to this site?"
+    question_sr_latn: "Pitanje od strane poslodavca: Koliko ponuda za posao mogu da dodan na ovom sajtu?"
+    answer: "Unlimited amount. Employers can add as many job offers as they want."
+    answer_en: "Unlimited amount. Employers can add as many job offers as they want."
+    answer_sr_latn: "Neograničeno. Poslodavci mogu da dodaju koliko god žele ponuda za posao."
+    display_to_anonymous: False
+    display_to_employers: True
+    display_to_applicants: False
+    created: 2023-01-02T00:00:00
+    modified: 2023-01-02T00:00:00

@@ -10,7 +10,7 @@ import { JobOfferService } from "@/api/jobOfferService";
 import JobOffers from "@/components/JobOffers/JobOffers";
 import { User } from "@/api/models/User";
 
-export default function JobOffersPage() {
+export default function MyJobOffersPage() {
     const router = useRouter();
 
     const [employer, setEmployer] = useState<User>();

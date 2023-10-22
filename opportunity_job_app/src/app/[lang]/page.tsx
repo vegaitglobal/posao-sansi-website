@@ -4,17 +4,17 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
-import Banner from "../components/Banner/Banner";
 import Mission from "@/components/Mission/Mission";
 import Statistics from "@/components/Statistics/Statistics";
 import HomepageCardLinks from "@/components/HomepageCardLinks/HomepageCardLinks";
 import { User } from "@/api/models/User";
 import API from "@/api/baseApi";
+import Banner from "@/components/Banner/Banner";
 
-export default function Home() {
+
+export default function HomePage() {
     const [user, setUser] = useState<User>();
     useEffect(() => {
-
         // TODO: REMOVE WHEN FINISHED WITH DEVELOPMENT
         async function testIndexAPIEndpoint() {
             const response = await API.index();
@@ -33,10 +33,10 @@ export default function Home() {
 
     return (
         <>
-            <Header user={user}/>
+            <Header user={ user }/>
             <main>
                 <Banner/>
-                <HomepageCardLinks user={user}/>
+                <HomepageCardLinks user={ user }/>
                 <Mission/>
                 <Statistics/>
             </main>

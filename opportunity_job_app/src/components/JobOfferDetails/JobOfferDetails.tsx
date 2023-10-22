@@ -76,7 +76,6 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 });
                 fetchJobOffers();
             } catch (error) {
-                console.log("Enrollment error:", error);
                 setPopupProps({
                     primaryText: "Greška: Vaša prijava nije mogla biti obradjena",
                     secondaryText: "Molim Vas pokušajte kasnije",
@@ -97,7 +96,6 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                     ...commonPopupProps,
                 });
             } catch (error) {
-                console.log("Enrollment error:", error);
                 setPopupProps({
                     primaryText: "Greška: Vaša prijava nije mogla biti obradjena",
                     paragraphSecondText: "Molim Vas pokušajte kasnije",

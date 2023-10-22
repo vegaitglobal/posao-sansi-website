@@ -7,13 +7,13 @@ import PasswordResetForm from "@/components/PasswordResetForm/PasswordResetForm"
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-interface ResetPasswordPageProps {
+interface PasswordResetPageProps {
     params: {
         token: string
     };
 }
 
-export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
+export default function PasswordResetPage({ params }: PasswordResetPageProps) {
     const router = useRouter();
 
     useEffect(() => {
