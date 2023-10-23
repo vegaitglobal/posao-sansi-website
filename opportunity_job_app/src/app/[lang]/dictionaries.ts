@@ -6,4 +6,4 @@ const dictionaries = {
     sr: sr,
 };
 
-export const getDictionary = (locale) => dictionaries[locale];
+export const getDictionary = (locale: string) => dictionaries[locale];
