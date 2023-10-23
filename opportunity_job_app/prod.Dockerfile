@@ -1,5 +1,8 @@
 FROM node:18 as build
 
+ARG API_URL
+ENV NEXT_PUBLIC_API_URL=$API_URL
+
 WORKDIR /app
 
 COPY --chmod=777 package*.json .
@@ -23,4 +26,4 @@ COPY --from=build /app/start_prod.sh    .
 
 EXPOSE 3000
 
-CMD [ "sh", "/app/start_prod.sh" ]
+ENTRYPOINT [ "npm", "start" ]
