@@ -1,10 +1,10 @@
-@import "./../../scss/style.scss";
+@import "../../scss/style.scss";
 
 .header {
   position: relative;
   height: 94px;
   padding: 0 46px;
-  box-shadow: 0px 4px 4px 0px rgba($black, 0.25);
+  box-shadow: 0 4px 4px 0 rgba($black, 0.25);
 }
 
 .header__container {
@@ -37,7 +37,7 @@
   right: 0;
   border: 1px solid $purple-primary;
   border-radius: 4px;
-  box-shadow: 0px 8px 8px 0px rgba($white-2, 0.25);
+  box-shadow: 0 8px 8px 0 rgba($white-2, 0.25);
   z-index: 2;
   width: 212px;
   background-color: $white;
@@ -59,7 +59,7 @@
   }
 }
 
-.header__laanguage-flag {
+.header__language-flag {
   margin-right: 10px;
 }
 
@@ -76,7 +76,7 @@
     right: 0;
     border: 1px solid $purple-primary;
     border-radius: 4px;
-    box-shadow: 0px 8px 8px 0px rgba($white-2, 0.25);
+    box-shadow: 0 8px 8px 0 rgba($white-2, 0.25);
     z-index: 2;
     width: 212px;
     background-color: $white;
@@ -93,6 +93,7 @@
 .header__nav-item {
   padding: 3px 20px 8px 20px;
   margin-left: 40px;
+  cursor: pointer;
 
   &:active {
     background-color: $purple-hover;
@@ -106,6 +107,7 @@
 .header__nav-link {
   display: flex;
   align-items: center;
+  font-family: $font-default;
 }
 
 .header__nav-icon {

@@ -1,8 +1,12 @@
-@import "./../../scss/style.scss";
+@import "../../scss/style.scss";
 
 .banner {
-  font-family: Mirza;
+  font-family: Mirza, serif;
   background-color: $purple-bg;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   @include media-breakpoint-up(lg) {
     padding: 80px 100px 40px 100px;
   }
@@ -32,16 +36,17 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
   @include media-breakpoint-down(sm) {
     flex-direction: column;
     justify-content: flex-start;
-    align-items: cenetr;
+    align-items: center;
   }
 }
 
 .banner__img {
   width: 515px;
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     width: 351px;
   }
   @include media-breakpoint-down(sm) {
@@ -54,6 +59,7 @@
   color: $white-2;
   font-size: 20px;
   line-height: 29px;
+  margin: 0 40px;
   @include media-breakpoint-down(md) {
     width: 397px;
     font-size: 16px;
@@ -66,3 +72,4 @@
     padding: 0 14px;
   }
 }
+

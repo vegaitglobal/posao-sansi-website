@@ -1,65 +1,50 @@
 "use client";
 import "./Popup.scss";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-type PopupElemetDetails = {
-    popupVisibility: boolean;
-    paragraphFirstText: string;
-    paragraphSecondText: string;
-    paragraphSecondVisibility: boolean;
-    linkVisibility: boolean;
-    linkText: string;
-    linkUrl: string;
+
+interface LinkButton {
+    label: string;
+    url: string;
 }
 
-const Popup = (props:{elementsDetails:PopupElemetDetails}) => {
-    const {elementsDetails } = props;
+export interface PopupProps {
+    isOpened: boolean;
+    primaryText: string;
+    secondaryText?: string;
+    linkButton?: LinkButton;
+}
 
-    const [disp, setDisp] = useState("");
-    const [paragraphVis, setParagraphVis] = useState("");
-    const [linkVis, setLinkVis] = useState("");
+const Popup = ({ isOpened, primaryText, secondaryText = "", linkButton }: PopupProps) => {
+    const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
 
-    useEffect(() => { 
-        setElementsVis()
-    },[elementsDetails])
+    useEffect(() => {
+        setIsDisplayed(isOpened);
+    }, [isOpened]);
 
-    const closePopup = (e:any) => {
-        e.stopPropagation(); setDisp("")
+    const closePopup = () => {
+        setIsDisplayed(false);
     };
 
-    const setElementsVis = () => {
-        if(elementsDetails.popupVisibility) {
-            setDisp("popup--active")
-        }else { 
-            setDisp("")
-        }
-        if(elementsDetails.paragraphSecondVisibility) {
-            setParagraphVis("")
-        }else {
-            setParagraphVis("popup__element-hide")
-        }
-        if(elementsDetails.linkVisibility) {
-            setLinkVis("")
-        }else {
-            setLinkVis("popup__element-hide")
-        }
-    }
-    
     return (
-      <div className={`popup ${disp}`}>
-        <div className="popup__overlay" onClick={closePopup}>
-            <div className="popup__holder" onClick={(e)=> {e.stopPropagation()}}>
-                <button className="popup__close" onClick={closePopup}>
-                    <img src="/images/close.svg" alt="Close icon" className="popup__img" />
-                </button>
-                <span className="popup__text">{elementsDetails.paragraphFirstText}</span>
-                <span className={`popup__text ${paragraphVis}`}>{elementsDetails.paragraphSecondText}</span>
-                <Link href={elementsDetails.linkUrl} className={`popup__link ${linkVis}`}>{elementsDetails.linkText}</Link>
+        <div className="popup" style={ { display: isDisplayed ? "block" : "none" } }>
+            <div className="popup__overlay" onClick={ closePopup }>
+                <div className="popup__holder">
+                    <button className="popup__close" onClick={ closePopup }>
+                        <img src="/images/close.svg" alt="Close icon" className="popup__img"/>
+                    </button>
+                    <span className="popup__text">{ primaryText }</span>
+                    <span className="popup__text">{ secondaryText }</span>
+                    { linkButton && (
+                        <Link href={ linkButton.url } className="popup__link">
+                            { linkButton.label }
+                        </Link>
+                    ) }
+                </div>
             </div>
         </div>
-      </div>  
-    )
-}
+    );
+};
 
 export default Popup;

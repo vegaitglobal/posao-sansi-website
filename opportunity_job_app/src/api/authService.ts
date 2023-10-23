@@ -38,12 +38,12 @@ export const AuthService = {
     localStorage.removeItem("user");
   },
   register: (userData: Object, type: any) => {
-    return API.post(`register-${ type }`, userData);
+    return API.post(`register-${ type }/`, userData);
   },
-  forgotPassword: (email: string) => {
-    return API.post("password-forgotten", { email: email });
+  requestPasswordReset: (email: string) => {
+    return API.post("password-forgotten/", { email: email });
   },
   resetPassword: (hash: string, password: string) => {
-    return API.post(`password-reset/${ hash }`, { password: password });
+    return API.post(`password-reset/${ hash }/`, { password: password });
   },
 };

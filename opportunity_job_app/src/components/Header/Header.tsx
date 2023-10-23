@@ -1,57 +1,72 @@
 "use client";
 
-import Link from "next/link";
-import { useCallback, useState } from "react";
 import "./Header.scss";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
 import { User } from "@/api/models/User";
 import { AuthService } from "@/api/authService";
 import { anonymousUserLinks, applicantLinks, employerLinks } from "@/appData/headerData";
+import API from "@/api/baseApi";
+import { useLanguage } from "@/hooks/useDictionary";
+import { usePathname, useRouter } from "next/navigation";
 
-type LinkItem = {
+interface LinkItem {
     label: string;
     url: string;
     iconPath: string;
     isLogged?: null | object;
-};
+}
 
-type LanguageItem = {
+interface LanguageItem {
     label: string;
     code: string;
     flagPath: string;
-};
-
-type HeaderProps = {
-    user?: User;
-};
-
-type linksObjectTypes = {
-    [x: string]: LinkItem[]
 }
 
-const Header = ({ user }: HeaderProps) => {
-    const router = useRouter();
-    const [isActive, setIsActive] = useState<boolean>(false);
-    const [navActive, setIsNavActive] = useState<boolean>(false);
+interface LinksObjectTypes {
+    [x: string]: LinkItem[];
+}
 
-    const toggle = () => {
-        setIsActive(!isActive);
-        setIsNavActive(false);
+const Header = () => {
+    const pathname = usePathname();
+    const { slug } = useLanguage();
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [user, setUser] = useState<User | undefined>();
+    const [hasOpenedLanguageMenu, setHasOpenedLanguageMenu] = useState<boolean>(false);
+    const [hasOpenedMainMenu, setHasOpenedMainMenu] = useState<boolean>(false);
+
+    useEffect(() => {
+        // TODO: REMOVE WHEN FINISHED WITH DEVELOPMENT
+        async function testIndexAPIEndpoint() {
+            const response = await API.index();
+            console.log("Index API endpoint response:", response.data);
+        }
+
+        testIndexAPIEndpoint();
+
+        if (isLoading) {
+            setUser(AuthService.getUser());
+            setIsLoading(false);
+        }
+    }, [user, isLoading]);
+
+    const toggleLanguageMenu = () => {
+        setHasOpenedLanguageMenu(!hasOpenedLanguageMenu);
+        setHasOpenedMainMenu(false);
     };
 
-    const toggleNav = () => {
-        setIsNavActive(!navActive);
-        setIsActive(false);
+    const toggleMainMenu = () => {
+        setHasOpenedMainMenu(!hasOpenedMainMenu);
+        setHasOpenedLanguageMenu(false);
     };
 
     const logout = useCallback(async () => {
         await AuthService.logout();
-        if (!user) {
-            router.push("/login");
-        }
+        window.location.href = "/login";
     }, []);
 
-    const linksObject: linksObjectTypes = {
+    const linksObject: LinksObjectTypes = {
         "anonymous": anonymousUserLinks,
         "employer": employerLinks,
         "applicant": applicantLinks
@@ -59,14 +74,18 @@ const Header = ({ user }: HeaderProps) => {
 
     const languages: LanguageItem[] = [
         { label: "ENG", code: "en", flagPath: "/images/en-flag.png" },
-        { label: "SRB", code: "srb", flagPath: "/images/srb-flag.png" },
+        { label: "SRB", code: "sr", flagPath: "/images/srb-flag.png" },
     ];
+
+    const changeLanguage = (languageSlug: string) => {
+        // TODO: do not change the location if the language is already active
+        window.location.href = pathname.replace(`/${ slug }`, `/${ languageSlug }`);
+    };
 
     const mapItems = (items: LinkItem[]) => {
         return items && items.map((link: LinkItem, index: number) => (
             <li className="header__nav-item" key={ index }>
-                <Link className="header__nav-link" href={ link.url }
-                      onClick={ link.label === "Odjava" ? logout : undefined }>
+                <Link className="header__nav-link" href={ link.url }>
                     <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
                     <span className="header__nav-link-text">
                         { link.label }
@@ -86,14 +105,17 @@ const Header = ({ user }: HeaderProps) => {
                     </a>
                 </div>
                 <div className="header__language">
-                    <button className="header__language-button" type="button" onClick={ toggle }>
+                    <button className="header__language-button" type="button" onClick={ toggleLanguageMenu }>
                         <img src="/images/language-icon.svg" alt="icon"/>
                     </button>
-                    { isActive && <ul className="header__language-list">
+                    { hasOpenedLanguageMenu && <ul className="header__language-list">
                         { languages.map((language, index) => (
-                            <li className="header__language-item" key={ index }>
+                            <li key={ index }
+                                className="header__language-item"
+                                onClick={ () => changeLanguage(language.code) }
+                            >
                                 <button className="header__language-btn" type="button">
-                                    <img className="header__laanguage-flag" src={ language.flagPath } alt="flag"/>
+                                    <img className="header__language-flag" src={ language.flagPath } alt="flag"/>
                                     { language.label }
                                 </button>
                             </li>
@@ -101,13 +123,25 @@ const Header = ({ user }: HeaderProps) => {
                     </ul> }
                 </div>
                 <nav className="header__nav">
-                    <ul className={ `header__nav-list ${ navActive ? "header__nav-list--active" : "" }` }>
-                        { user ? mapItems(linksObject[user.account_type]) : mapItems(anonymousUserLinks) }
-                    </ul>
-                    <button className="header__hamburger-btn" type="button" onClick={ toggleNav }>
-                        { user ? <img src="/images/user.svg" alt="user"/> :
-                            <img src="/images/hamburger-btn.svg" alt="hamburger-btn"/> }
-                    </button>
+                    { !isLoading && (
+                        <>
+                            <ul className={ `header__nav-list ${ hasOpenedMainMenu ? "header__nav-list--active" : "" }` }>
+                                { user ? mapItems(linksObject[user.account_type]) : mapItems(anonymousUserLinks) }
+                                { user && (
+                                    <li className="header__nav-item" key="logout-main-menu-item" onClick={ logout }>
+                                        <div className="header__nav-link">
+                                            <img className="header__nav-icon" src="/images/sing-out.svg" alt="icon"/>
+                                            <span className="header__nav-link-text">Odjava</span>
+                                        </div>
+                                    </li>
+                                ) }
+                            </ul>
+                            <button className="header__hamburger-btn" type="button" onClick={ toggleMainMenu }>
+                                { user ? <img src="/images/user.svg" alt="user"/> :
+                                    <img src="/images/hamburger-btn.svg" alt="hamburger-btn"/> }
+                            </button>
+                        </>
+                    ) }
                 </nav>
             </div>
         </header>

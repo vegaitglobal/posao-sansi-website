@@ -22,7 +22,7 @@ Table of Contents
 
 1. Move to project root directory
 
-2. Create `.env` using `example.com`:
+2. Create `.env` using `example.env`:
 
    `cp example.env .env`
 

@@ -19,11 +19,9 @@ export const anonymousUserLinks: LinkItem[] = [
 export const employerLinks: LinkItem[] = [
     ...publicLinks,
     { label: "Moji poslovi", url: "/my-job-offers", iconPath: "/images/jobs.svg" },
-    { label: "Odjava", url: "/logout", iconPath: "/images/sing-out.svg" },
 ];
 
 export const applicantLinks: LinkItem[] = [
     ...publicLinks,
     { label: "Ponuda poslova", url: "/job-offers", iconPath: "/images/jobs.svg" },
-    { label: "Odjava", url: "/logout", iconPath: "/images/sing-out.svg" },
 ];

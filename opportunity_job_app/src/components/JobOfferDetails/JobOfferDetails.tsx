@@ -8,22 +8,34 @@ import { mapStringToLocalDateString } from "@/utils";
 import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
+import Popup, { PopupProps } from "../Popup/Popup";
+import { useRouter } from "next/navigation";
+
+
+const commonPopupProps = {
+    isOpened: true,
+    button: {
+        label: "Nazad na poslove",
+        url: "/job-offers",
+    }
+};
 
 interface JobOfferDetailsProps {
     jobOfferID: number;
 }
 
 export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
+    const router = useRouter();
+    const [hasAccess, setHasAccess] = useState<boolean>(false);
     const [jobOffer, setJobOffer] = useState<JobOffer>();
     const [user, setUser] = useState<User>();
+    const [popupProps, setPopupProps] = useState<PopupProps>({
+        isOpened: false,
+        primaryText: "",
+    });
 
     useEffect(() => {
         const fetchJobOffer = async () => {
-            const user = AuthService.getUser();
-            if (!user) {
-                window.location.href = "/login";
-            }
-            setUser(user);
             try {
                 const jobOffer = await JobOfferService.findJobOffer(jobOfferID);
                 setJobOffer(jobOffer);
@@ -31,8 +43,22 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 goBack();
             }
         };
+
+        checkAccess();
         fetchJobOffer();
     }, []);
+
+    const checkAccess = () => {
+        const user = AuthService.getUser();
+        if (!user) {
+            router.push("/login");
+        } else if (user.account_type !== "applicant") {
+            router.push("/");
+        } else {
+            setUser(user);
+            setHasAccess(true);
+        }
+    };
 
     function goBack() {
         window.location.href = "/job-offers";
@@ -40,39 +66,52 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
 
     const fetchJobOffers = async () => {
         try {
-            const newJobOffer = await JobOfferService.findJobOffer(jobOfferID)
-            setJobOffer(newJobOffer)
+            const newJobOffer = await JobOfferService.findJobOffer(jobOfferID);
+            setJobOffer(newJobOffer);
         } catch (error) {
-            goBack()
+            goBack();
         }
-    }
-    
+    };
 
     const addJobEnrollment = async () => {
-        if (user) {
-            try {
-                const { account_id } = user;
-                await JobEnrollmentService.addJobEnrollment(jobOfferID, account_id);
-                fetchJobOffers();
-            } catch (error) {
-                console.log("Enrollment error:", error);
-            }
+        try {
+            const { account_id } = user;
+            await JobEnrollmentService.addJobEnrollment(jobOfferID, account_id);
+            setPopupProps({
+                primaryText: "Vasa prijava je uspeno prosledjena!",
+                secondaryText: "Uskoro ce Vam se javiti neko iz organizacije ATINA",
+                ...commonPopupProps
+            });
+            fetchJobOffers();
+        } catch (error) {
+            setPopupProps({
+                primaryText: "Greška: Vaša prijava nije mogla biti obradjena",
+                secondaryText: "Molim Vas pokušajte kasnije",
+                ...commonPopupProps
+            });
         }
     };
 
     const removeJobEnrollment = async () => {
-        if (user && jobOffer && jobOffer.job_enrollment) {
-            try {
-                const { job_enrollment } = jobOffer;
-                await JobEnrollmentService.removeJobEnrollment(job_enrollment);
-                fetchJobOffers();
-            } catch (error) {
-                console.log("Enrollment error:", error);
-            }
+        try {
+            const { job_enrollment } = jobOffer;
+            await JobEnrollmentService.removeJobEnrollment(job_enrollment);
+            fetchJobOffers();
+            setPopupProps({
+                primaryText: "Vasa prijava je uspeno otkazana! ",
+                ...commonPopupProps,
+            });
+        } catch (error) {
+            setPopupProps({
+                primaryText: "Greška: Vaša prijava nije mogla biti obradjena",
+                paragraphSecondText: "Molim Vas pokušajte kasnije",
+                ...commonPopupProps,
+            });
         }
     };
 
-    return jobOffer && (
+
+    return hasAccess && jobOffer && (
         <div className="page">
             <div className="page__back-button" onClick={ goBack }>
                 <img className="page__back-button-image" src="/images/left-arrow.svg" alt="flag"/>
@@ -102,10 +141,15 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 { user?.account_type === "applicant" && (
                     <>
                         { jobOffer.has_enrolled ? (
-                            <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>ODUSTANI</button>
+                            <button className="page__button page__button--secondary" onClick={ removeJobEnrollment }>
+                                ODUSTANI
+                            </button>
                         ) : (
-                            <button className="page__button page__button--primary" onClick={addJobEnrollment}>KONKURIŠI</button>
+                            <button className="page__button page__button--primary" onClick={ addJobEnrollment }>
+                                KONKURIŠI
+                            </button>
                         ) }
+                        <Popup { ...popupProps }/>
                     </>
                 ) }
                 { user?.account_type == "employer" && (
