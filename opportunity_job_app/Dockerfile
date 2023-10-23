@@ -25,4 +25,4 @@ CMD [ "sh", "/usr/app/start_prod.sh" ]
 
 FROM base AS development
 
-CMD [ "sh", "-c", "npm install; npm run start" ]
+CMD [ "sh", "-c", "npm install; npm run dev" ]
