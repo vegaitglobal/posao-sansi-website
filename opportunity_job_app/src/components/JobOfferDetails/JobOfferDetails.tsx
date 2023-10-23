@@ -8,6 +8,7 @@ import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
 import Popup from "../Popup/Popup";
+import Link from "next/link";
 
 interface JobOfferDetailsProps {
     jobOfferID: number;
@@ -38,7 +39,6 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
         ...commonPopupDetails,
         paragraphSecondVisibility: false,
     }
-      
 
     useEffect(() => {
         const fetchJobOffer = async () => {
@@ -57,8 +57,13 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
         fetchJobOffer();
     }, []);
 
+
     function goBack() {
-        window.location.href = "/job-offers";
+        if(user?.account_type !== "employer") {
+            window.location.href = "/job-offers";
+        }else {
+            window.location.href = "/my-job-offers"
+        }
     }
 
     const fetchJobOffers = async () => {
@@ -69,7 +74,6 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
             goBack()
         }
     }
-    
 
     const addJobEnrollment = async () => {
         if (user) {
@@ -115,7 +119,46 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
             }
         }
     };
+
+
+    const jobStatusText = () => {
+        if(jobOffer?.is_active) {
+            setPopupDetails({
+                paragraphFirstText: 'Uspešno ste arhivirali posao!',
+                paragraphSecondText: '',
+                ...updatedPopupDetails,
+                linkUrl: '/my-job-offers'
+              });
+        } else {
+            setPopupDetails({
+                paragraphFirstText: 'Uspešno ste aktivirali posao!',
+                paragraphSecondText: '',
+                ...updatedPopupDetails,
+                linkUrl: '/my-job-offers'
+              });
+        }
+    }
     
+
+    const toggleJobStatus = async () => {
+        if(jobOffer) {
+            try { 
+                const updatedData = {
+                    is_active: !jobOffer.is_active,
+                };
+                await JobOfferService.toggleJobOffer(jobOfferID, updatedData)
+                fetchJobOffers();
+                jobStatusText()
+            } catch(error) {
+                console.log(error)
+                setPopupDetails({
+                    paragraphFirstText: 'Greška',
+                    paragraphSecondText: 'Molim Vas pokušajte kasnije',
+                    ...commonPopupDetails
+                });
+            }
+        }
+    }
 
 
     return jobOffer && (
@@ -127,7 +170,7 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
             <div className="page__content">
                 <div className="page__content-left">
                     <h2 className="page__title">{ jobOffer?.job_name }</h2>
-                    <p className="page__dedaline">Roksasdasd za
+                    <p className="page__dedaline">Rok za
                         prijavu: { mapStringToLocalDateString(jobOffer.application_deadline) }</p>
                     <p className="page__company">KOMPANIJA: { jobOffer.company_name.toUpperCase() }</p>
                     <p className="page__location">MESTO: { jobOffer.location.toUpperCase() }</p>
@@ -148,22 +191,26 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 { user?.account_type === "applicant" && (
                     <>
                         { jobOffer.has_enrolled ? (
-                            <>
+                            
                             <button className="page__button page__button--secondary" onClick={removeJobEnrollment}>ODUSTANI</button>
-                            </>
+                        
                         ) : (
-                            <>
                             <button className="page__button page__button--primary" onClick={addJobEnrollment}>KONKURIŠI</button>
-                            </>
                         ) }
-                        <Popup elementsDetails={popupDetails} />
                     </>
                 ) }
                 { user?.account_type == "employer" && (
-                    // TODO: add "IZMENI" button later
-                    <button className="page__secondary-button">ARHIVIRAJ</button>
+                    <>
+                        {jobOffer.is_active ? (
+                            <button className="page__button page__button--secondary" onClick={toggleJobStatus}>ARHIVIRAJ</button>
+                        ): (
+                            <button className="page__button page__button--primary" onClick={toggleJobStatus}>AKTIVIRAJ</button>
+                        )}
+                        <Link className="page__button page__button--primary" href="#">IZMENI</Link>
+                    </>
                 ) }
             </div>
+            <Popup elementsDetails={popupDetails} />
         </div>
     );
 }

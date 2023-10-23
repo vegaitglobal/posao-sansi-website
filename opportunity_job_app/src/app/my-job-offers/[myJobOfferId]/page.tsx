@@ -10,24 +10,26 @@ import JobOffersDetails from "@/components/JobOfferDetails/JobOfferDetails";
 
 interface JobOffersPageProps {
     params: {
-        jobOfferId: string;
+        myJobOfferId: string
     };
 }
 
 export default function JobOffersPage({ params }: JobOffersPageProps) {
     const router = useRouter();
 
-    const [applicant, setApplicant] = useState<User>();
+    console.log(params)
+
+    const [employer, setEmployer] = useState<User>();
 
     useEffect(() => {
         const fetchJobOffers = async () => {
             const user = AuthService.getUser();
             if (!user) {
                 router.push("/login");
-            } else if (user.account_type !== "applicant") {
+            } else if (user.account_type !== "employer") {
                 router.push("/");
             } else {
-                setApplicant(user);
+                setEmployer(user);
             }
         };
         fetchJobOffers();
@@ -35,9 +37,9 @@ export default function JobOffersPage({ params }: JobOffersPageProps) {
 
     return (
         <>
-            <Header user={ applicant }/>
+            <Header user={ employer }/>
             <main>
-                <JobOffersDetails jobOfferID={ parseInt(params.jobOfferId) }/>
+                <JobOffersDetails jobOfferID={ parseInt(params.myJobOfferId) }/>
             </main>
             <Footer/>
         </>
