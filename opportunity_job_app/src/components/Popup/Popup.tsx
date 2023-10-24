@@ -1,4 +1,5 @@
 "use client";
+
 import "./Popup.scss";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
