@@ -26,4 +26,9 @@ export interface Dictionary {
     missionText: string
     visionText: string
   };
+  statistics: {
+    title: string
+    applicantsLabel: string
+    employerLabel: string
+  };
 }
