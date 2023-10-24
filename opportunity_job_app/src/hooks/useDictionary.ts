@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { getLangSlugFromPath } from "@/utils";
-import { Dictionary, getDictionary } from "@/app/[lang]/dictionaries";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 import { SERBIAN_LOCALE } from "@/appData/locales";
+import { Dictionary } from "@/app/[lang]/dictionaries/Dictionary";
 
 export function useLanguage() {
   const pathname = usePathname();
