@@ -2,7 +2,7 @@
 
 import "./Statistics.scss";
 import { useEffect, useState } from "react";
-import { StatisticService } from "@/api/statisticService";
+import { GeneralService } from "@/api/generalService";
 
 
 const Statistics = () => {
@@ -11,7 +11,7 @@ const Statistics = () => {
 
   useEffect(() => {
     async function getStatistics() {
-      const statistics = await StatisticService.getStatistics();
+      const statistics = await GeneralService.getStatistics();
       setApplicantCount(statistics.applicant_count);
       setEmployerCount(statistics.employer_count);
     }

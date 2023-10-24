@@ -8,11 +8,11 @@ const axiosInstance = axios.create({
 });
 
 const API = {
-  getOne: (urlPath: string, queryParams = "") => {
+  getList: (urlPath: string, queryParams = "") => {
     const config = API._getConfig();
     return axiosInstance.get(`${ urlPath }/?${ queryParams }`, config);
   },
-  getList: (urlPath: string, resourceId: number) => {
+  getOne: (urlPath: string, resourceId: number) => {
     const config = API._getConfig();
     return axiosInstance.get(`${ urlPath }/${ resourceId }/`, config);
   },
@@ -30,20 +30,11 @@ const API = {
   },
   _getConfig: () => {
     const headers = {
-      "Accept-Language": "sr", // TODO: set this dynamically
+      "Accept-Language": localStorage.getItem("locale"),
       ...AuthService.getAuthorizationHeaders()
     };
     return { headers: headers };
   },
-
-  // TODO: REMOVE WHEN FINISHED WITH DEVELOPMENT
-  index: () => {
-    console.log("process.env.NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
-    console.log("axiosInstance.getUri():", axiosInstance.getUri());
-
-    const config = API._getConfig();
-    return axiosInstance.get("/", config);
-  }
 };
 
 export default API;
