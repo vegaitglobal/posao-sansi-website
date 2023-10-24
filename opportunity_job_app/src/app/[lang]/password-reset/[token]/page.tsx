@@ -7,9 +7,5 @@ interface PasswordResetPageProps {
 }
 
 export default function PasswordResetPage({ params }: PasswordResetPageProps) {
-  return (
-    <main>
-      <PasswordResetForm token={ params.token }/>
-    </main>
-  );
+  return <PasswordResetForm token={ params.token }/>;
 }

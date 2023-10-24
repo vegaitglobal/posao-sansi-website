@@ -45,16 +45,12 @@ export default function MyJobOffersPage() {
     setTotalJobOfferNumber(response.pagination.total_items);
   }
 
-  return (
-    <main>
-      { hasAccess && (
-        <JobOffers
-          onLoadMore={ loadMoreJobOffers }
-          jobOffers={ jobOffers }
-          hasNextPage={ hasNextPage }
-          totalJobOfferNumber={ totalJobOfferNumber }
-        />
-      ) }
-    </main>
+  return hasAccess && (
+    <JobOffers
+      onLoadMore={ loadMoreJobOffers }
+      jobOffers={ jobOffers }
+      hasNextPage={ hasNextPage }
+      totalJobOfferNumber={ totalJobOfferNumber }
+    />
   );
 }

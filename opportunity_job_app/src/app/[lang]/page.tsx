@@ -6,11 +6,11 @@ import About from "@/components/About/About";
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <HomeBanner/>
       <HomeCardLinks/>
       <About/>
       <Statistics/>
-    </main>
+    </>
   );
 }

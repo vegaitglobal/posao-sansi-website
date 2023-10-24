@@ -8,9 +8,5 @@ interface JobOfferPageProps {
 
 export default function JobOfferPage({ params }: JobOfferPageProps) {
 
-  return (
-    <main>
-      <JobOffersDetails jobOfferID={ parseInt(params.jobOfferId) }/>
-    </main>
-  );
+  return <JobOffersDetails jobOfferID={ parseInt(params.jobOfferId) }/>;
 }
