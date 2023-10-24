@@ -8,12 +8,11 @@ import { mapStringToLocalDateString } from "@/utils";
 import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
-import Popup, { PopupProps } from "../Popup/Popup";
+import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
 
 
 const commonPopupProps = {
-  isOpened: true,
   button: {
     label: "Nazad na poslove",
     url: "/job-offers",
@@ -24,14 +23,27 @@ interface JobOfferDetailsProps {
   jobOfferID: number;
 }
 
+interface Popups {
+  enrollmentConfirmation: {
+    isOpened: boolean;
+  };
+  cancellationConfirmation: {
+    isOpened: boolean;
+  };
+  error: {
+    isOpened: boolean;
+  };
+}
+
 export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
   const router = useRouter();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffer, setJobOffer ] = useState<JobOffer>();
   const [ user, setUser ] = useState<User>();
-  const [ popupProps, setPopupProps ] = useState<PopupProps>({
-    isOpened: false,
-    primaryText: "",
+  const [ popups, setPopups ] = useState<Popups>({
+    enrollmentConfirmation: { isOpened: false },
+    cancellationConfirmation: { isOpened: false },
+    error: { isOpened: false },
   });
 
   useEffect(() => {
@@ -76,18 +88,10 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
   const addJobEnrollment = async () => {
     try {
       await JobEnrollmentService.addJobEnrollment(jobOfferID, user!.account_id);
-      setPopupProps({
-        primaryText: "Vasa prijava je uspeno prosledjena!",
-        secondaryText: "Uskoro ce Vam se javiti neko iz organizacije ATINA",
-        ...commonPopupProps
-      });
+      setPopups({ ...popups, enrollmentConfirmation: { isOpened: true } });
       fetchJobOffers();
     } catch (error) {
-      setPopupProps({
-        primaryText: "Greška: Vaša prijava nije mogla biti obradjena",
-        secondaryText: "Molim Vas pokušajte kasnije",
-        ...commonPopupProps
-      });
+      setPopups({ ...popups, error: { isOpened: true } });
     }
   };
 
@@ -95,19 +99,11 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
     try {
       await JobEnrollmentService.removeJobEnrollment(jobOffer!.job_enrollment);
       fetchJobOffers();
-      setPopupProps({
-        primaryText: "Vasa prijava je uspeno otkazana! ",
-        ...commonPopupProps,
-      });
+      setPopups({ ...popups, cancellationConfirmation: { isOpened: true } });
     } catch (error) {
-      setPopupProps({
-        primaryText: "Greška: Vaša prijava nije mogla biti obradjena",
-        secondaryText: "Molim Vas pokušajte kasnije",
-        ...commonPopupProps,
-      });
+      setPopups({ ...popups, error: { isOpened: true } });
     }
   };
-
 
   return hasAccess && jobOffer && (
     <div className="page">
@@ -147,7 +143,26 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
                 KONKURIŠI
               </button>
             ) }
-            <Popup { ...popupProps }/>
+            <Popup
+              isOpened={ popups.enrollmentConfirmation.isOpened }
+              onClose={ () => setPopups({ ...popups, enrollmentConfirmation: { isOpened: false } }) }
+              primaryText="Vasa prijava je uspeno prosledjena!"
+              secondaryText="Uskoro ce Vam se javiti neko iz organizacije ATINA."
+              { ...commonPopupProps }
+            />
+            <Popup
+              isOpened={ popups.cancellationConfirmation.isOpened }
+              onClose={ () => setPopups({ ...popups, cancellationConfirmation: { isOpened: false } }) }
+              primaryText="Vasa prijava je uspeno otkazana!"
+              { ...commonPopupProps }
+            />
+            <Popup
+              isOpened={ popups.error.isOpened }
+              onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
+              primaryText="Došlo je do greške."
+              secondaryText="Molimo Vas pokušajte kasnije."
+              { ...commonPopupProps }
+            />
           </>
         ) }
         { user?.account_type == "employer" && (
