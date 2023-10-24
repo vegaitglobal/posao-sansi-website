@@ -31,6 +31,7 @@ const PasswordForgottenForm = () => {
     try {
       await AuthService.requestPasswordReset(formData.email);
       setHasOpenedPopup(true);
+      setFormData({ email: "" });
     } catch (error: any) {
     }
   };
@@ -50,6 +51,7 @@ const PasswordForgottenForm = () => {
         <InputField
           label="E-mail adresa:"
           placeholder="Vaša e-mail adresa"
+          value={ formData.email }
           onChange={ (value) => updateFormData(value, "email") }
         />
         <button className="password-forgotten-form__button" onClick={ forgotPassword }>

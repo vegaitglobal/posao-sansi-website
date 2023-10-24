@@ -5,6 +5,7 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import InputField from "../InputField/InputField";
 import Popup from "@/components/Popup/Popup";
+import { deepCopy } from "@/utils";
 
 interface PasswordResetFormProps {
   token: string;
@@ -17,16 +18,19 @@ interface PasswordResetFormData {
   };
 }
 
+const getInitialFormData = (): PasswordResetFormData => {
+  return {
+    password: { value: "", error: "" },
+    passwordConfirmation: { value: "", error: "" },
+  };
+};
+
 const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
   const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<PasswordResetFormData>({
-    password: { value: "", error: "" },
-    passwordConfirmation: { value: "", error: "" },
-  });
+  const [ formData, setFormData ] = useState<PasswordResetFormData>(getInitialFormData);
   const [ responseError, setResponseError ] = useState<string>("");
-
 
   useEffect(() => {
     checkAccess();
@@ -42,7 +46,11 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
 
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
-    if (hasFormErrors()) {
+
+    const validatedFormData = validateFormData(formData);
+    setFormData(validatedFormData);
+
+    if (hasFormErrors(validatedFormData)) {
       setShouldDisplayFormErrors(true);
     } else {
       setShouldDisplayFormErrors(false);
@@ -50,13 +58,25 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
     }
   };
 
-  const hasFormErrors = () => {
+  const validateFormData = (formData: PasswordResetFormData): PasswordResetFormData => {
+    const formDataCopy = deepCopy(formData) as PasswordResetFormData;
+    formDataCopy.password.error = formDataCopy.password.value.length < 8
+      ? "Lozinka mora da sadrži najmanje 8 karaktera"
+      : "";
+    formDataCopy.passwordConfirmation.error = formDataCopy.password.value != formDataCopy.passwordConfirmation.value
+      ? "Lozinke nisu iste"
+      : "";
+    return formDataCopy;
+  };
+
+  const hasFormErrors = (formData: PasswordResetFormData) => {
     return !!(formData.password.error || formData.passwordConfirmation.error);
   };
 
   const resetPassword = async () => {
     try {
       await AuthService.resetPassword(token, formData.password.value);
+      setFormData(getInitialFormData());
       setHasOpenedPopup(true);
     } catch (error: any) {
       setResponseError(error.response?.data?.errors?.non_field_errors);
@@ -65,13 +85,16 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
 
   const updateFormData = (fieldValue: string, fieldName: string) => {
     const newFormData = { ...formData, [fieldName]: { ...formData[fieldName], value: fieldValue } };
-    newFormData.password.error = newFormData.password.value.length < 8
+    setFormData(newFormData);
+  };
+
+  const applyFormDataErrors = (formData: PasswordResetFormData) => {
+    formData.password.error = formData.password.value.length < 8
       ? "Lozinka mora da sadrži najmanje 8 karaktera"
       : "";
-    newFormData.passwordConfirmation.error = newFormData.password.value != newFormData.passwordConfirmation.value
+    formData.passwordConfirmation.error = formData.password.value != formData.passwordConfirmation.value
       ? "Lozinke nisu iste"
       : "";
-    setFormData(newFormData);
   };
 
   if (!hasAccess) return null;
@@ -86,6 +109,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
         <InputField
           type="password"
           label="Nova lozinka:"
+          value={ formData.password.value }
           placeholder="Unesite novu lozinku"
           onChange={ (value) => updateFormData(value, "password") }
           error={ shouldDisplayFormErrors ? formData.password.error : "" }
@@ -93,6 +117,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
         <InputField
           type="password"
           label="Potvrdi lozinku:"
+          value={ formData.passwordConfirmation.value }
           placeholder="Ponovite novu lozinku"
           onChange={ (value) => updateFormData(value, "passwordConfirmation") }
           error={ shouldDisplayFormErrors ? formData.passwordConfirmation.error : "" }
@@ -107,6 +132,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
       </form>
       <Popup
         isOpened={ hasOpenedPopup }
+        onClose={ () => setHasOpenedPopup(false) }
         primaryText="Uspešno ste promenili lozinku."
         secondaryText="Sada se možete prijaviti sa novom lozinkom."
         linkButton={ { label: "Prijava", url: "/login" } }

@@ -16,7 +16,12 @@ export function isPublicFile(pathname: string): boolean {
 }
 
 export function getLangSlugFromPath(pathname: string): string | undefined {
-    return locales.find(
-        (locale) => pathname.startsWith(`/${ locale }/`) || pathname === `/${ locale }`
-    );
+  return locales.find(
+    (locale) => pathname.startsWith(`/${ locale }/`) || pathname === `/${ locale }`
+  );
+}
+
+export function deepCopy(value: object | []): object | [] {
+  const valueJSON = JSON.stringify(value);
+  return JSON.parse(valueJSON);
 }
