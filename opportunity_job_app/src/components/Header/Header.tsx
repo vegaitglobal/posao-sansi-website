@@ -5,30 +5,17 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { User } from "@/api/models/User";
 import { AuthService } from "@/api/authService";
-import { anonymousUserLinks, applicantLinks, employerLinks } from "@/appData/headerData";
+import { anonymousUserLinks, applicantLinks, employerLinks, languageLinks, MainMenuLink } from "@/appData/links";
 import { useLanguage } from "@/hooks/useDictionary";
 import { usePathname } from "next/navigation";
 
-interface LinkItem {
-  label: string;
-  url: string;
-  iconPath: string;
-  isLogged?: null | object;
-}
-
-interface LanguageItem {
-  label: string;
-  code: string;
-  flagPath: string;
-}
-
-interface LinksObjectTypes {
-  [x: string]: LinkItem[];
+interface MainMenuLinks {
+  [x: string]: MainMenuLink[];
 }
 
 const Header = () => {
   const pathname = usePathname();
-  const { slug } = useLanguage();
+  const { slug, dict } = useLanguage();
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ user, setUser ] = useState<User | undefined>();
   const [ hasOpenedLanguageMenu, setHasOpenedLanguageMenu ] = useState<boolean>(false);
@@ -56,16 +43,11 @@ const Header = () => {
     window.location.href = "/login";
   }, []);
 
-  const linksObject: LinksObjectTypes = {
+  const mainMenuLinks: MainMenuLinks = {
     "anonymous": anonymousUserLinks,
     "employer": employerLinks,
     "applicant": applicantLinks
   };
-
-  const languages: LanguageItem[] = [
-    { label: "ENG", code: "en", flagPath: "/images/en-flag.png" },
-    { label: "SRB", code: "sr", flagPath: "/images/srb-flag.png" },
-  ];
 
   const changeLanguage = (languageSlug: string) => {
     if (!pathname.startsWith(`/${ languageSlug }`)) {
@@ -74,13 +56,13 @@ const Header = () => {
     }
   };
 
-  const mapItems = (items: LinkItem[]) => {
-    return items && items.map((link: LinkItem, index: number) => (
+  const renderMainMenuLinks = (items: MainMenuLink[]) => {
+    return items.map((link: MainMenuLink, index: number) => (
       <li className="header__nav-item" key={ index }>
         <Link className="header__nav-link" href={ link.url }>
           <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
           <span className="header__nav-link-text">
-              { link.label }
+              { dict.header.mainMenu[link.labelDictKey] }
           </span>
         </Link>
       </li>
@@ -93,37 +75,39 @@ const Header = () => {
         <div className="header__logo">
           <a className="header__logo-link" href="/">
             <img className="header__logo-img" src="/images/logo.png" alt="logo"/>
-            <span className="header__logo-text">POSAO ŠANSI</span>
+            <span className="header__logo-text">{ dict.header.logoText }</span>
           </a>
         </div>
         <div className="header__language">
           <button className="header__language-button" type="button" onClick={ toggleLanguageMenu }>
             <img src="/images/language-icon.svg" alt="icon"/>
           </button>
-          { hasOpenedLanguageMenu && <ul className="header__language-list">
-            { languages.map((language, index) => (
-              <li key={ index }
-                  className="header__language-item"
-                  onClick={ () => changeLanguage(language.code) }
-              >
-                <button className="header__language-btn" type="button">
-                  <img className="header__language-flag" src={ language.flagPath } alt="flag"/>
-                  { language.label }
-                </button>
-              </li>
-            )) }
-					</ul> }
+          { hasOpenedLanguageMenu && (
+            <ul className="header__language-list">
+              { languageLinks.map(languageLink => (
+                <li key={ languageLink.code }
+                    className="header__language-item"
+                    onClick={ () => changeLanguage(languageLink.code) }
+                >
+                  <button className="header__language-btn" type="button">
+                    <img className="header__language-flag" src={ languageLink.flagPath } alt="flag"/>
+                    { dict.header.languageMenu[languageLink.labelDictKey] }
+                  </button>
+                </li>
+              )) }
+            </ul>
+          ) }
         </div>
         <nav className="header__nav">
           { !isLoading && (
             <>
               <ul className={ `header__nav-list ${ hasOpenedMainMenu ? "header__nav-list--active" : "" }` }>
-                { user ? mapItems(linksObject[user.account_type]) : mapItems(anonymousUserLinks) }
+                { user ? renderMainMenuLinks(mainMenuLinks[user.account_type]) : renderMainMenuLinks(anonymousUserLinks) }
                 { user && (
                   <li className="header__nav-item" key="logout-main-menu-item" onClick={ logout }>
                     <div className="header__nav-link">
                       <img className="header__nav-icon" src="/images/sing-out.svg" alt="icon"/>
-                      <span className="header__nav-link-text">Odjava</span>
+                      <span className="header__nav-link-text">{ dict.header.mainMenu.logoutLabel }</span>
                     </div>
                   </li>
                 ) }
@@ -139,6 +123,5 @@ const Header = () => {
     </header>
   );
 };
-
 
 export default Header;

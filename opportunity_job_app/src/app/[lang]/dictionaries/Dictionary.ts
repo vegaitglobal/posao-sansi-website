@@ -1,34 +1,13 @@
+import { LinksDictionary } from "@/app/[lang]/dictionaries/components/LinksDictionary";
+import { HomeBannerDictionary } from "@/app/[lang]/dictionaries/components/HomeBannerDictionary";
+import { HomeCardLinksDictionary } from "@/app/[lang]/dictionaries/components/HomeCardLinksDictionary";
+import { AboutDictionary } from "@/app/[lang]/dictionaries/components/AboutDictionary";
+import { StatisticsDictionary } from "@/app/[lang]/dictionaries/components/StatisticsDictionary";
+
 export interface Dictionary {
-  homeBanner: {
-    title: string
-    text: string
-  };
-  homeCardLinks: {
-    anonymousApplicantCardLink: {
-      title: string
-      label: string
-    }
-    anonymousEmployerCardLink: {
-      title: string
-      label: string
-    }
-    applicantCardLink: {
-      title: string
-      label: string
-    }
-    employerCardLink: {
-      title: string
-      label: string
-    }
-  };
-  about: {
-    title: string
-    missionText: string
-    visionText: string
-  };
-  statistics: {
-    title: string
-    applicantsLabel: string
-    employerLabel: string
-  };
+  header: LinksDictionary;
+  homeBanner: HomeBannerDictionary;
+  homeCardLinks: HomeCardLinksDictionary;
+  about: AboutDictionary;
+  statistics: StatisticsDictionary;
 }
