@@ -67,7 +67,7 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
 
   const toggleJobStatus = async () => {
     try {
-      await JobOfferService.toggleJobOffer(jobOfferID, { is_active: !jobOffer.is_active });
+      await JobOfferService.toggleJobOffer(jobOfferID, { is_active: !jobOffer!.is_active });
       fetchJobOffer();
       displayConfirmationPopup();
     } catch (error) {
