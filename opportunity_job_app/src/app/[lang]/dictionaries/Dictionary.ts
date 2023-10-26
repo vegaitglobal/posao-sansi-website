@@ -9,6 +9,9 @@ import { LoginFormDictionary } from "@/app/[lang]/dictionaries/components/LoginF
 import { PasswordForgottenFormDictionary } from "@/app/[lang]/dictionaries/components/PasswordForgottenFormDictionary";
 import { PasswordResetFormDictionary } from "@/app/[lang]/dictionaries/components/PasswordResetFormDictionary";
 import { JobOfferListDictionary } from "@/app/[lang]/dictionaries/components/JobOfferListDictionary";
+import { JobOfferDetailsDictionary } from "@/app/[lang]/dictionaries/components/JobOfferDetailsDictionary";
+import { ActiveJobOfferDetailsDictionary } from "@/app/[lang]/dictionaries/components/ActiveJobOfferDetailsDictionary";
+import { MyJobOfferDetailsDictionary } from "@/app/[lang]/dictionaries/components/MyJobOfferDetailsDictionary";
 
 export interface Dictionary {
   header: LinksDictionary;
@@ -23,4 +26,7 @@ export interface Dictionary {
   passwordResetForm: PasswordResetFormDictionary;
   activeJobOfferList: JobOfferListDictionary;
   myJobOfferList: JobOfferListDictionary;
+  jobOfferDetails: JobOfferDetailsDictionary;
+  activeJobOfferDetails: ActiveJobOfferDetailsDictionary;
+  myJobOfferDetails: MyJobOfferDetailsDictionary;
 }
