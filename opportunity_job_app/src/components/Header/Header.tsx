@@ -17,7 +17,7 @@ interface Dictionary {
   // We define this interface for the object returned by
   // useDictionary hook so that we can access that object's
   // `dict` property using a dynamic key (e.g. `dict[key]`)
-  slug: string,
+  slug: string | undefined,
   dict: any
 }
 
