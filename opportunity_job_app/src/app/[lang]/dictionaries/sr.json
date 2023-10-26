@@ -103,5 +103,14 @@
   "myJobOfferList": {
     "title": "Moji poslovi:",
     "loadMoreButtonLabel": "UČITAJ JOŠ"
+  },
+  "jobOfferDetails": {
+    "backButtonLabel": "Nazad na poslove",
+    "applicationDeadlineLabel": "Rok za prijavu:",
+    "companyLabel": "KOMPANIJA:",
+    "locationLabel": "MESTO:",
+    "engagementLabel": "Angažman:",
+    "descriptionLabel": "Opis posla:",
+    "conditionsLabel": "Uslovi:"
   }
 }

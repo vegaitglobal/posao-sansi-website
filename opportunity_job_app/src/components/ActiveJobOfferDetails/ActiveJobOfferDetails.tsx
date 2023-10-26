@@ -4,12 +4,12 @@ import "../../scss/components/job-offer-details.scss";
 import { useEffect, useState } from "react";
 import { JobOfferService } from "@/api/jobOfferService";
 import { JobOffer } from "@/api/models/JobOffer";
-import { mapStringToLocalDateString } from "@/utils";
 import { AuthService } from "@/api/authService";
 import { User } from "@/api/models/User";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
 import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
+import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
 
 
 const commonPopupProps = {
@@ -19,7 +19,7 @@ const commonPopupProps = {
   }
 };
 
-interface JobOfferDetailsProps {
+interface ActiveJobOfferDetailsProps {
   jobOfferID: number;
 }
 
@@ -35,7 +35,7 @@ interface Popups {
   };
 }
 
-export default function ActiveJobOfferDetails({ jobOfferID }: JobOfferDetailsProps) {
+export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDetailsProps) {
   const router = useRouter();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffer, setJobOffer ] = useState<JobOffer>();
@@ -90,31 +90,7 @@ export default function ActiveJobOfferDetails({ jobOfferID }: JobOfferDetailsPro
 
   return hasAccess && jobOffer && (
     <div className="page">
-      <div className="page__back-button" onClick={ () => window.location.href = "/job-offers" }>
-        <img className="page__back-button-image" src="/images/left-arrow.svg" alt="flag"/>
-        <p className="page__back-button-text">Nazad na poslove</p>
-      </div>
-      <div className="page__content">
-        <div className="page__content-left">
-          <h2 className="page__title">{ jobOffer?.job_name }</h2>
-          <p className="page__dedaline">Roksasdasd za
-            prijavu: { mapStringToLocalDateString(jobOffer.application_deadline) }</p>
-          <p className="page__company">KOMPANIJA: { jobOffer.company_name.toUpperCase() }</p>
-          <p className="page__location">MESTO: { jobOffer.location.toUpperCase() }</p>
-          { jobOffer.company_url && (
-            <a className="page__link" href={ jobOffer.company_url }>{ jobOffer.company_url }</a>
-          ) }
-          <p className="page__engagement">Angažman: <span
-            className="page__engagement-sub">{ jobOffer.engagement }</span></p>
-        </div>
-        <div className="page__content-right">
-          <p>Opis posla: { jobOffer.job_description }</p>
-          <div className="page__list-wrap">
-            <span className="page__terms">Uslovi:</span>
-            <p>{ jobOffer.required_work_experience }</p>
-          </div>
-        </div>
-      </div>
+      <JobOfferDetails jobOffer={ jobOffer } backButtonURL="/job-offers"/>
       <div className="page__action-buttons">
         { jobOffer.has_enrolled ? (
           <button className="page__button page__button--secondary" onClick={ removeJobEnrollment }>
