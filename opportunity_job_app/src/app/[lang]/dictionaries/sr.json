@@ -68,13 +68,12 @@
     "submitButtonLabel": "Uloguj se",
     "passwordForgottenLinkText": "Zaboravili ste lozinku?"
   },
-  "jobOffersPage": {
-    "title": "Aktivni poslovi:"
+  "activeJobOffers": {
+    "title": "Aktivni poslovi:",
+    "loadMoreButtonLabel": "UČITAJ JOŠ"
   },
-  "myJobOffersPage": {
-    "title": "Moji poslovi:"
-  },
-  "jobOffers": {
+  "myJobOffers": {
+    "title": "Moji poslovi:",
     "loadMoreButtonLabel": "UČITAJ JOŠ"
   }
 }

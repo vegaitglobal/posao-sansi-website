@@ -1,4 +1,4 @@
-@import "./../../scss/style.scss";
+@import "./../style";
 
 $wrapper-max-widths: 1600px;
 
@@ -19,7 +19,7 @@ $wrapper-max-widths: 1600px;
   max-width: $wrapper-max-widths;
   margin: 0 auto 50px auto;
 
- @media only screen and (max-width: 1500px) {
+  @media only screen and (max-width: 1500px) {
     grid-template-columns: auto auto;
   }
 
