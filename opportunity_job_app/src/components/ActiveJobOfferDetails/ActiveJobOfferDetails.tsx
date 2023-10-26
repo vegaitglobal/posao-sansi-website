@@ -10,14 +10,8 @@ import { JobEnrollmentService } from "@/api/jobEnrollmentService";
 import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
 import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
+import { useDictionary } from "@/hooks/useDictionary";
 
-
-const commonPopupProps = {
-  linkButton: {
-    label: "Nazad na poslove",
-    url: "/job-offers",
-  }
-};
 
 interface ActiveJobOfferDetailsProps {
   jobOfferID: number;
@@ -37,6 +31,7 @@ interface Popups {
 
 export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDetailsProps) {
   const router = useRouter();
+  const { dict } = useDictionary();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffer, setJobOffer ] = useState<JobOffer>();
   const [ user, setUser ] = useState<User>();
@@ -45,6 +40,13 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
     cancellationConfirmation: { isOpened: false },
     error: { isOpened: false },
   });
+
+  const commonPopupProps = {
+    linkButton: {
+      label: dict.activeJobOfferDetails.commonPopupLinkButtonLabel,
+      url: "/job-offers",
+    }
+  };
 
   useEffect(() => {
     checkAccess();
@@ -94,31 +96,31 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
       <div className="page__action-buttons">
         { jobOffer.has_enrolled ? (
           <button className="page__button page__button--secondary" onClick={ removeJobEnrollment }>
-            ODUSTANI
+            { dict.activeJobOfferDetails.removeJobEnrollmentButtonLabel }
           </button>
         ) : (
           <button className="page__button page__button--primary" onClick={ addJobEnrollment }>
-            KONKURIŠI
+            { dict.activeJobOfferDetails.addJobEnrollmentButtonLabel }
           </button>
         ) }
         <Popup
           isOpened={ popups.enrollmentConfirmation.isOpened }
           onClose={ () => setPopups({ ...popups, enrollmentConfirmation: { isOpened: false } }) }
-          primaryText="Vasa prijava je uspeno prosledjena!"
-          secondaryText="Uskoro ce Vam se javiti neko iz organizacije ATINA."
+          primaryText={ dict.activeJobOfferDetails.enrollmentConfirmationPopup.primaryText }
+          secondaryText={ dict.activeJobOfferDetails.enrollmentConfirmationPopup.secondaryText }
           { ...commonPopupProps }
         />
         <Popup
           isOpened={ popups.cancellationConfirmation.isOpened }
           onClose={ () => setPopups({ ...popups, cancellationConfirmation: { isOpened: false } }) }
-          primaryText="Vasa prijava je uspeno otkazana!"
+          primaryText={ dict.activeJobOfferDetails.cancellationConfirmationPopup.primaryText }
           { ...commonPopupProps }
         />
         <Popup
           isOpened={ popups.error.isOpened }
           onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
-          primaryText="Došlo je do greške."
-          secondaryText="Molimo Vas pokušajte kasnije."
+          primaryText={ dict.activeJobOfferDetails.errorPopup.primaryText }
+          secondaryText={ dict.activeJobOfferDetails.errorPopup.secondaryText }
           { ...commonPopupProps }
         />
       </div>

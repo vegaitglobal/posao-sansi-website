@@ -112,5 +112,21 @@
     "engagementLabel": "Angažman:",
     "descriptionLabel": "Opis posla:",
     "conditionsLabel": "Uslovi:"
+  },
+  "activeJobOfferDetails": {
+    "removeJobEnrollmentButtonLabel": "ODUSTANI",
+    "addJobEnrollmentButtonLabel": "KONKURIŠI",
+    "enrollmentConfirmationPopup": {
+      "primaryText": "Vaša prijava je uspešno prosleđena!",
+      "secondaryText": "Uskoro će Vam se javiti neko iz organizacije ATINA."
+    },
+    "cancellationConfirmationPopup": {
+      "primaryText": "Vaša prijava je uspešno otkazana!"
+    },
+    "errorPopup": {
+      "primaryText": "Došlo je do greške.",
+      "secondaryText": "Molimo Vas pokušajte kasnije."
+    },
+    "commonPopupLinkButtonLabel": "Nazad na poslove"
   }
 }
