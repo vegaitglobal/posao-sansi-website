@@ -46,5 +46,13 @@
     "title": "KORISNICI NAŠE APLIKACIJE",
     "applicantsLabel": "aplikanta",
     "employerLabel": "poslodavca"
+  },
+  "footer": {
+    "socialMediaListTitle": "Društvene mreže",
+    "contactListTitle": "Kontakt",
+    "termsOfUseFilename": "Uslovi korišćenja",
+    "privacyPolicyFilename": "Politika privatnosti",
+    "copyrightText": "Copyright 2023 - Posao šansi",
+    "designedByText": "Design by Vega IT"
   }
 }
