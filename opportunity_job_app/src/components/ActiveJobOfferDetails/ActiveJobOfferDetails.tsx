@@ -1,6 +1,6 @@
 "use client";
 
-import "./job-offer-details.scss";
+import "../../scss/components/job-offer-details.scss";
 import { useEffect, useState } from "react";
 import { JobOfferService } from "@/api/jobOfferService";
 import { JobOffer } from "@/api/models/JobOffer";
@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 
 const commonPopupProps = {
-  button: {
+  linkButton: {
     label: "Nazad na poslove",
     url: "/job-offers",
   }
@@ -35,7 +35,7 @@ interface Popups {
   };
 }
 
-export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
+export default function ActiveJobOfferDetails({ jobOfferID }: JobOfferDetailsProps) {
   const router = useRouter();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffer, setJobOffer ] = useState<JobOffer>();
@@ -47,15 +47,6 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
   });
 
   useEffect(() => {
-    const fetchJobOffer = async () => {
-      try {
-        const jobOffer = await JobOfferService.findJobOffer(jobOfferID);
-        setJobOffer(jobOffer);
-      } catch (error: any) {
-        goBack();
-      }
-    };
-
     checkAccess();
     fetchJobOffer();
   }, []);
@@ -72,24 +63,16 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
     }
   };
 
-  function goBack() {
-    window.location.href = "/job-offers";
-  }
-
-  const fetchJobOffers = async () => {
-    try {
-      const newJobOffer = await JobOfferService.findJobOffer(jobOfferID);
-      setJobOffer(newJobOffer);
-    } catch (error) {
-      goBack();
-    }
+  const fetchJobOffer = async () => {
+    const newJobOffer = await JobOfferService.findJobOffer(jobOfferID);
+    setJobOffer(newJobOffer);
   };
 
   const addJobEnrollment = async () => {
     try {
       await JobEnrollmentService.addJobEnrollment(jobOfferID, user!.account_id);
       setPopups({ ...popups, enrollmentConfirmation: { isOpened: true } });
-      fetchJobOffers();
+      fetchJobOffer();
     } catch (error) {
       setPopups({ ...popups, error: { isOpened: true } });
     }
@@ -98,8 +81,8 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
   const removeJobEnrollment = async () => {
     try {
       await JobEnrollmentService.removeJobEnrollment(jobOffer!.job_enrollment);
-      fetchJobOffers();
       setPopups({ ...popups, cancellationConfirmation: { isOpened: true } });
+      fetchJobOffer();
     } catch (error) {
       setPopups({ ...popups, error: { isOpened: true } });
     }
@@ -107,7 +90,7 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
 
   return hasAccess && jobOffer && (
     <div className="page">
-      <div className="page__back-button" onClick={ goBack }>
+      <div className="page__back-button" onClick={ () => window.location.href = "/job-offers" }>
         <img className="page__back-button-image" src="/images/left-arrow.svg" alt="flag"/>
         <p className="page__back-button-text">Nazad na poslove</p>
       </div>
@@ -118,8 +101,9 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
             prijavu: { mapStringToLocalDateString(jobOffer.application_deadline) }</p>
           <p className="page__company">KOMPANIJA: { jobOffer.company_name.toUpperCase() }</p>
           <p className="page__location">MESTO: { jobOffer.location.toUpperCase() }</p>
-          { jobOffer.company_url &&
-						<a className="page__link" href={ jobOffer.company_url }>{ jobOffer.company_url }</a> }
+          { jobOffer.company_url && (
+            <a className="page__link" href={ jobOffer.company_url }>{ jobOffer.company_url }</a>
+          ) }
           <p className="page__engagement">Angažman: <span
             className="page__engagement-sub">{ jobOffer.engagement }</span></p>
         </div>
@@ -132,43 +116,35 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
         </div>
       </div>
       <div className="page__action-buttons">
-        { user?.account_type === "applicant" && (
-          <>
-            { jobOffer.has_enrolled ? (
-              <button className="page__button page__button--secondary" onClick={ removeJobEnrollment }>
-                ODUSTANI
-              </button>
-            ) : (
-              <button className="page__button page__button--primary" onClick={ addJobEnrollment }>
-                KONKURIŠI
-              </button>
-            ) }
-            <Popup
-              isOpened={ popups.enrollmentConfirmation.isOpened }
-              onClose={ () => setPopups({ ...popups, enrollmentConfirmation: { isOpened: false } }) }
-              primaryText="Vasa prijava je uspeno prosledjena!"
-              secondaryText="Uskoro ce Vam se javiti neko iz organizacije ATINA."
-              { ...commonPopupProps }
-            />
-            <Popup
-              isOpened={ popups.cancellationConfirmation.isOpened }
-              onClose={ () => setPopups({ ...popups, cancellationConfirmation: { isOpened: false } }) }
-              primaryText="Vasa prijava je uspeno otkazana!"
-              { ...commonPopupProps }
-            />
-            <Popup
-              isOpened={ popups.error.isOpened }
-              onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
-              primaryText="Došlo je do greške."
-              secondaryText="Molimo Vas pokušajte kasnije."
-              { ...commonPopupProps }
-            />
-          </>
+        { jobOffer.has_enrolled ? (
+          <button className="page__button page__button--secondary" onClick={ removeJobEnrollment }>
+            ODUSTANI
+          </button>
+        ) : (
+          <button className="page__button page__button--primary" onClick={ addJobEnrollment }>
+            KONKURIŠI
+          </button>
         ) }
-        { user?.account_type == "employer" && (
-          // TODO: add "IZMENI" button later
-          <button className="page__secondary-button">ARHIVIRAJ</button>
-        ) }
+        <Popup
+          isOpened={ popups.enrollmentConfirmation.isOpened }
+          onClose={ () => setPopups({ ...popups, enrollmentConfirmation: { isOpened: false } }) }
+          primaryText="Vasa prijava je uspeno prosledjena!"
+          secondaryText="Uskoro ce Vam se javiti neko iz organizacije ATINA."
+          { ...commonPopupProps }
+        />
+        <Popup
+          isOpened={ popups.cancellationConfirmation.isOpened }
+          onClose={ () => setPopups({ ...popups, cancellationConfirmation: { isOpened: false } }) }
+          primaryText="Vasa prijava je uspeno otkazana!"
+          { ...commonPopupProps }
+        />
+        <Popup
+          isOpened={ popups.error.isOpened }
+          onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
+          primaryText="Došlo je do greške."
+          secondaryText="Molimo Vas pokušajte kasnije."
+          { ...commonPopupProps }
+        />
       </div>
     </div>
   );

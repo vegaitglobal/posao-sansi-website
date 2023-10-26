@@ -1,5 +1,5 @@
-import ActiveJobOffers from "@/components/ActiveJobOffers/ActiveJobOffers";
+import ActiveJobOfferList from "@/components/ActiveJobOfferList/ActiveJobOfferList";
 
-export default function JobOffersPage() {
-  return <ActiveJobOffers/>;
+export default function ActiveJobOffersPage() {
+  return <ActiveJobOfferList/>;
 }

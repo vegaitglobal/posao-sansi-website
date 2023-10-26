@@ -1,5 +1,5 @@
-import MyJobOffers from "@/components/MyJobOffers/MyJobOffers";
+import MyJobOfferList from "@/components/MyJobOfferList/MyJobOfferList";
 
 export default function MyJobOffersPage() {
-  return <MyJobOffers/>;
+  return <MyJobOfferList/>;
 }

@@ -96,11 +96,11 @@
       "linkButtonLabel": "Prijava"
     }
   },
-  "activeJobOffers": {
+  "activeJobOfferList": {
     "title": "Aktivni poslovi:",
     "loadMoreButtonLabel": "UČITAJ JOŠ"
   },
-  "myJobOffers": {
+  "myJobOfferList": {
     "title": "Moji poslovi:",
     "loadMoreButtonLabel": "UČITAJ JOŠ"
   }
