@@ -3,13 +3,13 @@
 import "./Statistics.scss";
 import { useEffect, useState } from "react";
 import { GeneralService } from "@/api/generalService";
-import { useLanguage } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/useDictionary";
 
 
 const Statistics = () => {
   const [ applicantCount, setApplicantCount ] = useState<number>(0);
   const [ employerCount, setEmployerCount ] = useState<number>(0);
-  const { dict } = useLanguage();
+  const { dict } = useDictionary();
 
   useEffect(() => {
     async function getStatistics() {

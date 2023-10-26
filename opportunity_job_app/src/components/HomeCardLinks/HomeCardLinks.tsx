@@ -5,13 +5,13 @@ import "./HomeCardLinks.scss";
 import React, { useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import HomeCardLink from "@/components/HomeCardLink/HomeCardLink";
-import { useLanguage } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/useDictionary";
 
 
 const HomeCardLinks = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ user, setUser ] = useState<User>();
-  const { dict } = useLanguage();
+  const { dict } = useDictionary();
 
   useEffect(() => {
     if (isLoading) {

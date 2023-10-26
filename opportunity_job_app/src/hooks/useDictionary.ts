@@ -5,7 +5,7 @@ import { getDictionary } from "@/app/[lang]/dictionaries";
 import { SERBIAN_LOCALE } from "@/appData/locales";
 import { Dictionary } from "@/app/[lang]/dictionaries/Dictionary";
 
-export function useLanguage() {
+export function useDictionary() {
   const pathname = usePathname();
   const slug = getLangSlugFromPath(pathname);
   const [ dict ] = useState<Dictionary>(() => getDictionary(slug || SERBIAN_LOCALE));
