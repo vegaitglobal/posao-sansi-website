@@ -5,9 +5,11 @@ import InputField from "@/components/InputField/InputField";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import Popup from "@/components/Popup/Popup";
+import { useDictionary } from "@/hooks/useDictionary";
 
 
 const PasswordForgottenForm = () => {
+  const { dict } = useDictionary();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
   const [ formData, setFormData ] = useState({
@@ -44,25 +46,23 @@ const PasswordForgottenForm = () => {
 
   return (
     <div className="wrapper">
-      <p className="welcome-sentence">
-        Unesite Vašu e-mail adresu kako bismo Vam poslali podatke za resetovanje lozinke.
-      </p>
+      <p className="welcome-sentence">{ dict.passwordForgottenForm.topText }</p>
       <form className="password-forgotten-form">
         <InputField
-          label="E-mail adresa:"
-          placeholder="Vaša e-mail adresa"
+          label={ dict.passwordForgottenForm.emailFieldLabel }
+          placeholder={ dict.passwordForgottenForm.emailFieldPlaceholder }
           value={ formData.email }
           onChange={ (value) => updateFormData(value, "email") }
         />
-        <button className="password-forgotten-form__button" onClick={ forgotPassword }>
-          ZAHTEVAJ LINK
+        <button className="form-submit-button" onClick={ forgotPassword }>
+          { dict.passwordForgottenForm.submitButtonLabel }
         </button>
       </form>
       <Popup
         isOpened={ hasOpenedPopup }
         onClose={ () => setHasOpenedPopup(false) }
-        primaryText="Ukoliko nalog sa ovom mejl adresom postoji, poslaćemo mejl za resetovanje lozinke."
-        linkButton={ { label: "Nazad na početnu", url: "/" } }
+        primaryText={ dict.passwordForgottenForm.popup.primaryText }
+        linkButton={ { label: dict.passwordForgottenForm.popup.linkButtonLabel, url: "/" } }
       />
     </div>
   );

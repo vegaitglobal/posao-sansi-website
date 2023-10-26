@@ -17,7 +17,6 @@ services:
       - ./opportunity_job_api/src:/app/src/
       - ./opportunity_job_api/scripts/:/app/scripts/
       - ./opportunity_job_api/requirements:/app/requirements/
-    restart: always
 
   postgres:
     container_name: opportunity_job-postgres
@@ -28,7 +27,6 @@ services:
       - POSTGRES_DB=${DB_NAME}
     volumes:
       - opportunity_job-postgres-data:/var/lib/postgresql/data
-    restart: always
 
   nextjs:
     container_name: opportunity_job-nextjs
@@ -41,7 +39,6 @@ services:
       - ./opportunity_job_app:/usr/app/
     env_file:
       - .env
-    restart: always
 
 volumes:
   opportunity_job-postgres-data:

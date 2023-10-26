@@ -65,8 +65,36 @@
     "emailFieldPlaceholder": "Vaša e-mail adresa",
     "passwordFieldLabel": "Lozinka:",
     "passwordFieldPlaceholder": "Vaša lozinka",
-    "submitButtonLabel": "Uloguj se",
+    "submitButtonLabel": "PRIJAVI SE",
     "passwordForgottenLinkText": "Zaboravili ste lozinku?"
+  },
+  "passwordForgottenForm": {
+    "topText": "Unesite Vašu e-mail adresu kako bismo Vam poslali podatke za resetovanje lozinke.",
+    "emailFieldLabel": "E-mail adresa:",
+    "emailFieldPlaceholder": "Vaša e-mail adresa",
+    "submitButtonLabel": "ZAHTEVAJ LINK",
+    "popup": {
+      "primaryText": "Ukoliko nalog sa ovom mejl adresom postoji, poslaćemo mejl za resetovanje lozinke.",
+      "linkButtonLabel": "Nazad na početnu"
+    }
+  },
+  "passwordResetForm": {
+    "topTextFirstLine": "Unesite novu lozinku.",
+    "topTextSecondLine": "Lozinka mora biti minimum osam karaktera, jedan specijalan karakter i jedno veliko slovo.",
+    "passwordFieldLabel": "Nova lozinka:",
+    "passwordFieldPlaceholder": "Unesite novu lozinku",
+    "passwordConfirmFieldLabel": "Potvrdi lozinku:",
+    "passwordConfirmFieldPlaceholder": "Ponovite novu lozinku",
+    "errors": {
+      "passwordMinLength": "Lozinka mora da sadrži najmanje 8 karaktera",
+      "passwordsNotMatch": "Lozinke nisu iste"
+    },
+    "submitButtonLabel": "RESETUJ LOZINKU",
+    "popup": {
+      "primaryText": "Uspešno ste promenili lozinku.",
+      "secondaryText": "Sada se možete prijaviti sa novom lozinkom.",
+      "linkButtonLabel": "Prijava"
+    }
   },
   "activeJobOffers": {
     "title": "Aktivni poslovi:",
