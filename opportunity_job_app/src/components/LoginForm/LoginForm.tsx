@@ -5,8 +5,10 @@ import InputField from "@/components/InputField/InputField";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import Link from "next/link";
+import { useDictionary } from "@/hooks/useDictionary";
 
 const LoginForm = () => {
+  const { dict } = useDictionary();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ responseError, setResponseError ] = useState<string>("");
   const [ formData, setFormData ] = useState({
@@ -44,26 +46,26 @@ const LoginForm = () => {
 
   return (
     <div className="wrapper">
-      <p className="welcome-sentence">Dobrodošli nazad!</p>
-      <p className="welcome-sentence">Ulogujte se da biste nastavili.</p>
+      <p className="welcome-sentence">{ dict.loginForm.topTextFirstLine }</p>
+      <p className="welcome-sentence">{ dict.loginForm.topTextSecondLine }</p>
       <form className="login-form">
         <InputField
-          label="E-mail adresa:"
-          placeholder="Vaša e-mail adresa"
+          label={ dict.loginForm.emailFieldLabel }
+          placeholder={ dict.loginForm.emailFieldPlaceholder }
           value={ formData.email }
           onChange={ (value) => updateFormData(value, "email") }
         />
         <InputField
-          label="Lozinka:"
-          placeholder="Vaša lozinka"
+          label={ dict.loginForm.passwordFieldLabel }
+          placeholder={ dict.loginForm.passwordFieldPlaceholder }
           value={ formData.password }
           type="password"
           onChange={ (value) => updateFormData(value, "password") }
         />
         { responseError && <p className="error-message">{ responseError }</p> }
-        <button className="login-form__button" onClick={ login }>Uloguj se</button>
+        <button className="login-form__button" onClick={ login }>{ dict.loginForm.submitButtonLabel }</button>
         <Link className="login-form__link" href="/password-forgotten">
-          Zaboravili ste lozinku?
+          { dict.loginForm.passwordForgottenLinkText }
         </Link>
       </form>
     </div>

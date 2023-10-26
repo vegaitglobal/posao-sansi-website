@@ -42,22 +42,21 @@
   z-index: 2;
   width: 212px;
   background-color: $white;
-  padding: 8px 0;
+  padding: 5px;
 }
 
 .header__language-item {
-  padding: 8px 26px;
-  color: $purple-primary;
+  padding: 12px 12px;
   font-size: 14px;
   font-weight: 600;
   line-height: 14px;
   transition: 0.3s ease-in-out;
   cursor: pointer;
+}
 
-  &:active {
-    background-color: $purple-hover;
-    color: $white;
-  }
+.header__language-item:hover, .header__language-item--active {
+  background-color: $purple-hover;
+  color: $white;
 }
 
 .header__language-flag {
@@ -81,7 +80,6 @@
     z-index: 2;
     width: 212px;
     background-color: $white;
-    padding: 8px 0;
   }
 }
 
@@ -92,16 +90,18 @@
 }
 
 .header__nav-item {
-  padding: 3px 20px 8px 20px;
   margin-left: 40px;
   cursor: pointer;
+  @include media-breakpoint-down(md) {
+    margin-left: 0;
+  }
+}
 
-  &:active {
-    background-color: $purple-hover;
+.header__nav-item--active, .header__nav-item:active, .header__nav-item:hover {
+  background-color: $purple-hover;
 
-    .header__nav-link-text {
-      color: $white;
-    }
+  .header__nav-link-text {
+    color: $white;
   }
 }
 
@@ -109,6 +109,10 @@
   display: flex;
   align-items: center;
   font-family: $font-default;
+  padding: 5px 20px;
+  @include media-breakpoint-down(md) {
+    padding: 12px 20px;
+  }
 }
 
 .header__nav-icon {
@@ -134,7 +138,7 @@
 .header__nav-link-text {
   font-size: 20px;
   font-weight: 600;
-  line-height: normal;
+  padding-top: 8px;
   color: $purple-primary;
   @include media-breakpoint-down(md) {
     margin-left: 10px;

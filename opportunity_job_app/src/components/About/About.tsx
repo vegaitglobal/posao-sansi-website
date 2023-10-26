@@ -1,7 +1,7 @@
 "use client";
 
 import "./About.scss";
-import { useLanguage } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/useDictionary";
 
 interface ContentType {
   imageURL: string;
@@ -9,7 +9,7 @@ interface ContentType {
 }
 
 const About = () => {
-  const { dict } = useLanguage();
+  const { dict } = useDictionary();
   const mission: ContentType = {
     imageURL: "/images/mision.svg",
     text: dict.about.missionText

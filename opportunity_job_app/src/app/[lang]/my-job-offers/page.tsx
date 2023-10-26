@@ -6,11 +6,13 @@ import { useRouter } from "next/navigation";
 import { JobOffer } from "@/api/models/JobOffer";
 import { JobOfferService } from "@/api/jobOfferService";
 import JobOffers from "@/components/JobOffers/JobOffers";
+import { useDictionary } from "@/hooks/useDictionary";
 
 // TODO: refactor to server side component
 
 export default function MyJobOffersPage() {
   const router = useRouter();
+  const { dict } = useDictionary();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffers, setJobOffers ] = useState<JobOffer[]>([]);
   const [ pageNumber, setPageNumber ] = useState<number>(0);
@@ -50,7 +52,7 @@ export default function MyJobOffersPage() {
       onLoadMore={ loadMoreJobOffers }
       jobOffers={ jobOffers }
       hasNextPage={ hasNextPage }
-      totalJobOfferNumber={ totalJobOfferNumber }
+      title={ `${ dict.myJobOffersPage.title } ${ totalJobOfferNumber }` }
     />
   );
 }

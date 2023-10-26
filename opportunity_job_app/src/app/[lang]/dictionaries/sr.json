@@ -46,5 +46,35 @@
     "title": "KORISNICI NAŠE APLIKACIJE",
     "applicantsLabel": "aplikanta",
     "employerLabel": "poslodavca"
+  },
+  "footer": {
+    "socialMediaListTitle": "Društvene mreže",
+    "contactListTitle": "Kontakt",
+    "termsOfUseFilename": "Uslovi korišćenja",
+    "privacyPolicyFilename": "Politika privatnosti",
+    "copyrightText": "Copyright 2023 - Posao šansi",
+    "designedByText": "Design by Vega IT"
+  },
+  "faqItems": {
+    "title": "NAJČEŠĆE POSTAVLJENA PITANJA"
+  },
+  "loginForm": {
+    "topTextFirstLine": "Dobrodošli nazad!",
+    "topTextSecondLine": "Ulogujte se da biste nastavili.",
+    "emailFieldLabel": "E-mail adresa:",
+    "emailFieldPlaceholder": "Vaša e-mail adresa",
+    "passwordFieldLabel": "Lozinka:",
+    "passwordFieldPlaceholder": "Vaša lozinka",
+    "submitButtonLabel": "Uloguj se",
+    "passwordForgottenLinkText": "Zaboravili ste lozinku?"
+  },
+  "jobOffersPage": {
+    "title": "Aktivni poslovi:"
+  },
+  "myJobOffersPage": {
+    "title": "Moji poslovi:"
+  },
+  "jobOffers": {
+    "loadMoreButtonLabel": "UČITAJ JOŠ"
   }
 }
