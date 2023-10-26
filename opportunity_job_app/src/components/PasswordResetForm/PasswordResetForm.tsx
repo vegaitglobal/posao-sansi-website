@@ -6,6 +6,7 @@ import { AuthService } from "@/api/authService";
 import InputField from "../InputField/InputField";
 import Popup from "@/components/Popup/Popup";
 import { deepCopy } from "@/utils";
+import { useDictionary } from "@/hooks/useDictionary";
 
 interface PasswordResetFormProps {
   token: string;
@@ -26,6 +27,7 @@ const getInitialFormData = (): PasswordResetFormData => {
 };
 
 const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
+  const { dict } = useDictionary();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
   const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
@@ -61,10 +63,10 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const validateFormData = (formData: PasswordResetFormData): PasswordResetFormData => {
     const formDataCopy = deepCopy(formData) as PasswordResetFormData;
     formDataCopy.password.error = formDataCopy.password.value.length < 8
-      ? "Lozinka mora da sadrži najmanje 8 karaktera"
+      ? dict.passwordResetForm.errors.passwordMinLength
       : "";
     formDataCopy.passwordConfirmation.error = formDataCopy.password.value != formDataCopy.passwordConfirmation.value
-      ? "Lozinke nisu iste"
+      ? dict.passwordResetForm.errors.passwordsNotMatch
       : "";
     return formDataCopy;
   };
@@ -88,37 +90,26 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
     setFormData(newFormData);
   };
 
-  const applyFormDataErrors = (formData: PasswordResetFormData) => {
-    formData.password.error = formData.password.value.length < 8
-      ? "Lozinka mora da sadrži najmanje 8 karaktera"
-      : "";
-    formData.passwordConfirmation.error = formData.password.value != formData.passwordConfirmation.value
-      ? "Lozinke nisu iste"
-      : "";
-  };
-
   if (!hasAccess) return null;
 
   return (
     <div className="wrapper">
-      <p className="welcome-sentence">Unesite novu lozinku.</p>
-      <p className="welcome-sentence">
-        Lozinka mora biti minimum osam karaktera, jedan specijalan karakter i jedno veliko slovo.
-      </p>
+      <p className="welcome-sentence">{ dict.passwordResetForm.topTextFirstLine }</p>
+      <p className="welcome-sentence">{ dict.passwordResetForm.topTextSecondLine }</p>
       <form className="reset-password-form">
         <InputField
           type="password"
-          label="Nova lozinka:"
+          label={ dict.passwordResetForm.passwordFieldLabel }
+          placeholder={ dict.passwordResetForm.passwordFieldPlaceholder }
           value={ formData.password.value }
-          placeholder="Unesite novu lozinku"
           onChange={ (value) => updateFormData(value, "password") }
           error={ shouldDisplayFormErrors ? formData.password.error : "" }
         />
         <InputField
           type="password"
-          label="Potvrdi lozinku:"
+          label={ dict.passwordResetForm.passwordConfirmFieldLabel }
+          placeholder={ dict.passwordResetForm.passwordConfirmFieldPlaceholder }
           value={ formData.passwordConfirmation.value }
-          placeholder="Ponovite novu lozinku"
           onChange={ (value) => updateFormData(value, "passwordConfirmation") }
           error={ shouldDisplayFormErrors ? formData.passwordConfirmation.error : "" }
         />
@@ -127,15 +118,15 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
           className="reset-password-form__button"
           onClick={ handleSubmit }
         >
-          RESETUJ LOZINKU
+          { dict.passwordResetForm.submitButtonLabel }
         </button>
       </form>
       <Popup
         isOpened={ hasOpenedPopup }
         onClose={ () => setHasOpenedPopup(false) }
-        primaryText="Uspešno ste promenili lozinku."
-        secondaryText="Sada se možete prijaviti sa novom lozinkom."
-        linkButton={ { label: "Prijava", url: "/login" } }
+        primaryText={ dict.passwordResetForm.popup.primaryText }
+        secondaryText={ dict.passwordResetForm.popup.secondaryText }
+        linkButton={ { label: dict.passwordResetForm.popup.linkButtonLabel, url: "/login" } }
       />
     </div>
   );

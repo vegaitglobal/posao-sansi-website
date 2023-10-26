@@ -46,9 +46,7 @@ const PasswordForgottenForm = () => {
 
   return (
     <div className="wrapper">
-      <p className="welcome-sentence">
-        { dict.passwordForgottenForm.topText }
-      </p>
+      <p className="welcome-sentence">{ dict.passwordForgottenForm.topText }</p>
       <form className="password-forgotten-form">
         <InputField
           label={ dict.passwordForgottenForm.emailFieldLabel }

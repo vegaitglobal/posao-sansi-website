@@ -78,6 +78,24 @@
       "linkButtonLabel": "Nazad na početnu"
     }
   },
+  "passwordResetForm": {
+    "topTextFirstLine": "Unesite novu lozinku.",
+    "topTextSecondLine": "Lozinka mora biti minimum osam karaktera, jedan specijalan karakter i jedno veliko slovo.",
+    "passwordFieldLabel": "Nova lozinka:",
+    "passwordFieldPlaceholder": "Unesite novu lozinku",
+    "passwordConfirmFieldLabel": "Potvrdi lozinku:",
+    "passwordConfirmFieldPlaceholder": "Ponovite novu lozinku",
+    "errors": {
+      "passwordMinLength": "Lozinka mora da sadrži najmanje 8 karaktera",
+      "passwordsNotMatch": "Lozinke nisu iste"
+    },
+    "submitButtonLabel": "RESETUJ LOZINKU",
+    "popup": {
+      "primaryText": "Uspešno ste promenili lozinku.",
+      "secondaryText": "Sada se možete prijaviti sa novom lozinkom.",
+      "linkButtonLabel": "Prijava"
+    }
+  },
   "activeJobOffers": {
     "title": "Aktivni poslovi:",
     "loadMoreButtonLabel": "UČITAJ JOŠ"
