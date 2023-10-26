@@ -1,4 +1,4 @@
-import JobOffersDetails from "@/components/JobOfferDetails/JobOfferDetails";
+import ActiveJobOffersDetails from "@/components/ActiveJobOfferDetails/ActiveJobOfferDetails";
 
 interface JobOfferPageProps {
   params: {
@@ -6,7 +6,6 @@ interface JobOfferPageProps {
   };
 }
 
-export default function JobOfferPage({ params }: JobOfferPageProps) {
-
-  return <JobOffersDetails jobOfferID={ parseInt(params.jobOfferId) }/>;
+export default function ActiveJobOfferPage({ params }: JobOfferPageProps) {
+  return <ActiveJobOffersDetails jobOfferID={ parseInt(params.jobOfferId) }/>;
 }

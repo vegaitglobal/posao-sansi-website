@@ -1,6 +1,6 @@
 "use client";
 
-import "./../../scss/components/job-offers.scss";
+import "./../../scss/components/job-offer-list.scss";
 import { useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import { useRouter } from "next/navigation";
@@ -10,7 +10,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import JobOfferCard from "@/components/JobOfferCard/JobOfferCard";
 
 
-export default function ActiveJobOffers() {
+export default function ActiveJobOfferList() {
   const router = useRouter();
   const { dict } = useDictionary();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
@@ -50,7 +50,7 @@ export default function ActiveJobOffers() {
 
   return hasAccess && (
     <>
-      <h2 className="job-offers-title">{ `${ dict.activeJobOffers.title } ${ totalJobOfferNumber }` }</h2>
+      <h2 className="job-offers-title">{ `${ dict.activeJobOfferList.title } ${ totalJobOfferNumber }` }</h2>
       <div className="job-offers">
         { jobOffers?.map(jobOffer => {
           return <JobOfferCard key={ jobOffer.id } jobOffer={ jobOffer }/>;
@@ -59,7 +59,7 @@ export default function ActiveJobOffers() {
       { hasNextPage && (
         <div className="job-offers-bottom">
           <button className="load-more-button" onClick={ loadMoreJobOffers }>
-            { dict.activeJobOffers.loadMoreButtonLabel }
+            { dict.activeJobOfferList.loadMoreButtonLabel }
           </button>
         </div>
       ) }

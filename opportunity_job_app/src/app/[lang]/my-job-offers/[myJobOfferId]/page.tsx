@@ -1,25 +1,11 @@
-"use client";
-
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
-import { useEffect, useState } from "react";
-import { AuthService } from "@/api/authService";
-import { useRouter } from "next/navigation";
-import { User } from "@/api/models/User";
-import JobOffersDetails from "@/components/JobOfferDetails/JobOfferDetails";
+import MyJobOfferDetails from "@/components/MyJobOfferDetails/MyJobOfferDetails";
 
 interface JobOffersPageProps {
-    params: {
-        myJobOfferId: string
-    };
+  params: {
+    myJobOfferId: string
+  };
 }
 
-export default function JobOffersPage({ params }: JobOffersPageProps) {
-    return (
-        <>
-            <main>
-                <JobOffersDetails jobOfferID={ parseInt(params.myJobOfferId) }/>
-            </main>
-        </>
-    );
+export default function MyJobOfferPage({ params }: JobOffersPageProps) {
+  return <MyJobOfferDetails jobOfferID={ parseInt(params.myJobOfferId) }/>;
 }

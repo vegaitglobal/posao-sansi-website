@@ -1,10 +1,10 @@
-@import "./../../scss/style.scss";
+@import "../style";
 
 .page {
   @include media-breakpoint-up(xl) {
     padding: 50px 100px;
   }
-  @include media-breakpoint-between(md,lg) {
+  @include media-breakpoint-between(md, lg) {
     padding: 50px 70px;
   }
   @include media-breakpoint-down(sm) {
@@ -58,11 +58,11 @@ p {
   margin-right: 15px;
 }
 
-.page__engagement-sub{
-    color: $purple-primary;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 16px;
+.page__engagement-sub {
+  color: $purple-primary;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .page__action-buttons {
@@ -91,14 +91,14 @@ p {
   }
 }
 
-.page__content-left{
+.page__content-left {
   margin-bottom: 30px;
   @include media-breakpoint-up(xl) {
     width: 50%;
   }
 }
 
-.page__content-right{
+.page__content-right {
   background-color: $purple-pale-card;
   padding: 15px;
   @include media-breakpoint-up(xl) {
@@ -108,11 +108,12 @@ p {
 
 .page__list {
   padding-left: 30px;
+
   li {
     list-style-type: disc;
   }
 }
 
 .page__terms {
-    font-size: 16px;
+  font-size: 16px;
 }
