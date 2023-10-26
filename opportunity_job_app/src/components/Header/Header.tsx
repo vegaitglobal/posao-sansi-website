@@ -13,9 +13,17 @@ interface MainMenuLinks {
   [x: string]: MainMenuLink[];
 }
 
+interface Dictionary {
+  // We define this interface for the object returned by
+  // useDictionary hook so that we can access that object's
+  // `dict` property using a dynamic key (e.g. `dict[key]`)
+  slug: string,
+  dict: any
+}
+
 const Header = () => {
   const pathname = usePathname();
-  const { slug, dict } = useDictionary();
+  const { slug, dict }: Dictionary = useDictionary();
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ user, setUser ] = useState<User | undefined>();
   const [ hasOpenedLanguageMenu, setHasOpenedLanguageMenu ] = useState<boolean>(false);
