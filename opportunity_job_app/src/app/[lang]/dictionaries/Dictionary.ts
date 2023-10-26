@@ -5,6 +5,7 @@ import { AboutDictionary } from "@/app/[lang]/dictionaries/components/AboutDicti
 import { StatisticsDictionary } from "@/app/[lang]/dictionaries/components/StatisticsDictionary";
 import { FooterDictionary } from "@/app/[lang]/dictionaries/components/FooterDictionary";
 import { FAQItemsDictionary } from "@/app/[lang]/dictionaries/components/FAQItemsDictionary";
+import { LoginFormDictionary } from "@/app/[lang]/dictionaries/components/LoginFormDictionary";
 
 export interface Dictionary {
   header: LinksDictionary;
@@ -14,4 +15,5 @@ export interface Dictionary {
   statistics: StatisticsDictionary;
   footer: FooterDictionary;
   faqItems: FAQItemsDictionary;
+  loginForm: LoginFormDictionary;
 }

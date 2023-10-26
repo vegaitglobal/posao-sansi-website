@@ -57,5 +57,15 @@
   },
   "faqItems": {
     "title": "NAJČEŠĆE POSTAVLJENA PITANJA"
+  },
+  "loginForm": {
+    "topTextFirstLine": "Dobrodošli nazad!",
+    "topTextSecondLine": "Ulogujte se da biste nastavili.",
+    "emailFieldLabel": "E-mail adresa:",
+    "emailFieldPlaceholder": "Vaša e-mail adresa",
+    "passwordFieldLabel": "Lozinka:",
+    "passwordFieldPlaceholder": "Vaša lozinka",
+    "submitButtonLabel": "Uloguj se",
+    "passwordForgottenLinkText": "Zaboravili ste lozinku?"
   }
 }
