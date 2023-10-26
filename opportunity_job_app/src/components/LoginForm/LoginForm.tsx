@@ -63,7 +63,7 @@ const LoginForm = () => {
           onChange={ (value) => updateFormData(value, "password") }
         />
         { responseError && <p className="error-message">{ responseError }</p> }
-        <button className="login-form__button" onClick={ login }>{ dict.loginForm.submitButtonLabel }</button>
+        <button className="form-submit-button" onClick={ login }>{ dict.loginForm.submitButtonLabel }</button>
         <Link className="login-form__link" href="/password-forgotten">
           { dict.loginForm.passwordForgottenLinkText }
         </Link>

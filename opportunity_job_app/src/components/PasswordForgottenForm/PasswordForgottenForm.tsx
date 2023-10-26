@@ -54,7 +54,7 @@ const PasswordForgottenForm = () => {
           value={ formData.email }
           onChange={ (value) => updateFormData(value, "email") }
         />
-        <button className="password-forgotten-form__button" onClick={ forgotPassword }>
+        <button className="form-submit-button" onClick={ forgotPassword }>
           { dict.passwordForgottenForm.submitButtonLabel }
         </button>
       </form>
