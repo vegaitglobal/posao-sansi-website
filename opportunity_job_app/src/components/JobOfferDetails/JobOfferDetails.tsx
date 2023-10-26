@@ -10,12 +10,20 @@ import { User } from "@/api/models/User";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
 import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 const commonPopupProps = {
-  button: {
+  linkButton: {
     label: "Nazad na poslove",
     url: "/job-offers",
+  }
+};
+
+const commonPopupPropsEmployer = {
+  linkButton: {
+    label: "Nazad na poslove",
+    url: "/my-job-offers",
   }
 };
 
@@ -28,6 +36,12 @@ interface Popups {
     isOpened: boolean;
   };
   cancellationConfirmation: {
+    isOpened: boolean;
+  };
+  activeJobStatus: {
+    isOpened: boolean;
+  };
+  archiveJobStatus: {
     isOpened: boolean;
   };
   error: {
@@ -43,6 +57,8 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
   const [ popups, setPopups ] = useState<Popups>({
     enrollmentConfirmation: { isOpened: false },
     cancellationConfirmation: { isOpened: false },
+    activeJobStatus: {isOpened: false},
+    archiveJobStatus: {isOpened: false},
     error: { isOpened: false },
   });
 
@@ -62,9 +78,10 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
 
   const checkAccess = () => {
     const user = AuthService.getUser();
+    
     if (!user) {
       router.push("/login");
-    } else if (user.account_type !== "applicant") {
+    } else if (user.account_type !== "applicant" && user.account_type !== "employer") {
       router.push("/");
     } else {
       setUser(user);
@@ -74,7 +91,12 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
 
   function goBack() {
     window.location.href = "/job-offers";
-  }
+    if(user?.account_type !== "employer") {
+        window.location.href = "/job-offers";
+    }else {
+        window.location.href = "/my-job-offers"
+    }
+}
 
   const fetchJobOffers = async () => {
     try {
@@ -84,6 +106,7 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
       goBack();
     }
   };
+  
 
   const addJobEnrollment = async () => {
     try {
@@ -104,6 +127,31 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
       setPopups({ ...popups, error: { isOpened: true } });
     }
   };
+
+
+  const jobStatusText = () => {
+    if(jobOffer?.is_active) {
+      setPopups({ ...popups, archiveJobStatus: { isOpened: true } });
+    } else {
+      setPopups({ ...popups, activeJobStatus: { isOpened: true } });
+    }
+}
+
+
+const toggleJobStatus = async () => {
+    if(jobOffer) {
+        try { 
+            const updatedData = {
+                is_active: !jobOffer.is_active,
+            };
+            await JobOfferService.toggleJobOffer(jobOfferID, updatedData)
+            fetchJobOffers();
+            jobStatusText();
+        } catch(error) {
+            console.log(error)
+        }
+    }
+}
 
   return hasAccess && jobOffer && (
     <div className="page">
@@ -166,8 +214,33 @@ export default function JobOffersDetails({ jobOfferID }: JobOfferDetailsProps) {
           </>
         ) }
         { user?.account_type == "employer" && (
-          // TODO: add "IZMENI" button later
-          <button className="page__secondary-button">ARHIVIRAJ</button>
+         <>
+          {jobOffer.is_active ? (
+              <button className="page__button page__button--secondary" onClick={toggleJobStatus}>ARHIVIRAJ</button>
+          ): (
+              <button className="page__button page__button--primary" onClick={toggleJobStatus}>AKTIVIRAJ</button>
+          )}
+          <Link className="page__button page__button--primary" href="#">IZMENI</Link>
+          <Popup
+              isOpened={ popups.archiveJobStatus.isOpened }
+              onClose={ () => setPopups({ ...popups, archiveJobStatus: { isOpened: false } }) }
+              primaryText="Uspešno ste arhivirali posao!"
+              { ...commonPopupPropsEmployer }
+            />
+            <Popup
+              isOpened={ popups.activeJobStatus.isOpened }
+              onClose={ () => setPopups({ ...popups, activeJobStatus: { isOpened: false } }) }
+              primaryText="Uspešno ste aktivirali posao!"
+              { ...commonPopupPropsEmployer }
+            />
+             <Popup
+              isOpened={ popups.error.isOpened }
+              onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
+              primaryText="Došlo je do greške."
+              secondaryText="Molimo Vas pokušajte kasnije."
+              { ...commonPopupPropsEmployer }
+            />
+        </>
         ) }
       </div>
     </div>

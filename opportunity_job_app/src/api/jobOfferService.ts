@@ -37,5 +37,9 @@ export const JobOfferService = {
     findJobOffer: async (jobOfferID: number): Promise<JobOffer> => {
         const response = await API.getOne("job-offers", jobOfferID);
         return response.data;
+    },
+    
+    toggleJobOffer: async (jobOfferId: number, updatedData: any) => {
+        return await API.patch(`/job-offers/${jobOfferId}/`, updatedData);
     }
 };

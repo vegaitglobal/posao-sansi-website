@@ -1,6 +1,7 @@
 import "./job-offer-card.scss";
 import { JobOffer, JobOfferEngagements } from "@/api/models/JobOffer";
 import { mapStringToLocalDateString } from "@/utils";
+import { AuthService } from "@/api/authService";
 
 interface JobOfferProps {
     jobOffer: JobOffer;
@@ -8,8 +9,15 @@ interface JobOfferProps {
 
 const JobOfferCard = ({ jobOffer }: JobOfferProps) => {
 
+    const user = AuthService.getUser();
+
     function openJobOfferDetails(jobID: number): void {
         window.location.href = `/job-offers/${ jobID }/`;
+        if(user.account_type !== "employer") {
+            window.location.href = `/job-offers/${ jobID }/`;
+        }else {
+            window.location.href = `/my-job-offers/${ jobID }/`;
+        }
     }
 
     return (
