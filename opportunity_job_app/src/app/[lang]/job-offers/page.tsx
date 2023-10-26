@@ -1,5 +1,5 @@
 import ActiveJobOfferList from "@/components/ActiveJobOfferList/ActiveJobOfferList";
 
-export default function JobOffersPage() {
+export default function ActiveJobOffersPage() {
   return <ActiveJobOfferList/>;
 }
