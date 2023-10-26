@@ -68,6 +68,16 @@
     "submitButtonLabel": "Uloguj se",
     "passwordForgottenLinkText": "Zaboravili ste lozinku?"
   },
+  "passwordForgottenForm": {
+    "topText": "Unesite Vašu e-mail adresu kako bismo Vam poslali podatke za resetovanje lozinke.",
+    "emailFieldLabel": "E-mail adresa:",
+    "emailFieldPlaceholder": "Vaša e-mail adresa",
+    "submitButtonLabel": "ZAHTEVAJ LINK",
+    "popup": {
+      "primaryText": "Ukoliko nalog sa ovom mejl adresom postoji, poslaćemo mejl za resetovanje lozinke.",
+      "linkButtonLabel": "Nazad na početnu"
+    }
+  },
   "activeJobOffers": {
     "title": "Aktivni poslovi:",
     "loadMoreButtonLabel": "UČITAJ JOŠ"

@@ -6,6 +6,7 @@ import { StatisticsDictionary } from "@/app/[lang]/dictionaries/components/Stati
 import { FooterDictionary } from "@/app/[lang]/dictionaries/components/FooterDictionary";
 import { FAQItemsDictionary } from "@/app/[lang]/dictionaries/components/FAQItemsDictionary";
 import { LoginFormDictionary } from "@/app/[lang]/dictionaries/components/LoginFormDictionary";
+import { PasswordForgottenFormDictionary } from "@/app/[lang]/dictionaries/components/PasswordForgottenFormDictionary";
 import { JobOffersDictionary } from "@/app/[lang]/dictionaries/components/JobOffersDictionary";
 
 export interface Dictionary {
@@ -17,6 +18,7 @@ export interface Dictionary {
   footer: FooterDictionary;
   faqItems: FAQItemsDictionary;
   loginForm: LoginFormDictionary;
+  passwordForgottenForm: PasswordForgottenFormDictionary;
   activeJobOffers: JobOffersDictionary;
   myJobOffers: JobOffersDictionary;
 }
