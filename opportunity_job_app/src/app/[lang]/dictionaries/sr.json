@@ -67,5 +67,14 @@
     "passwordFieldPlaceholder": "Vaša lozinka",
     "submitButtonLabel": "Uloguj se",
     "passwordForgottenLinkText": "Zaboravili ste lozinku?"
+  },
+  "jobOffersPage": {
+    "title": "Aktivni poslovi:"
+  },
+  "myJobOffersPage": {
+    "title": "Moji poslovi:"
+  },
+  "jobOffers": {
+    "loadMoreButtonLabel": "UČITAJ JOŠ"
   }
 }
