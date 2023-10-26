@@ -8,14 +8,8 @@ import { AuthService } from "@/api/authService";
 import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
 import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
+import { useDictionary } from "@/hooks/useDictionary";
 
-
-const commonPopupProps = {
-  linkButton: {
-    label: "Nazad na poslove",
-    url: "/my-job-offers",
-  }
-};
 
 interface MyJobOfferDetailsProps {
   jobOfferID: number;
@@ -35,6 +29,7 @@ interface Popups {
 
 export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps) {
   const router = useRouter();
+  const { dict } = useDictionary();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffer, setJobOffer ] = useState<JobOffer>();
   const [ popups, setPopups ] = useState<Popups>({
@@ -42,6 +37,13 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
     archivingConfirmation: { isOpened: false },
     error: { isOpened: false },
   });
+
+  const commonPopupProps = {
+    linkButton: {
+      label: dict.myJobOfferDetails.commonPopupLinkButtonLabel,
+      url: "/my-job-offers",
+    }
+  };
 
   useEffect(() => {
     checkAccess();
@@ -88,27 +90,31 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
       <JobOfferDetails jobOffer={ jobOffer } backButtonURL="/my-job-offers"/>
       <div className="page__action-buttons">
         { jobOffer.is_active ? (
-          <button className="page__button page__button--secondary" onClick={ toggleJobStatus }>ARHIVIRAJ</button>
+          <button className="page__button page__button--secondary" onClick={ toggleJobStatus }>
+            { dict.myJobOfferDetails.archiveJobOfferButtonLabel }
+          </button>
         ) : (
-          <button className="page__button page__button--primary" onClick={ toggleJobStatus }>AKTIVIRAJ</button>
+          <button className="page__button page__button--primary" onClick={ toggleJobStatus }>
+            { dict.myJobOfferDetails.activateJobOfferButtonLabel }
+          </button>
         ) }
         <Popup
           isOpened={ popups.activationConfirmation.isOpened }
           onClose={ () => setPopups({ ...popups, activationConfirmation: { isOpened: false } }) }
-          primaryText="Uspešno ste arhivirali posao!"
+          primaryText={ dict.myJobOfferDetails.activationConfirmationPopup.primaryText }
           { ...commonPopupProps }
         />
         <Popup
           isOpened={ popups.archivingConfirmation.isOpened }
           onClose={ () => setPopups({ ...popups, archivingConfirmation: { isOpened: false } }) }
-          primaryText="Uspešno ste aktivirali posao!"
+          primaryText={ dict.myJobOfferDetails.archivingConfirmationPopup.primaryText }
           { ...commonPopupProps }
         />
         <Popup
           isOpened={ popups.error.isOpened }
           onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
-          primaryText="Došlo je do greške."
-          secondaryText="Molimo Vas pokušajte kasnije."
+          primaryText={ dict.myJobOfferDetails.errorPopup.primaryText }
+          secondaryText={ dict.myJobOfferDetails.errorPopup.secondaryText }
           { ...commonPopupProps }
         />
       </div>

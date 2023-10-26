@@ -128,5 +128,20 @@
       "secondaryText": "Molimo Vas pokušajte kasnije."
     },
     "commonPopupLinkButtonLabel": "Nazad na poslove"
+  },
+  "myJobOfferDetails": {
+    "archiveJobOfferButtonLabel": "ARHIVIRAJ",
+    "activateJobOfferButtonLabel": "AKTIVIRAJ",
+    "activationConfirmationPopup": {
+      "primaryText": "Uspešno ste aktivirali posao!"
+    },
+    "archivingConfirmationPopup": {
+      "primaryText": "Uspešno ste arhivirali posao!"
+    },
+    "errorPopup": {
+      "primaryText": "Došlo je do greške.",
+      "secondaryText": "Molimo Vas pokušajte kasnije."
+    },
+    "commonPopupLinkButtonLabel": "Nazad na poslove"
   }
 }
