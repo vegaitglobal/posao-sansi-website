@@ -10,10 +10,31 @@ class JobOfferSerializer(ModelSerializer):
         model = JobOffer
         fields = "__all__"
 
+    engagement = SerializerMethodField()
+    category = SerializerMethodField()
+    required_work_experience = SerializerMethodField()
+    required_education = SerializerMethodField()
+
     job_enrollment = SerializerMethodField("_get_job_enrollment")
     has_enrolled = SerializerMethodField("_has_enrolled")
     company_name = SerializerMethodField("_get_company_name")
     company_url = SerializerMethodField("_get_company_url")
+
+    @staticmethod
+    def get_engagement(obj: JobOffer) -> str:
+        return obj.get_engagement_display()
+
+    @staticmethod
+    def get_category(obj: JobOffer) -> str:
+        return obj.get_category_display()
+
+    @staticmethod
+    def get_required_work_experience(obj: JobOffer) -> str:
+        return obj.get_required_work_experience_display()
+
+    @staticmethod
+    def get_required_education(obj: JobOffer) -> str:
+        return obj.get_required_education_display()
 
     def _has_enrolled(self, obj: JobOffer) -> bool:
         if account := self._get_authenticated_applicant_account():
