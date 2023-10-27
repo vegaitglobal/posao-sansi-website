@@ -94,7 +94,7 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
             { dict.myJobOfferDetails.archiveJobOfferButtonLabel }
           </button>
         ) : (
-          <button className="page__button page__button--primary" onClick={ toggleJobStatus }>
+          <button className="page__button" onClick={ toggleJobStatus }>
             { dict.myJobOfferDetails.activateJobOfferButtonLabel }
           </button>
         ) }

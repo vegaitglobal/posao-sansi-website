@@ -21,13 +21,22 @@
 }
 
 .page__button {
-  padding: 12px 26px 12px 26px;
+  padding: 18px 26px 10px;
   background-color: $purple-primary;
   color: $white;
   font-size: 16px;
   margin-right: 15px;
 }
 
+.page__button:hover {
+  background-color: $purple-hover;
+
+}
+
 .page__button--secondary {
   background-color: $yellow-primary;
+}
+
+.page__button--secondary:hover {
+  background-color: $yellow-hover;
 }

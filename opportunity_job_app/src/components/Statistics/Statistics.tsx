@@ -27,12 +27,12 @@ const Statistics = () => {
         <h3 className="statistics__title">{ dict.statistics.title }</h3>
         <div className="statistics__holder">
           <div className="statistics__box">
+            <span className="statistics__box-text">{ dict.statistics.applicantsLabel }</span>
             <span className="statistics__box-number">{ applicantCount }</span>
-            <span className="statistics__box-text p">{ dict.statistics.applicantsLabel }</span>
           </div>
           <div className="statistics__box">
+            <span className="statistics__box-text">{ dict.statistics.employerLabel }</span>
             <span className="statistics__box-number">{ employerCount }</span>
-            <span className="statistics__box-text p">{ dict.statistics.employerLabel }</span>
           </div>
         </div>
       </div>

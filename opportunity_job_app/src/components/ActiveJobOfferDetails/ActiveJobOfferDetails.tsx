@@ -99,7 +99,7 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
             { dict.activeJobOfferDetails.removeJobEnrollmentButtonLabel }
           </button>
         ) : (
-          <button className="page__button page__button--primary" onClick={ addJobEnrollment }>
+          <button className="page__button" onClick={ addJobEnrollment }>
             { dict.activeJobOfferDetails.addJobEnrollmentButtonLabel }
           </button>
         ) }

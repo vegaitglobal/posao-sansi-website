@@ -44,8 +44,8 @@
   },
   "statistics": {
     "title": "KORISNICI NAŠE APLIKACIJE",
-    "applicantsLabel": "aplikanta",
-    "employerLabel": "poslodavca"
+    "applicantsLabel": "APLIKANTI:",
+    "employerLabel": "POSLODAVCI:"
   },
   "footer": {
     "socialMediaListTitle": "Društvene mreže",
