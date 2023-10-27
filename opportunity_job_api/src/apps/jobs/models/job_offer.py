@@ -36,36 +36,24 @@ class JobOffer(BaseModel):
         max_length=20,
         choices=JobEngagement.choices,
         default=JobEngagement.FULL_TIME,
-        help_text=_(
-            "This field contains the type of Job Offer"
-        ),
     )
     category = models.CharField(
         verbose_name=_("category"),
         max_length=30,
         choices=JobCategory.choices,
         default=JobCategory.OTHER,
-        help_text=_(
-            "This field contains the category of Job Offer"
-        ),
     )
     required_work_experience = models.CharField(
         verbose_name=_("required work experience"),
         max_length=20,
         choices=WorkExperience.choices,
         default=WorkExperience.NONE,
-        help_text=_(
-            "This field represents requiered work experience"
-        ),
     )
     required_education = models.CharField(
         verbose_name=_("required education"),
         max_length=20,
         choices=Education.choices,
         default=Education.NONE,
-        help_text=_(
-            "This field represents requiered education"
-        ),
     )
     additional_skills = models.CharField(
         verbose_name=_("additional skills"),
