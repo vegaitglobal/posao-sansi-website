@@ -1,11 +1,10 @@
-from decouple import Csv, config
+from decouple import config
 
 THIRD_PARTY_APPS = [
     "django_extensions",
     "rest_framework",
     "rest_framework.authtoken",
     "drf_spectacular",
-    "modeltranslation",
 ]
 
 THIRD_PARTY_MIDDLEWARE = [

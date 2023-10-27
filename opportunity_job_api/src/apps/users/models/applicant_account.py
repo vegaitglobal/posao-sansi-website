@@ -1,18 +1,9 @@
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import BaseModel
 from apps.users.enums import Education, WorkExperience
-
-TWO_MB_IN_BITES = 2 * 1024 * 1024
-
-
-def file_size(value) -> None:
-    limit = TWO_MB_IN_BITES
-    if value.size > limit:
-        raise ValidationError("File too large. Size should not exceed 2 MB.")
 
 
 class ApplicantAccount(BaseModel):
@@ -40,14 +31,12 @@ class ApplicantAccount(BaseModel):
         max_length=14,
         choices=WorkExperience.choices,
         default=WorkExperience.NONE,
-        help_text=_("Work experience of the applicant"),
     )
     education = models.CharField(
         verbose_name=_("education level"),
         max_length=14,
         choices=Education.choices,
         default=Education.NONE,
-        help_text=_("Education of the applicant"),
     )
     about = models.TextField(
         verbose_name=_("about me"),
@@ -59,5 +48,4 @@ class ApplicantAccount(BaseModel):
         upload_to="uploads/users/applicant_account/",
         blank=True,
         default=None,
-        validators=[file_size],
     )

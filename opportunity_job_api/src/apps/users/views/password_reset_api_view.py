@@ -1,7 +1,9 @@
 from http.client import BAD_REQUEST
+
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from rest_framework.views import APIView
+
 from apps.users.serializers import PasswordResetSerializer
 
 

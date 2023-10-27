@@ -5,8 +5,8 @@ from apps.users.views import (
     EmployerRegistrationAPIView,
     LoginAPIView,
     LogoutAPIView,
-    PasswordResetAPIView,
     PasswordForgottenAPIView,
+    PasswordResetAPIView,
     StatisticsAPIView,
 )
 

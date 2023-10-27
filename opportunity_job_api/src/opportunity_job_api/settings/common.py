@@ -27,6 +27,10 @@ PROJECT_TEMPLATES = [
 sys.path.append(normpath(join(PROJECT_ROOT, "apps")))
 
 INSTALLED_APPS = [
+    # "modeltranslation" is third party app, and it
+    # needs to be above "django.contrib.admin":
+    "modeltranslation",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
