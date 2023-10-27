@@ -14,9 +14,6 @@ WORKDIR         /usr/app
 
 FROM base AS production
 
-RUN npm install -g serve
-RUN npm run build
-
 CMD [ "sh", "/usr/app/start_prod.sh" ]
 
 ##########################
