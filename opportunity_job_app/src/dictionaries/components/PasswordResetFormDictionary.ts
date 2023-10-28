@@ -1,4 +1,4 @@
-import { PopupDictionary } from "@/app/[lang]/dictionaries/components/PopupDictionary";
+import { PopupDictionary } from "@/dictionaries/components/PopupDictionary";
 
 interface PasswordResetFormErrorsDictionary {
   passwordMinLength: string;
