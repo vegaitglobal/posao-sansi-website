@@ -1,48 +1,49 @@
 "use client";
 
-import { User } from "@/api/models/User";
+import { Auth } from "@/api/models/Auth";
 import "./HomeCardLinks.scss";
 import React, { useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import HomeCardLink from "@/components/HomeCardLink/HomeCardLink";
 import { useDictionary } from "@/hooks/useDictionary";
+import { AccountTypes } from "@/enums";
 
 
 const HomeCardLinks = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ user, setUser ] = useState<User>();
+  const [ auth, setAuth ] = useState<Auth>();
   const { dict } = useDictionary();
 
   useEffect(() => {
     if (isLoading) {
-      if (AuthService.getUser() !== null) {
-        setUser(AuthService.getUser());
+      if (AuthService.getAuth() !== null) {
+        setAuth(AuthService.getAuth());
       }
       setIsLoading(false);
     }
   }, []);
 
   const renderButtons = () => {
-    if (!user) {
+    if (!auth) {
       return (
         <>
           <HomeCardLink
             title={ dict.homeCardLinks.anonymousApplicantCardLink.title }
             label={ dict.homeCardLinks.anonymousApplicantCardLink.label }
-            href="/register"
+            href={ `/register?accountType=${ AccountTypes.applicant }` }
             imageURL="/images/card-1-img.svg"
           />
           <HomeCardLink
             title={ dict.homeCardLinks.anonymousEmployerCardLink.title }
             label={ dict.homeCardLinks.anonymousEmployerCardLink.label }
-            href="/register"
+            href={ `/register?accountType=${ AccountTypes.employer }` }
             imageURL="/images/card-2-img.svg"
           />
         </>
       );
     }
 
-    if (user.account_type === "applicant") {
+    if (auth.account_type === AccountTypes.applicant) {
       return (
         <HomeCardLink
           title={ dict.homeCardLinks.applicantCardLink.title }
@@ -52,7 +53,7 @@ const HomeCardLinks = () => {
         />
       );
     }
-    if (user.account_type === "employer") {
+    if (auth.account_type === AccountTypes.employer) {
       return (
         <HomeCardLink
           title={ dict.homeCardLinks.employerCardLink.title }

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.admin import TranslationAdmin
 
 from apps.common.admin import ModelAdmin
 from apps.common.utils import get_model_admin_change_details_url
@@ -8,7 +9,7 @@ from apps.jobs.models import JobOffer
 
 
 @admin.register(JobOffer)
-class JobOfferAdmin(ModelAdmin):
+class JobOfferAdmin(ModelAdmin, TranslationAdmin):
     list_display = (
         "job_name",
         "is_active",

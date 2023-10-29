@@ -2,7 +2,7 @@ from django.db.models import TextChoices
 from django.utils.translation import gettext_lazy as _
 
 
-class JobEngagement(TextChoices):
+class JobEngagements(TextChoices):
     COURSE = "course", _("Course or internship")
     UNPAID_INTERNSHIP = "unpaid_internship", _("Unpaid internship")
     PAIN_INTERNSHIP = "paid_internship", _("Paid internship")
@@ -10,7 +10,7 @@ class JobEngagement(TextChoices):
     FULL_TIME = "full_time", _("Full time job offer")
 
 
-class JobCategory(TextChoices):
+class JobCategories(TextChoices):
     SALES_AND_TRADE = "sales_and_trade", _("Sales and Trade")
     TOURISM_AND_CATERING = "tourism_and_catering", _("Tourism and Catering")
     TRANSPORT_AND_LOGISTICS = "transport_and_logistics", _("Transport and Logistics")

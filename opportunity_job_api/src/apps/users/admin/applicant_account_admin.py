@@ -1,13 +1,14 @@
 from django.contrib import admin
 from django.db.models import QuerySet
 from django.db.models.functions import Collate
+from modeltranslation.admin import TranslationAdmin
 
 from apps.common.admin import ModelAdmin
 from apps.users.models import ApplicantAccount
 
 
 @admin.register(ApplicantAccount)
-class ApplicantAccountAdmin(ModelAdmin):
+class ApplicantAccountAdmin(ModelAdmin, TranslationAdmin):
     list_display = (
         "first_name",
         "last_name",

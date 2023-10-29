@@ -9,6 +9,7 @@ import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
 import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
+import { AccountTypes } from "@/enums";
 
 
 interface MyJobOfferDetailsProps {
@@ -51,11 +52,10 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
   }, []);
 
   const checkAccess = () => {
-    const user = AuthService.getUser();
-
-    if (!user) {
+    const auth = AuthService.getAuth();
+    if (!auth) {
       router.push("/login");
-    } else if (user.account_type !== "applicant" && user.account_type !== "employer") {
+    } else if (auth.account_type !== AccountTypes.applicant && auth.account_type !== AccountTypes.employer) {
       router.push("/");
     } else {
       setHasAccess(true);

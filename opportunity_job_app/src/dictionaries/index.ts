@@ -1,7 +1,7 @@
 import en from "./en.json";
 import sr from "./sr.json";
 import { SERBIAN_LOCALE } from "@/appData/locales";
-import { Dictionary } from "@/app/[lang]/dictionaries/Dictionary";
+import { Dictionary } from "@/dictionaries/Dictionary";
 
 
 const dictionaries: any = {

@@ -2,12 +2,13 @@
 
 import "./Header.scss";
 import React, { useCallback, useEffect, useState } from "react";
-import { User } from "@/api/models/User";
+import { Auth } from "@/api/models/Auth";
 import { AuthService } from "@/api/authService";
 import { anonymousUserLinks, applicantLinks, employerLinks, languageLinks, MainMenuLink } from "@/appData/links";
 import { useDictionary } from "@/hooks/useDictionary";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { AccountTypes } from "@/enums";
 
 interface MainMenuLinks {
   [x: string]: MainMenuLink[];
@@ -25,16 +26,16 @@ const Header = () => {
   const pathname = usePathname();
   const { slug, dict }: Dictionary = useDictionary();
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ user, setUser ] = useState<User | undefined>();
+  const [ auth, setAuth ] = useState<Auth | undefined>();
   const [ hasOpenedLanguageMenu, setHasOpenedLanguageMenu ] = useState<boolean>(false);
   const [ hasOpenedMainMenu, setHasOpenedMainMenu ] = useState<boolean>(false);
 
   useEffect(() => {
     if (isLoading) {
-      setUser(AuthService.getUser());
+      setAuth(AuthService.getAuth());
       setIsLoading(false);
     }
-  }, [ user, isLoading ]);
+  }, [ auth, isLoading ]);
 
   const toggleLanguageMenu = () => {
     setHasOpenedLanguageMenu(!hasOpenedLanguageMenu);
@@ -52,9 +53,9 @@ const Header = () => {
   }, []);
 
   const mainMenuLinks: MainMenuLinks = {
-    "anonymous": anonymousUserLinks,
-    "employer": employerLinks,
-    "applicant": applicantLinks
+    anonymous: anonymousUserLinks,
+    [AccountTypes.applicant]: applicantLinks,
+    [AccountTypes.employer]: employerLinks,
   };
 
   const changeLanguage = (languageSlug: string) => {
@@ -113,8 +114,8 @@ const Header = () => {
     return (
       <>
         <ul className={ `header__nav-list ${ hasOpenedMainMenu ? "header__nav-list--active" : "" }` }>
-          { user ? renderMainMenuLinks(mainMenuLinks[user.account_type]) : renderMainMenuLinks(anonymousUserLinks) }
-          { user && (
+          { auth ? renderMainMenuLinks(mainMenuLinks[auth.account_type]) : renderMainMenuLinks(anonymousUserLinks) }
+          { auth && (
             <li className="header__nav-item" key="logout-main-menu-item" onClick={ logout }>
               <div className="header__nav-link">
                 <img className="header__nav-icon" src="/images/sing-out.svg" alt="icon"/>
@@ -124,7 +125,7 @@ const Header = () => {
           ) }
         </ul>
         <button className="header__hamburger-btn" type="button" onClick={ toggleMainMenu }>
-          { user ? <img src="/images/user.svg" alt="user"/> :
+          { auth ? <img src="/images/user.svg" alt="user"/> :
             <img src="/images/hamburger-btn.svg" alt="hamburger-btn"/> }
         </button>
       </>

@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import BaseModel
-from apps.users.enums import Education, WorkExperience
+from apps.users.enums import EducationLevels, WorkExperienceLevels
 
 
 class ApplicantAccount(BaseModel):
@@ -29,14 +29,14 @@ class ApplicantAccount(BaseModel):
     work_experience = models.CharField(
         verbose_name=_("work experience"),
         max_length=14,
-        choices=WorkExperience.choices,
-        default=WorkExperience.NONE,
+        choices=WorkExperienceLevels.choices,
+        default=WorkExperienceLevels.NONE,
     )
     education = models.CharField(
         verbose_name=_("education level"),
         max_length=14,
-        choices=Education.choices,
-        default=Education.NONE,
+        choices=EducationLevels.choices,
+        default=EducationLevels.NONE,
     )
     about = models.TextField(
         verbose_name=_("about me"),

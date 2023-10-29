@@ -78,6 +78,11 @@
       "linkButtonLabel": "Nazad na početnu"
     }
   },
+  "commonFormErrors": {
+    "passwordMinLength": "Lozinka mora da sadrži najmanje 8 karaktera",
+    "passwordsNotMatch": "Lozinke nisu iste",
+    "requiredField": "Ovo polje je obavezno"
+  },
   "passwordResetForm": {
     "topTextFirstLine": "Unesite novu lozinku.",
     "topTextSecondLine": "Lozinka mora biti minimum osam karaktera, jedan specijalan karakter i jedno veliko slovo.",
@@ -85,16 +90,59 @@
     "passwordFieldPlaceholder": "Unesite novu lozinku",
     "passwordConfirmFieldLabel": "Potvrdi lozinku:",
     "passwordConfirmFieldPlaceholder": "Ponovite novu lozinku",
-    "errors": {
-      "passwordMinLength": "Lozinka mora da sadrži najmanje 8 karaktera",
-      "passwordsNotMatch": "Lozinke nisu iste"
-    },
     "submitButtonLabel": "RESETUJ LOZINKU",
     "popup": {
       "primaryText": "Uspešno ste promenili lozinku.",
       "secondaryText": "Sada se možete prijaviti sa novom lozinkom.",
       "linkButtonLabel": "Prijava"
     }
+  },
+  "registrationForm": {
+    "topText": "U padajućem meniju odaberite koji tip naloga želite da kreirate: Poslodavac ili Aplikant",
+    "applicantOptionLabel": "Applicant",
+    "employerOptionLabel": "Employer",
+    "emailFieldLabel": "E-mail adresa:",
+    "emailFieldPlaceholder": "Vaša e-mail adresa",
+    "passwordFieldLabel": "Lozinka:",
+    "passwordFieldPlaceholder": "Odaberite lozinku",
+    "passwordConfirmFieldLabel": "Ponovite lozinku:",
+    "passwordConfirmFieldPlaceholder": "Ponovo unesite odabranu lozinku",
+    "submitButtonLabel": "KREIRAJ NALOG",
+    "successPopup": {
+      "primaryText": "Vaša registracije je uspešno obavljena!",
+      "secondaryText": "Uskoro će Vam se javiti neko iz udruženja ATINA.",
+      "linkButtonLabel": "Nazad na početnu"
+    },
+    "errorPopup": {
+      "primaryText": "Došlo je do greške.",
+      "secondaryText": "Molimo Vas pokušajte kasnije."
+    }
+  },
+  "applicantRegistrationForm": {
+    "firstNameFieldLabel": "Ime:",
+    "firstNameFieldPlaceholder": "Vaše ime",
+    "lastNameFieldLabel": "Prezime:",
+    "lastNameFieldPlaceholder": "Vaše prezime",
+    "workExperienceFieldLabel": "Radno iskustvo:",
+    "workExperienceFieldPlaceholder": "Vaše radno iskustvo",
+    "educationFieldLabel": "Nivo obrazovanja:",
+    "educationFieldPlaceholder": "Vaš nivo obrazovanja",
+    "aboutFieldLabel": "O meni:",
+    "aboutFieldPlaceholder": "Napišite nešto o sobi"
+  },
+  "employerRegistrationForm": {
+    "companyNameFieldLabel": "Naziv kompanije:",
+    "companyNameFieldPlaceholder": "Naziv Vaše kompanije",
+    "pibFieldLabel": "PIB:",
+    "pibFieldPlaceholder": "Poreski identifikacioni broj",
+    "addressFieldLabel": "Adresa:",
+    "addressFieldPlaceholder": "Adresa Vaše kompanije",
+    "phoneNumberFieldLabel": "Broj telefona:",
+    "phoneNumberFieldPlaceholder": "Vaš broj telefona",
+    "urlFieldLabel": "URL:",
+    "urlFieldPlaceholder": "URL Vašeg web sajta",
+    "aboutFieldLabel": "O kompaniji:",
+    "aboutFieldPlaceholder": "Napišite nešto o kompaniji"
   },
   "activeJobOfferList": {
     "title": "Aktivni poslovi:",

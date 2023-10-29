@@ -39,7 +39,7 @@
   fields:
     user: 3
     company_name: Vincic
-    pib: N123456
+    pib: 123456
     address: NS, Blvd Oslobodjenja 1
     phone_number: +000000000
     url: https://google.com/
@@ -60,7 +60,7 @@
   fields:
     user: 4
     company_name: Lukić
-    pib: N3232323
+    pib: 3232323
     address: NS, Cara Dušana
     phone_number: +232323232323
     url: https://google.com/

@@ -1,4 +1,5 @@
 import API from "./baseApi";
+import { ApplicantAccount } from "@/api/models/ApplicantAccount";
 
 export const AuthService = {
   login: async (email: string, password: string) => {
@@ -6,39 +7,42 @@ export const AuthService = {
       email: email,
       password: password,
     });
-    const userDataString = JSON.stringify({
+    const authJSON = JSON.stringify({
       token: response.data.token,
       id: response.data.id,
       account_type: response.data.account_type,
       account_id: response.data.account_id
     });
-    localStorage.setItem("user", userDataString);
+    localStorage.setItem("auth", authJSON);
   },
   isAuthenticated: () => {
-    return !!AuthService.getUser();
+    return !!AuthService.getAuth();
   },
-  getUser: () => {
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      return JSON.parse(userData);
+  getAuth: () => {
+    const authJSON = localStorage.getItem("auth");
+    if (authJSON) {
+      return JSON.parse(authJSON);
     } else {
       return null;
     }
   },
   getAuthorizationHeaders: () => {
-    const userJSON = localStorage.getItem("user");
-    const user = userJSON ? JSON.parse(userJSON) : null;
-    return user ? { Authorization: `Bearer ${ user?.token }` } : {};
+    const authJSON = localStorage.getItem("auth");
+    const auth = authJSON ? JSON.parse(authJSON) : null;
+    return auth ? { Authorization: `Bearer ${ auth.token }` } : {};
   },
   logout: async () => {
     try {
       await API.post("logout/", {});
     } catch (e) {
     }
-    localStorage.removeItem("user");
+    localStorage.removeItem("auth");
   },
-  register: (userData: Object, type: any) => {
-    return API.post(`register-${ type }/`, userData);
+  registerApplicant: (data: ApplicantAccount) => {
+    return API.post(`register-applicant/`, data);
+  },
+  registerEmployer: (data: Object) => {
+    return API.post(`register-employer/`, data);
   },
   requestPasswordReset: (email: string) => {
     return API.post("password-forgotten/", { email: email });

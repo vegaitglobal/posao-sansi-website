@@ -1,0 +1,65 @@
+@import "./../../scss/style.scss";
+
+$field-height: 40px;
+
+.form-field--select {
+  position: relative;
+}
+
+.form-field__value, .form-field__option {
+  display: flex;
+  align-items: center;
+  height: $field-height;
+  padding: 0 10px;
+  cursor: pointer;
+  font-size: 100%;
+  color: inherit;
+}
+
+.form-field__value, .form-field__options {
+  background-color: white;
+  border: 1px solid $purple-primary;
+  border-radius: 4px;
+}
+
+.select-carrot {
+  position: absolute;
+  right: 14px;
+}
+
+.form-field:hover .select-carrot {
+  transform: rotate(180deg);
+}
+
+.form-field__options {
+  position: absolute;
+  width: 100%;
+  top: calc($field-height + $form-field-label-height);
+  z-index: 2;
+  visibility: hidden;
+  padding: 3px;
+  box-shadow: 0 6px 6px 0 rgba($black, 0.25);
+}
+
+.form-field--no-label .form-field__options {
+  top: $field-height;
+}
+
+.form-field:hover .form-field__options {
+  visibility: visible;
+}
+
+.form-field__option:hover {
+  background-color: $purple-hover;
+  color: white;
+}
+
+.form-field__option--selected {
+  background-color: $purple-primary;
+  color: white;
+}
+
+.form-field--reversed-colors .form-field__value {
+  background-color: $purple-primary;
+  color: white;
+}

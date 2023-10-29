@@ -1,13 +1,14 @@
 from django.contrib import admin
 from django.db.models import QuerySet
 from django.db.models.functions import Collate
+from modeltranslation.admin import TranslationAdmin
 
 from apps.common.admin import ModelAdmin
 from apps.users.models import EmployerAccount
 
 
 @admin.register(EmployerAccount)
-class EmployerAccountAdmin(ModelAdmin):
+class EmployerAccountAdmin(ModelAdmin, TranslationAdmin):
     list_display = (
         "company_name",
         "user",

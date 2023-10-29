@@ -1,27 +1,7 @@
 @import "./../../scss/style.scss";
 
-.input-field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0;
-}
-
-.input-field__input {
+.input-field__value--input {
   height: 40px;
   border: 1px solid $purple-primary;
   border-radius: 4px;
-}
-
-.input-field--error .input-field__input {
-  border-color: red;
-  background-color: #ffdfdf;
-}
-
-.input-field__input::placeholder {
-  color: #a8a8a8;
-}
-
-.input-field__error {
-  color: red;
 }
