@@ -152,6 +152,14 @@
     "title": "Moji poslovi:",
     "loadMoreButtonLabel": "UČITAJ JOŠ"
   },
+  "jobOfferCard": {
+    "activeFlagLabel": "AKTIVAN",
+    "archivedFlagLabel": "ARHIVIRAN",
+    "enrolledFlagLabel": "KONKURISALI STE",
+    "jobDescriptionLabel": "Opis posla:",
+    "engagementLabel": "Angažman:",
+    "applicationDeadlineLabel": "Rok za prijavu:"
+  },
   "jobOfferDetails": {
     "backButtonLabel": "Nazad na poslove",
     "applicationDeadlineLabel": "Rok za prijavu:",
