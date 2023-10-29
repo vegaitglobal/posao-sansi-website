@@ -55,9 +55,8 @@ class JobOffer(BaseModel):
         choices=EducationLevels.choices,
         default=EducationLevels.NONE,
     )
-    additional_skills = models.CharField(
+    additional_skills = models.TextField(
         verbose_name=_("additional skills"),
-        max_length=250,
         blank=True
     )
     is_active = models.BooleanField(
