@@ -31,12 +31,12 @@ export function deepCopy(value: object | []): object | [] {
 }
 
 export function mapTextChoicesFieldOptionsToSelectOptions(options: TextChoicesFieldOptions): SelectOption[] {
-  return Object.entries(options).map(([ value, label ]) => ({ value: value, label: label }));
+  return Object.entries(options).map(([value, label]) => ({ value: value, label: label }));
 }
 
-export const validateFormData = (formData: FormData, dict: Dictionary): FormData => {
+export const validateFormData = <T>(formData: FormData, dict: Dictionary): T => {
   const formDataCopy = deepCopy(formData) as FormData;
-  Object.entries(formDataCopy).forEach(([ key, field ]) => {
+  Object.entries(formDataCopy).forEach(([key, field]) => {
     formDataCopy[key].errors = [];
     if (!field.value.trim()) {
       formDataCopy[key].errors.push(dict.commonFormErrors.requiredField);
@@ -46,5 +46,5 @@ export const validateFormData = (formData: FormData, dict: Dictionary): FormData
       formDataCopy[key].errors.push(dict.commonFormErrors.passwordsNotMatch);
     }
   });
-  return formDataCopy;
+  return formDataCopy as T;
 };

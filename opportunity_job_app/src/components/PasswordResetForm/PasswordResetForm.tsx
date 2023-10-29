@@ -14,7 +14,7 @@ interface PasswordResetFormProps {
   token: string;
 }
 
-interface PasswordResetFormData {
+interface PasswordResetFormData extends FormData {
   password: InputFieldProps;
   password_confirmation: InputFieldProps;
 }
@@ -49,8 +49,8 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
 
-    const validatedFormData = validateFormData(formData as FormData, dict);
-    setFormData(validatedFormData as PasswordResetFormData);
+    const validatedFormData = validateFormData<PasswordResetFormData>(formData, dict);
+    setFormData(validatedFormData);
 
     if (hasFormErrors(validatedFormData)) {
       setShouldDisplayFormErrors(true);
@@ -70,8 +70,11 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
     }
   };
 
-  const updateFormData = (fieldValue: string, fieldName: string) => {
-    const newFormData = { ...formData, [fieldName]: { ...formData[fieldName], value: fieldValue } };
+  const updateFormData = (fieldValue: string, fieldName: keyof PasswordResetFormData) => {
+    const newFormData = {
+      ...formData,
+      [fieldName]: { ...formData[fieldName], value: fieldValue }
+    };
     setFormData(newFormData);
   };
 

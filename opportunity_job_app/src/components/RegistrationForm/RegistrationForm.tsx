@@ -15,16 +15,15 @@ import { AccountTypes } from "@/enums";
 const RegistrationForm = ({}) => {
   const { dict } = useDictionary();
   const searchParams = useSearchParams();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ selectedAccountType, setSelectedAccountType ] = useState<AccountTypes>(() => {
-    let accountType;
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [selectedAccountType, setSelectedAccountType] = useState<AccountTypes>(() => {
     const accountTypeURLParam = searchParams.get("accountType");
-    if (accountTypeURLParam) accountType = AccountTypes[accountTypeURLParam];
-    return accountType || AccountTypes.applicant;
+    if (accountTypeURLParam && accountTypeURLParam === AccountTypes.employer) return AccountTypes.employer;
+    return AccountTypes.applicant;
   });
-  const [ hasOpenedSuccessPopup, setHasOpenedSuccessPopup ] = useState<boolean>(false);
-  const [ hasOpenedErrorPopup, setHasOpenedErrorPopup ] = useState<boolean>(false);
+  const [hasOpenedSuccessPopup, setHasOpenedSuccessPopup] = useState<boolean>(false);
+  const [hasOpenedErrorPopup, setHasOpenedErrorPopup] = useState<boolean>(false);
 
   const accountTypeOptions: SelectOption[] = [
     { value: AccountTypes.applicant, label: dict.registrationForm.applicantOptionLabel },

@@ -1,6 +1,6 @@
-import { InputFieldProps, SelectFieldProps } from "@/types";
+import { FormData, InputFieldProps, SelectFieldProps } from "@/types";
 
-export interface RegistrationFormData {
+export interface RegistrationFormData extends FormData {
   email: InputFieldProps;
   password: InputFieldProps;
   password_confirmation: InputFieldProps;

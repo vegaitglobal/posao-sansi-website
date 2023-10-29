@@ -55,7 +55,7 @@ const SelectField = (
       <div className="form-field__options">
         { options.map(({ value, label }) => {
           let className = "form-field__option";
-          if (selectedOption.value === value) {
+          if (selectedOption!.value === value) {
             className += " form-field__option--selected";
           }
           return (
