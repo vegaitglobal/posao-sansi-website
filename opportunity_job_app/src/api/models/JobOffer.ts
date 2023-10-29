@@ -38,7 +38,7 @@ export interface JobOffer {
     job_description: string;
     location: string;
     application_deadline: string;
-    engagement: JobOfferEngagements;
+    engagement: string;
     category: string;
     required_work_experience: string;
     required_education: string;
@@ -50,12 +50,4 @@ export interface JobOffer {
     company_name: string;
     company_url: string;
     flag?: JobOfferFlag;
-}
-
-export enum JobOfferEngagements {
-    course = "Course or internship",
-    unpaid_internship = "Unpaid internship",
-    paid_internship = "Paid internship",
-    part_time = "Part time job offer",
-    full_time = "Full time job offer",
 }

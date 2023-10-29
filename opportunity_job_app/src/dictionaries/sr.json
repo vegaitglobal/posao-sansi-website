@@ -107,7 +107,16 @@
     "passwordFieldPlaceholder": "Odaberite lozinku",
     "passwordConfirmFieldLabel": "Ponovite lozinku:",
     "passwordConfirmFieldPlaceholder": "Ponovo unesite odabranu lozinku",
-    "submitButtonLabel": "KREIRAJ NALOG"
+    "submitButtonLabel": "KREIRAJ NALOG",
+    "successPopup": {
+      "primaryText": "Vaša registracije je uspešno obavljena!",
+      "secondaryText": "Uskoro će Vam se javiti neko iz udruženja ATINA.",
+      "linkButtonLabel": "Nazad na početnu"
+    },
+    "errorPopup": {
+      "primaryText": "Došlo je do greške.",
+      "secondaryText": "Molimo Vas pokušajte kasnije."
+    }
   },
   "applicantRegistrationForm": {
     "firstNameFieldLabel": "Ime:",

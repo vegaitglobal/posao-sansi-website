@@ -1,5 +1,5 @@
 import "./job-offer-card.scss";
-import { JobOffer, JobOfferEngagements } from "@/api/models/JobOffer";
+import { JobOffer } from "@/api/models/JobOffer";
 import { mapStringToLocalDateString } from "@/utils";
 
 interface JobOfferProps {
@@ -30,7 +30,7 @@ const JobOfferCard = ({ jobOffer, listPathname }: JobOfferProps) => {
       <div className="job-offer__row">
         Angažman:&nbsp;
         <span className="job-offer__engagement-value">
-            { JobOfferEngagements[jobOffer.engagement as unknown as keyof typeof JobOfferEngagements].toUpperCase() }
+            { jobOffer.engagement && jobOffer.engagement.toUpperCase() }
         </span>
       </div>
       <div className="job-offer__row job-offer__application-deadline">

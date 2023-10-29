@@ -7,7 +7,7 @@ interface FieldErrorsProps {
 const FieldErrors = ({ errors }: FieldErrorsProps) => {
   return (
     <div className="form-field__error-container">
-      { errors?.map((error, index) => (
+      { errors && errors.map((error, index) => (
         <span key={ index } className="form-field__error">{ error }</span>
       )) }
     </div>

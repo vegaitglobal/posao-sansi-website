@@ -1,3 +1,5 @@
+import { PopupDictionary } from "@/dictionaries/components/PopupDictionary";
+
 export interface RegistrationFormDictionary {
   topText: string;
   applicantOptionLabel: string;
@@ -9,4 +11,6 @@ export interface RegistrationFormDictionary {
   passwordConfirmFieldLabel: string;
   passwordConfirmFieldPlaceholder: string;
   submitButtonLabel: string;
+  successPopup: PopupDictionary;
+  errorPopup: PopupDictionary;
 }

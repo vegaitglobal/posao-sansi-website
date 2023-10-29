@@ -9,7 +9,7 @@ import { BadRequestResponse } from "@/api/models/BadRequestResponse";
 
 export const validateFormData = (formData: ApplicantFormData, dict: Dictionary): ApplicantFormData => {
   const formDataCopy = deepCopy(formData) as ApplicantFormData;
-  Object.entries(formDataCopy).forEach(([key, field]) => {
+  Object.entries(formDataCopy).forEach(([ key, field ]) => {
     formDataCopy[key].errors = [];
     if (!field.value.trim()) {
       formDataCopy[key].errors.push(dict.commonFormErrors.requiredField);
@@ -25,7 +25,8 @@ export const validateFormData = (formData: ApplicantFormData, dict: Dictionary):
 export const applyAPIFormErrors = (formData: ApplicantFormData, formDataErrors: BadRequestResponse): ApplicantFormData => {
   const erroneousFields = Object.keys(formDataErrors);
   const formDataCopy = deepCopy(formData) as ApplicantFormData;
-  Object.entries(formDataCopy).forEach(([key, _]) => {
+  Object.entries(formDataCopy).forEach(([ key, _ ]) => {
+    formDataCopy[key].errors = [];
     if (erroneousFields.includes(key)) {
       formDataCopy[key].errors = formDataErrors[key];
     } else if (key === "email" && formDataErrors.user?.email) {
