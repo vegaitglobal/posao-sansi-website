@@ -16,13 +16,13 @@ interface PasswordResetFormProps {
 
 interface PasswordResetFormData {
   password: InputFieldProps;
-  passwordConfirmation: InputFieldProps;
+  password_confirmation: InputFieldProps;
 }
 
 const getInitialFormData = (): PasswordResetFormData => {
   return {
     password: { value: "", errors: [] },
-    passwordConfirmation: { value: "", errors: [] },
+    password_confirmation: { value: "", errors: [] },
   };
 };
 
@@ -94,9 +94,9 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
           type="password"
           label={ dict.passwordResetForm.passwordConfirmFieldLabel }
           placeholder={ dict.passwordResetForm.passwordConfirmFieldPlaceholder }
-          value={ formData.passwordConfirmation.value }
-          onChange={ (value) => updateFormData(value, "passwordConfirmation") }
-          errors={ shouldDisplayFormErrors ? formData.passwordConfirmation.errors : [] }
+          value={ formData.password_confirmation.value }
+          onChange={ (value) => updateFormData(value, "password_confirmation") }
+          errors={ shouldDisplayFormErrors ? formData.password_confirmation.errors : [] }
         />
         { responseError && <p className="error-message">{ responseError }</p> }
         <button className="form-submit-button" onClick={ handleSubmit }>
