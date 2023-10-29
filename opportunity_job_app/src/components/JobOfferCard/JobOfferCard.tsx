@@ -19,7 +19,7 @@ const JobOfferCard = ({ jobOffer, listPathname }: JobOfferProps) => {
     <div key={ jobOffer.id } className="job-offer" onClick={ () => goToJobOfferDetails(jobOffer.id) }>
       { jobOffer.flag && (
         <div className="job-offer__flag" style={ jobOffer.flag.style }>
-          { dict.jobOfferCard[jobOffer.flag.labelKey] }
+          { dict.jobOfferCard[jobOffer.flag.labelKey as keyof JobOfferCardDictionary] }
         </div>
       ) }
       <div className="job-offer__row job-offer__name">{ jobOffer.job_name.toUpperCase() }</div>
