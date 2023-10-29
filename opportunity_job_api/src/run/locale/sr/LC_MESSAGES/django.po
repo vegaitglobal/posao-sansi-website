@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-28 09:32-0500\n"
+"POT-Creation-Date: 2023-10-29 10:33-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,7 +125,7 @@ msgid "job name"
 msgstr ""
 
 #: apps/jobs/admin/job_enrollment_admin.py:34
-#: apps/jobs/admin/job_offer_admin.py:29
+#: apps/jobs/admin/job_offer_admin.py:30
 #: apps/users/models/employer_account.py:21
 msgid "company name"
 msgstr ""
@@ -270,7 +270,7 @@ msgstr ""
 msgid "additional skills"
 msgstr ""
 
-#: apps/jobs/models/job_offer.py:64
+#: apps/jobs/models/job_offer.py:63
 msgid "is active"
 msgstr ""
 
@@ -391,19 +391,23 @@ msgstr ""
 msgid "PIB"
 msgstr ""
 
-#: apps/users/models/employer_account.py:29
+#: apps/users/models/employer_account.py:27
+msgid "In Serbia, this number contains 9 numeric characters"
+msgstr ""
+
+#: apps/users/models/employer_account.py:31
 msgid "company address"
 msgstr ""
 
-#: apps/users/models/employer_account.py:33
+#: apps/users/models/employer_account.py:35
 msgid "company phone number"
 msgstr ""
 
-#: apps/users/models/employer_account.py:37
+#: apps/users/models/employer_account.py:39
 msgid "company url"
 msgstr ""
 
-#: apps/users/models/employer_account.py:40
+#: apps/users/models/employer_account.py:42
 msgid "about company"
 msgstr ""
 
