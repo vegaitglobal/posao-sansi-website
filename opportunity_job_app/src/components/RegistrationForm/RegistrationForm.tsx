@@ -49,41 +49,48 @@ const RegistrationForm = ({}) => {
 
   return (
     <div className="wrapper">
-      <p className="welcome-sentence">{ dict.registrationForm.topText }</p>
-      <div className="account-type-selector-wrapper">
-        <SelectField
-          value={ selectedAccountType }
-          onChange={ (value: AccountTypes) => setSelectedAccountType(value) }
-          options={ accountTypeOptions }
-          withReversedColors
+      <div className="wrapper__left">
+        <p className="welcome-sentence">{ dict.registrationForm.topText }</p>
+        <div className="account-type-selector-wrapper">
+          <SelectField
+            value={ selectedAccountType }
+            onChange={ (value: AccountTypes) => setSelectedAccountType(value) }
+            options={ accountTypeOptions }
+            withReversedColors
+          />
+        </div>
+        { selectedAccountType === AccountTypes.applicant && (
+          <ApplicantRegistrationForm
+            onSuccess={ () => setHasOpenedSuccessPopup(true) }
+            onError={ () => setHasOpenedErrorPopup(true) }
+          />
+        ) }
+        { selectedAccountType === AccountTypes.employer && (
+          <EmployerRegistrationForm
+            onSuccess={ () => setHasOpenedSuccessPopup(true) }
+            onError={ () => setHasOpenedErrorPopup(true) }
+          />
+        ) }
+        <Popup
+          isOpened={ hasOpenedSuccessPopup }
+          primaryText={ dict.registrationForm.successPopup.primaryText }
+          secondaryText={ dict.registrationForm.successPopup.secondaryText }
+          linkButton={ { url: "/", label: dict.registrationForm.successPopup.linkButtonLabel } }
+          onClose={ () => setHasOpenedSuccessPopup(false) }
+        />
+        <Popup
+          isOpened={ hasOpenedErrorPopup }
+          primaryText={ dict.registrationForm.errorPopup.primaryText }
+          secondaryText={ dict.registrationForm.errorPopup.secondaryText }
+          onClose={ () => setHasOpenedErrorPopup(false) }
         />
       </div>
-      { selectedAccountType === AccountTypes.applicant && (
-        <ApplicantRegistrationForm
-          onSuccess={ () => setHasOpenedSuccessPopup(true) }
-          onError={ () => setHasOpenedErrorPopup(true) }
-        />
-      ) }
-      { selectedAccountType === AccountTypes.employer && (
-        <EmployerRegistrationForm
-          onSuccess={ () => setHasOpenedSuccessPopup(true) }
-          onError={ () => setHasOpenedErrorPopup(true) }
-        />
-      ) }
-      <Popup
-        isOpened={ hasOpenedSuccessPopup }
-        primaryText={ dict.registrationForm.successPopup.primaryText }
-        secondaryText={ dict.registrationForm.successPopup.secondaryText }
-        linkButton={ { url: "/", label: dict.registrationForm.successPopup.linkButtonLabel } }
-        onClose={ () => setHasOpenedSuccessPopup(false) }
-      />
-      <Popup
-        isOpened={ hasOpenedErrorPopup }
-        primaryText={ dict.registrationForm.errorPopup.primaryText }
-        secondaryText={ dict.registrationForm.errorPopup.secondaryText }
-        onClose={ () => setHasOpenedErrorPopup(false) }
-      />
+      <div className="wrapper__right">
+        <img className="desktop-image__background" src="/images/form-image-under.svg" alt="ilustration background"/>
+        <img className="desktop-image__overlay" src="/images/form-image-over.svg" alt="ilustration"/>
+      </div>
     </div>
+
   );
 };
 
