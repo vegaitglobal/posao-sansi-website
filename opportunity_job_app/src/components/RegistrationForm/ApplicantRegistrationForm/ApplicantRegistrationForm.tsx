@@ -18,6 +18,7 @@ import { initialApplicantFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
 import { validateFormData } from "@/utils";
+import { FormData } from "@/types";
 
 
 interface ApplicantRegistrationFormProps {
@@ -28,10 +29,10 @@ interface ApplicantRegistrationFormProps {
 
 const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistrationFormProps) => {
   const { dict } = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<ApplicantFormData>(initialApplicantFormData);
-  const [ responseError, setResponseError ] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
+  const [formData, setFormData] = useState<ApplicantFormData>(initialApplicantFormData);
+  const [responseError, setResponseError] = useState<string>("");
 
   useEffect(() => {
     if (isLoading) {
@@ -45,7 +46,7 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
 
-    const validatedFormData = validateFormData(formData, dict);
+    const validatedFormData = validateFormData(formData as FormData, dict) as ApplicantFormData;
     setFormData(validatedFormData);
 
     if (hasFormErrors(validatedFormData)) {
@@ -61,7 +62,8 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
       const accountData = mapFormDataToApplicantAccount(formData);
       await AuthService.registerApplicant(accountData);
       onSuccess();
-      setFormData(clearFormData(formData));
+      const clearedFormData = clearFormData(formData as FormData) as ApplicantFormData;
+      setFormData(clearedFormData);
     } catch (error: any) {
       handleResponseError(error);
     }
@@ -70,7 +72,7 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
   const handleResponseError = (error: any) => {
     if (error.response?.data?.errors) {
       const validatedFormData = applyAPIFormErrors(formData, error.response.data.errors);
-      setFormData(validatedFormData);
+      setFormData(validatedFormData as ApplicantFormData);
       setResponseError(error.response.data.errors.non_field_errors);
       setShouldDisplayFormErrors(true);
     } else {

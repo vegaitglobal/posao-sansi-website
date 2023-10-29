@@ -16,6 +16,7 @@ import { initialEmployerFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
 import { validateFormData } from "@/utils";
+import { FormData } from "@/types";
 
 
 interface EmployerRegistrationFormProps {
@@ -26,10 +27,10 @@ interface EmployerRegistrationFormProps {
 
 const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFormProps) => {
   const { dict } = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<EmployerFormData>(initialEmployerFormData);
-  const [ responseError, setResponseError ] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
+  const [formData, setFormData] = useState<EmployerFormData>(initialEmployerFormData);
+  const [responseError, setResponseError] = useState<string>("");
 
   useEffect(() => {
     if (isLoading) {
@@ -41,7 +42,7 @@ const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFo
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
 
-    const validatedFormData = validateFormData(formData, dict);
+    const validatedFormData = validateFormData(formData as FormData, dict) as EmployerFormData;
     setFormData(validatedFormData);
 
     if (hasFormErrors(validatedFormData)) {
@@ -57,7 +58,8 @@ const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFo
       const accountData = mapFormDataToEmployerAccount(formData);
       await AuthService.registerEmployer(accountData);
       onSuccess();
-      setFormData(clearFormData(formData));
+      const clearedFormData = clearFormData(formData as FormData) as EmployerFormData;
+      setFormData(clearedFormData);
     } catch (error: any) {
       handleResponseError(error);
     }
@@ -66,7 +68,7 @@ const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFo
   const handleResponseError = (error: any) => {
     if (error.response?.data?.errors) {
       const validatedFormData = applyAPIFormErrors(formData, error.response.data.errors);
-      setFormData(validatedFormData);
+      setFormData(validatedFormData as EmployerFormData);
       setResponseError(error.response.data.errors.non_field_errors);
       setShouldDisplayFormErrors(true);
     } else {

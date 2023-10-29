@@ -7,6 +7,7 @@ import InputField from "../InputField/InputField";
 import Popup from "@/components/Popup/Popup";
 import { validateFormData } from "@/utils";
 import { useDictionary } from "@/hooks/useDictionary";
+import { FormData } from "@/types";
 
 interface PasswordResetFormProps {
   token: string;
@@ -15,24 +16,24 @@ interface PasswordResetFormProps {
 interface PasswordResetFormData {
   [key: string]: {
     value: string,
-    error: string
+    error: string[]
   };
 }
 
 const getInitialFormData = (): PasswordResetFormData => {
   return {
-    password: { value: "", error: "" },
-    passwordConfirmation: { value: "", error: "" },
+    password: { value: "", error: [] },
+    passwordConfirmation: { value: "", error: [] },
   };
 };
 
 const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const { dict } = useDictionary();
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
-  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<PasswordResetFormData>(getInitialFormData);
-  const [ responseError, setResponseError ] = useState<string>("");
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [hasOpenedPopup, setHasOpenedPopup] = useState<boolean>(false);
+  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
+  const [formData, setFormData] = useState<PasswordResetFormData>(getInitialFormData);
+  const [responseError, setResponseError] = useState<string>("");
 
   useEffect(() => {
     checkAccess();
@@ -49,7 +50,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
 
-    const validatedFormData = validateFormData(formData);
+    const validatedFormData = validateFormData(formData as FormData, dict) as PasswordResetFormData;
     setFormData(validatedFormData);
 
     if (hasFormErrors(validatedFormData)) {

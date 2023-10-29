@@ -6,11 +6,12 @@ import { ApplicantFormData, EmployerFormData } from "@/components/RegistrationFo
 import { initialApplicantFormData } from "@/components/RegistrationForm/data";
 import { BadRequestResponse } from "@/api/models/BadRequestResponse";
 import { EmployerAccount } from "@/api/models/EmployerAccount";
+import { FormData } from "@/types";
 
 export const applyAPIFormErrors = (formData: ApplicantFormData | EmployerFormData, formDataErrors: BadRequestResponse): ApplicantFormData | EmployerFormData => {
   const erroneousFields = Object.keys(formDataErrors);
   const formDataCopy = deepCopy(formData) as ApplicantFormData | EmployerFormData;
-  Object.entries(formDataCopy).forEach(([ key, _ ]) => {
+  Object.entries(formDataCopy).forEach(([key, _]) => {
     formDataCopy[key].errors = [];
     if (erroneousFields.includes(key)) {
       formDataCopy[key].errors = formDataErrors[key];
@@ -74,8 +75,8 @@ export function mapFormDataToEmployerAccount(formData: EmployerFormData): Employ
   };
 }
 
-export function clearFormData(formData: ApplicantFormData): ApplicantFormData {
-  const formDataCopy = deepCopy(formData);
-  Object.entries(formDataCopy).forEach(([ key, _ ]) => formDataCopy[key].value = "");
+export function clearFormData(formData: FormData): FormData {
+  const formDataCopy = deepCopy(formData) as FormData;
+  Object.entries(formDataCopy).forEach(([key, _]) => formDataCopy[key].value = "");
   return formDataCopy;
 }

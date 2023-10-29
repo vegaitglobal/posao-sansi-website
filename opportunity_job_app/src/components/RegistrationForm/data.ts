@@ -1,4 +1,4 @@
-import { ApplicantFormData } from "@/components/RegistrationForm/types";
+import { ApplicantFormData, EmployerFormData } from "@/components/RegistrationForm/types";
 
 const initialCredentialsFormData = {
   email: { value: "", errors: [] },
@@ -15,7 +15,7 @@ export const initialApplicantFormData: ApplicantFormData = {
   about: { value: "", errors: [] },
 };
 
-export const initialEmployerFormData: ApplicantFormData = {
+export const initialEmployerFormData: EmployerFormData = {
   ...initialCredentialsFormData,
   company_name: { value: "", errors: [] },
   pib: { value: "", errors: [] },
