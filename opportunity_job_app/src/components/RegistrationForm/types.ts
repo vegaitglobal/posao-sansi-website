@@ -22,3 +22,12 @@ export interface ApplicantFormData extends RegistrationFormData {
   education: SelectFieldProps;
   about: InputFieldProps;
 }
+
+export interface EmployerFormData extends RegistrationFormData {
+  company_name: InputFieldProps;
+  pib: InputFieldProps;
+  address: InputFieldProps;
+  phone_number: InputFieldProps;
+  url: InputFieldProps;
+  about: InputFieldProps;
+}

@@ -8,11 +8,9 @@ import ApplicantRegistrationForm from "./ApplicantRegistrationForm/ApplicantRegi
 import { useSearchParams } from "next/navigation";
 import SelectField, { SelectOption } from "@/components/SelectField/SelectField";
 import Popup from "@/components/Popup/Popup";
+import EmployerRegistrationForm from "@/components/RegistrationForm/EmployerRegistrationForm/EmployerRegistrationForm";
+import { AccountTypes } from "@/enums";
 
-enum AccountTypes {
-  APPLICANT = "applicant",
-  EMPLOYER = "employer",
-}
 
 const RegistrationForm = ({}) => {
   const { dict } = useDictionary();
@@ -22,15 +20,15 @@ const RegistrationForm = ({}) => {
   const [ selectedAccountType, setSelectedAccountType ] = useState<AccountTypes>(() => {
     let accountType;
     const accountTypeURLParam = searchParams.get("accountType");
-    if (accountTypeURLParam) accountType = AccountTypes[accountTypeURLParam.toUpperCase()];
-    return accountType || AccountTypes.APPLICANT;
+    if (accountTypeURLParam) accountType = AccountTypes[accountTypeURLParam];
+    return accountType || AccountTypes.applicant;
   });
   const [ hasOpenedSuccessPopup, setHasOpenedSuccessPopup ] = useState<boolean>(false);
   const [ hasOpenedErrorPopup, setHasOpenedErrorPopup ] = useState<boolean>(false);
 
   const accountTypeOptions: SelectOption[] = [
-    { value: AccountTypes.APPLICANT, label: dict.registrationForm.applicantOptionLabel },
-    { value: AccountTypes.EMPLOYER, label: dict.registrationForm.employerOptionLabel },
+    { value: AccountTypes.applicant, label: dict.registrationForm.applicantOptionLabel },
+    { value: AccountTypes.employer, label: dict.registrationForm.employerOptionLabel },
   ];
 
   useEffect(() => {
@@ -61,13 +59,18 @@ const RegistrationForm = ({}) => {
           withReversedColors
         />
       </div>
-      { selectedAccountType === AccountTypes.APPLICANT && (
+      { selectedAccountType === AccountTypes.applicant && (
         <ApplicantRegistrationForm
           onSuccess={ () => setHasOpenedSuccessPopup(true) }
           onError={ () => setHasOpenedErrorPopup(true) }
         />
       ) }
-      { selectedAccountType === AccountTypes.EMPLOYER && <div>TODO: EMPLOYER FORM</div> }
+      { selectedAccountType === AccountTypes.employer && (
+        <EmployerRegistrationForm
+          onSuccess={ () => setHasOpenedSuccessPopup(true) }
+          onError={ () => setHasOpenedErrorPopup(true) }
+        />
+      ) }
       <Popup
         isOpened={ hasOpenedSuccessPopup }
         primaryText={ dict.registrationForm.successPopup.primaryText }

@@ -123,14 +123,26 @@
     "firstNameFieldPlaceholder": "Vaše ime",
     "lastNameFieldLabel": "Prezime:",
     "lastNameFieldPlaceholder": "Vaše prezime",
-    "phoneNumberFieldLabel": "Broj telefona:",
-    "phoneNumberFieldPlaceholder": "Vaš broj telefona",
     "workExperienceFieldLabel": "Radno iskustvo:",
     "workExperienceFieldPlaceholder": "Vaše radno iskustvo",
     "educationFieldLabel": "Nivo obrazovanja:",
     "educationFieldPlaceholder": "Vaš nivo obrazovanja",
     "aboutFieldLabel": "O meni:",
     "aboutFieldPlaceholder": "Napišite nešto o sobi"
+  },
+  "employerRegistrationForm": {
+    "companyNameFieldLabel": "Naziv kompanije:",
+    "companyNameFieldPlaceholder": "Naziv Vaše kompanije",
+    "pibFieldLabel": "PIB:",
+    "pibFieldPlaceholder": "Poreski identifikacioni broj",
+    "addressFieldLabel": "Adresa:",
+    "addressFieldPlaceholder": "Adresa Vaše kompanije",
+    "phoneNumberFieldLabel": "Broj telefona:",
+    "phoneNumberFieldPlaceholder": "Vaš broj telefona",
+    "urlFieldLabel": "URL:",
+    "urlFieldPlaceholder": "URL Vašeg web sajta",
+    "aboutFieldLabel": "O kompaniji:",
+    "aboutFieldPlaceholder": "Napišite nešto o kompaniji"
   },
   "activeJobOfferList": {
     "title": "Aktivni poslovi:",

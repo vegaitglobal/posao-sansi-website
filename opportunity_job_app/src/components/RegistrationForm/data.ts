@@ -1,25 +1,26 @@
 import { ApplicantFormData } from "@/components/RegistrationForm/types";
 
-export const initialApplicantFormData: ApplicantFormData = {
-  first_name: { value: "", errors: [] },
-  last_name: { value: "", errors: [] },
+const initialCredentialsFormData = {
   email: { value: "", errors: [] },
   password: { value: "", errors: [] },
   password_confirmation: { value: "", errors: [] },
+};
+
+export const initialApplicantFormData: ApplicantFormData = {
+  ...initialCredentialsFormData,
+  first_name: { value: "", errors: [] },
+  last_name: { value: "", errors: [] },
   work_experience: { value: "", options: [], errors: [] },
   education: { value: "", options: [], errors: [] },
   about: { value: "", errors: [] },
 };
 
-
-// TODO: REMOVE
-// export const initialApplicantFormData: ApplicantFormData = {
-//   first_name: { value: "Milos", errors: [] },
-//   last_name: { value: "Roknic", errors: [] },
-//   email: { value: "roknic.milos.994@gmail.com", errors: [] },
-//   password: { value: "pass4user", errors: [] },
-//   password_confirmation: { value: "pass4user", errors: [] },
-//   work_experience: { value: "", options: [], errors: [] },
-//   education: { value: "", options: [], errors: [] },
-//   about: { value: "Evo malo teksta o meni", errors: [] },
-// };
+export const initialEmployerFormData: ApplicantFormData = {
+  ...initialCredentialsFormData,
+  company_name: { value: "", errors: [] },
+  pib: { value: "", errors: [] },
+  address: { value: "", errors: [] },
+  phone_number: { value: "", errors: [] },
+  url: { value: "", errors: [] },
+  about: { value: "", errors: [] },
+};

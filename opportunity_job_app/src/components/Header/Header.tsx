@@ -8,6 +8,7 @@ import { anonymousUserLinks, applicantLinks, employerLinks, languageLinks, MainM
 import { useDictionary } from "@/hooks/useDictionary";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { AccountTypes } from "@/enums";
 
 interface MainMenuLinks {
   [x: string]: MainMenuLink[];
@@ -52,9 +53,9 @@ const Header = () => {
   }, []);
 
   const mainMenuLinks: MainMenuLinks = {
-    "anonymous": anonymousUserLinks,
-    "employer": employerLinks,
-    "applicant": applicantLinks
+    anonymous: anonymousUserLinks,
+    [AccountTypes.applicant]: applicantLinks,
+    [AccountTypes.employer]: employerLinks,
   };
 
   const changeLanguage = (languageSlug: string) => {

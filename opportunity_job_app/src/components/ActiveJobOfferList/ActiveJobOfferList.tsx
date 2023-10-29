@@ -8,17 +8,18 @@ import { JobOffer } from "@/api/models/JobOffer";
 import { JobOfferService } from "@/api/jobOfferService";
 import { useDictionary } from "@/hooks/useDictionary";
 import JobOfferCard from "@/components/JobOfferCard/JobOfferCard";
+import { AccountTypes } from "@/enums";
 
 
 export default function ActiveJobOfferList() {
   const router = useRouter();
   const { dict } = useDictionary();
   const pathname = usePathname();
-  const [hasAccess, setHasAccess] = useState<boolean>(false);
-  const [jobOffers, setJobOffers] = useState<JobOffer[]>([]);
-  const [pageNumber, setPageNumber] = useState<number>(0);
-  const [totalJobOfferNumber, setTotalJobOfferNumber] = useState<number>(0);
-  const [hasNextPage, setHasNextPage] = useState<boolean>(false);
+  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
+  const [ jobOffers, setJobOffers ] = useState<JobOffer[]>([]);
+  const [ pageNumber, setPageNumber ] = useState<number>(0);
+  const [ totalJobOfferNumber, setTotalJobOfferNumber ] = useState<number>(0);
+  const [ hasNextPage, setHasNextPage ] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchJobOffers = async () => {
@@ -33,7 +34,7 @@ export default function ActiveJobOfferList() {
     const auth = AuthService.getAuth();
     if (!auth) {
       router.push("/login");
-    } else if (auth.account_type !== "applicant") {
+    } else if (auth.account_type !== AccountTypes.applicant) {
       router.push("/");
     } else {
       setHasAccess(true);
@@ -44,7 +45,7 @@ export default function ActiveJobOfferList() {
     const nextPageNumber = pageNumber + 1;
     setPageNumber(nextPageNumber);
     const response = await JobOfferService.getActiveJobOffers(nextPageNumber);
-    setJobOffers([...jobOffers, ...response.items]);
+    setJobOffers([ ...jobOffers, ...response.items ]);
     setHasNextPage(nextPageNumber < response.pagination.total_pages);
     setTotalJobOfferNumber(response.pagination.total_items);
   }

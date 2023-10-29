@@ -10,9 +10,8 @@ interface JobOfferProps {
 // TODO: ADD translations
 
 const JobOfferCard = ({ jobOffer, listPathname }: JobOfferProps) => {
-
   function goToJobOfferDetails(jobID: number): void {
-    window.location.href = `/${ listPathname }/${ jobID }/`;
+    window.location.href = `${ listPathname }/${ jobID }/`;
   }
 
   return (

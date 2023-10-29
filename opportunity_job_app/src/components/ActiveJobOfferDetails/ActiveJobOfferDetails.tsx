@@ -11,6 +11,7 @@ import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
 import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
+import { AccountTypes } from "@/enums";
 
 
 interface ActiveJobOfferDetailsProps {
@@ -57,7 +58,7 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
     const auth = AuthService.getAuth();
     if (!auth) {
       router.push("/login");
-    } else if (auth.account_type !== "applicant") {
+    } else if (auth.account_type !== AccountTypes.applicant) {
       router.push("/");
     } else {
       setAuth(auth);

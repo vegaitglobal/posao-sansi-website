@@ -9,6 +9,7 @@ import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
 import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
+import { AccountTypes } from "@/enums";
 
 
 interface MyJobOfferDetailsProps {
@@ -30,9 +31,9 @@ interface Popups {
 export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps) {
   const router = useRouter();
   const { dict } = useDictionary();
-  const [hasAccess, setHasAccess] = useState<boolean>(false);
-  const [jobOffer, setJobOffer] = useState<JobOffer>();
-  const [popups, setPopups] = useState<Popups>({
+  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
+  const [ jobOffer, setJobOffer ] = useState<JobOffer>();
+  const [ popups, setPopups ] = useState<Popups>({
     activationConfirmation: { isOpened: false },
     archivingConfirmation: { isOpened: false },
     error: { isOpened: false },
@@ -54,7 +55,7 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
     const auth = AuthService.getAuth();
     if (!auth) {
       router.push("/login");
-    } else if (auth.account_type !== "applicant" && auth.account_type !== "employer") {
+    } else if (auth.account_type !== AccountTypes.applicant && auth.account_type !== AccountTypes.employer) {
       router.push("/");
     } else {
       setHasAccess(true);

@@ -5,7 +5,7 @@ import InputField from "@/components/InputField/InputField";
 import { RegistrationFormData } from "@/components/RegistrationForm/types";
 import { useDictionary } from "@/hooks/useDictionary";
 
-interface CredentialFieldsProps {
+interface CredentialsFieldsProps {
   formData: RegistrationFormData;
 
   onUpdateFormData(value: string, fieldName: string): void;
@@ -13,7 +13,7 @@ interface CredentialFieldsProps {
   shouldDisplayFormErrors: boolean;
 }
 
-const CredentialFields = ({ formData, onUpdateFormData, shouldDisplayFormErrors }: CredentialFieldsProps) => {
+const CredentialsFields = ({ formData, onUpdateFormData, shouldDisplayFormErrors }: CredentialsFieldsProps) => {
   const { dict } = useDictionary();
   return (
     <>
@@ -46,4 +46,4 @@ const CredentialFields = ({ formData, onUpdateFormData, shouldDisplayFormErrors 
   );
 };
 
-export default CredentialFields;
+export default CredentialsFields;

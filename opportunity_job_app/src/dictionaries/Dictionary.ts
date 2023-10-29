@@ -15,6 +15,7 @@ import { MyJobOfferDetailsDictionary } from "@/dictionaries/components/MyJobOffe
 import { FormErrorsDictionary } from "@/dictionaries/common/FormErrorsDictionary";
 import { RegistrationFormDictionary } from "@/dictionaries/components/RegistrationFormDictionary";
 import { ApplicantRegistrationFormDictionary } from "@/dictionaries/components/ApplicantRegistrationFormDictionary";
+import { EmployerRegistrationFormDictionary } from "@/dictionaries/components/EmployerRegistrationFormDictionary";
 
 export interface Dictionary {
   header: LinksDictionary;
@@ -30,6 +31,7 @@ export interface Dictionary {
   passwordResetForm: PasswordResetFormDictionary;
   registrationForm: RegistrationFormDictionary;
   applicantRegistrationForm: ApplicantRegistrationFormDictionary;
+  employerRegistrationForm: EmployerRegistrationFormDictionary;
   activeJobOfferList: JobOfferListDictionary;
   myJobOfferList: JobOfferListDictionary;
   jobOfferDetails: JobOfferDetailsDictionary;

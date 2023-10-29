@@ -3,8 +3,6 @@ export interface ApplicantRegistrationFormDictionary {
     firstNameFieldPlaceholder: string;
     lastNameFieldLabel: string;
     lastNameFieldPlaceholder: string;
-    phoneNumberFieldLabel: string;
-    phoneNumberFieldPlaceholder: string;
     workExperienceFieldLabel: string;
     workExperienceFieldPlaceholder: string;
     educationFieldLabel: string;

@@ -4,41 +4,37 @@ import "./../registration-form.scss";
 import { useDictionary } from "@/hooks/useDictionary";
 import { SyntheticEvent, useEffect, useState } from "react";
 import InputField from "@/components/InputField/InputField";
-import SelectField from "@/components/SelectField/SelectField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import {
   applyAPIFormErrors,
   clearFormData,
-  getInitialApplicantFormData,
   hasFormErrors,
-  mapFormDataToApplicantAccount,
+  mapFormDataToEmployerAccount,
   validateFormData
 } from "@/components/RegistrationForm/utils";
-import { ApplicantFormData } from "@/components/RegistrationForm/types";
-import { initialApplicantFormData } from "@/components/RegistrationForm/data";
+import { EmployerFormData } from "@/components/RegistrationForm/types";
+import { initialEmployerFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
 
 
-interface ApplicantRegistrationFormProps {
+interface EmployerRegistrationFormProps {
   onSuccess(): void;
 
   onError(): void;
 }
 
-const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistrationFormProps) => {
+const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFormProps) => {
   const { dict } = useDictionary();
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<ApplicantFormData>(initialApplicantFormData);
+  const [ formData, setFormData ] = useState<EmployerFormData>(initialEmployerFormData);
   const [ responseError, setResponseError ] = useState<string>("");
 
   useEffect(() => {
     if (isLoading) {
-      getInitialApplicantFormData().then(data => {
-        setFormData(data);
-        setIsLoading(false);
-      });
+      setFormData(initialEmployerFormData);
+      setIsLoading(false);
     }
   }, []);
 
@@ -58,8 +54,8 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
 
   const register = async () => {
     try {
-      const accountData = mapFormDataToApplicantAccount(formData);
-      await AuthService.registerApplicant(accountData);
+      const accountData = mapFormDataToEmployerAccount(formData);
+      await AuthService.registerEmployer(accountData);
       onSuccess();
       setFormData(clearFormData(formData));
     } catch (error: any) {
@@ -87,44 +83,50 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
 
   return (
     <form className="registration-form">
-      <InputField
-        label={ dict.applicantRegistrationForm.firstNameFieldLabel }
-        placeholder={ dict.applicantRegistrationForm.firstNameFieldPlaceholder }
-        value={ formData.first_name.value }
-        onChange={ (value) => updateFormData(value, "first_name") }
-        errors={ shouldDisplayFormErrors ? formData.first_name.errors : [] }
-      />
-      <InputField
-        label={ dict.applicantRegistrationForm.lastNameFieldLabel }
-        placeholder={ dict.applicantRegistrationForm.lastNameFieldPlaceholder }
-        value={ formData.last_name.value }
-        onChange={ (value) => updateFormData(value, "last_name") }
-        errors={ shouldDisplayFormErrors ? formData.last_name.errors : [] }
-      />
       <CredentialsFields
         formData={ formData }
         onUpdateFormData={ updateFormData }
         shouldDisplayFormErrors={ shouldDisplayFormErrors }
       />
-      <SelectField
-        label={ dict.applicantRegistrationForm.workExperienceFieldLabel }
-        placeholder={ dict.applicantRegistrationForm.workExperienceFieldPlaceholder }
-        value={ formData.work_experience.value }
-        options={ formData.work_experience.options }
-        onChange={ (value) => updateFormData(value, "work_experience") }
-        errors={ shouldDisplayFormErrors ? formData.work_experience.errors : [] }
+      <InputField
+        label={ dict.employerRegistrationForm.companyNameFieldLabel }
+        placeholder={ dict.employerRegistrationForm.companyNameFieldPlaceholder }
+        value={ formData.company_name.value }
+        onChange={ (value) => updateFormData(value, "company_name") }
+        errors={ shouldDisplayFormErrors ? formData.company_name.errors : [] }
       />
-      <SelectField
-        label={ dict.applicantRegistrationForm.educationFieldLabel }
-        placeholder={ dict.applicantRegistrationForm.educationFieldPlaceholder }
-        value={ formData.education.value }
-        options={ formData.education.options }
-        onChange={ (value) => updateFormData(value, "education") }
-        errors={ shouldDisplayFormErrors ? formData.education.errors : [] }
+      <InputField
+        type="number"
+        label={ dict.employerRegistrationForm.pibFieldLabel }
+        placeholder={ dict.employerRegistrationForm.pibFieldPlaceholder }
+        value={ formData.pib.value }
+        onChange={ (value) => updateFormData(value, "pib") }
+        errors={ shouldDisplayFormErrors ? formData.pib.errors : [] }
+      />
+      <InputField
+        label={ dict.employerRegistrationForm.addressFieldLabel }
+        placeholder={ dict.employerRegistrationForm.addressFieldPlaceholder }
+        value={ formData.address.value }
+        onChange={ (value) => updateFormData(value, "address") }
+        errors={ shouldDisplayFormErrors ? formData.address.errors : [] }
+      />
+      <InputField
+        label={ dict.employerRegistrationForm.phoneNumberFieldLabel }
+        placeholder={ dict.employerRegistrationForm.phoneNumberFieldPlaceholder }
+        value={ formData.phone_number.value }
+        onChange={ (value) => updateFormData(value, "phone_number") }
+        errors={ shouldDisplayFormErrors ? formData.phone_number.errors : [] }
+      />
+      <InputField
+        label={ dict.employerRegistrationForm.urlFieldLabel }
+        placeholder={ dict.employerRegistrationForm.urlFieldPlaceholder }
+        value={ formData.url.value }
+        onChange={ (value) => updateFormData(value, "url") }
+        errors={ shouldDisplayFormErrors ? formData.url.errors : [] }
       />
       <TextAreaField
-        label={ dict.applicantRegistrationForm.aboutFieldLabel }
-        placeholder={ dict.applicantRegistrationForm.aboutFieldPlaceholder }
+        label={ dict.employerRegistrationForm.aboutFieldLabel }
+        placeholder={ dict.employerRegistrationForm.aboutFieldPlaceholder }
         value={ formData.about.value }
         onChange={ (value) => updateFormData(value, "about") }
         errors={ shouldDisplayFormErrors ? formData.about.errors : [] }
@@ -137,4 +139,4 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
   );
 };
 
-export default ApplicantRegistrationForm;
+export default EmployerRegistrationForm;
