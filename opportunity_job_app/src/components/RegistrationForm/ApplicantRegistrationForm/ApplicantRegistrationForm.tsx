@@ -12,12 +12,12 @@ import {
   getInitialApplicantFormData,
   hasFormErrors,
   mapFormDataToApplicantAccount,
-  validateFormData
 } from "@/components/RegistrationForm/utils";
 import { ApplicantFormData } from "@/components/RegistrationForm/types";
 import { initialApplicantFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
+import { validateFormData } from "@/utils";
 
 
 interface ApplicantRegistrationFormProps {

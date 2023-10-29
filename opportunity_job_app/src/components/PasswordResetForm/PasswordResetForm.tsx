@@ -5,7 +5,7 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import InputField from "../InputField/InputField";
 import Popup from "@/components/Popup/Popup";
-import { deepCopy } from "@/utils";
+import { validateFormData } from "@/utils";
 import { useDictionary } from "@/hooks/useDictionary";
 
 interface PasswordResetFormProps {
@@ -28,11 +28,11 @@ const getInitialFormData = (): PasswordResetFormData => {
 
 const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const { dict } = useDictionary();
-  const [hasAccess, setHasAccess] = useState<boolean>(false);
-  const [hasOpenedPopup, setHasOpenedPopup] = useState<boolean>(false);
-  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
-  const [formData, setFormData] = useState<PasswordResetFormData>(getInitialFormData);
-  const [responseError, setResponseError] = useState<string>("");
+  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
+  const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
+  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
+  const [ formData, setFormData ] = useState<PasswordResetFormData>(getInitialFormData);
+  const [ responseError, setResponseError ] = useState<string>("");
 
   useEffect(() => {
     checkAccess();
@@ -58,17 +58,6 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
       setShouldDisplayFormErrors(false);
       resetPassword();
     }
-  };
-
-  const validateFormData = (formData: PasswordResetFormData): PasswordResetFormData => {
-    const formDataCopy = deepCopy(formData) as PasswordResetFormData;
-    formDataCopy.password.error = formDataCopy.password.value.length < 8
-      ? dict.passwordSetFormErrors.passwordMinLength
-      : "";
-    formDataCopy.passwordConfirmation.error = formDataCopy.password.value != formDataCopy.passwordConfirmation.value
-      ? dict.passwordSetFormErrors.passwordsNotMatch
-      : "";
-    return formDataCopy;
   };
 
   const hasFormErrors = (formData: PasswordResetFormData) => {
@@ -103,7 +92,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
           placeholder={ dict.passwordResetForm.passwordFieldPlaceholder }
           value={ formData.password.value }
           onChange={ (value) => updateFormData(value, "password") }
-          errors={ shouldDisplayFormErrors ? formData.password.error : "" }
+          errors={ shouldDisplayFormErrors ? formData.password.error : [] }
         />
         <InputField
           type="password"
@@ -111,7 +100,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
           placeholder={ dict.passwordResetForm.passwordConfirmFieldPlaceholder }
           value={ formData.passwordConfirmation.value }
           onChange={ (value) => updateFormData(value, "passwordConfirmation") }
-          errors={ shouldDisplayFormErrors ? formData.passwordConfirmation.error : "" }
+          errors={ shouldDisplayFormErrors ? formData.passwordConfirmation.error : [] }
         />
         { responseError && <p className="error-message">{ responseError }</p> }
         <button className="form-submit-button" onClick={ handleSubmit }>
