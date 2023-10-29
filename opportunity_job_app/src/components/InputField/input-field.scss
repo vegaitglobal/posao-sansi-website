@@ -1,11 +1,7 @@
 @import "./../../scss/style.scss";
 
-.input-field__input {
+.input-field__value--input {
   height: 40px;
   border: 1px solid $purple-primary;
   border-radius: 4px;
-}
-
-.input-field__input::placeholder {
-  color: darkgrey;
 }

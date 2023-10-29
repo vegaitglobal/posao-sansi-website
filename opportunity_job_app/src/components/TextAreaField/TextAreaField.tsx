@@ -1,49 +1,43 @@
-import "./input-field.scss";
+import "./text-area-field.scss";
 import React from "react";
 import FieldErrors from "@/components/FieldErrors/FieldErrors";
 
 
-interface InputFieldProps {
+interface TextAreaFieldProps {
   label: string;
   placeholder: string;
   value: string;
-  autocomplete?: string;
 
   onChange(value: string): void;
 
-  type?: string;
   isRequired?: boolean;
   errors?: string[];
 }
 
-const InputField = (
+const TextAreaField = (
   {
     label,
     placeholder,
     value,
     onChange,
-    autocomplete = "off",
-    type = "text",
     isRequired = true,
     errors
-  }: InputFieldProps
+  }: TextAreaFieldProps
 ) => {
   return (
     <label className={ `form-field ${ errors && errors.length ? "form-field--error" : "" }` }>
       <span className="form-field-label">
         { label }{ isRequired && <span className="form-field-label__asterisk">*</span> }
       </span>
-      <input
-        className="form-field__value input-field__value--input"
+      <textarea
+        className="form-field__value form-field__value--text-area"
         value={ value }
-        type={ type }
         placeholder={ placeholder }
         onChange={ (event) => onChange(event.target.value) }
-        autoComplete={ autocomplete }
       />
       <FieldErrors errors={ errors }/>
     </label>
   );
 };
 
-export default InputField;
+export default TextAreaField;

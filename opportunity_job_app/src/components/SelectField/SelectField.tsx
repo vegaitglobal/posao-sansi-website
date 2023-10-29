@@ -17,6 +17,7 @@ interface SelectFieldProps {
   onChange(value: string): void;
 
   withReversedColors?: boolean;
+  isRequired?: boolean;
   errors?: string[];
 }
 
@@ -28,6 +29,7 @@ const SelectField = (
     placeholder,
     onChange,
     withReversedColors,
+    isRequired = true,
     errors
   }: SelectFieldProps
 ) => {
@@ -84,7 +86,11 @@ const SelectField = (
 
   return (
     <div className={ fieldClassName }>
-      { label && <span className="form-field-label">{ label }</span> }
+      { label && (
+        <span className="form-field-label">
+          { label }{ isRequired && <span className="form-field-label__asterisk">*</span> }
+        </span>
+      ) }
       <div className={ selectClassName }>
         { selectedOption.label }
         <img className="select-carrot" src={ selectCarrotImgPath } alt="select carrot"/>

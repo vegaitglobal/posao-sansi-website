@@ -1,10 +1,11 @@
 "use client";
 
 import "./../registration-form.scss";
-import InputField from "@/components/InputField/InputField";
 import { useDictionary } from "@/hooks/useDictionary";
 import { SyntheticEvent, useEffect, useState } from "react";
+import InputField from "@/components/InputField/InputField";
 import SelectField from "@/components/SelectField/SelectField";
+import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import {
   applyAPIFormErrors,
   clearFormData,
@@ -121,7 +122,7 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
         onChange={ (value) => updateFormData(value, "education") }
         errors={ shouldDisplayFormErrors ? formData.education.errors : [] }
       />
-      <InputField
+      <TextAreaField
         label={ dict.applicantRegistrationForm.aboutFieldLabel }
         placeholder={ dict.applicantRegistrationForm.aboutFieldPlaceholder }
         value={ formData.about.value }
