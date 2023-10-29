@@ -42,3 +42,6 @@ class EmployerAccount(BaseModel):
         verbose_name=_("about company"),
         max_length=500
     )
+
+    def __str__(self):
+        return self.company_name
