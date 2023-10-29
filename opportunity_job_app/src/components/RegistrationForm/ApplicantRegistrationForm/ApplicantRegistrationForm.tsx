@@ -46,8 +46,8 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
 
-    const validatedFormData = validateFormData(formData as FormData, dict) as ApplicantFormData;
-    setFormData(validatedFormData);
+    const validatedFormData = validateFormData(formData as FormData, dict);
+    setFormData(validatedFormData as ApplicantFormData);
 
     if (hasFormErrors(validatedFormData)) {
       setShouldDisplayFormErrors(true);

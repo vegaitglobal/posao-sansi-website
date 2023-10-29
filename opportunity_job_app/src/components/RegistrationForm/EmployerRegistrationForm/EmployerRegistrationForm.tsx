@@ -42,8 +42,8 @@ const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFo
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
 
-    const validatedFormData = validateFormData(formData as FormData, dict) as EmployerFormData;
-    setFormData(validatedFormData);
+    const validatedFormData = validateFormData(formData as FormData, dict);
+    setFormData(validatedFormData as EmployerFormData);
 
     if (hasFormErrors(validatedFormData)) {
       setShouldDisplayFormErrors(true);

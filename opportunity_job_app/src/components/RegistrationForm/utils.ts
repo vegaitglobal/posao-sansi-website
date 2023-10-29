@@ -22,7 +22,7 @@ export const applyAPIFormErrors = (formData: ApplicantFormData | EmployerFormDat
   return formDataCopy;
 };
 
-export const hasFormErrors = (formData: ApplicantFormData | EmployerFormData) => {
+export const hasFormErrors = (formData: FormData) => {
   return !!Object.values(formData).find(field => !!field.errors.length);
 };
 

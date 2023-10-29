@@ -7,23 +7,22 @@ import InputField from "../InputField/InputField";
 import Popup from "@/components/Popup/Popup";
 import { validateFormData } from "@/utils";
 import { useDictionary } from "@/hooks/useDictionary";
-import { FormData } from "@/types";
+import { FormData, InputFieldProps } from "@/types";
+import { hasFormErrors } from "@/components/RegistrationForm/utils";
 
 interface PasswordResetFormProps {
   token: string;
 }
 
 interface PasswordResetFormData {
-  [key: string]: {
-    value: string,
-    error: string[]
-  };
+  password: InputFieldProps;
+  passwordConfirmation: InputFieldProps;
 }
 
 const getInitialFormData = (): PasswordResetFormData => {
   return {
-    password: { value: "", error: [] },
-    passwordConfirmation: { value: "", error: [] },
+    password: { value: "", errors: [] },
+    passwordConfirmation: { value: "", errors: [] },
   };
 };
 
@@ -50,8 +49,8 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
 
-    const validatedFormData = validateFormData(formData as FormData, dict) as PasswordResetFormData;
-    setFormData(validatedFormData);
+    const validatedFormData = validateFormData(formData as FormData, dict);
+    setFormData(validatedFormData as PasswordResetFormData);
 
     if (hasFormErrors(validatedFormData)) {
       setShouldDisplayFormErrors(true);
@@ -59,10 +58,6 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
       setShouldDisplayFormErrors(false);
       resetPassword();
     }
-  };
-
-  const hasFormErrors = (formData: PasswordResetFormData) => {
-    return !!(formData.password.error || formData.passwordConfirmation.error);
   };
 
   const resetPassword = async () => {
@@ -93,7 +88,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
           placeholder={ dict.passwordResetForm.passwordFieldPlaceholder }
           value={ formData.password.value }
           onChange={ (value) => updateFormData(value, "password") }
-          errors={ shouldDisplayFormErrors ? formData.password.error : [] }
+          errors={ shouldDisplayFormErrors ? formData.password.errors : [] }
         />
         <InputField
           type="password"
@@ -101,7 +96,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
           placeholder={ dict.passwordResetForm.passwordConfirmFieldPlaceholder }
           value={ formData.passwordConfirmation.value }
           onChange={ (value) => updateFormData(value, "passwordConfirmation") }
-          errors={ shouldDisplayFormErrors ? formData.passwordConfirmation.error : [] }
+          errors={ shouldDisplayFormErrors ? formData.passwordConfirmation.errors : [] }
         />
         { responseError && <p className="error-message">{ responseError }</p> }
         <button className="form-submit-button" onClick={ handleSubmit }>
