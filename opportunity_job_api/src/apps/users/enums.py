@@ -2,7 +2,7 @@ from django.db.models import TextChoices
 from django.utils.translation import gettext_lazy as _
 
 
-class Education(TextChoices):
+class EducationLevels(TextChoices):
     NONE = "none", _("No formal education")
     FIRST_DEGREE = "first_degree", _("First degree, 4 years of primary school")
     SECOND_DEGREE = "second_degree", _("Second degree, primary school")
@@ -13,7 +13,7 @@ class Education(TextChoices):
     SEVENTH_DEGREE = "seventh_degree", _("Seventh degree, higher vocational education, higher education school")
 
 
-class WorkExperience(TextChoices):
+class WorkExperienceLevels(TextChoices):
     NONE = "none", _("No work experience")
     LT_YEAR = "lt_year", _("Less than a year")
     ONE_TO_THREE = "one_to_three", _("More than one less than three years")

@@ -2,8 +2,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import BaseModel
-from apps.jobs.enums import JobCategory, JobEngagement
-from apps.users.enums import Education, WorkExperience
+from apps.jobs.enums import JobCategories, JobEngagements
+from apps.users.enums import EducationLevels, WorkExperienceLevels
 
 
 class JobOffer(BaseModel):
@@ -34,26 +34,26 @@ class JobOffer(BaseModel):
     engagement = models.CharField(
         verbose_name=_("engagement"),
         max_length=20,
-        choices=JobEngagement.choices,
-        default=JobEngagement.FULL_TIME,
+        choices=JobEngagements.choices,
+        default=JobEngagements.FULL_TIME,
     )
     category = models.CharField(
         verbose_name=_("category"),
         max_length=30,
-        choices=JobCategory.choices,
-        default=JobCategory.OTHER,
+        choices=JobCategories.choices,
+        default=JobCategories.OTHER,
     )
     required_work_experience = models.CharField(
         verbose_name=_("required work experience"),
         max_length=20,
-        choices=WorkExperience.choices,
-        default=WorkExperience.NONE,
+        choices=WorkExperienceLevels.choices,
+        default=WorkExperienceLevels.NONE,
     )
     required_education = models.CharField(
         verbose_name=_("required education"),
         max_length=20,
-        choices=Education.choices,
-        default=Education.NONE,
+        choices=EducationLevels.choices,
+        default=EducationLevels.NONE,
     )
     additional_skills = models.CharField(
         verbose_name=_("additional skills"),
