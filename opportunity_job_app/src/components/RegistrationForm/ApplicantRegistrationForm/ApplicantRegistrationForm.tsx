@@ -3,11 +3,11 @@
 import "./../registration-form.scss";
 import InputField from "@/components/InputField/InputField";
 import { useDictionary } from "@/hooks/useDictionary";
-import { AuthService } from "@/api/authService";
 import { SyntheticEvent, useEffect, useState } from "react";
 import SelectField from "@/components/SelectField/SelectField";
 import {
   applyAPIFormErrors,
+  clearFormData,
   getInitialApplicantFormData,
   hasFormErrors,
   mapFormDataToApplicantAccount,
@@ -16,14 +16,18 @@ import {
 import { ApplicantFormData } from "@/components/RegistrationForm/types";
 import { initialApplicantFormData } from "@/components/RegistrationForm/data";
 import CredentialFields from "@/components/RegistrationForm/CredentialFields/CredentialFields";
-import Popup from "@/components/Popup/Popup";
+import { AuthService } from "@/api/authService";
 
 
-const ApplicantRegistrationForm = () => {
+interface ApplicantRegistrationFormProps {
+  onSuccess(): void;
+
+  onError(): void;
+}
+
+const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistrationFormProps) => {
   const { dict } = useDictionary();
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasOpenedSuccessPopup, setHasOpenedSuccessPopup ] = useState<boolean>(false);
-  const [ hasOpenedErrorPopup, setHasOpenedErrorPopup ] = useState<boolean>(false);
   const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
   const [ formData, setFormData ] = useState<ApplicantFormData>(initialApplicantFormData);
   const [ responseError, setResponseError ] = useState<string>("");
@@ -55,8 +59,8 @@ const ApplicantRegistrationForm = () => {
     try {
       const accountData = mapFormDataToApplicantAccount(formData);
       await AuthService.registerApplicant(accountData);
-      setHasOpenedSuccessPopup(true);
-      setFormData(initialApplicantFormData);
+      onSuccess();
+      setFormData(clearFormData(formData));
     } catch (error: any) {
       handleResponseError(error);
     }
@@ -69,7 +73,7 @@ const ApplicantRegistrationForm = () => {
       setResponseError(error.response.data.errors.non_field_errors);
       setShouldDisplayFormErrors(true);
     } else {
-      setHasOpenedErrorPopup(true);
+      onError();
     }
   };
 
@@ -104,15 +108,17 @@ const ApplicantRegistrationForm = () => {
       <SelectField
         label={ dict.applicantRegistrationForm.workExperienceFieldLabel }
         placeholder={ dict.applicantRegistrationForm.workExperienceFieldPlaceholder }
-        onChange={ (value) => updateFormData(value, "work_experience") }
+        value={ formData.work_experience.value }
         options={ formData.work_experience.options }
+        onChange={ (value) => updateFormData(value, "work_experience") }
         errors={ shouldDisplayFormErrors ? formData.work_experience.errors : [] }
       />
       <SelectField
         label={ dict.applicantRegistrationForm.educationFieldLabel }
         placeholder={ dict.applicantRegistrationForm.educationFieldPlaceholder }
-        onChange={ (value) => updateFormData(value, "education") }
+        value={ formData.education.value }
         options={ formData.education.options }
+        onChange={ (value) => updateFormData(value, "education") }
         errors={ shouldDisplayFormErrors ? formData.education.errors : [] }
       />
       <InputField
@@ -126,17 +132,6 @@ const ApplicantRegistrationForm = () => {
       <button className="form-submit-button" onClick={ handleSubmit }>
         { dict.registrationForm.submitButtonLabel }
       </button>
-      <Popup
-        isOpened={ hasOpenedSuccessPopup }
-        primaryText={ dict.registrationForm.successPopup.primaryText }
-        secondaryText={ dict.registrationForm.successPopup.secondaryText }
-        linkButton={ { url: "/", label: dict.registrationForm.successPopup.linkButtonLabel } }
-      />
-      <Popup
-        isOpened={ hasOpenedErrorPopup }
-        primaryText={ dict.registrationForm.errorPopup.primaryText }
-        secondaryText={ dict.registrationForm.errorPopup.secondaryText }
-      />
     </form>
   );
 };

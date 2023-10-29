@@ -1,6 +1,5 @@
 import { ApplicantFormData } from "@/components/RegistrationForm/types";
 
-// TODO: UNCOMMENT
 export const initialApplicantFormData: ApplicantFormData = {
   first_name: { value: "", errors: [] },
   last_name: { value: "", errors: [] },

@@ -62,11 +62,20 @@ export const getInitialApplicantFormData = async (): Promise<ApplicantFormData> 
 
 export function mapFormDataToApplicantAccount(formData: ApplicantFormData): ApplicantAccount {
   return {
-    user: { email: formData.email.value },
+    user: {
+      email: formData.email.value,
+      password: formData.password.value,
+    },
     first_name: formData.first_name.value,
     last_name: formData.last_name.value,
     work_experience: formData.work_experience.value,
     education: formData.education.value,
     about: formData.about.value,
   };
+}
+
+export function clearFormData(formData: ApplicantFormData): ApplicantFormData {
+  const formDataCopy = deepCopy(formData);
+  Object.entries(formDataCopy).forEach(([ key, _ ]) => formDataCopy[key].value = "");
+  return formDataCopy;
 }

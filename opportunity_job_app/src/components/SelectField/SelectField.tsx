@@ -1,5 +1,5 @@
 import "./select-field.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FieldErrors from "@/components/FieldErrors/FieldErrors";
 
 
@@ -31,11 +31,17 @@ const SelectField = (
     errors
   }: SelectFieldProps
 ) => {
-  const [selectedOption, setSelectedOption] = useState<SelectOption>(() => {
+  const [ selectedOption, setSelectedOption ] = useState<SelectOption>();
+
+  useEffect(() => {
+    setSelectedOption(getSelectedOption());
+  }, [ value, placeholder ]);
+
+  const getSelectedOption = () => {
     if (value) return options.find(option => option.value === value);
     if (placeholder) return { value: "", label: placeholder };
     throw Error("Either 'value' or 'placeholder' must be defined");
-  });
+  };
 
   const selectOption = (value: string) => {
     setSelectedOption(options.find(option => option.value === value)!);
@@ -59,6 +65,8 @@ const SelectField = (
       </div>
     );
   };
+
+  if (!selectedOption) return null;
 
   let fieldClassName = "form-field form-field--select";
   if (errors && errors.length) fieldClassName += " form-field--error";
