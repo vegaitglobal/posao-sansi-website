@@ -13,7 +13,7 @@ class UserManager(BaseUserManager):
         return self._create_user(email=email, is_staff=True, is_superuser=True, **kwargs)
 
     def create_user(self, email: str = None, **kwargs):
-        return self._create_user(email=email, is_staff=False, is_superuser=False, **kwargs)
+        return self._create_user(email=email, is_active=False, is_staff=False, is_superuser=False, **kwargs)
 
     def _create_user(self, email: str = None, password: str = None, **kwargs):
         email = self.normalize_email(email)
