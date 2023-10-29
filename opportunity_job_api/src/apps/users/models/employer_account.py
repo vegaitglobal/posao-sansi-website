@@ -21,9 +21,11 @@ class EmployerAccount(BaseModel):
         verbose_name=_("company name"),
         max_length=250,
     )
-    pib = models.CharField(
+    pib = models.IntegerField(
         verbose_name=_("PIB"),
-        max_length=8,
+        help_text=_(
+            "In Serbia, this number contains 9 numeric characters"
+        )
     )
     address = models.CharField(
         verbose_name=_("company address"),
