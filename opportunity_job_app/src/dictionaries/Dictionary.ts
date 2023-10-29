@@ -34,6 +34,7 @@ export interface Dictionary {
   employerRegistrationForm: EmployerRegistrationFormDictionary;
   activeJobOfferList: JobOfferListDictionary;
   myJobOfferList: JobOfferListDictionary;
+  jobOfferCard: JobOfferCardDictionary;
   jobOfferDetails: JobOfferDetailsDictionary;
   activeJobOfferDetails: ActiveJobOfferDetailsDictionary;
   myJobOfferDetails: MyJobOfferDetailsDictionary;
