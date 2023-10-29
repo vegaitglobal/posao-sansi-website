@@ -12,6 +12,9 @@ import { JobOfferListDictionary } from "@/dictionaries/components/JobOfferListDi
 import { JobOfferDetailsDictionary } from "@/dictionaries/components/JobOfferDetailsDictionary";
 import { ActiveJobOfferDetailsDictionary } from "@/dictionaries/components/ActiveJobOfferDetailsDictionary";
 import { MyJobOfferDetailsDictionary } from "@/dictionaries/components/MyJobOfferDetailsDictionary";
+import { FormErrorsDictionary } from "@/dictionaries/common/FormErrorsDictionary";
+import { RegistrationFormDictionary } from "@/dictionaries/components/RegistrationFormDictionary";
+import { ApplicantRegistrationFormDictionary } from "@/dictionaries/components/ApplicantRegistrationFormDictionary";
 
 export interface Dictionary {
   header: LinksDictionary;
@@ -23,10 +26,14 @@ export interface Dictionary {
   faqItems: FAQItemsDictionary;
   loginForm: LoginFormDictionary;
   passwordForgottenForm: PasswordForgottenFormDictionary;
+  passwordSetFormErrors: FormErrorsDictionary;
   passwordResetForm: PasswordResetFormDictionary;
+  registrationForm: RegistrationFormDictionary;
+  applicantRegistrationForm: ApplicantRegistrationFormDictionary;
   activeJobOfferList: JobOfferListDictionary;
   myJobOfferList: JobOfferListDictionary;
   jobOfferDetails: JobOfferDetailsDictionary;
   activeJobOfferDetails: ActiveJobOfferDetailsDictionary;
   myJobOfferDetails: MyJobOfferDetailsDictionary;
+  commonFormErrors: FormErrorsDictionary;
 }

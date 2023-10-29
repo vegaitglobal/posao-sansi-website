@@ -30,9 +30,9 @@ interface Popups {
 export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps) {
   const router = useRouter();
   const { dict } = useDictionary();
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ jobOffer, setJobOffer ] = useState<JobOffer>();
-  const [ popups, setPopups ] = useState<Popups>({
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [jobOffer, setJobOffer] = useState<JobOffer>();
+  const [popups, setPopups] = useState<Popups>({
     activationConfirmation: { isOpened: false },
     archivingConfirmation: { isOpened: false },
     error: { isOpened: false },
@@ -51,11 +51,10 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
   }, []);
 
   const checkAccess = () => {
-    const user = AuthService.getUser();
-
-    if (!user) {
+    const auth = AuthService.getAuth();
+    if (!auth) {
       router.push("/login");
-    } else if (user.account_type !== "applicant" && user.account_type !== "employer") {
+    } else if (auth.account_type !== "applicant" && auth.account_type !== "employer") {
       router.push("/");
     } else {
       setHasAccess(true);

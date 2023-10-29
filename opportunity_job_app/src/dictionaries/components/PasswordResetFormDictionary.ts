@@ -1,9 +1,5 @@
 import { PopupDictionary } from "@/dictionaries/components/PopupDictionary";
 
-interface PasswordResetFormErrorsDictionary {
-  passwordMinLength: string;
-  passwordsNotMatch: string;
-}
 
 export interface PasswordResetFormDictionary {
   topTextFirstLine: string;
@@ -12,7 +8,6 @@ export interface PasswordResetFormDictionary {
   passwordFieldPlaceholder: string;
   passwordConfirmFieldLabel: string;
   passwordConfirmFieldPlaceholder: string;
-  errors: PasswordResetFormErrorsDictionary;
   submitButtonLabel: string;
   popup: PopupDictionary;
 }

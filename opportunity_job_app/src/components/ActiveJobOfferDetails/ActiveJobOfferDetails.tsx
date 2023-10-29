@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { JobOfferService } from "@/api/jobOfferService";
 import { JobOffer } from "@/api/models/JobOffer";
 import { AuthService } from "@/api/authService";
-import { User } from "@/api/models/User";
+import { Auth } from "@/api/models/Auth";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
 import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
@@ -34,7 +34,7 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
   const { dict } = useDictionary();
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffer, setJobOffer ] = useState<JobOffer>();
-  const [ user, setUser ] = useState<User>();
+  const [ auth, setAuth ] = useState<Auth>();
   const [ popups, setPopups ] = useState<Popups>({
     enrollmentConfirmation: { isOpened: false },
     cancellationConfirmation: { isOpened: false },
@@ -54,13 +54,13 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
   }, []);
 
   const checkAccess = () => {
-    const user = AuthService.getUser();
-    if (!user) {
+    const auth = AuthService.getAuth();
+    if (!auth) {
       router.push("/login");
-    } else if (user.account_type !== "applicant") {
+    } else if (auth.account_type !== "applicant") {
       router.push("/");
     } else {
-      setUser(user);
+      setAuth(auth);
       setHasAccess(true);
     }
   };
@@ -72,7 +72,7 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
 
   const addJobEnrollment = async () => {
     try {
-      await JobEnrollmentService.addJobEnrollment(jobOfferID, user!.account_id);
+      await JobEnrollmentService.addJobEnrollment(jobOfferID, auth!.account_id);
       setPopups({ ...popups, enrollmentConfirmation: { isOpened: true } });
       fetchJobOffer();
     } catch (error) {

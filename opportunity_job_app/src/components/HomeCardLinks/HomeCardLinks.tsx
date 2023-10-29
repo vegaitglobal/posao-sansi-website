@@ -1,6 +1,6 @@
 "use client";
 
-import { User } from "@/api/models/User";
+import { Auth } from "@/api/models/Auth";
 import "./HomeCardLinks.scss";
 import React, { useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
@@ -10,20 +10,20 @@ import { useDictionary } from "@/hooks/useDictionary";
 
 const HomeCardLinks = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ user, setUser ] = useState<User>();
+  const [ auth, setAuth ] = useState<Auth>();
   const { dict } = useDictionary();
 
   useEffect(() => {
     if (isLoading) {
-      if (AuthService.getUser() !== null) {
-        setUser(AuthService.getUser());
+      if (AuthService.getAuth() !== null) {
+        setAuth(AuthService.getAuth());
       }
       setIsLoading(false);
     }
   }, []);
 
   const renderButtons = () => {
-    if (!user) {
+    if (!auth) {
       return (
         <>
           <HomeCardLink
@@ -42,7 +42,7 @@ const HomeCardLinks = () => {
       );
     }
 
-    if (user.account_type === "applicant") {
+    if (auth.account_type === "applicant") {
       return (
         <HomeCardLink
           title={ dict.homeCardLinks.applicantCardLink.title }
@@ -52,7 +52,7 @@ const HomeCardLinks = () => {
         />
       );
     }
-    if (user.account_type === "employer") {
+    if (auth.account_type === "employer") {
       return (
         <HomeCardLink
           title={ dict.homeCardLinks.employerCardLink.title }

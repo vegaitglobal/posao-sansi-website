@@ -28,7 +28,7 @@ const API = {
     const config = API._getConfig();
     return axiosInstance.delete(urlPath, config);
   },
-  _getConfig: () => {
+  _getConfig: (): any => {
     const headers = {
       "Accept-Language": localStorage.getItem("locale"),
       ...AuthService.getAuthorizationHeaders()

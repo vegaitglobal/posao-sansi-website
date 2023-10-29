@@ -78,6 +78,11 @@
       "linkButtonLabel": "Nazad na početnu"
     }
   },
+  "commonFormErrors": {
+    "passwordMinLength": "Lozinka mora da sadrži najmanje 8 karaktera",
+    "passwordsNotMatch": "Lozinke nisu iste",
+    "requiredField": "Ovo polje je obavezno"
+  },
   "passwordResetForm": {
     "topTextFirstLine": "Unesite novu lozinku.",
     "topTextSecondLine": "Lozinka mora biti minimum osam karaktera, jedan specijalan karakter i jedno veliko slovo.",
@@ -85,16 +90,38 @@
     "passwordFieldPlaceholder": "Unesite novu lozinku",
     "passwordConfirmFieldLabel": "Potvrdi lozinku:",
     "passwordConfirmFieldPlaceholder": "Ponovite novu lozinku",
-    "errors": {
-      "passwordMinLength": "Lozinka mora da sadrži najmanje 8 karaktera",
-      "passwordsNotMatch": "Lozinke nisu iste"
-    },
     "submitButtonLabel": "RESETUJ LOZINKU",
     "popup": {
       "primaryText": "Uspešno ste promenili lozinku.",
       "secondaryText": "Sada se možete prijaviti sa novom lozinkom.",
       "linkButtonLabel": "Prijava"
     }
+  },
+  "registrationForm": {
+    "topText": "U padajućem meniju odaberite koji tip naloga želite da kreirate: Poslodavac ili Aplikant",
+    "applicantOptionLabel": "Applicant",
+    "employerOptionLabel": "Employer",
+    "emailFieldLabel": "E-mail adresa:",
+    "emailFieldPlaceholder": "Vaša e-mail adresa",
+    "passwordFieldLabel": "Lozinka:",
+    "passwordFieldPlaceholder": "Odaberite lozinku",
+    "passwordConfirmFieldLabel": "Ponovite lozinku:",
+    "passwordConfirmFieldPlaceholder": "Ponovo unesite odabranu lozinku",
+    "submitButtonLabel": "KREIRAJ NALOG"
+  },
+  "applicantRegistrationForm": {
+    "firstNameFieldLabel": "Ime:",
+    "firstNameFieldPlaceholder": "Vaše ime",
+    "lastNameFieldLabel": "Prezime:",
+    "lastNameFieldPlaceholder": "Vaše prezime",
+    "phoneNumberFieldLabel": "Broj telefona:",
+    "phoneNumberFieldPlaceholder": "Vaš broj telefona",
+    "workExperienceFieldLabel": "Radno iskustvo:",
+    "workExperienceFieldPlaceholder": "Vaše radno iskustvo",
+    "educationFieldLabel": "Nivo obrazovanja:",
+    "educationFieldPlaceholder": "Vaš nivo obrazovanja",
+    "aboutFieldLabel": "O meni:",
+    "aboutFieldPlaceholder": "Napišite nešto o sobi"
   },
   "activeJobOfferList": {
     "title": "Aktivni poslovi:",
