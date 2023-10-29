@@ -49,3 +49,6 @@ class ApplicantAccount(BaseModel):
         blank=True,
         default=None,
     )
+
+    def __str__(self):
+        return str(self.user)

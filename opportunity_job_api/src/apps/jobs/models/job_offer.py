@@ -63,3 +63,6 @@ class JobOffer(BaseModel):
         verbose_name=_("is active"),
         default=False
     )
+
+    def __str__(self):
+        return self.job_name

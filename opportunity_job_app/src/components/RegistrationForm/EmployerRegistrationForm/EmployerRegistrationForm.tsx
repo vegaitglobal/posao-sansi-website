@@ -10,12 +10,12 @@ import {
   clearFormData,
   hasFormErrors,
   mapFormDataToEmployerAccount,
-  validateFormData
 } from "@/components/RegistrationForm/utils";
 import { EmployerFormData } from "@/components/RegistrationForm/types";
 import { initialEmployerFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
+import { validateFormData } from "@/utils";
 
 
 interface EmployerRegistrationFormProps {

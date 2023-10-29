@@ -1,13 +1,4 @@
-import { SelectOption } from "@/components/SelectField/SelectField";
-
-export interface InputFieldProps {
-  value: string;
-  errors: string[];
-}
-
-export interface SelectFieldProps extends InputFieldProps {
-  options: SelectOption[];
-}
+import { InputFieldProps, SelectFieldProps } from "@/types";
 
 export interface RegistrationFormData {
   email: InputFieldProps;

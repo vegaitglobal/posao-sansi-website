@@ -1,5 +1,4 @@
 import { deepCopy, mapTextChoicesFieldOptionsToSelectOptions } from "@/utils";
-import { Dictionary } from "@/dictionaries/Dictionary";
 import { GeneralService } from "@/api/generalService";
 import { SelectOption } from "@/components/SelectField/SelectField";
 import { ApplicantAccount } from "@/api/models/ApplicantAccount";
@@ -7,21 +6,6 @@ import { ApplicantFormData, EmployerFormData } from "@/components/RegistrationFo
 import { initialApplicantFormData } from "@/components/RegistrationForm/data";
 import { BadRequestResponse } from "@/api/models/BadRequestResponse";
 import { EmployerAccount } from "@/api/models/EmployerAccount";
-
-export const validateFormData = (formData: ApplicantFormData | EmployerFormData, dict: Dictionary): ApplicantFormData | EmployerFormData => {
-  const formDataCopy = deepCopy(formData) as ApplicantFormData | EmployerFormData;
-  Object.entries(formDataCopy).forEach(([ key, field ]) => {
-    formDataCopy[key].errors = [];
-    if (!field.value.trim()) {
-      formDataCopy[key].errors.push(dict.commonFormErrors.requiredField);
-    } else if (key === "password" && field.value.length < 8) {
-      formDataCopy[key].errors.push(dict.commonFormErrors.passwordMinLength);
-    } else if (key === "password_confirmation" && formDataCopy.password.value != field.value) {
-      formDataCopy[key].errors.push(dict.commonFormErrors.passwordsNotMatch);
-    }
-  });
-  return formDataCopy;
-};
 
 export const applyAPIFormErrors = (formData: ApplicantFormData | EmployerFormData, formDataErrors: BadRequestResponse): ApplicantFormData | EmployerFormData => {
   const erroneousFields = Object.keys(formDataErrors);
