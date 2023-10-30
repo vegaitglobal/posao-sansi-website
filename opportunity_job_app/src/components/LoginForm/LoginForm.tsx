@@ -48,8 +48,10 @@ const LoginForm = () => {
   return (
     <div className="form-page">
       <div className="form-page__left">
-        <p className="welcome-sentence">{ dict.loginForm.topTextFirstLine }</p>
-        <p className="welcome-sentence">{ dict.loginForm.topTextSecondLine }</p>
+        <div className="form-page__message">
+          <p>{ dict.loginForm.topTextFirstLine }</p>
+          <p>{ dict.loginForm.topTextSecondLine }</p>
+        </div>
         <form className="form-page__form">
           <InputField
             label={ dict.loginForm.emailFieldLabel }
@@ -71,7 +73,7 @@ const LoginForm = () => {
           </Link>
         </form>
       </div>
-      <FormPageDesktopImage />
+      <FormPageDesktopImage/>
     </div>
   );
 };
