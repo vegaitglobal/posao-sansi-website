@@ -14,6 +14,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en">
+    <head>
+      <title></title>
+      <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
+    </head>
     <body className={ inter.className }>
     <Header/>
     <main>
