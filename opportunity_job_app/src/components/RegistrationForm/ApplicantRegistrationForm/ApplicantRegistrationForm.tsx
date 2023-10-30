@@ -87,7 +87,7 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
   if (isLoading) return null;
 
   return (
-    <form className="registration-form">
+    <form className="form-page__form">
       <InputField
         label={ dict.applicantRegistrationForm.firstNameFieldLabel }
         placeholder={ dict.applicantRegistrationForm.firstNameFieldPlaceholder }

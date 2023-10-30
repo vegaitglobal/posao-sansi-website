@@ -6,6 +6,7 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import Link from "next/link";
 import { useDictionary } from "@/hooks/useDictionary";
+import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 
 const LoginForm = () => {
   const { dict } = useDictionary();
@@ -45,29 +46,32 @@ const LoginForm = () => {
   if (!hasAccess) return null;
 
   return (
-    <div className="wrapper">
-      <p className="welcome-sentence">{ dict.loginForm.topTextFirstLine }</p>
-      <p className="welcome-sentence">{ dict.loginForm.topTextSecondLine }</p>
-      <form className="login-form">
-        <InputField
-          label={ dict.loginForm.emailFieldLabel }
-          placeholder={ dict.loginForm.emailFieldPlaceholder }
-          value={ formData.email }
-          onChange={ (value) => updateFormData(value, "email") }
-        />
-        <InputField
-          label={ dict.loginForm.passwordFieldLabel }
-          placeholder={ dict.loginForm.passwordFieldPlaceholder }
-          value={ formData.password }
-          type="password"
-          onChange={ (value) => updateFormData(value, "password") }
-        />
-        { responseError && <p className="error-message">{ responseError }</p> }
-        <button className="form-submit-button" onClick={ login }>{ dict.loginForm.submitButtonLabel }</button>
-        <Link className="login-form__link" href="/password-forgotten">
-          { dict.loginForm.passwordForgottenLinkText }
-        </Link>
-      </form>
+    <div className="form-page">
+      <div className="form-page__left">
+        <p className="welcome-sentence">{ dict.loginForm.topTextFirstLine }</p>
+        <p className="welcome-sentence">{ dict.loginForm.topTextSecondLine }</p>
+        <form className="form-page__form">
+          <InputField
+            label={ dict.loginForm.emailFieldLabel }
+            placeholder={ dict.loginForm.emailFieldPlaceholder }
+            value={ formData.email }
+            onChange={ (value) => updateFormData(value, "email") }
+          />
+          <InputField
+            label={ dict.loginForm.passwordFieldLabel }
+            placeholder={ dict.loginForm.passwordFieldPlaceholder }
+            value={ formData.password }
+            type="password"
+            onChange={ (value) => updateFormData(value, "password") }
+          />
+          { responseError && <p className="error-message">{ responseError }</p> }
+          <button className="form-submit-button" onClick={ login }>{ dict.loginForm.submitButtonLabel }</button>
+          <Link className="login-form__link" href="/password-forgotten">
+            { dict.loginForm.passwordForgottenLinkText }
+          </Link>
+        </form>
+      </div>
+      <FormPageDesktopImage />
     </div>
   );
 };

@@ -8,7 +8,7 @@ export function middleware(request: NextRequest): Response | undefined {
     (locale) => pathname.startsWith(`/${ locale }/`) || pathname === `/${ locale }`
   );
 
-  const shouldRedirect = !pathnameHasLocale && !isPublicFile(pathname);
+  const shouldRedirect = !pathnameHasLocale && !isPublicFile(pathname) && !pathname.endsWith("favicon.ico");
   if (shouldRedirect) {
     request.nextUrl.pathname = `/${ SERBIAN_LOCALE }${ pathname }`;
     return Response.redirect(request.nextUrl);

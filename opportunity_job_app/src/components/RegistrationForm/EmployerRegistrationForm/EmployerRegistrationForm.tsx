@@ -83,7 +83,7 @@ const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFo
   if (isLoading) return null;
 
   return (
-    <form className="registration-form">
+    <form className="form-page__form">
       <CredentialsFields
         formData={ formData }
         onUpdateFormData={ updateFormData }
