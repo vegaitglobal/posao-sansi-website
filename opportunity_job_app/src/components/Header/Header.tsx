@@ -25,10 +25,10 @@ interface Dictionary {
 const Header = () => {
   const pathname = usePathname();
   const { slug, dict }: Dictionary = useDictionary();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [auth, setAuth] = useState<Auth | undefined>();
-  const [hasOpenedLanguageMenu, setHasOpenedLanguageMenu] = useState<boolean>(false);
-  const [hasOpenedMainMenu, setHasOpenedMainMenu] = useState<boolean>(false);
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
+  const [ auth, setAuth ] = useState<Auth | undefined>();
+  const [ hasOpenedLanguageMenu, setHasOpenedLanguageMenu ] = useState<boolean>(false);
+  const [ hasOpenedMainMenu, setHasOpenedMainMenu ] = useState<boolean>(false);
 
   useEffect(() => {
     if (isLoading) {
@@ -38,7 +38,7 @@ const Header = () => {
         localStorage.setItem("locale", slug!);
       }
     }
-  }, [auth, isLoading]);
+  }, [ auth, isLoading ]);
 
   const toggleLanguageMenu = () => {
     setHasOpenedLanguageMenu(!hasOpenedLanguageMenu);
@@ -102,7 +102,7 @@ const Header = () => {
       }
       return (
         <li className={ className } key={ index }>
-          <Link className="header__nav-link" href={ link.url }>
+          <Link className="header__nav-link" href={ link.url || "" }>
             <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
             <span className="header__nav-link-text">
               { dict.header.mainMenu[link.labelDictKey] }

@@ -14,7 +14,7 @@ interface HomeCardLinkProps {
 const HomeCardLink = ({ href, title, label, imageURL }: HomeCardLinkProps) => {
   return (
     <div className="card__holder">
-      <Link className="card__link" href={ href }></Link>
+      <Link className="card__link" href={ href || "" }></Link>
       <div className="cards__left">
         <img className="cards__img" src={ imageURL } alt="Card 1"/>
       </div>
