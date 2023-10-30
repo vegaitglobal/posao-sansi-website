@@ -1,6 +1,6 @@
 import en from "./en.json";
 import sr from "./sr.json";
-import { SERBIAN_LOCALE } from "@/appData/locales";
+import { SERBIAN_LOCALE } from "@/data/locales";
 import { Dictionary } from "@/dictionaries/Dictionary";
 
 

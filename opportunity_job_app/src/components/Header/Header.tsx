@@ -4,7 +4,7 @@ import "./Header.scss";
 import React, { useCallback, useEffect, useState } from "react";
 import { Auth } from "@/api/models/Auth";
 import { AuthService } from "@/api/authService";
-import { anonymousUserLinks, applicantLinks, employerLinks, languageLinks, MainMenuLink } from "@/appData/links";
+import { anonymousUserLinks, applicantLinks, employerLinks, languageLinks, MainMenuLink } from "@/data/links";
 import { useDictionary } from "@/hooks/useDictionary";
 import { usePathname } from "next/navigation";
 import Link from "next/link";

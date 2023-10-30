@@ -1,5 +1,5 @@
 import { isPublicFile } from "@/utils";
-import { locales, SERBIAN_LOCALE } from "@/appData/locales";
+import { locales, SERBIAN_LOCALE } from "@/data/locales";
 import { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest): Response | undefined {

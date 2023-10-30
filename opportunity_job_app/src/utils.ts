@@ -1,8 +1,8 @@
-import { locales } from "@/appData/locales";
+import { locales } from "@/data/locales";
 import { SelectOption } from "@/components/SelectField/SelectField";
 import { TextChoicesFieldOptions } from "@/api/models/TextChoicesFieldOptions";
 import { Dictionary } from "@/dictionaries/Dictionary";
-import { FormData } from "@/types";
+import { EnvironmentVariables, FormData, PublicRuntimeConfig } from "@/types";
 
 export function mapStringToLocalDateString(dateString: string): string {
   return new Date(Date.parse(dateString)).toLocaleDateString("de");
@@ -31,12 +31,12 @@ export function deepCopy(value: object | []): object | [] {
 }
 
 export function mapTextChoicesFieldOptionsToSelectOptions(options: TextChoicesFieldOptions): SelectOption[] {
-  return Object.entries(options).map(([value, label]) => ({ value: value, label: label }));
+  return Object.entries(options).map(([ value, label ]) => ({ value: value, label: label }));
 }
 
 export const validateFormData = <T>(formData: FormData, dict: Dictionary): T => {
   const formDataCopy = deepCopy(formData) as FormData;
-  Object.entries(formDataCopy).forEach(([key, field]) => {
+  Object.entries(formDataCopy).forEach(([ key, field ]) => {
     formDataCopy[key].errors = [];
     if (!field.value.trim()) {
       formDataCopy[key].errors.push(dict.commonFormErrors.requiredField);
@@ -48,3 +48,7 @@ export const validateFormData = <T>(formData: FormData, dict: Dictionary): T => 
   });
   return formDataCopy as T;
 };
+
+export function mapPublicRuntimeConfigToENV(publicRuntimeConfig: PublicRuntimeConfig): EnvironmentVariables {
+  return deepCopy(publicRuntimeConfig) as EnvironmentVariables;
+}

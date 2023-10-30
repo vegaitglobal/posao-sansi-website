@@ -4,7 +4,7 @@ This project is divided into [API/](/opportunity_job_api/README.md)
 and `app`.
 [API directory](opportunity_job_api) contains
 [Django](https://www.djangoproject.com/) application,
-and the [APP directory](TODO) contains
+and the [APP directory](opportunity_job_app) contains
 [Next.js](https://nextjs.org/) application.
 
 Table of Contents

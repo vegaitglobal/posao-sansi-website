@@ -1,29 +1,26 @@
 import "../scss/style.scss";
-import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-
-const inter = Inter({ subsets: [ "latin" ] });
+import { ENV } from "@/data/env";
 
 interface RootLayoutProps {
   children: ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-
   return (
     <html lang="en">
     <head>
-      <title></title>
+      <title>{ ENV.title }</title>
       <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
     </head>
-    <body className={ inter.className }>
+    <body>
     <Header/>
     <main>
       { children }
     </main>
-    <Footer/>
+    <Footer env={ ENV }/>
     </body>
     </html>
   );

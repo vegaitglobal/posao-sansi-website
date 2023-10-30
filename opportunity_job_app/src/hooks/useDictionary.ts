@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { getLangSlugFromPath } from "@/utils";
-import { SERBIAN_LOCALE } from "@/appData/locales";
+import { SERBIAN_LOCALE } from "@/data/locales";
 import { Dictionary } from "@/dictionaries/Dictionary";
 import { getDictionary } from "@/dictionaries";
 

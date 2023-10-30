@@ -2,12 +2,48 @@
 
 import Link from "next/link";
 import "./Footer.scss";
-import { contact, socialMediaLinks } from "@/appData/footerData";
 import { useDictionary } from "@/hooks/useDictionary";
+import { EnvironmentVariables } from "@/types";
+
+interface FooterProps {
+  env: EnvironmentVariables;
+}
+
+interface SocialIcon {
+  url: string,
+  iconPath: string,
+  alt: string,
+}
 
 
-const Footer = () => {
+const Footer = ({ env }: FooterProps) => {
   const { dict } = useDictionary();
+
+  const socialMediaLinks: SocialIcon[] = [
+    {
+      url: env.facebookURL,
+      iconPath: "/images/facebook.svg",
+      alt: "Facebook icon"
+    },
+    {
+      url: env.linkedinURL,
+      iconPath: "/images/linkedin.svg",
+      alt: "Linkedin icon"
+    },
+    {
+      url: env.twitterURL,
+      iconPath: "/images/twitter.svg",
+      alt: "Twitter icon"
+    },
+    {
+      url: env.atinaWebsiteURL,
+      iconPath: "/images/web.svg",
+      alt: "Web icon"
+    },
+  ];
+
+  const location = `${ env.address }, ${ env.city } ${ env.postalCode }`;
+  const googleMapsLocationURL = `https://www.google.com/maps/search/?api=1&query=${ location }`;
 
   return (
     <div className="footer">
@@ -28,18 +64,19 @@ const Footer = () => {
         <div className="footer__links-holder">
           <span className="footer__links-title">{ dict.footer.contactListTitle }</span>
           <ul className="footer__contacts">
-            { contact.map((contact, i) => (
-              <li className="footer__contacts-item" key={ i }>
-                <img src={ contact.iconPath } alt={ contact.alt } className="footer__contacts-img"/>
-                <a className="footer__contact-link" href={ contact.href }>{ contact.label }</a>
-              </li>
-            )) }
+            <li className="footer__contacts-item">
+              <img src="/images/mail.svg" alt="Mail icon" className="footer__contacts-img"/>
+              <a className="footer__contact-link" href={ `mailto: ${ env.email }` }>{ env.email }</a>
+            </li>
+            <li className="footer__contacts-item">
+              <img src="/images/phone.svg" alt="Phone icon" className="footer__contacts-img"/>
+              <a className="footer__contact-link" href={ `tel: ${ env.phone }` }>{ env.phone }</a>
+            </li>
             <li className="footer__contacts-item">
               <img src="/images/location.svg" alt="Location icon" className="footer__contacts-img"/>
-              <div className="footer__contacts-address-holder">
-                <span className="footer__contacts-address">Bul. Kralja Aleksandra 23,</span>
-                <span className="footer__contacts-address">11000 Beograd</span>
-              </div>
+              <Link className="footer__contacts-address-holder" href={ googleMapsLocationURL }>
+                <span className="footer__contacts-address">{ location }</span>
+              </Link>
             </li>
           </ul>
         </div>
