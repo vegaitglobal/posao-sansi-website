@@ -1,11 +1,12 @@
 "use client";
 
-import "./password-forgotten-form.scss";
+import "./../../scss/components/form-page.scss";
 import InputField from "@/components/InputField/InputField";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import Popup from "@/components/Popup/Popup";
 import { useDictionary } from "@/hooks/useDictionary";
+import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 
 
 const PasswordForgottenForm = () => {
@@ -45,25 +46,28 @@ const PasswordForgottenForm = () => {
   if (!hasAccess) return null;
 
   return (
-    <div className="wrapper">
-      <p className="welcome-sentence">{ dict.passwordForgottenForm.topText }</p>
-      <form className="password-forgotten-form">
-        <InputField
-          label={ dict.passwordForgottenForm.emailFieldLabel }
-          placeholder={ dict.passwordForgottenForm.emailFieldPlaceholder }
-          value={ formData.email }
-          onChange={ (value) => updateFormData(value, "email") }
+    <div className="form-page">
+      <div className="form-page__left">
+        <p className="form-page__message">{ dict.passwordForgottenForm.topText }</p>
+        <form className="form-page__form">
+          <InputField
+            label={ dict.passwordForgottenForm.emailFieldLabel }
+            placeholder={ dict.passwordForgottenForm.emailFieldPlaceholder }
+            value={ formData.email }
+            onChange={ (value) => updateFormData(value, "email") }
+          />
+          <button className="form-submit-button" onClick={ forgotPassword }>
+            { dict.passwordForgottenForm.submitButtonLabel }
+          </button>
+        </form>
+        <Popup
+          isOpened={ hasOpenedPopup }
+          onClose={ () => setHasOpenedPopup(false) }
+          primaryText={ dict.passwordForgottenForm.popup.primaryText }
+          linkButton={ { label: dict.passwordForgottenForm.popup.linkButtonLabel, url: "/" } }
         />
-        <button className="form-submit-button" onClick={ forgotPassword }>
-          { dict.passwordForgottenForm.submitButtonLabel }
-        </button>
-      </form>
-      <Popup
-        isOpened={ hasOpenedPopup }
-        onClose={ () => setHasOpenedPopup(false) }
-        primaryText={ dict.passwordForgottenForm.popup.primaryText }
-        linkButton={ { label: dict.passwordForgottenForm.popup.linkButtonLabel, url: "/" } }
-      />
+      </div>
+      <FormPageDesktopImage/>;
     </div>
   );
 };
