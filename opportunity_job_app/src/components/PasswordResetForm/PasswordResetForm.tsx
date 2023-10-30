@@ -105,7 +105,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
             onChange={ (value) => updateFormData(value, "password_confirmation") }
             errors={ shouldDisplayFormErrors ? formData.password_confirmation.errors : [] }
           />
-          { responseError && <p className="error-message">{ responseError }</p> }
+          { responseError && <p className="form-field__error">{ responseError }</p> }
           <button className="form-submit-button" onClick={ handleSubmit }>
             { dict.passwordResetForm.submitButtonLabel }
           </button>
