@@ -51,7 +51,7 @@ const RegistrationForm = () => {
   return (
     <div className="form-page">
       <div className="form-page__left">
-        <p className="welcome-sentence">{ dict.registrationForm.topText }</p>
+        <p className="form-page__message">{ dict.registrationForm.topText }</p>
         <div className="account-type-selector-wrapper">
           <SelectField
             value={ selectedAccountType }
