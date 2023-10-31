@@ -24,7 +24,7 @@ const LoginForm = () => {
       checkAccess();
       setIsLoading(false);
     }
-  }, []);
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
@@ -49,8 +49,6 @@ const LoginForm = () => {
   };
 
   if (isLoading) return <Spinner/>;
-
-  if (!hasAccess) return null;
 
   return hasAccess && (
     <div className="form-page">
