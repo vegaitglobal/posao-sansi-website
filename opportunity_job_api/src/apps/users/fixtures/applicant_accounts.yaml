@@ -6,3 +6,48 @@
     last_name: Roknic
     created: 2023-10-14T01:00:00+00:00
     modified: 2023-10-14T01:00:00+00:00
+
+- model: users.ApplicantAccount
+  pk: 2
+  fields:
+    user: 5
+    first_name: Srđan
+    last_name: Kokić
+    created: 2023-10-14T02:00:00+00:00
+    modified: 2023-10-14T02:00:00+00:00
+
+- model: users.ApplicantAccount
+  pk: 3
+  fields:
+    user: 6
+    first_name: Nemanja
+    last_name: Simić
+    created: 2023-01-01T01:00:00+00:00
+    modified: 2023-01-01T01:00:00+00:00
+
+- model: users.ApplicantAccount
+  pk: 4
+  fields:
+    user: 7
+    first_name: Hristina
+    last_name: Barjaktarović
+    created: 2023-01-02T01:00:00+00:00
+    modified: 2023-01-02T01:00:00+00:00
+
+- model: users.ApplicantAccount
+  pk: 5
+  fields:
+    user: 8
+    first_name: Marko
+    last_name: Kuštudija
+    created: 2023-01-02T02:00:00+00:00
+    modified: 2023-01-02T02:00:00+00:00
+
+- model: users.ApplicantAccount
+  pk: 6
+  fields:
+    user: 10
+    first_name: Nikola
+    last_name: Kokić
+    created: 2023-01-02T03:00:00+00:00
+    modified: 2023-01-02T03:00:00+00:00

@@ -23,3 +23,16 @@
     about: Miki's company
     created: 2023-10-15T01:00:00+00:00
     modified: 2023-10-15T01:00:00+00:00
+
+- model: users.EmployerAccount
+  pk: 3
+  fields:
+    user: 9
+    company_name: Zorić
+    pib: 123456789
+    address: Gundulićeva 10, 11000 Beograd
+    phone_number: +123456789
+    url: https://google.com/
+    about: Vlasnik ove kompanije je Mila. Ovde imate puno ponuda za posao i sve su jako dobre (bar Mila tako kaže).
+    created: 2023-10-15T01:00:00+00:00
+    modified: 2023-10-15T01:00:00+00:00

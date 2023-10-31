@@ -9,10 +9,14 @@ from apps.users.models import ApplicantAccount
 
 @admin.register(ApplicantAccount)
 class ApplicantAccountAdmin(ModelAdmin, TranslationAdmin):
+    ordering = (
+        "-modified",
+    )
     list_display = (
         "first_name",
         "last_name",
         "user",
+        "created",
     )
     search_fields = (
         "first_name",

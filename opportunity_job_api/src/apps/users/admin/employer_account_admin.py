@@ -9,9 +9,13 @@ from apps.users.models import EmployerAccount
 
 @admin.register(EmployerAccount)
 class EmployerAccountAdmin(ModelAdmin, TranslationAdmin):
+    ordering = (
+        "-modified",
+    )
     list_display = (
         "company_name",
         "user",
+        "created",
     )
     search_fields = (
         "company_name",
