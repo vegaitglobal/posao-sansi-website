@@ -7,9 +7,11 @@ import { AuthService } from "@/api/authService";
 import Link from "next/link";
 import { useDictionary } from "@/hooks/useDictionary";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
+import Spinner from "@/components/Spinner/Spinner";
 
 const LoginForm = () => {
   const { dict } = useDictionary();
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ responseError, setResponseError ] = useState<string>("");
   const [ formData, setFormData ] = useState({
@@ -18,7 +20,10 @@ const LoginForm = () => {
   });
 
   useEffect(() => {
-    checkAccess();
+    if (isLoading) {
+      checkAccess();
+      setIsLoading(false);
+    }
   }, []);
 
   const checkAccess = () => {
@@ -43,9 +48,11 @@ const LoginForm = () => {
     setFormData({ ...formData, [fieldName]: fieldValue });
   };
 
+  if (isLoading) return <Spinner/>;
+
   if (!hasAccess) return null;
 
-  return (
+  return hasAccess && (
     <div className="form-page">
       <div className="form-page__left">
         <div className="form-page__message">
