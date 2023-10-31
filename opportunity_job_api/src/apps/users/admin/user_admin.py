@@ -33,6 +33,7 @@ class UserAdmin(ModelAdmin, BaseUserAdmin):
         "email_deterministic",
     )
     ordering = (
+        "is_active",
         "email",
     )
     add_form = CreateUserForm
