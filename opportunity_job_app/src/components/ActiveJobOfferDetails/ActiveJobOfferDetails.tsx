@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
+import Spinner from "@/components/Spinner/Spinner";
 
 
 interface ActiveJobOfferDetailsProps {
@@ -33,6 +34,7 @@ interface Popups {
 export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDetailsProps) {
   const router = useRouter();
   const { dict } = useDictionary();
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffer, setJobOffer ] = useState<JobOffer>();
   const [ auth, setAuth ] = useState<Auth>();
@@ -50,8 +52,11 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
   };
 
   useEffect(() => {
-    checkAccess();
-    fetchJobOffer();
+    if (isLoading) {
+      checkAccess();
+      fetchJobOffer();
+      setIsLoading(false);
+    }
   }, []);
 
   const checkAccess = () => {
@@ -90,6 +95,8 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
       setPopups({ ...popups, error: { isOpened: true } });
     }
   };
+
+  if (isLoading) return <Spinner/>;
 
   return hasAccess && jobOffer && (
     <div className="page">

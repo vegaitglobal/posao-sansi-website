@@ -9,12 +9,14 @@ import { JobOfferService } from "@/api/jobOfferService";
 import { useDictionary } from "@/hooks/useDictionary";
 import JobOfferCard from "@/components/JobOfferCard/JobOfferCard";
 import { AccountTypes } from "@/enums";
+import Spinner from "@/components/Spinner/Spinner";
 
 
 export default function ActiveJobOfferList() {
   const router = useRouter();
   const { dict } = useDictionary();
   const pathname = usePathname();
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ jobOffers, setJobOffers ] = useState<JobOffer[]>([]);
   const [ pageNumber, setPageNumber ] = useState<number>(0);
@@ -26,9 +28,12 @@ export default function ActiveJobOfferList() {
       loadMoreJobOffers();
     };
 
-    checkAccess();
-    fetchJobOffers();
-  }, []);
+    if (isLoading) {
+      checkAccess();
+      fetchJobOffers();
+      setIsLoading(false);
+    }
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     const auth = AuthService.getAuth();
@@ -49,6 +54,8 @@ export default function ActiveJobOfferList() {
     setHasNextPage(nextPageNumber < response.pagination.total_pages);
     setTotalJobOfferNumber(response.pagination.total_items);
   }
+
+  if (isLoading) return <Spinner/>;
 
   return hasAccess && (
     <>
