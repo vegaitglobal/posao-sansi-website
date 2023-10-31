@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-31 03:53-0500\n"
+"POT-Creation-Date: 2023-10-31 07:30-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,17 +100,17 @@ msgstr ""
 msgid "djangotainer on GitHub"
 msgstr ""
 
-#: apps/jobs/admin/job_enrollment_admin.py:26 apps/jobs/models/job_offer.py:15
+#: apps/jobs/admin/job_enrollment_admin.py:36 apps/jobs/models/job_offer.py:15
 msgid "job name"
 msgstr ""
 
-#: apps/jobs/admin/job_enrollment_admin.py:34
+#: apps/jobs/admin/job_enrollment_admin.py:45
 #: apps/jobs/admin/job_offer_admin.py:30
-#: apps/users/models/employer_account.py:21
+#: apps/users/models/employer_account.py:15
 msgid "company name"
 msgstr ""
 
-#: apps/jobs/admin/job_enrollment_admin.py:42
+#: apps/jobs/admin/job_enrollment_admin.py:54
 msgid "applicant_email"
 msgstr ""
 
@@ -194,20 +194,32 @@ msgstr ""
 msgid "display to applicants"
 msgstr ""
 
-#: apps/jobs/models/job_enrollment.py:10
+#: apps/jobs/models/job_enrollment.py:9
 msgid "Job Enrollment"
 msgstr ""
 
-#: apps/jobs/models/job_enrollment.py:11
+#: apps/jobs/models/job_enrollment.py:10
 msgid "Job Enrollments"
 msgstr ""
 
-#: apps/jobs/models/job_enrollment.py:15
+#: apps/jobs/models/job_enrollment.py:14
 msgid "job offer"
 msgstr ""
 
-#: apps/jobs/models/job_enrollment.py:21
+#: apps/jobs/models/job_enrollment.py:20
 msgid "applicant account"
+msgstr ""
+
+#: apps/jobs/models/job_enrollment.py:26
+msgid "pending?"
+msgstr ""
+
+#: apps/jobs/models/job_enrollment.py:29
+msgid ""
+"The status indicates whether the enrollment has been processed. If the "
+"status is pending, the applicant either needs to connect with the employer "
+"to complete the application process, or someone else may need to apply for "
+"the job on behalf of the applicant."
 msgstr ""
 
 #: apps/jobs/models/job_offer.py:11
@@ -251,6 +263,7 @@ msgid "additional skills"
 msgstr ""
 
 #: apps/jobs/models/job_offer.py:63
+#: apps/users/admin/abstract_account_admin.py:16
 msgid "is active"
 msgstr ""
 
@@ -262,16 +275,20 @@ msgstr ""
 msgid "Employer"
 msgstr ""
 
-#: apps/users/admin/password_reset_email_admin.py:36
+#: apps/users/admin/password_reset_email_admin.py:42
 msgid "Details"
 msgstr ""
 
-#: apps/users/admin/user_admin.py:34
+#: apps/users/admin/user_admin.py:49
 msgid "Permissions"
 msgstr ""
 
-#: apps/users/admin/user_admin.py:41
+#: apps/users/admin/user_admin.py:56
 msgid "Important dates"
+msgstr ""
+
+#: apps/users/admin/user_admin.py:81
+msgid "account"
 msgstr ""
 
 #: apps/users/enums.py:6
@@ -330,69 +347,68 @@ msgstr ""
 msgid "More than ten years"
 msgstr ""
 
-#: apps/users/models/applicant_account.py:11
-msgid "Applicant Account"
-msgstr ""
-
-#: apps/users/models/applicant_account.py:12
-msgid "Applicant Accounts"
-msgstr ""
-
-#: apps/users/models/applicant_account.py:18
-#: apps/users/models/employer_account.py:17
+#: apps/users/models/abstract_account.py:14
 #: apps/users/models/password_reset_email.py:37
 msgid "user"
 msgstr ""
 
-#: apps/users/models/applicant_account.py:22
+#: apps/users/models/applicant_account.py:10
+msgid "Applicant Account"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:11
+msgid "Applicant Accounts"
+msgstr ""
+
+#: apps/users/models/applicant_account.py:16
 msgid "first name"
 msgstr ""
 
-#: apps/users/models/applicant_account.py:26
+#: apps/users/models/applicant_account.py:20
 msgid "last name"
 msgstr ""
 
-#: apps/users/models/applicant_account.py:30
+#: apps/users/models/applicant_account.py:24
 msgid "work experience"
 msgstr ""
 
-#: apps/users/models/applicant_account.py:36
+#: apps/users/models/applicant_account.py:30
 msgid "education level"
 msgstr ""
 
-#: apps/users/models/applicant_account.py:42
+#: apps/users/models/applicant_account.py:36
 msgid "about me"
 msgstr ""
 
-#: apps/users/models/employer_account.py:10
+#: apps/users/models/employer_account.py:9
 msgid "Employer Account"
 msgstr ""
 
-#: apps/users/models/employer_account.py:11
+#: apps/users/models/employer_account.py:10
 msgid "Employer Accounts"
 msgstr ""
 
-#: apps/users/models/employer_account.py:25
+#: apps/users/models/employer_account.py:19
 msgid "PIB"
 msgstr ""
 
-#: apps/users/models/employer_account.py:27
+#: apps/users/models/employer_account.py:21
 msgid "In Serbia, this number contains 9 numeric characters"
 msgstr ""
 
-#: apps/users/models/employer_account.py:31
+#: apps/users/models/employer_account.py:25
 msgid "company address"
 msgstr ""
 
-#: apps/users/models/employer_account.py:35
+#: apps/users/models/employer_account.py:29
 msgid "company phone number"
 msgstr ""
 
-#: apps/users/models/employer_account.py:39
+#: apps/users/models/employer_account.py:33
 msgid "company url"
 msgstr ""
 
-#: apps/users/models/employer_account.py:42
+#: apps/users/models/employer_account.py:36
 msgid "about company"
 msgstr ""
 
