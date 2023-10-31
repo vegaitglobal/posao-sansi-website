@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-29 10:33-0500\n"
+"POT-Creation-Date: 2023-10-31 03:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,47 +23,31 @@ msgstr ""
 msgid "id"
 msgstr ""
 
-#: apps/emails/admin.py:46
-msgid "Details"
-msgstr ""
-
-#: apps/emails/admin.py:64
-msgid "recipient user"
-msgstr ""
-
-#: apps/emails/admin.py:72 apps/emails/models.py:48
+#: apps/emails/admin.py:26 apps/emails/models.py:44
 msgid "status"
 msgstr ""
 
-#: apps/emails/admin.py:76
+#: apps/emails/admin.py:30
 msgid "Send selected emails"
 msgstr ""
 
-#: apps/emails/admin.py:95
+#: apps/emails/admin.py:49
 #, python-brace-format
 msgid "Successfully sent {emails_count} {label}."
 msgstr ""
 
-#: apps/emails/admin.py:97
+#: apps/emails/admin.py:51
 msgid "emails"
 msgstr ""
 
-#: apps/emails/admin.py:97 apps/users/models/user.py:27
+#: apps/emails/admin.py:51 apps/users/models/user.py:27
 msgid "email"
 msgstr ""
 
-#: apps/emails/admin.py:107
+#: apps/emails/admin.py:61
 msgid ""
 "You can select a maximum of 5 emails to send at once. Please reduce the "
 "number of selected emails and try again."
-msgstr ""
-
-#: apps/emails/models.py:15
-msgid "Email"
-msgstr ""
-
-#: apps/emails/models.py:16
-msgid "Emails"
 msgstr ""
 
 #: apps/emails/models.py:21
@@ -83,36 +67,32 @@ msgid "email subject"
 msgstr ""
 
 #: apps/emails/models.py:30
-msgid "recipient email address"
-msgstr ""
-
-#: apps/emails/models.py:34
 msgid "email context"
 msgstr ""
 
-#: apps/emails/models.py:38
+#: apps/emails/models.py:34
 msgid "template path"
 msgstr ""
 
-#: apps/emails/models.py:42 apps/jobs/models/job_offer.py:41
+#: apps/emails/models.py:38 apps/jobs/models/job_offer.py:41
 msgid "category"
 msgstr ""
 
-#: apps/emails/models.py:45
+#: apps/emails/models.py:41
 msgid "For easier grouping and searching of specific emails"
 msgstr ""
 
-#: apps/emails/models.py:53
+#: apps/emails/models.py:49
 msgid ""
 "Note that the email can successfully be sent even if the recipient email "
 "address does not exist"
 msgstr ""
 
-#: apps/emails/models.py:58
+#: apps/emails/models.py:54
 msgid "error"
 msgstr ""
 
-#: apps/emails/models.py:60
+#: apps/emails/models.py:56
 msgid "An error occurred during the email sending process"
 msgstr ""
 
@@ -282,6 +262,10 @@ msgstr ""
 msgid "Employer"
 msgstr ""
 
+#: apps/users/admin/password_reset_email_admin.py:36
+msgid "Details"
+msgstr ""
+
 #: apps/users/admin/user_admin.py:34
 msgid "Permissions"
 msgstr ""
@@ -356,6 +340,7 @@ msgstr ""
 
 #: apps/users/models/applicant_account.py:18
 #: apps/users/models/employer_account.py:17
+#: apps/users/models/password_reset_email.py:37
 msgid "user"
 msgstr ""
 
@@ -411,6 +396,19 @@ msgstr ""
 msgid "about company"
 msgstr ""
 
+#: apps/users/models/password_reset_email.py:13
+#: templates/emails/password_reset.html:20
+msgid "Reset your password"
+msgstr "Promenite lozinku"
+
+#: apps/users/models/password_reset_email.py:29
+msgid "Password Reset Email"
+msgstr ""
+
+#: apps/users/models/password_reset_email.py:30
+msgid "Password Reset Emails"
+msgstr ""
+
 #: apps/users/models/user.py:38
 msgid "User"
 msgstr ""
@@ -435,10 +433,6 @@ msgstr ""
 msgid "User does not exist"
 msgstr ""
 
-#: apps/users/utils.py:38 templates/emails/password_reset.html:19
-msgid "Reset your password"
-msgstr ""
-
 #: opportunity_job_api/settings/common.py:82
 msgid "English"
 msgstr ""
@@ -452,10 +446,15 @@ msgid "Welcome to Opportunity Job web API"
 msgstr ""
 
 #: templates/emails/password_reset.html:10
+#, python-format
 msgid ""
 "\n"
-"          We recived a request to reset the password for your account on "
-"Posao Šansi website.\n"
+"          We received a request to reset the password for your account on\n"
+"          <a href=\"%(website_url)s\">%(website_name)s</a> website.\n"
 "          Please click on the button below to enter a new password:\n"
 "        "
+msgstr ""
+
+#: templates/emails/password_reset.html:27
+msgid "Kind regards"
 msgstr ""
