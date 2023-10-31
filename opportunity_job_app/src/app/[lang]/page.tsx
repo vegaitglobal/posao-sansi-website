@@ -1,16 +1,6 @@
-import Statistics from "@/components/Statistics/Statistics";
-import HomeCardLinks from "@/components/HomeCardLinks/HomeCardLinks";
-import HomeBanner from "@/components/Banner/HomeBanner";
-import About from "@/components/About/About";
+import Home from "@/components/Home/Home";
 
 
 export default function HomePage() {
-  return (
-    <>
-      <HomeBanner/>
-      <HomeCardLinks/>
-      <About/>
-      <Statistics/>
-    </>
-  );
+  return <Home/>;
 }

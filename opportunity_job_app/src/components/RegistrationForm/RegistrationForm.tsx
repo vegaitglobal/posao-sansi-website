@@ -36,7 +36,7 @@ const RegistrationForm = () => {
       checkAccess();
       setIsLoading(false);
     }
-  }, []);
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
