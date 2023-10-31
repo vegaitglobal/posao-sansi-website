@@ -21,25 +21,25 @@ import { validateFormData } from "@/utils";
 
 
 interface ApplicantRegistrationFormProps {
+  onFormReady(): void;
+
   onSuccess(): void;
 
   onError(): void;
+
 }
 
-const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistrationFormProps) => {
+const ApplicantRegistrationForm = ({ onFormReady, onSuccess, onError }: ApplicantRegistrationFormProps) => {
   const { dict } = useDictionary();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
-  const [formData, setFormData] = useState<ApplicantFormData>(initialApplicantFormData);
-  const [responseError, setResponseError] = useState<string>("");
+  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
+  const [ formData, setFormData ] = useState<ApplicantFormData>(initialApplicantFormData);
+  const [ responseError, setResponseError ] = useState<string>("");
 
   useEffect(() => {
-    if (isLoading) {
-      getInitialApplicantFormData().then(data => {
-        setFormData(data);
-        setIsLoading(false);
-      });
-    }
+    getInitialApplicantFormData().then(data => {
+      setFormData(data);
+      onFormReady();
+    });
   }, []);
 
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
@@ -83,8 +83,6 @@ const ApplicantRegistrationForm = ({ onSuccess, onError }: ApplicantRegistration
     const newFormData = { ...formData, [fieldName]: { ...formData[fieldName], value: fieldValue } };
     setFormData(newFormData);
   };
-
-  if (isLoading) return null;
 
   return (
     <form className="form-page__form">
