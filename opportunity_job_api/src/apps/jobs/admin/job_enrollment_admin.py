@@ -12,7 +12,7 @@ from apps.jobs.models import JobEnrollment
 @admin.register(JobEnrollment)
 class JobEnrollmentAdmin(ModelAdmin):
     ordering = (
-        "is_pending",
+        "-is_pending",
         "-modified",
     )
     list_display = (

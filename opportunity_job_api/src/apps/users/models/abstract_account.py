@@ -16,4 +16,8 @@ class AbstractAccount(BaseModel):
     )
 
     def __str__(self):
-        return str(self.user)
+        return self.verbose_name + " " + str(self.user)
+
+    @property
+    def is_active(self) -> bool:
+        return self.user.is_active

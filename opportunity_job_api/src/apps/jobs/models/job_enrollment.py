@@ -24,7 +24,15 @@ class JobEnrollment(BaseModel):
     )
     is_pending = models.BooleanField(
         verbose_name=_("pending?"),
-        default=True
+        default=True,
+        help_text=_(
+            "The status indicates whether the enrollment "
+            "has been processed. If the status is pending, "
+            "the applicant either needs to connect with the "
+            "employer to complete the application process, "
+            "or someone else may need to apply for the job "
+            "on behalf of the applicant."
+        )
     )
 
     def __str__(self):

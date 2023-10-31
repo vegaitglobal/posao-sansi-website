@@ -1,20 +1,15 @@
 from django.contrib import admin
-from django.db.models import QuerySet
-from django.db.models.functions import Collate
-from modeltranslation.admin import TranslationAdmin
 
-from apps.common.admin import ModelAdmin
+from apps.users.admin.abstract_account_admin import AbstractAccountAdmin
 from apps.users.models import EmployerAccount
 
 
 @admin.register(EmployerAccount)
-class EmployerAccountAdmin(ModelAdmin, TranslationAdmin):
-    ordering = (
-        "-modified",
-    )
+class EmployerAccountAdmin(AbstractAccountAdmin):
     list_display = (
+        "__str__",
+        "is_active",
         "company_name",
-        "user",
         "created",
         "modified",
     )
@@ -22,9 +17,6 @@ class EmployerAccountAdmin(ModelAdmin, TranslationAdmin):
         "company_name",
         "email_deterministic",
     )
-
-    def get_queryset(self, request) -> QuerySet:
-        queryset = super().get_queryset(request)
-        return queryset.annotate(
-            email_deterministic=Collate("user__email", "und-x-icu")
-        )
+    readonly_fields = (
+        "is_active",
+    )
