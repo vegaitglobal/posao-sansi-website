@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import "./Footer.scss";
+import "./footer.scss";
 import { useDictionary } from "@/hooks/useDictionary";
 import { EnvironmentVariables } from "@/types";
 
@@ -46,7 +46,7 @@ const Footer = ({ env }: FooterProps) => {
   const googleMapsLocationURL = `https://www.google.com/maps/search/?api=1&query=${ location }`;
 
   return (
-    <div className="footer">
+    <footer className="footer">
       <img className="footer__bg-img" src="/images/footer-bg.png" alt="Background image"/>
       <div className="footer__container">
         <div className="footer__social">
@@ -93,7 +93,7 @@ const Footer = ({ env }: FooterProps) => {
         <span className="footer__bottom-text">{ dict.footer.copyrightText }</span>
         <span className="footer__bottom-text">{ dict.footer.designedByText }</span>
       </div>
-    </div>
+    </footer>
   );
 };
 

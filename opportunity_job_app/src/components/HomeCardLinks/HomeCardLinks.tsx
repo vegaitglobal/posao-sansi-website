@@ -1,49 +1,20 @@
 "use client";
 
-import { Auth } from "@/api/models/Auth";
 import "./HomeCardLinks.scss";
-import React, { useEffect, useState } from "react";
-import { AuthService } from "@/api/authService";
+import React from "react";
 import HomeCardLink from "@/components/HomeCardLink/HomeCardLink";
 import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
 
+interface HomeCardLinks {
+  accountType?: AccountTypes;
+}
 
-const HomeCardLinks = () => {
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ auth, setAuth ] = useState<Auth>();
+const HomeCardLinks = ({ accountType }: HomeCardLinks) => {
   const { dict } = useDictionary();
 
-  useEffect(() => {
-    if (isLoading) {
-      if (AuthService.getAuth() !== null) {
-        setAuth(AuthService.getAuth());
-      }
-      setIsLoading(false);
-    }
-  }, []);
-
   const renderButtons = () => {
-    if (!auth) {
-      return (
-        <>
-          <HomeCardLink
-            title={ dict.homeCardLinks.anonymousApplicantCardLink.title }
-            label={ dict.homeCardLinks.anonymousApplicantCardLink.label }
-            href={ `/register?accountType=${ AccountTypes.applicant }` }
-            imageURL="/images/card-1-img.svg"
-          />
-          <HomeCardLink
-            title={ dict.homeCardLinks.anonymousEmployerCardLink.title }
-            label={ dict.homeCardLinks.anonymousEmployerCardLink.label }
-            href={ `/register?accountType=${ AccountTypes.employer }` }
-            imageURL="/images/card-2-img.svg"
-          />
-        </>
-      );
-    }
-
-    if (auth.account_type === AccountTypes.applicant) {
+    if (accountType === AccountTypes.applicant) {
       return (
         <HomeCardLink
           title={ dict.homeCardLinks.applicantCardLink.title }
@@ -53,7 +24,7 @@ const HomeCardLinks = () => {
         />
       );
     }
-    if (auth.account_type === AccountTypes.employer) {
+    if (accountType === AccountTypes.employer) {
       return (
         <HomeCardLink
           title={ dict.homeCardLinks.employerCardLink.title }
@@ -63,11 +34,27 @@ const HomeCardLinks = () => {
         />
       );
     }
+    return (
+      <>
+        <HomeCardLink
+          title={ dict.homeCardLinks.anonymousApplicantCardLink.title }
+          label={ dict.homeCardLinks.anonymousApplicantCardLink.label }
+          href={ `/register?accountType=${ AccountTypes.applicant }` }
+          imageURL="/images/card-1-img.svg"
+        />
+        <HomeCardLink
+          title={ dict.homeCardLinks.anonymousEmployerCardLink.title }
+          label={ dict.homeCardLinks.anonymousEmployerCardLink.label }
+          href={ `/register?accountType=${ AccountTypes.employer }` }
+          imageURL="/images/card-2-img.svg"
+        />
+      </>
+    );
   };
 
   return (
     <section className="cards">
-      { !isLoading && renderButtons() }
+      { renderButtons() }
     </section>
   );
 

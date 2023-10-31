@@ -11,6 +11,7 @@ import Popup from "@/components/Popup/Popup";
 import EmployerRegistrationForm from "@/components/RegistrationForm/EmployerRegistrationForm/EmployerRegistrationForm";
 import { AccountTypes } from "@/enums";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
+import Spinner from "@/components/Spinner/Spinner";
 
 
 const RegistrationForm = () => {
@@ -36,7 +37,7 @@ const RegistrationForm = () => {
       checkAccess();
       setIsLoading(false);
     }
-  }, []);
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
@@ -46,47 +47,54 @@ const RegistrationForm = () => {
     }
   };
 
-  if (isLoading || !hasAccess) return null;
+  const changeAccountType = (value: AccountTypes) => {
+    setSelectedAccountType(value);
+    setIsLoading(true);
+  };
 
-  return (
+  if (isLoading) return <Spinner/>;
+
+  return hasAccess && (
     <div className="form-page">
       <div className="form-page__left">
         <p className="form-page__message">{ dict.registrationForm.topText }</p>
         <div className="account-type-selector-wrapper">
           <SelectField
             value={ selectedAccountType }
-            onChange={ (value: AccountTypes) => setSelectedAccountType(value) }
+            onChange={ (value: AccountTypes) => changeAccountType(value) }
             options={ accountTypeOptions }
             withReversedColors
           />
         </div>
         { selectedAccountType === AccountTypes.applicant && (
           <ApplicantRegistrationForm
+            onFormReady={ () => setIsLoading(false) }
             onSuccess={ () => setHasOpenedSuccessPopup(true) }
             onError={ () => setHasOpenedErrorPopup(true) }
           />
         ) }
         { selectedAccountType === AccountTypes.employer && (
           <EmployerRegistrationForm
+            onFormReady={ () => setIsLoading(false) }
             onSuccess={ () => setHasOpenedSuccessPopup(true) }
             onError={ () => setHasOpenedErrorPopup(true) }
           />
         ) }
-        <Popup
-          isOpened={ hasOpenedSuccessPopup }
-          primaryText={ dict.registrationForm.successPopup.primaryText }
-          secondaryText={ dict.registrationForm.successPopup.secondaryText }
-          linkButton={ { url: "/", label: dict.registrationForm.successPopup.linkButtonLabel } }
-          onClose={ () => setHasOpenedSuccessPopup(false) }
-        />
-        <Popup
-          isOpened={ hasOpenedErrorPopup }
-          primaryText={ dict.registrationForm.errorPopup.primaryText }
-          secondaryText={ dict.registrationForm.errorPopup.secondaryText }
-          onClose={ () => setHasOpenedErrorPopup(false) }
-        />
       </div>
       <FormPageDesktopImage style={ { paddingTop: "120px" } }/>
+      <Popup
+        isOpened={ hasOpenedSuccessPopup }
+        primaryText={ dict.registrationForm.successPopup.primaryText }
+        secondaryText={ dict.registrationForm.successPopup.secondaryText }
+        linkButton={ { url: "/", label: dict.registrationForm.successPopup.linkButtonLabel } }
+        onClose={ () => setHasOpenedSuccessPopup(false) }
+      />
+      <Popup
+        isOpened={ hasOpenedErrorPopup }
+        primaryText={ dict.registrationForm.errorPopup.primaryText }
+        secondaryText={ dict.registrationForm.errorPopup.secondaryText }
+        onClose={ () => setHasOpenedErrorPopup(false) }
+      />
     </div>
   );
 };

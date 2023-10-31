@@ -1,25 +1,15 @@
 "use client";
 
 import "./Statistics.scss";
-import { useEffect, useState } from "react";
-import { GeneralService } from "@/api/generalService";
 import { useDictionary } from "@/hooks/useDictionary";
 
+interface StatisticsProps {
+  applicantCount: number;
+  employerCount: number;
+}
 
-const Statistics = () => {
-  const [ applicantCount, setApplicantCount ] = useState<number>(0);
-  const [ employerCount, setEmployerCount ] = useState<number>(0);
+const Statistics = ({ applicantCount, employerCount }: StatisticsProps) => {
   const { dict } = useDictionary();
-
-  useEffect(() => {
-    async function getStatistics() {
-      const statistics = await GeneralService.getStatistics();
-      setApplicantCount(statistics.applicant_count);
-      setEmployerCount(statistics.employer_count);
-    }
-
-    getStatistics();
-  }, []);
 
   return (
     <div className="statistics">

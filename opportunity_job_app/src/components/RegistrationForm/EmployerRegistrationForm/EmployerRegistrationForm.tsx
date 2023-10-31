@@ -2,7 +2,7 @@
 
 import "./../registration-form.scss";
 import { useDictionary } from "@/hooks/useDictionary";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import {
@@ -19,24 +19,21 @@ import { validateFormData } from "@/utils";
 
 
 interface EmployerRegistrationFormProps {
+  onFormReady(): void;
+
   onSuccess(): void;
 
   onError(): void;
 }
 
-const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFormProps) => {
+const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerRegistrationFormProps) => {
   const { dict } = useDictionary();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
-  const [formData, setFormData] = useState<EmployerFormData>(initialEmployerFormData);
-  const [responseError, setResponseError] = useState<string>("");
-
-  useEffect(() => {
-    if (isLoading) {
-      setFormData(initialEmployerFormData);
-      setIsLoading(false);
-    }
-  }, []);
+  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
+  const [ responseError, setResponseError ] = useState<string>("");
+  const [ formData, setFormData ] = useState<EmployerFormData>(() => {
+    onFormReady();
+    return initialEmployerFormData;
+  });
 
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
@@ -79,8 +76,6 @@ const EmployerRegistrationForm = ({ onSuccess, onError }: EmployerRegistrationFo
     const newFormData = { ...formData, [fieldName]: { ...formData[fieldName], value: fieldValue } };
     setFormData(newFormData);
   };
-
-  if (isLoading) return null;
 
   return (
     <form className="form-page__form">

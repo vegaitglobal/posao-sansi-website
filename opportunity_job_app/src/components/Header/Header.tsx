@@ -1,6 +1,6 @@
 "use client";
 
-import "./Header.scss";
+import "./header.scss";
 import React, { useCallback, useEffect, useState } from "react";
 import { Auth } from "@/api/models/Auth";
 import { AuthService } from "@/api/authService";
@@ -9,7 +9,6 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { AccountTypes } from "@/enums";
-import Spinner from "../Spinner/Spinner";
 
 interface MainMenuLinks {
   [x: string]: MainMenuLink[];
@@ -151,11 +150,7 @@ const Header = () => {
           </button>
           { hasOpenedLanguageMenu && renderLanguageMenu() }
         </div>
-        {isLoading ? (
-          <Spinner /> 
-        ) : (
-          renderMainMenu()
-        )}
+        { renderMainMenu() }
       </div>
     </header>
   );

@@ -7,10 +7,12 @@ import { AuthService } from "@/api/authService";
 import Popup from "@/components/Popup/Popup";
 import { useDictionary } from "@/hooks/useDictionary";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
+import Spinner from "@/components/Spinner/Spinner";
 
 
 const PasswordForgottenForm = () => {
   const { dict } = useDictionary();
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
   const [ formData, setFormData ] = useState({
@@ -18,8 +20,11 @@ const PasswordForgottenForm = () => {
   });
 
   useEffect(() => {
-    checkAccess();
-  }, []);
+    if (isLoading) {
+      checkAccess();
+      setIsLoading(false);
+    }
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
@@ -43,9 +48,9 @@ const PasswordForgottenForm = () => {
     setFormData({ ...formData, [fieldName]: fieldValue });
   };
 
-  if (!hasAccess) return null;
+  if (isLoading) return <Spinner/>;
 
-  return (
+  return hasAccess && (
     <div className="form-page">
       <div className="form-page__left">
         <p className="form-page__message">{ dict.passwordForgottenForm.topText }</p>

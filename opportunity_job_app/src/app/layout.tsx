@@ -1,4 +1,4 @@
-import "../scss/style.scss";
+import "./layout.scss";
 import { ReactNode } from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </head>
     <body>
     <Header/>
-    <main>
+    <main className="main">
       { children }
     </main>
     <Footer env={ ENV }/>
