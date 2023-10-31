@@ -10,6 +10,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { FormData, InputFieldProps } from "@/types";
 import { hasFormErrors } from "@/components/RegistrationForm/utils";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
+import Spinner from "@/components/Spinner/Spinner";
 
 interface PasswordResetFormProps {
   token: string;
@@ -29,6 +30,7 @@ const getInitialFormData = (): PasswordResetFormData => {
 
 const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const { dict } = useDictionary();
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
   const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
@@ -36,8 +38,11 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
   const [ responseError, setResponseError ] = useState<string>("");
 
   useEffect(() => {
-    checkAccess();
-  }, []);
+    if (isLoading) {
+      checkAccess();
+      setIsLoading(false);
+    }
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
@@ -79,9 +84,9 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
     setFormData(newFormData);
   };
 
-  if (!hasAccess) return null;
+  if (isLoading) return <Spinner/>;
 
-  return (
+  return hasAccess && (
     <div className="form-page">
       <div className="form-page__left">
         <div className="form-page__message">

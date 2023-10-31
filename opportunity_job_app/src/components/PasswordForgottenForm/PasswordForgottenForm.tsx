@@ -24,7 +24,7 @@ const PasswordForgottenForm = () => {
       checkAccess();
       setIsLoading(false);
     }
-  }, []);
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
