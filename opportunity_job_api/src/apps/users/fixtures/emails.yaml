@@ -1,0 +1,89 @@
+- model: users.PasswordResetEmail
+  pk: 1
+  fields:
+    subject: Reset Your Password
+    subject_en: Reset Your Password
+    subject_sr_latn: Promenite Lozinku
+    user: 2
+    template_path: emails/password_reset.html
+    context:
+      first_name: Jon
+      last_name: Smit
+    created: 2023-01-01T11:00:00
+    modified: 2023-01-01T11:00:00
+
+- model: users.PasswordResetEmail
+  pk: 2
+  fields:
+    subject: Reset Your Password
+    subject_en: Reset Your Password
+    subject_sr_latn: Promenite Lozinku
+    status: success
+    user: 3
+    template_path: emails/password_reset.html
+    context:
+      first_name: Jon
+      last_name: Smit
+    created: 2023-01-01T10:00:00
+    modified: 2023-01-01T10:00:00
+
+- model: users.PasswordResetEmail
+  pk: 3
+  fields:
+    subject: Reset Your Password
+    subject_en: Reset Your Password
+    subject_sr_latn: Promenite Lozinku
+    status: failure
+    user: 4
+    error: Something went wrong :(
+    template_path: emails/password_reset.html
+    context:
+      first_name: Jon
+      last_name: Smit
+    created: 2023-01-01T09:00:00
+    modified: 2023-01-01T09:00:00
+
+- model: users.PasswordResetEmail
+  pk: 4
+  fields:
+    subject: Reset Your Password
+    subject_en: Reset Your Password
+    subject_sr_latn: Promenite Lozinku
+    user: 2
+    template_path: emails/password_reset.html
+    context:
+      first_name: Jon
+      last_name: Smit
+    created: 2023-01-01T08:00:00
+    modified: 2023-01-01T08:00:00
+
+- model: users.PasswordResetEmail
+  pk: 5
+  fields:
+    subject: Reset Your Password
+    subject_en: Reset Your Password
+    subject_sr_latn: Promenite Lozinku
+    status: success
+    user: 3
+    template_path: emails/password_reset.html
+    context:
+      first_name: Jon
+      last_name: Smit
+    created: 2023-01-01T07:00:00
+    modified: 2023-01-01T07:00:00
+
+- model: users.PasswordResetEmail
+  pk: 6
+  fields:
+    subject: Reset Your Password
+    subject_en: Reset Your Password
+    subject_sr_latn: Promenite Lozinku
+    status: failure
+    user: 4
+    error: There is something wrong with this email...
+    template_path: emails/password_reset.html
+    context:
+      first_name: Jon
+      last_name: Smit
+    created: 2023-01-01T06:00:00
+    modified: 2023-01-01T06:00:00
