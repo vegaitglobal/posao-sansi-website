@@ -1,0 +1,8 @@
+- model: users.ApplicantAccount
+  pk: 1
+  fields:
+    user: 2
+    first_name: Milos
+    last_name: Roknic
+    created: 2023-10-14T01:00:00+00:00
+    modified: 2023-10-14T01:00:00+00:00

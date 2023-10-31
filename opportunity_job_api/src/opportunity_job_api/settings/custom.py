@@ -12,6 +12,8 @@ CUSTOM_MIDDLEWARE = [
 FIXTURES = (
     "emails",
     "users",
+    "applicant_accounts",
+    "employer_accounts",
     "jobs",
     "faqs",
 )
