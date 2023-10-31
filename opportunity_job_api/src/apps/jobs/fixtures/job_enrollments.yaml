@@ -1,0 +1,68 @@
+- model: jobs.JobEnrollment
+  pk: 1
+  fields:
+    job_offer: 1
+    applicant_account: 1
+    is_pending: false
+    created: 2023-01-01T12:00:00
+    modified: 2023-01-01T12:00:00
+
+- model: jobs.JobEnrollment
+  pk: 2
+  fields:
+    job_offer: 2
+    applicant_account: 1
+    created: 2023-01-01T11:00:00
+    modified: 2023-01-01T11:00:00
+
+- model: jobs.JobEnrollment
+  pk: 3
+  fields:
+    job_offer: 3
+    applicant_account: 1
+    is_pending: false
+    created: 2023-01-01T10:00:00
+    modified: 2023-01-01T10:00:00
+
+- model: jobs.JobEnrollment
+  pk: 4
+  fields:
+    job_offer: 1
+    applicant_account: 2
+    created: 2023-01-01T12:00:00
+    modified: 2023-01-01T12:00:00
+
+- model: jobs.JobEnrollment
+  pk: 5
+  fields:
+    job_offer: 4
+    applicant_account: 1
+    is_pending: false
+    created: 2023-01-01T13:00:00
+    modified: 2023-01-01T13:00:00
+
+- model: jobs.JobEnrollment
+  pk: 6
+  fields:
+    job_offer: 6
+    applicant_account: 1
+    created: 2023-01-01T12:00:00
+    modified: 2023-01-01T12:00:00
+
+- model: jobs.JobEnrollment
+  pk: 7
+  fields:
+    job_offer: 5
+    applicant_account: 4
+    is_pending: false
+    created: 2023-01-01T14:00:00
+    modified: 2023-01-01T14:00:00
+
+- model: jobs.JobEnrollment
+  pk: 8
+  fields:
+    job_offer: 7
+    applicant_account: 4
+    created: 2023-01-01T15:00:00
+    modified: 2023-01-01T15:00:00
+

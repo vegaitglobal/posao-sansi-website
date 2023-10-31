@@ -14,6 +14,7 @@ FIXTURES = (
     "users",
     "applicant_accounts",
     "employer_accounts",
-    "jobs",
+    "job_offers",
+    "job_enrollments",
     "faqs",
 )

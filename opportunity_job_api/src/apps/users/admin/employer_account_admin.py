@@ -16,6 +16,7 @@ class EmployerAccountAdmin(ModelAdmin, TranslationAdmin):
         "company_name",
         "user",
         "created",
+        "modified",
     )
     search_fields = (
         "company_name",

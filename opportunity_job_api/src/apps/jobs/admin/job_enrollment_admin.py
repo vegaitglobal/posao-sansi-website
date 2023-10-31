@@ -11,11 +11,21 @@ from apps.jobs.models import JobEnrollment
 
 @admin.register(JobEnrollment)
 class JobEnrollmentAdmin(ModelAdmin):
+    ordering = (
+        "is_pending",
+        "-modified",
+    )
     list_display = (
-        "id",
+        "__str__",
+        "is_pending",
         "job_name",
         "company_name",
-        "applicant_email"
+        "applicant_email",
+        "created",
+        "modified",
+    )
+    list_filter = (
+        "is_pending",
     )
     search_fields = (
         "job_offer__job_name",
@@ -25,27 +35,30 @@ class JobEnrollmentAdmin(ModelAdmin):
 
     @admin.display(description=_("job name"))
     def job_name(self, obj: JobEnrollment = None) -> str:
-        if obj:
-            job_offer = obj.job_offer
-            href = get_model_admin_change_details_url(obj=job_offer)
-            return mark_safe(f'<a href="{href}">{job_offer.job_name}</a>')
-        return "-"
+        if not obj:
+            return "-"
+
+        job_offer = obj.job_offer
+        href = get_model_admin_change_details_url(obj=job_offer)
+        return mark_safe(f'<a href="{href}">{job_offer.job_name}</a>')
 
     @admin.display(description=_("company name"))
     def company_name(self, obj: JobEnrollment = None) -> str:
-        if obj:
-            job_offer = obj.job_offer
-            href = get_model_admin_change_details_url(obj=job_offer.employer)
-            return mark_safe(f'<a href="{href}">{job_offer.employer.company_name}</a>')
-        return "-"
+        if not obj:
+            return "-"
+
+        job_offer = obj.job_offer
+        href = get_model_admin_change_details_url(obj=job_offer.employer)
+        return mark_safe(f'<a href="{href}">{job_offer.employer.company_name}</a>')
 
     @admin.display(description=_("applicant_email"))
     def applicant_email(self, obj: JobEnrollment = None) -> str:
-        if obj:
-            applicant_account = obj.applicant_account
-            href = get_model_admin_change_details_url(obj=applicant_account.user)
-            return mark_safe(f'<a href="{href}">{applicant_account.user.email}</a>')
-        return "-"
+        if not obj:
+            return "-"
+
+        applicant_account = obj.applicant_account
+        href = get_model_admin_change_details_url(obj=applicant_account.user)
+        return mark_safe(f'<a href="{href}">{applicant_account.user.email}</a>')
 
     def get_queryset(self, request) -> QuerySet:
         queryset = super().get_queryset(request)

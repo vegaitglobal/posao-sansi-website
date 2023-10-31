@@ -17,6 +17,7 @@ class ApplicantAccountAdmin(ModelAdmin, TranslationAdmin):
         "last_name",
         "user",
         "created",
+        "modified",
     )
     search_fields = (
         "first_name",

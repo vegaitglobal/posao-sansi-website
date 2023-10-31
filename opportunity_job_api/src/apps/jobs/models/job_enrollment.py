@@ -5,7 +5,6 @@ from apps.common.models import BaseModel
 
 
 class JobEnrollment(BaseModel):
-
     class Meta:
         verbose_name = _("Job Enrollment")
         verbose_name_plural = _("Job Enrollments")
@@ -23,3 +22,10 @@ class JobEnrollment(BaseModel):
         null=True,
         on_delete=models.CASCADE
     )
+    is_pending = models.BooleanField(
+        verbose_name=_("pending?"),
+        default=True
+    )
+
+    def __str__(self):
+        return f'{self.applicant_account.user.email} >> {self.job_offer.job_name}'
