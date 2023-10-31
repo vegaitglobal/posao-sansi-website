@@ -1,9 +1,8 @@
 from django.conf import settings
 from django.core import signing
-from django.utils.translation import gettext_lazy as _
 
-from apps.emails.models import Email
 from apps.users.models import ApplicantAccount, EmployerAccount, User
+from apps.users.models.password_reset_email import PasswordResetEmail
 from apps.users.serializers import ApplicantAccountSerializer, EmployerAccountSerializer
 
 
@@ -28,17 +27,15 @@ def get_email_from_hash(url_hash: str) -> str:
     return decoded_key.get("email")
 
 
-def send_password_reset_email(email: str) -> None:
+def send_password_reset_email(user: User) -> None:
+    email = PasswordResetEmail.objects.create(user=user)
+    email.send()
+
+
+def create_password_reset_email_context(email: str) -> dict[str, str]:
     url_hash = signing.dumps({"email": email})
-    email_context = {
+    return {
         "password_reset_url": f"{settings.FE_APP_ORIGIN}/password-reset/{url_hash}/",
         "website_url": settings.FE_APP_ORIGIN,
+        "website_name": settings.WEBSITE_NAME,
     }
-    email = Email.objects.create(
-        subject=_("Reset your password"),
-        recipient=email,
-        context=email_context,
-        template_path="emails/password_reset.html",
-        category="password_reset",
-    )
-    email.send()

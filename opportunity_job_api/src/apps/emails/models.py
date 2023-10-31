@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from threading import Thread
 
 from django.conf import settings
@@ -12,8 +13,7 @@ from apps.common.models import BaseModel
 
 class Email(BaseModel):
     class Meta:
-        verbose_name = _("Email")
-        verbose_name_plural = _("Emails")
+        abstract = True
 
     email_from = settings.EMAIL_HOST_USER
 
@@ -24,10 +24,6 @@ class Email(BaseModel):
 
     subject = models.CharField(
         verbose_name=_("email subject"),
-        max_length=250,
-    )
-    recipient = models.CharField(
-        verbose_name=_("recipient email address"),
         max_length=250,
     )
     context = models.JSONField(
@@ -86,10 +82,14 @@ class Email(BaseModel):
             subject=self.subject,
             message=strip_tags(html_message),
             from_email=self.email_from,
-            recipient_list=[self.recipient],
+            recipient_list=self.get_recipients(),
             html_message=html_message,
         )
 
     def _render_html_message(self) -> str:
         template = get_template(self.template_path)
         return template.render(self.context)
+
+    @abstractmethod
+    def get_recipients(self) -> list[str]:
+        pass

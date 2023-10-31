@@ -11,5 +11,5 @@ class PasswordForgottenAPIView(APIView):
     def post(request, **kwargs) -> JsonResponse:
         serializer = PasswordForgottenSerializer(data=request.data)
         if serializer.is_valid():
-            send_password_reset_email(email=serializer.user.email)
+            send_password_reset_email(user=serializer.user)
         return JsonResponse(data={"message": "success"})

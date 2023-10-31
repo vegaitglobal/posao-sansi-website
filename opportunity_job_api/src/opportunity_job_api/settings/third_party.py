@@ -29,3 +29,5 @@ FE_APP_ORIGIN = config("FE_APP_ORIGIN")
 CORS_ALLOWED_ORIGINS = [
     FE_APP_ORIGIN,
 ]
+
+WEBSITE_NAME = "Posao Šansi"
