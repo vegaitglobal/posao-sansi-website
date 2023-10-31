@@ -5,9 +5,11 @@ import React, { useEffect, useState } from "react";
 import { FaqService } from "@/api/faqService";
 import { Faq } from "@/api/models/Faq";
 import { useDictionary } from "@/hooks/useDictionary";
+import Spinner from "@/components/Spinner/Spinner";
 
 const FAQItems = () => {
   const { dict } = useDictionary();
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ isOpen, setIsOpen ] = useState<number>(0);
   const [ faqList, setFaqList ] = useState<Faq[]>([]);
 
@@ -17,12 +19,18 @@ const FAQItems = () => {
       setFaqList(faq);
     }
 
-    getFaq();
-  }, []);
+    if (isLoading) {
+      getFaq();
+      setIsLoading(false);
+    }
+  }, [ isLoading ]);
 
   const toggleAccordion = (faqId: number) => {
     setIsOpen(isOpen === faqId ? 0 : faqId);
   };
+
+  if (isLoading) return <Spinner/>;
+
   return (
     <div className="faq">
       <img className="faq__details faq__details--left" src="/images/detail.png" alt="Detail image"/>
