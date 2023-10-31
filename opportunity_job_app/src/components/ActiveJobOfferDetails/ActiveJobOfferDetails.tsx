@@ -54,8 +54,7 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
   useEffect(() => {
     if (isLoading) {
       checkAccess();
-      fetchJobOffer();
-      setIsLoading(false);
+      fetchJobOffer().then(() => setIsLoading(false));
     }
   }, []);
 

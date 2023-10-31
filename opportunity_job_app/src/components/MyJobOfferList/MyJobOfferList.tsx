@@ -25,15 +25,10 @@ export default function MyJobOfferList() {
 
   useEffect(() => {
     if (isLoading) {
-      fetchJobOffers();
-      setIsLoading(false);
+      checkAccess();
+      loadMoreJobOffers().then(() => setIsLoading(false));
     }
   }, [ isLoading ]);
-
-  const fetchJobOffers = async () => {
-    checkAccess();
-    loadMoreJobOffers();
-  };
 
   const checkAccess = () => {
     const auth = AuthService.getAuth();

@@ -24,14 +24,10 @@ export default function ActiveJobOfferList() {
   const [ hasNextPage, setHasNextPage ] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchJobOffers = async () => {
-      loadMoreJobOffers();
-    };
 
     if (isLoading) {
       checkAccess();
-      fetchJobOffers();
-      setIsLoading(false);
+      loadMoreJobOffers().then(() => setIsLoading(false));
     }
   }, [ isLoading ]);
 
