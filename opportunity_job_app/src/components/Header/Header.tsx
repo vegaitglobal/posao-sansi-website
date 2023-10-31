@@ -9,6 +9,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { AccountTypes } from "@/enums";
+import Spinner from "../Spinner/Spinner";
 
 interface MainMenuLinks {
   [x: string]: MainMenuLink[];
@@ -150,9 +151,11 @@ const Header = () => {
           </button>
           { hasOpenedLanguageMenu && renderLanguageMenu() }
         </div>
-        <nav className="header__nav">
-          { !isLoading && renderMainMenu() }
-        </nav>
+        {isLoading ? (
+          <Spinner /> 
+        ) : (
+          renderMainMenu()
+        )}
       </div>
     </header>
   );
