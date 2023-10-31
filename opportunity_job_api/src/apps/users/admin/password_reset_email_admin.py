@@ -16,9 +16,10 @@ class PasswordResetEmailAdmin(AbstractEmailAdmin):
         "__str__",
         "subject",
         "user",
-        "modified",
         "colored_status",
         "category",
+        "created",
+        "modified",
     )
     search_fields = (
         "email_deterministic",
@@ -45,6 +46,8 @@ class PasswordResetEmailAdmin(AbstractEmailAdmin):
                 "status",
                 "error",
                 "category",
+                "created",
+                "modified",
             )
         },),
     )

@@ -1,22 +1,16 @@
-from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.common.models import BaseModel
+from apps.users.models import AbstractAccount
 
 
-class EmployerAccount(BaseModel):
+class EmployerAccount(AbstractAccount):
     class Meta:
         verbose_name = _("Employer Account")
         verbose_name_plural = _("Employer Accounts")
 
     type = "employer"
 
-    user = models.OneToOneField(
-        to=settings.AUTH_USER_MODEL,
-        verbose_name=_("user"),
-        on_delete=models.CASCADE,
-    )
     company_name = models.CharField(
         verbose_name=_("company name"),
         max_length=250,
@@ -42,6 +36,3 @@ class EmployerAccount(BaseModel):
         verbose_name=_("about company"),
         max_length=500
     )
-
-    def __str__(self):
-        return self.company_name

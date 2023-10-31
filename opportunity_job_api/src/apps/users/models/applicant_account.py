@@ -1,23 +1,17 @@
-from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.common.models import BaseModel
 from apps.users.enums import EducationLevels, WorkExperienceLevels
+from apps.users.models import AbstractAccount
 
 
-class ApplicantAccount(BaseModel):
+class ApplicantAccount(AbstractAccount):
     class Meta:
         verbose_name = _("Applicant Account")
         verbose_name_plural = _("Applicant Accounts")
 
     type = "applicant"
 
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        verbose_name=_("user"),
-        on_delete=models.CASCADE,
-    )
     first_name = models.CharField(
         verbose_name=_("first name"),
         max_length=250,
@@ -49,6 +43,3 @@ class ApplicantAccount(BaseModel):
         blank=True,
         default=None,
     )
-
-    def __str__(self):
-        return str(self.user)
