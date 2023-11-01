@@ -1,1 +1,203 @@
-{}
+{
+  "header": {
+    "logoText": "JOB OPPORTUNITIES",
+    "languageMenu": {
+      "enLabel": "ENG",
+      "srLabel": "SRB"
+    },
+    "mainMenu": {
+      "homeLabel": "Home",
+      "faqLabel": "FAQ",
+      "logoutLabel": "Logout",
+      "loginLabel": "Login",
+      "registerLabel": "Registration",
+      "myJobsLabel": "My jobs",
+      "jobOffersLabel": "Job Offers"
+    }
+  },
+  "homeBanner": {
+    "title": "Job Opportunities",
+    "text": "Welcome to Job Opportunities - a platform that makes a difference in the world of employment! Our vision is simple - We want to create a space where every woman can achieve success and have equal chances to find a dignified job. Regardless of whether you are looking for a job or offer employment opportunities, we invite you to join our platform to work together to create a positive vision of the future for all women in the labor market. Job opportunities - because together we make a difference!"
+  },
+  "homeCardLinks": {
+    "anonymousApplicantCardLink": {
+      "title": "Looking for a job",
+      "label": "Register"
+    },
+    "anonymousEmployerCardLink": {
+      "title": "I offer a job",
+      "label": "Register"
+    },
+    "applicantCardLink": {
+      "title": "Active job offers",
+      "label": "View job offers"
+    },
+    "employerCardLink": {
+      "title": "My job offers",
+      "label": "Check job offers"
+    }
+  },
+  "about": {
+    "title": "MISSION AND VISION",
+    "missionText": "Mission: Atina advocates for the establishment of equal status of all members of society in the public and private sphere, through identification and the fight against gender-based marginalization, discrimination, and violence. A special focus of Atina's work is children and young people, especially those who come from vulnerable groups and do not have the same opportunities as others (children and youth without primary education and parental care). Addressing the causes of victimization and vulnerability, Atina implements activities aimed at changing patriarchal norms and promoting women's activism and leadership.",
+    "visionText": "Vision: Women and girls - independent, empowered, free to choose and stand up for themselves, represent the main goal that Atina strives to achieve."
+  },
+  "statistics": {
+    "title": "USERS OF OUR APPLICATION",
+    "applicantsLabel": "APPLICANTS:",
+    "employerLabel": "EMPLOYERS:"
+  },
+  "footer": {
+    "socialMediaListTitle": "Social Networks",
+    "contactListTitle": "Contact",
+    "termsOfUseFilename": "Terms of Use",
+    "privacyPolicyFilename": "Privacy Policy",
+    "copyrightText": "Copyright 2023 - Job opportunities",
+    "designedByText": "Designed by Vega IT"
+  },
+  "faqItems": {
+    "title": "FAQ"
+  },
+  "loginForm": {
+    "topTextFirstLine": "Welcome back!",
+    "topTextSecondLine": "Log in to continue",
+    "emailFieldLabel": "Email address:",
+    "emailFieldPlaceholder": "Your email address",
+    "passwordFieldLabel": "Password:",
+    "passwordFieldPlaceholder": "Your password",
+    "submitButtonLabel": "SIGN IN",
+    "passwordForgottenLinkText": "Forgot your password?"
+  },
+  "passwordForgottenForm": {
+    "topText": "Enter your email address so we can send you password reset information.",
+    "emailFieldLabel": "Email address:",
+    "emailFieldPlaceholder": "Your email address",
+    "submitButtonLabel": "REQUEST LINK",
+    "popup": {
+      "primaryText": "If an account with this email address exists, we will send a password reset email.",
+      "linkButtonLabel": "Back to Home"
+    }
+  },
+  "commonFormErrors": {
+    "passwordMinLength": "Password must contain at least 8 characters",
+    "passwordsNotMatch": "Passwords do not match",
+    "requiredField": "This field is required"
+  },
+  "passwordResetForm": {
+    "topTextFirstLine": "Enter a new password.",
+    "topTextSecondLine": "The password must be a minimum of eight characters, one special character, and one capital letter.",
+    "passwordFieldLabel": "New password:",
+    "passwordFieldPlaceholder": "Enter a new password",
+    "passwordConfirmFieldLabel": "Confirm password:",
+    "passwordConfirmFieldPlaceholder": "Re-enter a new password",
+    "submitButtonLabel": "RESET PASSWORD",
+    "popup": {
+      "primaryText": "You have successfully changed your password.",
+      "secondaryText": "You can now log in with a new password.",
+      "linkButtonLabel": "LOGIN"
+    }
+  },
+  "registrationForm": {
+    "topText": "You can chose what type of account you want to created in the dropdown below: Employer or Applicant",
+    "applicantOptionLabel": "Applicant",
+    "employerOptionLabel": "Employer",
+    "emailFieldLabel": "Email address:",
+    "emailFieldPlaceholder": "Your email address",
+    "passwordFieldLabel": "Password:",
+    "passwordFieldPlaceholder": "Chose a password",
+    "passwordConfirmFieldLabel": "Repeat the password:",
+    "passwordConfirmFieldPlaceholder": "Enter the same password again",
+    "submitButtonLabel": "CREATE ACCOUNT",
+    "successPopup": {
+      "primaryText": "Your registration was successful!",
+      "secondaryText": "Someone from the association will contact you shortly regarding your account activation.",
+      "linkButtonLabel": "Back to homepage"
+    },
+    "errorPopup": {
+      "primaryText": "An error occurred.",
+      "secondaryText": "Please try again later."
+    }
+  },
+  "applicantRegistrationForm": {
+    "firstNameFieldLabel": "First name:",
+    "firstNameFieldPlaceholder": "Your first name",
+    "lastNameFieldLabel": "Last name:",
+    "lastNameFieldPlaceholder": "Your last name",
+    "workExperienceFieldLabel": "Work experience:",
+    "workExperienceFieldPlaceholder": "Your work experience",
+    "educationFieldLabel": "Education level:",
+    "educationFieldPlaceholder": "Level of your education",
+    "aboutFieldLabel": "About me:",
+    "aboutFieldPlaceholder": "Write something bout you"
+  },
+  "employerRegistrationForm": {
+    "companyNameFieldLabel": "Company name:",
+    "companyNameFieldPlaceholder": "Name of your company",
+    "pibFieldLabel": "Tax ID:",
+    "pibFieldPlaceholder": "Tax identification number",
+    "addressFieldLabel": "Address:",
+    "addressFieldPlaceholder": "Your company address",
+    "phoneNumberFieldLabel": "Phone number:",
+    "phoneNumberFieldPlaceholder": "Your business phone number",
+    "urlFieldLabel": "URL:",
+    "urlFieldPlaceholder": "URL of your website",
+    "aboutFieldLabel": "About company:",
+    "aboutFieldPlaceholder": "Write something about your company"
+  },
+  "activeJobOfferList": {
+    "title": "Active job offers:",
+    "loadMoreButtonLabel": "LOAD MORE"
+  },
+  "myJobOfferList": {
+    "title": "My job offers:",
+    "loadMoreButtonLabel": "LOAD MORE"
+  },
+  "jobOfferCard": {
+    "activeFlagLabel": "ACTIVE",
+    "archivedFlagLabel": "ARCHIVED",
+    "enrolledFlagLabel": "YOU'VE ENROLLED",
+    "jobDescriptionLabel": "Job description:",
+    "engagementLabel": "Engagement:",
+    "applicationDeadlineLabel": "Enrollment deadline:"
+  },
+  "jobOfferDetails": {
+    "backButtonLabel": "Back to job offers",
+    "applicationDeadlineLabel": "Application deadline:",
+    "companyLabel": "COMPANY:",
+    "locationLabel": "PLACE OF WORK:",
+    "engagementLabel": "Engagement:",
+    "descriptionLabel": "Job description:",
+    "conditionsLabel": "Conditions:"
+  },
+  "activeJobOfferDetails": {
+    "removeJobEnrollmentButtonLabel": "CANCEL",
+    "addJobEnrollmentButtonLabel": "APPLY",
+    "enrollmentConfirmationPopup": {
+      "primaryText": "Your application has been submitted successfully!",
+      "secondaryText": "Someone from the association will contact you shortly regarding the next steps."
+    },
+    "cancellationConfirmationPopup": {
+      "primaryText": "Your enrollment has been successfully canceled!"
+    },
+    "errorPopup": {
+      "primaryText": "An error occurred.",
+      "secondaryText": "Please try again later."
+    },
+    "commonPopupLinkButtonLabel": "Back to job offers"
+  },
+  "myJobOfferDetails": {
+    "archiveJobOfferButtonLabel": "ARCHIVE",
+    "activateJobOfferButtonLabel": "ACTIVATE",
+    "activationConfirmationPopup": {
+      "primaryText": "You have successfully activated the job!"
+    },
+    "archivingConfirmationPopup": {
+      "primaryText": "You have successfully archived the job!"
+    },
+    "errorPopup": {
+      "primaryText": "An error occurred.",
+      "secondaryText": "Please try again later."
+    },
+    "commonPopupLinkButtonLabel": "Back to job offers"
+  }
+}

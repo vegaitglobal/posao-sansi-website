@@ -94,13 +94,13 @@
     "popup": {
       "primaryText": "Uspešno ste promenili lozinku.",
       "secondaryText": "Sada se možete prijaviti sa novom lozinkom.",
-      "linkButtonLabel": "Prijava"
+      "linkButtonLabel": "PRIJAVA"
     }
   },
   "registrationForm": {
     "topText": "U padajućem meniju odaberite koji tip naloga želite da kreirate: Poslodavac ili Aplikant",
-    "applicantOptionLabel": "Applicant",
-    "employerOptionLabel": "Employer",
+    "applicantOptionLabel": "Aplikant",
+    "employerOptionLabel": "Poslodavac",
     "emailFieldLabel": "E-mail adresa:",
     "emailFieldPlaceholder": "Vaša e-mail adresa",
     "passwordFieldLabel": "Lozinka:",
@@ -109,8 +109,8 @@
     "passwordConfirmFieldPlaceholder": "Ponovo unesite odabranu lozinku",
     "submitButtonLabel": "KREIRAJ NALOG",
     "successPopup": {
-      "primaryText": "Vaša registracije je uspešno obavljena!",
-      "secondaryText": "Uskoro će Vam se javiti neko iz udruženja ATINA.",
+      "primaryText": "Vaša registracije je uspešna!",
+      "secondaryText": "Uskoro će Vam se javiti neko iz udruženja u vezi aktivacije vašeg naloga.",
       "linkButtonLabel": "Nazad na početnu"
     },
     "errorPopup": {
@@ -174,7 +174,7 @@
     "addJobEnrollmentButtonLabel": "KONKURIŠI",
     "enrollmentConfirmationPopup": {
       "primaryText": "Vaša prijava je uspešno prosleđena!",
-      "secondaryText": "Uskoro će Vam se javiti neko iz organizacije ATINA."
+      "secondaryText": "Uskoro će Vam se javiti neko iz udrženja u vezi daljnjih koraka."
     },
     "cancellationConfirmationPopup": {
       "primaryText": "Vaša prijava je uspešno otkazana!"
