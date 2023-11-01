@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
                 ('work_experience', models.CharField(choices=[('none', 'No work experience'), ('lt_year', 'Less than a year'), ('one_to_three', 'More than one less than three'), ('three_to_five', 'More than three less than five'), ('five_to_ten', 'More than five less than ten'), ('gt_ten', 'More than ten')], default='none', help_text='Work experience of the applicant', max_length=14, verbose_name='work experience')),
                 ('education', models.CharField(choices=[('none', 'No formal education'), ('first_degree', 'First degree, 4 years of primary school'), ('second_degree', 'Primary school'), ('third_degree', 'High school'), ('fourth_degree', 'High school'), ('fifth_degree', 'High school'), ('sixth_degree', 'VSS'), ('seventh_degree', 'VSS')], default='none', help_text='Education of the applicant', max_length=14, verbose_name='education level')),
                 ('about', models.TextField(blank=True, max_length=500, null=True, verbose_name='about me')),
-                ('cv', models.FileField(blank=True, default=None, upload_to='uploads/users/applicant_account/', validators=[])),
+                ('cv', models.FileField(blank=True, default=None, upload_to='uploads/users/applicant_account/', validators=[], verbose_name='CV')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='user')),
             ],
             options={

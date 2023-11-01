@@ -39,6 +39,7 @@ class ApplicantAccount(AbstractAccount):
         null=True,
     )
     cv = models.FileField(
+        verbose_name=_("CV"),
         upload_to="uploads/users/applicant_account/",
         blank=True,
         default=None,
