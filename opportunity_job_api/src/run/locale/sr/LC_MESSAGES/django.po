@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 10:55-0500\n"
+"POT-Creation-Date: 2023-11-01 11:00-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -387,6 +387,10 @@ msgstr "nivo edukacije"
 #: apps/users/models/applicant_account.py:36
 msgid "about me"
 msgstr "o meni"
+
+#: apps/users/models/applicant_account.py:42
+msgid "CV"
+msgstr "CV"
 
 #: apps/users/models/employer_account.py:9
 msgid "Employer Account"
