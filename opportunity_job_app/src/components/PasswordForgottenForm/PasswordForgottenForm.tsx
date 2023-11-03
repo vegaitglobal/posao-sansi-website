@@ -8,14 +8,15 @@ import Popup from "@/components/Popup/Popup";
 import { useDictionary } from "@/hooks/useDictionary";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 import Spinner from "@/components/Spinner/Spinner";
+import { HOME_LINK } from "@/data/links";
 
 
 const PasswordForgottenForm = () => {
-  const { dict } = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState({
+  const { dict, locale } = useDictionary();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [hasOpenedPopup, setHasOpenedPopup] = useState<boolean>(false);
+  const [formData, setFormData] = useState({
     email: ""
   });
 
@@ -24,11 +25,11 @@ const PasswordForgottenForm = () => {
       checkAccess();
       setIsLoading(false);
     }
-  }, [ isLoading ]);
+  }, [isLoading]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
-      window.location.href = "/";
+      window.location.href = HOME_LINK.getPathname(locale);
     } else {
       setHasAccess(true);
     }
@@ -69,7 +70,10 @@ const PasswordForgottenForm = () => {
           isOpened={ hasOpenedPopup }
           onClose={ () => setHasOpenedPopup(false) }
           primaryText={ dict.passwordForgottenForm.popup.primaryText }
-          linkButton={ { label: dict.passwordForgottenForm.popup.linkButtonLabel, url: "/" } }
+          linkButton={ {
+            label: dict.passwordForgottenForm.popup.linkButtonLabel,
+            url: HOME_LINK.getPathname(locale)
+          } }
         />
       </div>
       <FormPageDesktopImage/>;

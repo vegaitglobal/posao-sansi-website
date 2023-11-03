@@ -8,13 +8,14 @@ import Link from "next/link";
 import { useDictionary } from "@/hooks/useDictionary";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 import Spinner from "@/components/Spinner/Spinner";
+import { HOME_LINK, PASSWORD_FORGOTTEN_LINK } from "@/data/links";
 
 const LoginForm = () => {
-  const { dict } = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ responseError, setResponseError ] = useState<string>("");
-  const [ formData, setFormData ] = useState({
+  const { dict, locale } = useDictionary();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [responseError, setResponseError] = useState<string>("");
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
@@ -24,11 +25,11 @@ const LoginForm = () => {
       checkAccess();
       setIsLoading(false);
     }
-  }, [ isLoading ]);
+  }, [isLoading]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
-      window.location.href = "/";
+      window.location.href = HOME_LINK.getPathname(locale);
     } else {
       setHasAccess(true);
     }
@@ -38,7 +39,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await AuthService.login(formData.email, formData.password);
-      window.location.href = "/";
+      window.location.href = HOME_LINK.getPathname(locale);
     } catch (error: any) {
       setResponseError(error.response?.data?.errors?.non_field_errors);
     }
@@ -73,7 +74,7 @@ const LoginForm = () => {
           />
           { responseError && <p className="form-field__error">{ responseError }</p> }
           <button className="form-submit-button" onClick={ login }>{ dict.loginForm.submitButtonLabel }</button>
-          <Link className="login-form__link" href="/password-forgotten">
+          <Link className="login-form__link" href={ PASSWORD_FORGOTTEN_LINK.getPathname(locale) }>
             { dict.loginForm.passwordForgottenLinkText }
           </Link>
         </form>

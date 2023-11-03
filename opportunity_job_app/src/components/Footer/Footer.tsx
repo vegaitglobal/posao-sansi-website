@@ -54,7 +54,7 @@ const Footer = ({ env }: FooterProps) => {
           <ul className="footer__social-icon-holder">
             { socialMediaLinks.map((link, index) => (
               <li className="footer__social-item" key={ index }>
-                <Link className="footer__social-link" target="_blank" href={ link.url || "" }>
+                <Link className="footer__social-link" target="_blank" href={ link.url }>
                   <img className="footer__social-img" src={ link.iconPath } alt={ link.alt }/>
                 </Link>
               </li>
