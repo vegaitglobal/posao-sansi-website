@@ -41,7 +41,7 @@ const Popup = ({ isOpened, primaryText, secondaryText = "", linkButton, onClose 
           <span className="popup__text">{ primaryText }</span>
           <span className="popup__text">{ secondaryText }</span>
           { linkButton && (
-            <Link href={ linkButton.url || "" } className="popup__link">
+            <Link href={ linkButton.url } className="popup__link">
               { linkButton.label }
             </Link>
           ) }

@@ -12,20 +12,21 @@ import EmployerRegistrationForm from "@/components/RegistrationForm/EmployerRegi
 import { AccountTypes } from "@/enums";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 import Spinner from "@/components/Spinner/Spinner";
+import { HOME_LINK } from "@/data/links";
 
 
 const RegistrationForm = () => {
-  const { dict } = useDictionary();
+  const { dict, locale } = useDictionary();
   const searchParams = useSearchParams();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ selectedAccountType, setSelectedAccountType ] = useState<AccountTypes>(() => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [selectedAccountType, setSelectedAccountType] = useState<AccountTypes>(() => {
     const accountTypeURLParam = searchParams.get("accountType");
     if (accountTypeURLParam && accountTypeURLParam === AccountTypes.employer) return AccountTypes.employer;
     return AccountTypes.applicant;
   });
-  const [ hasOpenedSuccessPopup, setHasOpenedSuccessPopup ] = useState<boolean>(false);
-  const [ hasOpenedErrorPopup, setHasOpenedErrorPopup ] = useState<boolean>(false);
+  const [hasOpenedSuccessPopup, setHasOpenedSuccessPopup] = useState<boolean>(false);
+  const [hasOpenedErrorPopup, setHasOpenedErrorPopup] = useState<boolean>(false);
 
   const accountTypeOptions: SelectOption[] = [
     { value: AccountTypes.applicant, label: dict.registrationForm.applicantOptionLabel },
@@ -37,11 +38,11 @@ const RegistrationForm = () => {
       checkAccess();
       setIsLoading(false);
     }
-  }, [ isLoading ]);
+  }, [isLoading]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
-      window.location.href = "/";
+      window.location.href = HOME_LINK.getPathname(locale);
     } else {
       setHasAccess(true);
     }
@@ -86,7 +87,10 @@ const RegistrationForm = () => {
         isOpened={ hasOpenedSuccessPopup }
         primaryText={ dict.registrationForm.successPopup.primaryText }
         secondaryText={ dict.registrationForm.successPopup.secondaryText }
-        linkButton={ { url: "/", label: dict.registrationForm.successPopup.linkButtonLabel } }
+        linkButton={ {
+          url: HOME_LINK.getPathname(locale),
+          label: dict.registrationForm.successPopup.linkButtonLabel
+        } }
         onClose={ () => setHasOpenedSuccessPopup(false) }
       />
       <Popup

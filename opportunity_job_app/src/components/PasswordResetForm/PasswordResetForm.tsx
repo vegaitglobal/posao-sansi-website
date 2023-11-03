@@ -11,6 +11,7 @@ import { FormData, InputFieldProps } from "@/types";
 import { hasFormErrors } from "@/components/RegistrationForm/utils";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 import Spinner from "@/components/Spinner/Spinner";
+import { HOME_LINK, LOGIN_LINK } from "@/data/links";
 
 interface PasswordResetFormProps {
   token: string;
@@ -29,24 +30,24 @@ const getInitialFormData = (): PasswordResetFormData => {
 };
 
 const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
-  const { dict } = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ hasOpenedPopup, setHasOpenedPopup ] = useState<boolean>(false);
-  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<PasswordResetFormData>(getInitialFormData);
-  const [ responseError, setResponseError ] = useState<string>("");
+  const { dict, locale } = useDictionary();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [hasOpenedPopup, setHasOpenedPopup] = useState<boolean>(false);
+  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
+  const [formData, setFormData] = useState<PasswordResetFormData>(getInitialFormData);
+  const [responseError, setResponseError] = useState<string>("");
 
   useEffect(() => {
     if (isLoading) {
       checkAccess();
       setIsLoading(false);
     }
-  }, [ isLoading ]);
+  }, [isLoading]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {
-      window.location.href = "/";
+      window.location.href = HOME_LINK.getPathname(locale);
     } else {
       setHasAccess(true);
     }
@@ -120,7 +121,10 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
           onClose={ () => setHasOpenedPopup(false) }
           primaryText={ dict.passwordResetForm.popup.primaryText }
           secondaryText={ dict.passwordResetForm.popup.secondaryText }
-          linkButton={ { label: dict.passwordResetForm.popup.linkButtonLabel, url: "/login" } }
+          linkButton={ {
+            label: dict.passwordResetForm.popup.linkButtonLabel,
+            url: LOGIN_LINK.getPathname(locale)
+          } }
         />
       </div>
       <FormPageDesktopImage/>

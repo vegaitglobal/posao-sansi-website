@@ -1,59 +1,35 @@
-export interface MainMenuLink {
-  labelDictKey: string;
-  url: string;
-  iconPath: string;
-}
+import { LanguageLink, MainMenuLink } from "@/types";
+import { createAppLink, createMenuLink } from "@/utils";
+
+
+export const HOME_LINK = createMenuLink("/", "homeLabel", "/images/home.svg");
+export const FAQ_LINK = createMenuLink("/faq", "faqLabel", "/images/faq.svg");
+export const LOGIN_LINK = createMenuLink("/login", "loginLabel", "/images/log-in.svg");
+export const REGISTER_LINK = createMenuLink("/register", "registerLabel", "/images/sign-in.svg");
+export const MY_JOB_OFFERS_LINK = createMenuLink("/my-job-offers", "myJobsLabel", "/images/jobs.svg");
+export const ACTIVE_JOB_OFFERS_LINK = createMenuLink("/job-offers", "jobOffersLabel", "/images/jobs.svg");
+export const PASSWORD_FORGOTTEN_LINK = createAppLink("/password-forgotten");
 
 export const publicLinks: MainMenuLink[] = [
-  {
-    labelDictKey: "homeLabel",
-    url: "/",
-    iconPath: "/images/home.svg",
-  },
-  {
-    labelDictKey: "faqLabel",
-    url: "/faq",
-    iconPath: "/images/faq.svg",
-  },
+  HOME_LINK,
+  FAQ_LINK,
 ];
 
 export const anonymousUserLinks: MainMenuLink[] = [
   ...publicLinks,
-  {
-    labelDictKey: "loginLabel",
-    url: "/login",
-    iconPath: "/images/log-in.svg",
-  },
-  {
-    labelDictKey: "registerLabel",
-    url: "/register",
-    iconPath: "/images/sign-in.svg",
-  },
+  LOGIN_LINK,
+  REGISTER_LINK,
 ];
 
 export const employerLinks: MainMenuLink[] = [
   ...publicLinks,
-  {
-    labelDictKey: "myJobsLabel",
-    url: "/my-job-offers",
-    iconPath: "/images/jobs.svg",
-  },
+  MY_JOB_OFFERS_LINK,
 ];
 
 export const applicantLinks: MainMenuLink[] = [
   ...publicLinks,
-  {
-    labelDictKey: "jobOffersLabel",
-    url: "/job-offers",
-    iconPath: "/images/jobs.svg",
-  },
+  ACTIVE_JOB_OFFERS_LINK,
 ];
-
-interface LanguageLink {
-  labelDictKey: string;
-  code: string;
-  flagPath: string;
-}
 
 export const languageLinks: LanguageLink[] = [
   {

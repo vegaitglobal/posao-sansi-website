@@ -4,11 +4,12 @@ import "./header.scss";
 import React, { useCallback, useEffect, useState } from "react";
 import { Auth } from "@/api/models/Auth";
 import { AuthService } from "@/api/authService";
-import { anonymousUserLinks, applicantLinks, employerLinks, languageLinks, MainMenuLink } from "@/data/links";
+import { anonymousUserLinks, applicantLinks, employerLinks, HOME_LINK, languageLinks, LOGIN_LINK } from "@/data/links";
 import { useDictionary } from "@/hooks/useDictionary";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { AccountTypes } from "@/enums";
+import { MainMenuLink } from "@/types";
 
 interface MainMenuLinks {
   [x: string]: MainMenuLink[];
@@ -18,27 +19,27 @@ interface Dictionary {
   // We define this interface for the object returned by
   // useDictionary hook so that we can access that object's
   // `dict` property using a dynamic key (e.g. `dict[key]`)
-  slug: string | undefined,
+  locale: string | undefined,
   dict: any
 }
 
 const Header = () => {
   const pathname = usePathname();
-  const { slug, dict }: Dictionary = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ auth, setAuth ] = useState<Auth | undefined>();
-  const [ hasOpenedLanguageMenu, setHasOpenedLanguageMenu ] = useState<boolean>(false);
-  const [ hasOpenedMainMenu, setHasOpenedMainMenu ] = useState<boolean>(false);
+  const { locale, dict }: Dictionary = useDictionary();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [auth, setAuth] = useState<Auth | undefined>();
+  const [hasOpenedLanguageMenu, setHasOpenedLanguageMenu] = useState<boolean>(false);
+  const [hasOpenedMainMenu, setHasOpenedMainMenu] = useState<boolean>(false);
 
   useEffect(() => {
     if (isLoading) {
       setAuth(AuthService.getAuth());
       setIsLoading(false);
       if (!localStorage.getItem("locale")) {
-        localStorage.setItem("locale", slug!);
+        localStorage.setItem("locale", locale!);
       }
     }
-  }, [ auth, isLoading ]);
+  }, [auth, isLoading]);
 
   const toggleLanguageMenu = () => {
     setHasOpenedLanguageMenu(!hasOpenedLanguageMenu);
@@ -52,7 +53,7 @@ const Header = () => {
 
   const logout = useCallback(async () => {
     await AuthService.logout();
-    window.location.href = "/login";
+    window.location.href = LOGIN_LINK.getPathname(locale);
   }, []);
 
   const mainMenuLinks: MainMenuLinks = {
@@ -61,11 +62,12 @@ const Header = () => {
     [AccountTypes.employer]: employerLinks,
   };
 
-  const changeLanguage = (languageSlug: string) => {
-    if (!pathname.startsWith(`/${ languageSlug }`)) {
-      localStorage.setItem("locale", languageSlug);
-      window.location.href = pathname.replace(`/${ slug }`, `/${ languageSlug }`);
+  const changeLanguage = (newLocale: string) => {
+    if (!pathname.startsWith(`/${ newLocale }`)) {
+      localStorage.setItem("locale", newLocale);
+      window.location.href = pathname.replace(`/${ locale }`, `/${ newLocale }`);
     }
+    setHasOpenedLanguageMenu(false);
   };
 
   const renderLanguageMenu = () => {
@@ -73,7 +75,7 @@ const Header = () => {
       <ul className="header__language-list">
         { languageLinks.map(languageLink => {
           let className = "header__language-item";
-          if (languageLink.code === slug) {
+          if (languageLink.code === locale) {
             className += " header__language-item--active";
           }
           return (
@@ -95,14 +97,13 @@ const Header = () => {
   const renderMainMenuLinks = (items: MainMenuLink[]) => {
     return items.map((link: MainMenuLink, index: number) => {
       let className = "header__nav-item";
-      const pathnameWithoutSlug = pathname.replace(`/${ slug }`, "");
-      const isOnHomepage = link.url === "/" && pathnameWithoutSlug === "";
-      if (isOnHomepage || pathnameWithoutSlug === link.url) {
+      const pathnameWithoutLocale = pathname.replace(`/${ locale }`, "");
+      if (link.isActive(pathnameWithoutLocale)) {
         className += " header__nav-item--active";
       }
       return (
         <li className={ className } key={ index }>
-          <Link className="header__nav-link" href={ link.url || "" }>
+          <Link className="header__nav-link" href={ link.getPathname(locale) }>
             <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
             <span className="header__nav-link-text">
               { dict.header.mainMenu[link.labelDictKey] }
@@ -139,7 +140,7 @@ const Header = () => {
     <header className="header">
       <div className="header__container">
         <div className="header__logo">
-          <a className="header__logo-link" href="/">
+          <a className="header__logo-link" href={ HOME_LINK.getPathname(locale) }>
             <img className="header__logo-img" src="/images/logo.png" alt="logo"/>
             <span className="header__logo-text">{ dict.header.logoText }</span>
           </a>
@@ -150,7 +151,7 @@ const Header = () => {
           </button>
           { hasOpenedLanguageMenu && renderLanguageMenu() }
         </div>
-        { renderMainMenu() }
+        { !isLoading && renderMainMenu() }
       </div>
     </header>
   );

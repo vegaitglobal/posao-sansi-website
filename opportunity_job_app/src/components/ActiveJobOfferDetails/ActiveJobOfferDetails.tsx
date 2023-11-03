@@ -13,6 +13,7 @@ import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
 import Spinner from "@/components/Spinner/Spinner";
+import { ACTIVE_JOB_OFFERS_LINK, HOME_LINK, LOGIN_LINK } from "@/data/links";
 
 
 interface ActiveJobOfferDetailsProps {
@@ -33,12 +34,12 @@ interface Popups {
 
 export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDetailsProps) {
   const router = useRouter();
-  const { dict } = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ jobOffer, setJobOffer ] = useState<JobOffer>();
-  const [ auth, setAuth ] = useState<Auth>();
-  const [ popups, setPopups ] = useState<Popups>({
+  const { dict, locale } = useDictionary();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [jobOffer, setJobOffer] = useState<JobOffer>();
+  const [auth, setAuth] = useState<Auth>();
+  const [popups, setPopups] = useState<Popups>({
     enrollmentConfirmation: { isOpened: false },
     cancellationConfirmation: { isOpened: false },
     error: { isOpened: false },
@@ -47,7 +48,7 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
   const commonPopupProps = {
     linkButton: {
       label: dict.activeJobOfferDetails.commonPopupLinkButtonLabel,
-      url: "/job-offers",
+      url: ACTIVE_JOB_OFFERS_LINK.getPathname(locale),
     }
   };
 
@@ -61,9 +62,9 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
   const checkAccess = () => {
     const auth = AuthService.getAuth();
     if (!auth) {
-      router.push("/login");
+      router.push(LOGIN_LINK.getPathname(locale));
     } else if (auth.account_type !== AccountTypes.applicant) {
-      router.push("/");
+      router.push(HOME_LINK.getPathname(locale));
     } else {
       setAuth(auth);
       setHasAccess(true);

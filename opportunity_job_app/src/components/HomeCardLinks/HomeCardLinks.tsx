@@ -5,13 +5,14 @@ import React from "react";
 import HomeCardLink from "@/components/HomeCardLink/HomeCardLink";
 import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
+import { ACTIVE_JOB_OFFERS_LINK, MY_JOB_OFFERS_LINK, REGISTER_LINK } from "@/data/links";
 
 interface HomeCardLinks {
   accountType?: AccountTypes;
 }
 
 const HomeCardLinks = ({ accountType }: HomeCardLinks) => {
-  const { dict } = useDictionary();
+  const { dict, locale } = useDictionary();
 
   const renderButtons = () => {
     if (accountType === AccountTypes.applicant) {
@@ -19,7 +20,7 @@ const HomeCardLinks = ({ accountType }: HomeCardLinks) => {
         <HomeCardLink
           title={ dict.homeCardLinks.applicantCardLink.title }
           label={ dict.homeCardLinks.applicantCardLink.label }
-          href="/job-offers"
+          href={ ACTIVE_JOB_OFFERS_LINK.getPathname(locale) }
           imageURL="/images/card-1-img.svg"
         />
       );
@@ -29,7 +30,7 @@ const HomeCardLinks = ({ accountType }: HomeCardLinks) => {
         <HomeCardLink
           title={ dict.homeCardLinks.employerCardLink.title }
           label={ dict.homeCardLinks.employerCardLink.label }
-          href="/my-job-offers"
+          href={ MY_JOB_OFFERS_LINK.getPathname(locale) }
           imageURL="/images/card-2-img.svg"
         />
       );
@@ -39,13 +40,13 @@ const HomeCardLinks = ({ accountType }: HomeCardLinks) => {
         <HomeCardLink
           title={ dict.homeCardLinks.anonymousApplicantCardLink.title }
           label={ dict.homeCardLinks.anonymousApplicantCardLink.label }
-          href={ `/register?accountType=${ AccountTypes.applicant }` }
+          href={ REGISTER_LINK.getPathname(locale, { accountType: AccountTypes.applicant }) }
           imageURL="/images/card-1-img.svg"
         />
         <HomeCardLink
           title={ dict.homeCardLinks.anonymousEmployerCardLink.title }
           label={ dict.homeCardLinks.anonymousEmployerCardLink.label }
-          href={ `/register?accountType=${ AccountTypes.employer }` }
+          href={ REGISTER_LINK.getPathname(locale, { accountType: AccountTypes.employer }) }
           imageURL="/images/card-2-img.svg"
         />
       </>

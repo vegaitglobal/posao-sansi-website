@@ -1,39 +1,37 @@
 "use client";
 
 import axios from "axios";
-import { AuthService } from "./authService";
+import { handleResponseError, prepareRequest } from "@/api/utils";
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
+axiosInstance.interceptors.request.use(
+  config => prepareRequest(config),
+  error => Promise.reject(error)
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  error => handleResponseError(error)
+);
+
 const API = {
   getList: (urlPath: string, queryParams = "") => {
-    const config = API._getConfig();
-    return axiosInstance.get(`${ urlPath }/?${ queryParams }`, config);
+    return axiosInstance.get(`${ urlPath }/?${ queryParams }`);
   },
   getOne: (urlPath: string, resourceId: number) => {
-    const config = API._getConfig();
-    return axiosInstance.get(`${ urlPath }/${ resourceId }/`, config);
+    return axiosInstance.get(`${ urlPath }/${ resourceId }/`);
   },
   post: (urlPath: string, data: Object) => {
-    const config = API._getConfig();
-    return axiosInstance.post(urlPath, data, config);
+    return axiosInstance.post(urlPath, data);
   },
   patch: (urlPath: string, data: Object) => {
-    const config = API._getConfig();
-    return axiosInstance.patch(urlPath, data, config);
+    return axiosInstance.patch(urlPath, data);
   },
   delete: (urlPath: string) => {
-    const config = API._getConfig();
-    return axiosInstance.delete(urlPath, config);
-  },
-  _getConfig: (): any => {
-    const headers = {
-      "Accept-Language": localStorage.getItem("locale"),
-      ...AuthService.getAuthorizationHeaders()
-    };
-    return { headers: headers };
+    return axiosInstance.delete(urlPath);
   },
 };
 

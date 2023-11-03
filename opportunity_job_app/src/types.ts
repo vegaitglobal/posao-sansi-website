@@ -47,3 +47,22 @@ export interface SelectFieldProps extends InputFieldProps {
 export interface FormData {
   [key: string]: InputFieldProps | SelectFieldProps;
 }
+
+export interface AppLink {
+  rawPathname: string;
+
+  getPathname(locale?: string, params?: {}): string;
+
+  isActive(currentPathname: string): boolean;
+}
+
+export interface MainMenuLink extends AppLink {
+  labelDictKey: string;
+  iconPath: string;
+}
+
+export interface LanguageLink {
+  labelDictKey: string;
+  code: string;
+  flagPath: string;
+}
