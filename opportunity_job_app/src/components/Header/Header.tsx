@@ -25,10 +25,10 @@ interface Dictionary {
 const Header = () => {
   const pathname = usePathname();
   const { slug, dict }: Dictionary = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ auth, setAuth ] = useState<Auth | undefined>();
-  const [ hasOpenedLanguageMenu, setHasOpenedLanguageMenu ] = useState<boolean>(false);
-  const [ hasOpenedMainMenu, setHasOpenedMainMenu ] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [auth, setAuth] = useState<Auth | undefined>();
+  const [hasOpenedLanguageMenu, setHasOpenedLanguageMenu] = useState<boolean>(false);
+  const [hasOpenedMainMenu, setHasOpenedMainMenu] = useState<boolean>(false);
 
   useEffect(() => {
     if (isLoading) {
@@ -38,7 +38,7 @@ const Header = () => {
         localStorage.setItem("locale", slug!);
       }
     }
-  }, [ auth, isLoading ]);
+  }, [auth, isLoading]);
 
   const toggleLanguageMenu = () => {
     setHasOpenedLanguageMenu(!hasOpenedLanguageMenu);
@@ -150,7 +150,7 @@ const Header = () => {
           </button>
           { hasOpenedLanguageMenu && renderLanguageMenu() }
         </div>
-        { renderMainMenu() }
+        { !isLoading && renderMainMenu() }
       </div>
     </header>
   );
