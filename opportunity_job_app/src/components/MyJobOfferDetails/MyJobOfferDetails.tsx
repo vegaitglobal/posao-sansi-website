@@ -11,6 +11,7 @@ import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
 import Spinner from "@/components/Spinner/Spinner";
+import { HOME_LINK, LOGIN_LINK, MY_JOB_OFFERS_LINK } from "@/data/links";
 
 
 interface MyJobOfferDetailsProps {
@@ -31,11 +32,11 @@ interface Popups {
 
 export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps) {
   const router = useRouter();
-  const { dict } = useDictionary();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ jobOffer, setJobOffer ] = useState<JobOffer>();
-  const [ popups, setPopups ] = useState<Popups>({
+  const { dict, locale } = useDictionary();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [jobOffer, setJobOffer] = useState<JobOffer>();
+  const [popups, setPopups] = useState<Popups>({
     activationConfirmation: { isOpened: false },
     archivingConfirmation: { isOpened: false },
     error: { isOpened: false },
@@ -44,7 +45,7 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
   const commonPopupProps = {
     linkButton: {
       label: dict.myJobOfferDetails.commonPopupLinkButtonLabel,
-      url: "/my-job-offers",
+      url: MY_JOB_OFFERS_LINK.getPathname(locale),
     }
   };
 
@@ -53,14 +54,14 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
       checkAccess();
       fetchJobOffer().then(() => setIsLoading(false));
     }
-  }, [ isLoading ]);
+  }, [isLoading]);
 
   const checkAccess = () => {
     const auth = AuthService.getAuth();
     if (!auth) {
-      router.push("/login");
+      router.push(LOGIN_LINK.getPathname(locale));
     } else if (auth.account_type !== AccountTypes.applicant && auth.account_type !== AccountTypes.employer) {
-      router.push("/");
+      router.push(HOME_LINK.getPathname(locale));
     } else {
       setHasAccess(true);
     }

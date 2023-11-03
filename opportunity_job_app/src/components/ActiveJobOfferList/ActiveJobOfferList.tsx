@@ -10,18 +10,19 @@ import { useDictionary } from "@/hooks/useDictionary";
 import JobOfferCard from "@/components/JobOfferCard/JobOfferCard";
 import { AccountTypes } from "@/enums";
 import Spinner from "@/components/Spinner/Spinner";
+import { HOME_LINK, LOGIN_LINK } from "@/data/links";
 
 
 export default function ActiveJobOfferList() {
   const router = useRouter();
-  const { dict } = useDictionary();
+  const { dict, locale } = useDictionary();
   const pathname = usePathname();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
-  const [ jobOffers, setJobOffers ] = useState<JobOffer[]>([]);
-  const [ pageNumber, setPageNumber ] = useState<number>(0);
-  const [ totalJobOfferNumber, setTotalJobOfferNumber ] = useState<number>(0);
-  const [ hasNextPage, setHasNextPage ] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [jobOffers, setJobOffers] = useState<JobOffer[]>([]);
+  const [pageNumber, setPageNumber] = useState<number>(0);
+  const [totalJobOfferNumber, setTotalJobOfferNumber] = useState<number>(0);
+  const [hasNextPage, setHasNextPage] = useState<boolean>(false);
 
   useEffect(() => {
 
@@ -29,14 +30,14 @@ export default function ActiveJobOfferList() {
       checkAccess();
       loadMoreJobOffers().then(() => setIsLoading(false));
     }
-  }, [ isLoading ]);
+  }, [isLoading]);
 
   const checkAccess = () => {
     const auth = AuthService.getAuth();
     if (!auth) {
-      router.push("/login");
+      router.push(LOGIN_LINK.getPathname(locale));
     } else if (auth.account_type !== AccountTypes.applicant) {
-      router.push("/");
+      router.push(HOME_LINK.getPathname(locale));
     } else {
       setHasAccess(true);
     }
@@ -46,7 +47,7 @@ export default function ActiveJobOfferList() {
     const nextPageNumber = pageNumber + 1;
     setPageNumber(nextPageNumber);
     const response = await JobOfferService.getActiveJobOffers(nextPageNumber);
-    setJobOffers([ ...jobOffers, ...response.items ]);
+    setJobOffers([...jobOffers, ...response.items]);
     setHasNextPage(nextPageNumber < response.pagination.total_pages);
     setTotalJobOfferNumber(response.pagination.total_items);
   }
