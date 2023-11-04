@@ -21,7 +21,6 @@ class JobOffer(BaseModel):
     employer = models.ForeignKey(
         verbose_name=_("employer"),
         to="users.EmployerAccount",
-        null=True,
         on_delete=models.CASCADE
     )
     location = models.CharField(
@@ -35,7 +34,6 @@ class JobOffer(BaseModel):
         verbose_name=_("engagement"),
         max_length=20,
         choices=JobEngagements.choices,
-        default=JobEngagements.FULL_TIME,
     )
     category = models.CharField(
         verbose_name=_("category"),
@@ -61,7 +59,7 @@ class JobOffer(BaseModel):
     )
     is_active = models.BooleanField(
         verbose_name=_("is active"),
-        default=False
+        default=True
     )
 
     def __str__(self):
