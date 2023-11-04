@@ -10,6 +10,22 @@ from apps.common.paginator import Paginator
 class ListCreateAPIView(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend]
     model_class: type[BaseModel]
+    list_permission_classes = None
+    create_permission_classes = None
+
+    def get_permissions(self) -> tuple:
+        permission_classes = tuple(self.permission_classes)
+        permission_classes += self._get_method_specific_permission_classes()
+        # Make sure there are no duplicates in the list:
+        permission_classes = tuple(set(permission_classes))
+        return tuple(permission() for permission in permission_classes)
+
+    def _get_method_specific_permission_classes(self) -> tuple:
+        if self.request.method == "GET" and self.list_permission_classes:
+            return tuple(self.list_permission_classes)
+        if self.request.method == "POST" and self.create_permission_classes:
+            return tuple(self.create_permission_classes)
+        return ()
 
     def list(self, request, *args, **kwargs) -> Response:
         queryset = self.filter_queryset(queryset=self.model_class.objects.order_by("-created").all())

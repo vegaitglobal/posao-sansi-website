@@ -1,19 +1,15 @@
 from rest_framework.fields import SerializerMethodField
 
-from apps.common.serializers import ModelSerializer
 from apps.jobs.models import JobEnrollment, JobOffer
+from apps.jobs.serializers import WriteJobOfferSerializer
 from apps.users.models import ApplicantAccount
 
 
-class JobOfferSerializer(ModelSerializer):
-    class Meta:
-        model = JobOffer
-        fields = "__all__"
-
+class ReadJobOfferSerializer(WriteJobOfferSerializer):
     engagement = SerializerMethodField()
-    category = SerializerMethodField()
-    required_work_experience = SerializerMethodField()
-    required_education = SerializerMethodField()
+    category = SerializerMethodField(read_only=True)
+    required_work_experience = SerializerMethodField(read_only=True)
+    required_education = SerializerMethodField(read_only=True)
 
     job_enrollment = SerializerMethodField("_get_job_enrollment")
     has_enrolled = SerializerMethodField("_has_enrolled")

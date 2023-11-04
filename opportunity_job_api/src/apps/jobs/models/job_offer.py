@@ -1,15 +1,27 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.manager import MultilingualManager
 
 from apps.common.models import BaseModel
 from apps.jobs.enums import JobCategories, JobEngagements
 from apps.users.enums import EducationLevels, WorkExperienceLevels
 
 
+class JobOfferManager(MultilingualManager):
+
+    def create(self, **kwargs) -> "JobOffer":
+        """
+        Populates field translations for inactive languages
+        """
+        return super().populate().create(**kwargs)
+
+
 class JobOffer(BaseModel):
     class Meta:
         verbose_name = _("Job Offer")
         verbose_name_plural = _("Job Offers")
+
+    objects = JobOfferManager()
 
     job_name = models.CharField(
         verbose_name=_("job name"),
