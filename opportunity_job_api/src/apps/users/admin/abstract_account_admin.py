@@ -1,7 +1,7 @@
-from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from django.db.models import QuerySet
 from django.db.models.functions import Collate
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.admin import TranslationAdmin
 from apps.users.models import AbstractAccount

@@ -1,5 +1,6 @@
 from django.db.models import QuerySet
 from rest_framework.permissions import IsAuthenticated
+
 from apps.common.views import ListCreateAPIView
 from apps.jobs.models import JobOffer
 from apps.jobs.serializers import ReadJobOfferSerializer, WriteJobOfferSerializer

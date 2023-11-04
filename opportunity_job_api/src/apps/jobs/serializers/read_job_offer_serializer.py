@@ -7,9 +7,9 @@ from apps.users.models import ApplicantAccount
 
 class ReadJobOfferSerializer(WriteJobOfferSerializer):
     engagement = SerializerMethodField()
-    category = SerializerMethodField(read_only=True)
-    required_work_experience = SerializerMethodField(read_only=True)
-    required_education = SerializerMethodField(read_only=True)
+    category = SerializerMethodField()
+    required_work_experience = SerializerMethodField()
+    required_education = SerializerMethodField()
 
     job_enrollment = SerializerMethodField("_get_job_enrollment")
     has_enrolled = SerializerMethodField("_has_enrolled")
