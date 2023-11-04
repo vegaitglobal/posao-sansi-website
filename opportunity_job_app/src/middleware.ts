@@ -33,7 +33,7 @@ function getRedirectResponsePathname(request: NextRequest): string {
 }
 
 function getRedirectResponseLocale(request: NextRequest): string {
-  const acceptLanguage = request.headers.get("accept-language");
+  const acceptLanguage = request.headers.get("accept-language") || "";
   const validRequestLocale = acceptLanguageParser.pick(locales, acceptLanguage);
   return validRequestLocale || SERBIAN_LOCALE;
 }

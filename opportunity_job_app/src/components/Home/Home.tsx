@@ -9,20 +9,21 @@ import { Auth } from "@/api/models/Auth";
 import { AuthService } from "@/api/authService";
 import Spinner from "@/components/Spinner/Spinner";
 import { GeneralService } from "@/api/generalService";
+import { AccountTypes } from "@/enums";
 
 
 export default function Home() {
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ auth, setAuth ] = useState<Auth>();
-  const [ applicantCount, setApplicantCount ] = useState<number>(0);
-  const [ employerCount, setEmployerCount ] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [auth, setAuth] = useState<Auth>();
+  const [applicantCount, setApplicantCount] = useState<number>(0);
+  const [employerCount, setEmployerCount] = useState<number>(0);
 
   useEffect(() => {
     if (isLoading) {
       setAuth(AuthService.getAuth());
       fetchStatistics().then(() => setIsLoading(false));
     }
-  }, [ isLoading ]);
+  }, [isLoading]);
 
   async function fetchStatistics() {
     const statistics = await GeneralService.getStatistics();
@@ -35,7 +36,7 @@ export default function Home() {
   return (
     <>
       <HomeBanner/>
-      <HomeCardLinks accountType={ auth?.account_type }/>
+      <HomeCardLinks accountType={ auth?.account_type as AccountTypes }/>
       <About/>
       <Statistics applicantCount={ applicantCount } employerCount={ employerCount }/>
     </>

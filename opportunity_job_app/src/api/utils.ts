@@ -2,7 +2,7 @@ import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { AuthService } from "@/api/authService";
 import { axiosInstance } from "@/api/baseApi";
 
-export const prepareRequest = async (config): Promise<AxiosRequestConfig> => {
+export const prepareRequest = async (config: AxiosRequestConfig): Promise<any> => {
   return {
     ...config,
     headers: {
