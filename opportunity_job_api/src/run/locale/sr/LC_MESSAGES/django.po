@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 11:00-0500\n"
+"POT-Creation-Date: 2023-11-05 02:51-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,32 +19,32 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: apps/common/admin/model_admin.py:45
+#: apps/common/admin/model_admin.py:24
 msgid "id"
 msgstr "id"
 
-#: apps/emails/admin.py:26 apps/emails/models.py:44
+#: apps/emails/admin.py:25 apps/emails/models.py:44
 msgid "status"
 msgstr "status"
 
-#: apps/emails/admin.py:30
+#: apps/emails/admin.py:29
 msgid "Send selected emails"
 msgstr "Pošalji odabrane e-poruke"
 
-#: apps/emails/admin.py:49
+#: apps/emails/admin.py:48
 #, python-brace-format
 msgid "Successfully sent {emails_count} {label}."
 msgstr "Uspešno poslato {emails_count} {label} "
 
-#: apps/emails/admin.py:51
+#: apps/emails/admin.py:50
 msgid "emails"
 msgstr "e-poruke"
 
-#: apps/emails/admin.py:51 apps/users/models/user.py:27
+#: apps/emails/admin.py:50 apps/users/models/user.py:27
 msgid "email"
 msgstr "e-poruka"
 
-#: apps/emails/admin.py:61
+#: apps/emails/admin.py:60
 msgid ""
 "You can select a maximum of 5 emails to send at once. Please reduce the "
 "number of selected emails and try again."
@@ -76,7 +76,7 @@ msgstr "objašnjenje poruke"
 msgid "template path"
 msgstr "putanja šablona"
 
-#: apps/emails/models.py:38 apps/jobs/models/job_offer.py:41
+#: apps/emails/models.py:38 apps/jobs/models/job_offer.py:51
 msgid "category"
 msgstr "kategorija"
 
@@ -104,12 +104,12 @@ msgstr "Došlo je do greške tokom procesa slanja e-pošte"
 msgid "djangotainer on GitHub"
 msgstr "djangotainer na GitHub-u"
 
-#: apps/jobs/admin/job_enrollment_admin.py:36 apps/jobs/models/job_offer.py:15
+#: apps/jobs/admin/job_enrollment_admin.py:36 apps/jobs/models/job_offer.py:27
 msgid "job name"
 msgstr "naziv pozicije"
 
 #: apps/jobs/admin/job_enrollment_admin.py:45
-#: apps/jobs/admin/job_offer_admin.py:30
+#: apps/jobs/admin/job_offer_admin.py:29
 #: apps/users/models/employer_account.py:15
 msgid "company name"
 msgstr "naziv kompanije"
@@ -230,50 +230,54 @@ msgstr ""
 "prijave, ili će biti potrebno da se neko drugi prijavi za posao u ime "
 "podnosioca zahteva."
 
-#: apps/jobs/models/job_offer.py:11
+#: apps/jobs/models/job_offer.py:21
 msgid "Job Offer"
 msgstr "Ponuda za posao"
 
-#: apps/jobs/models/job_offer.py:12
+#: apps/jobs/models/job_offer.py:22
 msgid "Job Offers"
 msgstr "Ponude poslova"
 
-#: apps/jobs/models/job_offer.py:19
+#: apps/jobs/models/job_offer.py:31
 msgid "job description"
 msgstr "opis radne pozicije"
 
-#: apps/jobs/models/job_offer.py:22
+#: apps/jobs/models/job_offer.py:34
 msgid "employer"
 msgstr "poslodavac"
 
-#: apps/jobs/models/job_offer.py:28
+#: apps/jobs/models/job_offer.py:39
 msgid "location"
 msgstr "lokacija"
 
-#: apps/jobs/models/job_offer.py:32
+#: apps/jobs/models/job_offer.py:43
 msgid "application deadline"
 msgstr "rok za prijavu"
 
-#: apps/jobs/models/job_offer.py:35
+#: apps/jobs/models/job_offer.py:46
 msgid "engagement"
 msgstr "angažovanje"
 
-#: apps/jobs/models/job_offer.py:47
+#: apps/jobs/models/job_offer.py:57
 msgid "required work experience"
 msgstr "potrebno radno iskustvo"
 
-#: apps/jobs/models/job_offer.py:53
+#: apps/jobs/models/job_offer.py:63
 msgid "required education"
 msgstr "potrebno obrazovanje"
 
-#: apps/jobs/models/job_offer.py:59
+#: apps/jobs/models/job_offer.py:69
 msgid "additional skills"
 msgstr "dodatne veštine"
 
-#: apps/jobs/models/job_offer.py:63
-#: apps/users/admin/abstract_account_admin.py:16
+#: apps/jobs/models/job_offer.py:73
+#: apps/users/admin/abstract_account_admin.py:15
 msgid "is active"
 msgstr "aktivan"
+
+#: apps/jobs/serializers/write_job_offer_serializer.py:18
+msgid "Application deadline must be in the future"
+msgstr "Rok za prijavu mora da bude u budućnosti"
 
 #: apps/jobs/views/text_choices_field_options_api_view.py:20
 msgid "Applicant"
