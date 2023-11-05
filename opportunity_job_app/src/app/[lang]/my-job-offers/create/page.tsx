@@ -1,5 +1,5 @@
-import JobOfferForm from "@/components/JobOfferForm/JobOfferForm";
+import CreateJobOffer from "@/components/CreateJobOffer/CreateJobOffer";
 
 export default function CreateJobOfferPage() {
-  return <JobOfferForm/>;
+  return <CreateJobOffer/>;
 }

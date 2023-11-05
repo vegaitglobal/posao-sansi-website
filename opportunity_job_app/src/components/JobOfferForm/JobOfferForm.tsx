@@ -2,63 +2,37 @@
 
 import "./../../scss/components/form-page.scss";
 import { useDictionary } from "@/hooks/useDictionary";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import {
-  applyAPIFormErrors,
-  clearFormData,
+  applyAPIFormErrors, clearFormData,
   hasFormErrors,
   mapFormDataToAPIRequestBody,
   scrollFirstFieldWithErrorsIntoView
 } from "@/utils";
 import { validateFormData } from "@/utils";
-import { JobOfferService } from "@/api/jobOfferService";
-import { getInitialJobOfferFormData } from "@/components/JobOfferForm/utils";
 import { JobOfferFormData } from "@/components/JobOfferForm/types";
-import { initialJobOfferFormData } from "@/components/JobOfferForm/data";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 import SelectField from "@/components/SelectField/SelectField";
-import { AuthService } from "@/api/authService";
-import { HOME_LINK, LOGIN_LINK, MY_JOB_OFFERS_LINK } from "@/data/links";
-import Spinner from "@/components/Spinner/Spinner";
-import { AccountTypes } from "@/enums";
-import { useRouter } from "next/navigation";
+import { MY_JOB_OFFERS_LINK } from "@/data/links";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import Popup from "@/components/Popup/Popup";
 import { CreateJobOffer } from "@/api/models/CreateJobOffer";
 
+interface JobOfferFormProps {
+  formData: JobOfferFormData;
 
-const JobOfferForm = () => {
+  onSubmit(jobOffer: CreateJobOffer): Promise<void>;
+
+  setFormData(formData: JobOfferFormData): void;
+}
+
+const JobOfferForm = ({ onSubmit, formData, setFormData }: JobOfferFormProps) => {
   const { dict, locale } = useDictionary();
-  const router = useRouter();
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
-  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
   const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<JobOfferFormData>(initialJobOfferFormData);
   const [ responseError, setResponseError ] = useState<string>("");
   const [ hasOpenedSuccessPopup, setHasOpenedSuccessPopup ] = useState<boolean>(false);
   const [ hasOpenedErrorPopup, setHasOpenedErrorPopup ] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (isLoading) {
-      checkAccess();
-      getInitialJobOfferFormData().then(data => {
-        setFormData(data);
-        setIsLoading(false);
-      });
-    }
-  }, [ isLoading ]);
-
-  const checkAccess = () => {
-    const auth = AuthService.getAuth();
-    if (!auth) {
-      router.push(LOGIN_LINK.getPathname(locale));
-    } else if (auth.account_type !== AccountTypes.employer) {
-      router.push(HOME_LINK.getPathname(locale));
-    } else {
-      setHasAccess(true);
-    }
-  };
 
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
@@ -69,20 +43,20 @@ const JobOfferForm = () => {
     if (hasFormErrors(validatedFormData)) {
       displayFormErrors();
     } else {
-      setShouldDisplayFormErrors(false);
-      createJobOffer();
+      doSubmit();
     }
   };
 
-  const createJobOffer = async () => {
+  const doSubmit = async () => {
+    setShouldDisplayFormErrors(false);
     try {
       const jobOffer = mapFormDataToAPIRequestBody<CreateJobOffer>(formData);
-      await JobOfferService.createJobOffer(jobOffer);
+      await onSubmit(jobOffer);
       setHasOpenedSuccessPopup(true);
       const clearedFormData = clearFormData<JobOfferFormData>(formData);
       setFormData(clearedFormData);
     } catch (error: any) {
-      handleResponseError(error);
+      handleSubmitError(error);
     }
   };
 
@@ -91,7 +65,7 @@ const JobOfferForm = () => {
     scrollFirstFieldWithErrorsIntoView();
   };
 
-  const handleResponseError = (error: any) => {
+  const handleSubmitError = (error: any) => {
     if (error.response?.data?.errors) {
       const validatedFormData = applyAPIFormErrors<JobOfferFormData>(formData, error.response.data.errors);
       setFormData(validatedFormData);
@@ -107,9 +81,7 @@ const JobOfferForm = () => {
     setFormData(newFormData);
   };
 
-  if (isLoading) return <Spinner/>;
-
-  return hasAccess && (
+  return (
     <div className="form-page">
       <div className="form-page__left">
         <p className="form-page__message">{ dict.jobOfferForm.topText }</p>
