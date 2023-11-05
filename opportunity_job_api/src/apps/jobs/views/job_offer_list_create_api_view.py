@@ -12,7 +12,7 @@ from apps.users.permissions import IsEmployer
 
 
 class JobOfferListCreateAPIView(ListCreateAPIView):
-    queryset = JobOffer.objects.all()
+    queryset = JobOffer.objects.all().order_by("-is_active", "-created")
     serializer_class = ReadJobOfferSerializer
     model_class = JobOffer
     permission_classes = [IsAuthenticated]

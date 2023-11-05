@@ -28,8 +28,8 @@ class ListCreateAPIView(generics.ListCreateAPIView):
         return ()
 
     def list(self, request, *args, **kwargs) -> Response:
-        queryset = self.filter_queryset(queryset=self.model_class.objects.order_by("-created").all())
-        paginator = Paginator(queryset=queryset, request=request)
+        filtered_queryset = self.filter_queryset(queryset=self.get_queryset())
+        paginator = Paginator(queryset=filtered_queryset, request=request)
         serializer_kwargs = self.get_serializer_kwargs(paginator=paginator)
         serializer = self.serializer_class(**serializer_kwargs)
         return Response(data=serializer.data)
