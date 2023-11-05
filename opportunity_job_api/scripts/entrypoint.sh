@@ -69,7 +69,7 @@ elif [ "$1" = "$FIX_ARG" ]; then
 
 else
   printc "Unknown argument: \"$1\" \n" "danger"
-  printc "Available first arguments: \"$START_ARG\" \n" "info"
+  printc "Available first arguments: \"$START_ARG\", \"$TEST_ARG\", \"$CHECK_ARG\" and \"$FIX_ARG\" \n" "info"
   printc "Exiting!\n" "info"
   exit 1
 fi

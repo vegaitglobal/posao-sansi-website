@@ -1,5 +1,8 @@
 from django.db.models import QuerySet
+from rest_framework import status
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from apps.common.views import ListCreateAPIView
 from apps.jobs.models import JobOffer
@@ -34,3 +37,9 @@ class JobOfferListCreateAPIView(ListCreateAPIView):
             account = self.request.user.get_account()
             kwargs["data"]["employer"] = account.pk
         return super().get_serializer(*args, **kwargs)
+
+    def create(self, request, *args, **kwargs) -> Response:
+        try:
+            return super().create(request, *args, **kwargs)
+        except ValidationError as error:
+            return Response(data={"errors": error.detail}, status=status.HTTP_400_BAD_REQUEST)
