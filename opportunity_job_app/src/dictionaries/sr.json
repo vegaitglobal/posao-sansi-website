@@ -81,7 +81,8 @@
   "commonFormErrors": {
     "passwordMinLength": "Lozinka mora da sadrži najmanje 8 karaktera",
     "passwordsNotMatch": "Lozinke nisu iste",
-    "requiredField": "Ovo polje je obavezno"
+    "requiredField": "Ovo polje je obavezno",
+    "invalidDateFormat": "Format datuma mora da bude \"DD.MM.GGGG\""
   },
   "passwordResetForm": {
     "topTextFirstLine": "Unesite novu lozinku.",
@@ -150,7 +151,8 @@
   },
   "myJobOfferList": {
     "title": "Moji poslovi:",
-    "loadMoreButtonLabel": "UČITAJ JOŠ"
+    "loadMoreButtonLabel": "UČITAJ JOŠ",
+    "createJobOfferButtonLabel": "KREIRAJ POSAO"
   },
   "jobOfferCard": {
     "activeFlagLabel": "AKTIVAN",
@@ -168,6 +170,36 @@
     "engagementLabel": "Angažman:",
     "descriptionLabel": "Opis posla:",
     "conditionsLabel": "Uslovi:"
+  },
+  "jobOfferForm": {
+    "topText": "Popunite neophodna polja kako biste kreirali NOVU ponudu za posao.",
+    "jobNameFieldLabel": "Naziv pozicije:",
+    "jobNameFieldPlaceholder": "Naziv pozicije",
+    "locationFieldLabel": "Mesto zaposlenja:",
+    "locationFieldPlaceholder": "Mesto zaposlenja",
+    "applicationDeadlineFieldLabel": "Rok za prijavu:",
+    "applicationDeadlineFieldPlaceholder": "DD.MM.GGGG",
+    "jobDescriptionFieldLabel": "Opis pozicije:",
+    "jobDescriptionFieldPlaceholder": "Opis pozicije",
+    "categoryFieldLabel": "Kategorija:",
+    "categoryFieldPlaceholder": "Kategorija",
+    "requiredWorkExperienceFieldLabel": "Godine radnog iskustva:",
+    "requiredWorkExperienceFieldPlaceholder": "Godine radnog iskustva",
+    "engagementFieldLabel": "Vrsta angažmana:",
+    "engagementFieldPlaceholder": "Vrsta angažmana",
+    "requiredEducationFieldLabel": "Nivo obrazovanja:",
+    "requiredEducationFieldPlaceholder": "Nivo obrazovanja",
+    "additionalSkillsFieldLabel": "Dodatne veštine:",
+    "additionalSkillsFieldPlaceholder": "Dodatne veštine",
+    "submitButtonLabel": "KREIRAJ POSAO",
+    "successPopup": {
+      "primaryText": "Uspešno ste kreirali novu ponudu za posao!",
+      "linkButtonLabel": "Nazad na moje poslove"
+    },
+    "errorPopup": {
+      "primaryText": "Došlo je do greške.",
+      "secondaryText": "Molimo Vas pokušajte kasnije."
+    }
   },
   "activeJobOfferDetails": {
     "removeJobEnrollmentButtonLabel": "ODUSTANI",

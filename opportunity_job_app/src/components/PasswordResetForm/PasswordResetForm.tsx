@@ -5,10 +5,9 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import { AuthService } from "@/api/authService";
 import InputField from "../InputField/InputField";
 import Popup from "@/components/Popup/Popup";
-import { validateFormData } from "@/utils";
+import { hasFormErrors, validateFormData } from "@/utils";
 import { useDictionary } from "@/hooks/useDictionary";
 import { FormData, InputFieldProps } from "@/types";
-import { hasFormErrors } from "@/components/RegistrationForm/utils";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 import Spinner from "@/components/Spinner/Spinner";
 import { HOME_LINK, LOGIN_LINK } from "@/data/links";
@@ -112,7 +111,7 @@ const PasswordResetForm = ({ token }: PasswordResetFormProps) => {
             errors={ shouldDisplayFormErrors ? formData.password_confirmation.errors : [] }
           />
           { responseError && <p className="form-field__error">{ responseError }</p> }
-          <button className="form-submit-button" onClick={ handleSubmit }>
+          <button className="button" onClick={ handleSubmit }>
             { dict.passwordResetForm.submitButtonLabel }
           </button>
         </form>

@@ -6,18 +6,12 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import SelectField from "@/components/SelectField/SelectField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import {
-  applyAPIFormErrors,
-  clearFormData,
-  getInitialApplicantFormData,
-  hasFormErrors,
-  mapFormDataToApplicantAccount,
-} from "@/components/RegistrationForm/utils";
+import { getInitialApplicantFormData, mapFormDataToApplicantAccount } from "@/components/RegistrationForm/utils";
 import { ApplicantFormData } from "@/components/RegistrationForm/types";
 import { initialApplicantFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
-import { validateFormData } from "@/utils";
+import { applyAPIFormErrors, clearFormData, hasFormErrors, validateFormData } from "@/utils";
 
 
 interface ApplicantRegistrationFormProps {
@@ -31,9 +25,9 @@ interface ApplicantRegistrationFormProps {
 
 const ApplicantRegistrationForm = ({ onFormReady, onSuccess, onError }: ApplicantRegistrationFormProps) => {
   const { dict } = useDictionary();
-  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<ApplicantFormData>(initialApplicantFormData);
-  const [ responseError, setResponseError ] = useState<string>("");
+  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
+  const [formData, setFormData] = useState<ApplicantFormData>(initialApplicantFormData);
+  const [responseError, setResponseError] = useState<string>("");
 
   useEffect(() => {
     getInitialApplicantFormData().then(data => {
@@ -129,7 +123,7 @@ const ApplicantRegistrationForm = ({ onFormReady, onSuccess, onError }: Applican
         errors={ shouldDisplayFormErrors ? formData.about.errors : [] }
       />
       { responseError && <p className="form-field__error">{ responseError }</p> }
-      <button className="form-submit-button" onClick={ handleSubmit }>
+      <button className="button" onClick={ handleSubmit }>
         { dict.registrationForm.submitButtonLabel }
       </button>
     </form>

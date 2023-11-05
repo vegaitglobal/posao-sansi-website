@@ -2,13 +2,23 @@
 
 $wrapper-max-widths: 1600px;
 
-.job-offers-title {
-  margin: 50px 40px 10px;
+.job-offers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 5% 40px;
+}
+
+.job-offers-header__title {
   color: $purple-primary;
 
   @include media-breakpoint-down(sm) {
     width: 90%;
   }
+}
+
+.job-offers-header__button.job-offers-header__button {
+  margin: 0;
 }
 
 .job-offers {
@@ -30,7 +40,7 @@ $wrapper-max-widths: 1600px;
   }
 }
 
-.job-offers-bottom {
+.job-offers-footer {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -38,10 +48,3 @@ $wrapper-max-widths: 1600px;
   margin: 50px 0;
 }
 
-.load-more-button {
-  background-color: #E99E41;
-  color: white;
-  padding: 18px 50px 10px;
-  border-radius: 4px;
-  font-size: 22px;
-}

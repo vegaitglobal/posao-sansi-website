@@ -2,7 +2,8 @@ import { locales, SERBIAN_LOCALE } from "@/data/locales";
 import { SelectOption } from "@/components/SelectField/SelectField";
 import { TextChoicesFieldOptions } from "@/api/models/TextChoicesFieldOptions";
 import { Dictionary } from "@/dictionaries/Dictionary";
-import { AppLink, EnvironmentVariables, FormData, MainMenuLink, PublicRuntimeConfig } from "@/types";
+import { AppLink, EnvironmentVariables, FormData, FormFieldType, MainMenuLink, PublicRuntimeConfig } from "@/types";
+import { BadRequestResponse } from "@/api/models/BadRequestResponse";
 
 export function mapStringToLocalDateString(dateString: string): string {
   return new Date(Date.parse(dateString)).toLocaleDateString("de");
@@ -31,15 +32,17 @@ export function deepCopy(value: object | []): object | [] {
 }
 
 export function mapTextChoicesFieldOptionsToSelectOptions(options: TextChoicesFieldOptions): SelectOption[] {
-  return Object.entries(options).map(([value, label]) => ({ value: value, label: label }));
+  return Object.entries(options).map(([ value, label ]) => ({ value: value, label: label }));
 }
 
 export const validateFormData = <T>(formData: FormData, dict: Dictionary): T => {
   const formDataCopy = deepCopy(formData) as FormData;
-  Object.entries(formDataCopy).forEach(([key, field]) => {
+  Object.entries(formDataCopy).forEach(([ key, field ]) => {
     formDataCopy[key].errors = [];
     if (!field.value.trim()) {
       formDataCopy[key].errors.push(dict.commonFormErrors.requiredField);
+    } else if (field.type === FormFieldType.date && !isValidDateFormat(field.value)) {
+      formDataCopy[key].errors.push(dict.commonFormErrors.invalidDateFormat);
     } else if (key === "password" && field.value.length < 8) {
       formDataCopy[key].errors.push(dict.commonFormErrors.passwordMinLength);
     } else if (key === "password_confirmation" && formDataCopy.password.value != field.value) {
@@ -47,6 +50,25 @@ export const validateFormData = <T>(formData: FormData, dict: Dictionary): T => 
     }
   });
   return formDataCopy as T;
+};
+
+/**
+ * Valid date format is only "DD.MM.YYYY"
+ */
+const isValidDateFormat = (value: string): boolean => {
+  if (value.length !== 10) {
+    return false;
+  }
+  const dateParts = value.split(".");
+  if (!dateParts.every(part => isAllDigits(part))) {
+    return false;
+  }
+  const [ day, month, year ] = dateParts;
+  return day.length === 2 && month.length === 2 && year.length === 4;
+};
+
+const isAllDigits = (value: string): boolean => {
+  return value.split("").every((char) => !isNaN(Number(char)));
 };
 
 export function mapPublicRuntimeConfigToENV(publicRuntimeConfig: PublicRuntimeConfig): EnvironmentVariables {
@@ -78,4 +100,50 @@ export const createMenuLink = (rawPathname: string, labelDictKey: string, iconPa
     labelDictKey: labelDictKey,
     iconPath: iconPath,
   };
+};
+
+export function clearFormData<T>(formData: FormData): T {
+  const formDataCopy = deepCopy(formData) as FormData;
+  Object.entries(formDataCopy).forEach(([ key, _ ]) => formDataCopy[key].value = "");
+  return formDataCopy as T;
+}
+
+export const applyAPIFormErrors = <T>(formData: FormData, formDataErrors: BadRequestResponse): T => {
+  const erroneousFields = Object.keys(formDataErrors);
+  const formDataCopy = deepCopy(formData) as T;
+  Object.entries(formDataCopy).forEach(([ key, _ ]) => {
+    formDataCopy[key].errors = [];
+    if (erroneousFields.includes(key)) {
+      formDataCopy[key].errors = formDataErrors[key] as string[];
+    } else if (key === "email" && formDataErrors.user) {
+      const userErrors = formDataErrors.user as BadRequestResponse;
+      formDataCopy[key].errors = userErrors[key] as string[];
+    }
+  });
+  return formDataCopy;
+};
+
+export const hasFormErrors = (formData: FormData) => {
+  return !!Object.values(formData).find(field => !!field.errors.length);
+};
+
+export const mapFormDataToAPIRequestBody = <T>(formData: FormData, excludeFields: string[] = []): T => {
+  const APIRequestBody = {} as T;
+  Object.entries(formData).forEach(([ fieldName, field ]) => {
+    if (!excludeFields.includes(fieldName)) {
+      if (field.type == FormFieldType.date) {
+        APIRequestBody[fieldName] = mapFormDateStringToDate(field.value).toISOString() as any;
+      } else {
+        APIRequestBody[fieldName] = formData[fieldName].value as any;
+      }
+    }
+  });
+  return APIRequestBody;
+};
+
+const mapFormDateStringToDate = (value: string): Date => {
+  if (!isValidDateFormat(value)) {
+    throw new Error("Invalid date format");
+  }
+  return new Date(value.split(".").reverse().join("-"));
 };

@@ -1,19 +1,7 @@
 @import "./../../scss/style.scss";
 
-$field-height: 40px;
-
 .form-field--select {
   position: relative;
-}
-
-.form-field__value, .form-field__option {
-  display: flex;
-  align-items: center;
-  height: $field-height;
-  padding: 4px 10px 0;
-  cursor: pointer;
-  font-size: 100%;
-  color: inherit;
 }
 
 .form-field__value, .form-field__options {

@@ -1,7 +1,7 @@
 import API from "./baseApi";
 import { JobOffer, jobOfferFlags } from "@/api/models/JobOffer";
 import { Pagination } from "@/api/models/Pagination";
-import { JobOfferFormData } from "@/components/RegistrationForm/types";
+import { CreateJobOffer } from "@/api/models/CreateJobOffer";
 
 
 interface JobOfferListResponse {
@@ -44,7 +44,7 @@ export const JobOfferService = {
     return await API.patch(`/job-offers/${ jobOfferId }/`, updatedData);
   },
 
-  createJobOffer: async (jobOffer: JobOfferFormData) => {
+  createJobOffer: async (jobOffer: CreateJobOffer) => {
     return await API.post("/job-offers/", jobOffer);
   }
 };

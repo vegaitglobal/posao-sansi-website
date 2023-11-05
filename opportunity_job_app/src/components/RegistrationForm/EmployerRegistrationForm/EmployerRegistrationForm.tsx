@@ -5,17 +5,12 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { SyntheticEvent, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import {
-  applyAPIFormErrors,
-  clearFormData,
-  hasFormErrors,
-  mapFormDataToEmployerAccount,
-} from "@/components/RegistrationForm/utils";
+import { mapFormDataToEmployerAccount } from "@/components/RegistrationForm/utils";
 import { EmployerFormData } from "@/components/RegistrationForm/types";
 import { initialEmployerFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
-import { validateFormData } from "@/utils";
+import { applyAPIFormErrors, clearFormData, hasFormErrors, validateFormData } from "@/utils";
 
 
 interface EmployerRegistrationFormProps {
@@ -28,9 +23,9 @@ interface EmployerRegistrationFormProps {
 
 const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerRegistrationFormProps) => {
   const { dict } = useDictionary();
-  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
-  const [ responseError, setResponseError ] = useState<string>("");
-  const [ formData, setFormData ] = useState<EmployerFormData>(() => {
+  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
+  const [responseError, setResponseError] = useState<string>("");
+  const [formData, setFormData] = useState<EmployerFormData>(() => {
     onFormReady();
     return initialEmployerFormData;
   });
@@ -128,7 +123,7 @@ const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerR
         errors={ shouldDisplayFormErrors ? formData.about.errors : [] }
       />
       { responseError && <p className="form-field__error">{ responseError }</p> }
-      <button className="form-submit-button" onClick={ handleSubmit }>
+      <button className="button" onClick={ handleSubmit }>
         { dict.registrationForm.submitButtonLabel }
       </button>
     </form>

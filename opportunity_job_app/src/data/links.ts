@@ -9,6 +9,7 @@ export const REGISTER_LINK = createMenuLink("/register", "registerLabel", "/imag
 export const MY_JOB_OFFERS_LINK = createMenuLink("/my-job-offers", "myJobsLabel", "/images/jobs.svg");
 export const ACTIVE_JOB_OFFERS_LINK = createMenuLink("/job-offers", "jobOffersLabel", "/images/jobs.svg");
 export const PASSWORD_FORGOTTEN_LINK = createAppLink("/password-forgotten");
+export const CREATE_JOB_OFFER_LINK = createAppLink(`${ MY_JOB_OFFERS_LINK.rawPathname }/create`);
 
 export const publicLinks: MainMenuLink[] = [
   HOME_LINK,

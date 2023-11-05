@@ -9,6 +9,7 @@ import { LoginFormDictionary } from "@/dictionaries/components/LoginFormDictiona
 import { PasswordForgottenFormDictionary } from "@/dictionaries/components/PasswordForgottenFormDictionary";
 import { PasswordResetFormDictionary } from "@/dictionaries/components/PasswordResetFormDictionary";
 import { JobOfferListDictionary } from "@/dictionaries/components/JobOfferListDictionary";
+import { MyJobOfferListDictionary } from "@/dictionaries/components/MyJobOfferListDictionary";
 import { JobOfferDetailsDictionary } from "@/dictionaries/components/JobOfferDetailsDictionary";
 import { ActiveJobOfferDetailsDictionary } from "@/dictionaries/components/ActiveJobOfferDetailsDictionary";
 import { MyJobOfferDetailsDictionary } from "@/dictionaries/components/MyJobOfferDetailsDictionary";
@@ -16,6 +17,7 @@ import { FormErrorsDictionary } from "@/dictionaries/common/FormErrorsDictionary
 import { RegistrationFormDictionary } from "@/dictionaries/components/RegistrationFormDictionary";
 import { ApplicantRegistrationFormDictionary } from "@/dictionaries/components/ApplicantRegistrationFormDictionary";
 import { EmployerRegistrationFormDictionary } from "@/dictionaries/components/EmployerRegistrationFormDictionary";
+import { JobOfferFormDictionary } from "@/dictionaries/components/JobOfferFormDictionary";
 
 export interface Dictionary {
   header: LinksDictionary;
@@ -33,9 +35,10 @@ export interface Dictionary {
   applicantRegistrationForm: ApplicantRegistrationFormDictionary;
   employerRegistrationForm: EmployerRegistrationFormDictionary;
   activeJobOfferList: JobOfferListDictionary;
-  myJobOfferList: JobOfferListDictionary;
+  myJobOfferList: MyJobOfferListDictionary;
   jobOfferCard: JobOfferCardDictionary;
   jobOfferDetails: JobOfferDetailsDictionary;
+  jobOfferForm: JobOfferFormDictionary;
   activeJobOfferDetails: ActiveJobOfferDetailsDictionary;
   myJobOfferDetails: MyJobOfferDetailsDictionary;
   commonFormErrors: FormErrorsDictionary;

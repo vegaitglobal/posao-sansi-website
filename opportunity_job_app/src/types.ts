@@ -35,9 +35,14 @@ export interface PublicRuntimeConfig {
 export interface EnvironmentVariables extends PublicRuntimeConfig {
 }
 
+export enum FormFieldType {
+  date = "date",
+}
+
 export interface InputFieldProps {
   value: string;
   errors: string[];
+  type?: FormFieldType;
 }
 
 export interface SelectFieldProps extends InputFieldProps {
