@@ -1,7 +1,4 @@
-import { PopupDictionary } from "@/dictionaries/components/PopupDictionary";
-
 export interface JobOfferFormDictionary {
-  topText: string;
   jobNameFieldLabel: string;
   jobNameFieldPlaceholder: string;
   locationFieldLabel: string;
@@ -20,7 +17,4 @@ export interface JobOfferFormDictionary {
   requiredEducationFieldPlaceholder: string;
   additionalSkillsFieldLabel: string;
   additionalSkillsFieldPlaceholder: string;
-  submitButtonLabel: string;
-  successPopup: PopupDictionary;
-  errorPopup: PopupDictionary;
 }

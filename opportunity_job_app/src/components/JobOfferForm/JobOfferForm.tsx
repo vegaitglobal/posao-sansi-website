@@ -13,25 +13,35 @@ import {
 import { validateFormData } from "@/utils";
 import { JobOfferFormData } from "@/components/JobOfferForm/types";
 import SelectField from "@/components/SelectField/SelectField";
-import { MY_JOB_OFFERS_LINK } from "@/data/links";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import Popup from "@/components/Popup/Popup";
 import { PostJobOffer } from "@/api/models/PostJobOffer";
 
 interface JobOfferFormProps {
   formData: JobOfferFormData;
+  submitButtonLabel: string;
 
   onSubmit(jobOffer: PostJobOffer): Promise<void>;
 
   setFormData(formData: JobOfferFormData): void;
+
+  onSuccess(): void;
+
+  onError(): void;
 }
 
-const JobOfferForm = ({ onSubmit, formData, setFormData }: JobOfferFormProps) => {
+const JobOfferForm = (
+  {
+    onSubmit,
+    submitButtonLabel,
+    formData,
+    setFormData,
+    onSuccess,
+    onError
+  }: JobOfferFormProps
+) => {
   const { dict, locale } = useDictionary();
   const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
   const [ responseError, setResponseError ] = useState<string>("");
-  const [ hasOpenedSuccessPopup, setHasOpenedSuccessPopup ] = useState<boolean>(false);
-  const [ hasOpenedErrorPopup, setHasOpenedErrorPopup ] = useState<boolean>(false);
 
   const handleSubmit = (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault();
@@ -51,7 +61,7 @@ const JobOfferForm = ({ onSubmit, formData, setFormData }: JobOfferFormProps) =>
     try {
       const jobOffer = mapFormDataToAPIRequestBody<PostJobOffer>(formData);
       await onSubmit(jobOffer);
-      setHasOpenedSuccessPopup(true);
+      onSuccess();
       const clearedFormData = clearFormData<JobOfferFormData>(formData);
       setFormData(clearedFormData);
     } catch (error: any) {
@@ -71,7 +81,7 @@ const JobOfferForm = ({ onSubmit, formData, setFormData }: JobOfferFormProps) =>
       setResponseError(error.response.data.errors.non_field_errors);
       displayFormErrors();
     } else {
-      setHasOpenedErrorPopup(true);
+      onError();
     }
   };
 
@@ -161,25 +171,10 @@ const JobOfferForm = ({ onSubmit, formData, setFormData }: JobOfferFormProps) =>
         />
         { responseError && <p className="form-field__error">{ responseError }</p> }
         <button className="button" onClick={ handleSubmit }>
-          { dict.jobOfferForm.submitButtonLabel }
+          { submitButtonLabel }
         </button>
       </form>
-      <Popup
-        isOpened={ hasOpenedSuccessPopup }
-        primaryText={ dict.jobOfferForm.successPopup.primaryText }
-        secondaryText={ dict.jobOfferForm.successPopup.secondaryText }
-        linkButton={ {
-          url: MY_JOB_OFFERS_LINK.getPathname(locale),
-          label: dict.jobOfferForm.successPopup.linkButtonLabel
-        } }
-        onClose={ () => setHasOpenedSuccessPopup(false) }
-      />
-      <Popup
-        isOpened={ hasOpenedErrorPopup }
-        primaryText={ dict.jobOfferForm.errorPopup.primaryText }
-        secondaryText={ dict.jobOfferForm.errorPopup.secondaryText }
-        onClose={ () => setHasOpenedErrorPopup(false) }
-      />
+
     </>
   );
 };

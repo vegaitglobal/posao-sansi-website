@@ -175,7 +175,6 @@
     "additionalSkillsLabel": "Dodatne veštine:"
   },
   "jobOfferForm": {
-    "topText": "Popunite neophodna polja kako biste kreirali NOVU ponudu za posao.",
     "jobNameFieldLabel": "Naziv pozicije:",
     "jobNameFieldPlaceholder": "Naziv pozicije",
     "locationFieldLabel": "Mesto zaposlenja:",
@@ -193,10 +192,25 @@
     "requiredEducationFieldLabel": "Nivo obrazovanja:",
     "requiredEducationFieldPlaceholder": "Nivo obrazovanja",
     "additionalSkillsFieldLabel": "Dodatne veštine:",
-    "additionalSkillsFieldPlaceholder": "Dodatne veštine",
+    "additionalSkillsFieldPlaceholder": "Dodatne veštine"
+  },
+  "createJobOfferForm": {
+    "topText": "Popunite neophodna polja kako biste kreirali NOVU ponudu za posao.",
     "submitButtonLabel": "KREIRAJ POSAO",
     "successPopup": {
       "primaryText": "Uspešno ste kreirali novu ponudu za posao!",
+      "linkButtonLabel": "Nazad na moje poslove"
+    },
+    "errorPopup": {
+      "primaryText": "Došlo je do greške.",
+      "secondaryText": "Molimo Vas pokušajte kasnije."
+    }
+  },
+  "updateJobOfferForm": {
+    "topText": "Nakon što završite sa izmenama, kliknite dugme na kraju forme kako biste sačuvali izmene.",
+    "submitButtonLabel": "SAČUVAJ IZMENE",
+    "successPopup": {
+      "primaryText": "Uspešno ste izmenili ovaj posao!",
       "linkButtonLabel": "Nazad na moje poslove"
     },
     "errorPopup": {
