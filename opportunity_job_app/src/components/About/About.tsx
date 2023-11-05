@@ -1,6 +1,6 @@
 "use client";
 
-import "./About.scss";
+import "./about.scss";
 import { useDictionary } from "@/hooks/useDictionary";
 
 interface ContentType {

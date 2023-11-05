@@ -1,6 +1,6 @@
 "use client";
 
-import "./HomeCardLinks.scss";
+import "./home-card-links.scss";
 import React from "react";
 import HomeCardLink from "@/components/HomeCardLink/HomeCardLink";
 import { useDictionary } from "@/hooks/useDictionary";
@@ -54,8 +54,10 @@ const HomeCardLinks = ({ accountType }: HomeCardLinks) => {
   };
 
   return (
-    <section className="cards">
-      { renderButtons() }
+    <section className="cards-wrapper">
+      <div className="cards">
+        { renderButtons() }
+      </div>
     </section>
   );
 
