@@ -15,7 +15,7 @@
   right: 14px;
 }
 
-.form-field:hover .select-carrot {
+.form-field--opened .select-carrot {
   transform: rotate(180deg);
 }
 
@@ -29,12 +29,12 @@
   box-shadow: 0 6px 6px 0 rgba($black, 0.25);
 }
 
-.form-field--no-label .form-field__options {
-  top: $field-height;
+.form-field--opened .form-field__options {
+  visibility: visible;
 }
 
-.form-field:hover .form-field__options {
-  visibility: visible;
+.form-field--no-label .form-field__options {
+  top: $field-height;
 }
 
 .form-field__option:hover {
