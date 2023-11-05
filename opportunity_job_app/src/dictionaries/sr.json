@@ -167,9 +167,12 @@
     "applicationDeadlineLabel": "Rok za prijavu:",
     "companyLabel": "KOMPANIJA:",
     "locationLabel": "MESTO:",
+    "websiteLinkLabel": "Posetite web stranicu:",
     "engagementLabel": "Angažman:",
     "descriptionLabel": "Opis posla:",
-    "conditionsLabel": "Uslovi:"
+    "requiredWorkExperienceLabel": "Neophodno radno iskustvo:",
+    "requiredEducationLabel": "Neophodan nivo obrazovanja:",
+    "additionalSkillsLabel": "Dodatne veštine:"
   },
   "jobOfferForm": {
     "topText": "Popunite neophodna polja kako biste kreirali NOVU ponudu za posao.",

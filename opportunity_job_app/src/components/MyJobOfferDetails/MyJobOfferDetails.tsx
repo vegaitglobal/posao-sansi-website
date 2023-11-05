@@ -7,7 +7,7 @@ import { JobOffer } from "@/api/models/JobOffer";
 import { AuthService } from "@/api/authService";
 import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
-import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
+import JobOfferDetails from "@/components/JobOfferDetails/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
 import Spinner from "@/components/Spinner/Spinner";

@@ -1,6 +1,9 @@
 @import "../style";
 
 .page {
+  max-width: 1400px;
+  margin: 0 auto;
+
   @include media-breakpoint-up(xl) {
     padding: 50px 100px;
   }
@@ -8,7 +11,7 @@
     padding: 50px 70px;
   }
   @include media-breakpoint-down(sm) {
-    padding: 50px 30px;
+    padding: 50px 20px;
   }
 }
 

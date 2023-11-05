@@ -167,9 +167,12 @@
     "applicationDeadlineLabel": "Application deadline:",
     "companyLabel": "COMPANY:",
     "locationLabel": "PLACE OF WORK:",
+    "websiteLinkLabel": "Go to the website:",
     "engagementLabel": "Engagement:",
     "descriptionLabel": "Job description:",
-    "conditionsLabel": "Conditions:"
+    "requiredWorkExperienceLabel": "Required work experience:",
+    "requiredEducationLabel": "Required education level:",
+    "additionalSkillsLabel": "Additional skills:"
   },
   "jobOfferForm": {
     "topText": "Fill the necessary form fields in order to create a NEW job offer.",

@@ -3,15 +3,21 @@
 $wrapper-max-widths: 1600px;
 
 .job-offers-header {
+  max-width: 1400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 50px 5% 40px;
+  margin: 50px auto 40px;
 
-  @include media-breakpoint-down(sm) {
+  @media only screen and (max-width: 1550px) {
+    max-width: 900px;
+  }
+
+  @include media-breakpoint-down(md) {
+    max-width: 450px;
     flex-direction: column-reverse;
     justify-content: flex-end;
-    margin: 40px 2.5% 30px;
+    margin: 40px auto 30px;
   }
 }
 
@@ -26,7 +32,7 @@ $wrapper-max-widths: 1600px;
 .job-offers-header__button.job-offers-header__button {
   margin: 0;
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     margin-bottom: 40px;
   }
 }
@@ -39,7 +45,7 @@ $wrapper-max-widths: 1600px;
   max-width: $wrapper-max-widths;
   margin: 0 auto 50px auto;
 
-  @media only screen and (max-width: 1500px) {
+  @media only screen and (max-width: 1550px) {
     grid-template-columns: auto auto;
   }
 
@@ -58,4 +64,3 @@ $wrapper-max-widths: 1600px;
   align-content: center;
   margin: 50px 0;
 }
-

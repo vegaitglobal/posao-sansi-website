@@ -9,7 +9,7 @@ import { Auth } from "@/api/models/Auth";
 import { JobEnrollmentService } from "@/api/jobEnrollmentService";
 import Popup from "../Popup/Popup";
 import { useRouter } from "next/navigation";
-import JobOfferDetails from "@/components/JobOfferDetail/JobOfferDetails";
+import JobOfferDetails from "@/components/JobOfferDetails/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
 import Spinner from "@/components/Spinner/Spinner";
