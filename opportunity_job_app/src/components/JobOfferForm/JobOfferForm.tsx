@@ -4,7 +4,13 @@ import "./../../scss/components/form-page.scss";
 import { useDictionary } from "@/hooks/useDictionary";
 import { SyntheticEvent, useEffect, useState } from "react";
 import InputField from "@/components/InputField/InputField";
-import { applyAPIFormErrors, clearFormData, hasFormErrors, mapFormDataToAPIRequestBody } from "@/utils";
+import {
+  applyAPIFormErrors,
+  clearFormData,
+  hasFormErrors,
+  mapFormDataToAPIRequestBody,
+  scrollFirstFieldWithErrorsIntoView
+} from "@/utils";
 import { validateFormData } from "@/utils";
 import { JobOfferService } from "@/api/jobOfferService";
 import { getInitialJobOfferFormData } from "@/components/JobOfferForm/utils";
@@ -61,7 +67,7 @@ const JobOfferForm = () => {
     setFormData(validatedFormData);
 
     if (hasFormErrors(validatedFormData)) {
-      setShouldDisplayFormErrors(true);
+      displayFormErrors();
     } else {
       setShouldDisplayFormErrors(false);
       createJobOffer();
@@ -80,12 +86,17 @@ const JobOfferForm = () => {
     }
   };
 
+  const displayFormErrors = () => {
+    setShouldDisplayFormErrors(true);
+    scrollFirstFieldWithErrorsIntoView();
+  };
+
   const handleResponseError = (error: any) => {
     if (error.response?.data?.errors) {
       const validatedFormData = applyAPIFormErrors<JobOfferFormData>(formData, error.response.data.errors);
       setFormData(validatedFormData);
       setResponseError(error.response.data.errors.non_field_errors);
-      setShouldDisplayFormErrors(true);
+      displayFormErrors();
     } else {
       setHasOpenedErrorPopup(true);
     }

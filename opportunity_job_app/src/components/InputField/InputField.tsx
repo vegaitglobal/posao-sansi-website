@@ -1,6 +1,7 @@
 import "./input-field.scss";
 import React from "react";
 import FieldErrors from "@/components/FieldErrors/FieldErrors";
+import { FIELD_WITH_ERRORS_CLASS_NAME } from "@/data/constants";
 
 
 interface InputFieldProps {
@@ -29,7 +30,7 @@ const InputField = (
   }: InputFieldProps
 ) => {
   return (
-    <label className={ `form-field ${ errors && errors.length ? "form-field--error" : "" }` }>
+    <label className={ `form-field ${ errors && errors.length ? FIELD_WITH_ERRORS_CLASS_NAME : "" }` }>
       <span className="form-field-label">
         { label }{ isRequired && <span className="form-field-label__asterisk">*</span> }
       </span>

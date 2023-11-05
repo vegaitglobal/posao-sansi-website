@@ -4,6 +4,7 @@ import { TextChoicesFieldOptions } from "@/api/models/TextChoicesFieldOptions";
 import { Dictionary } from "@/dictionaries/Dictionary";
 import { AppLink, EnvironmentVariables, FormData, FormFieldType, MainMenuLink, PublicRuntimeConfig } from "@/types";
 import { BadRequestResponse } from "@/api/models/BadRequestResponse";
+import { FIELD_WITH_ERRORS_CLASS_NAME } from "@/data/constants";
 
 export function mapStringToLocalDateString(dateString: string): string {
   return new Date(Date.parse(dateString)).toLocaleDateString("de");
@@ -147,3 +148,13 @@ const mapFormDateStringToDate = (value: string): Date => {
   }
   return new Date(value.split(".").reverse().join("-"));
 };
+
+export function scrollFirstFieldWithErrorsIntoView() {
+  setTimeout(function () {
+    const firstFieldWithErrors = document.getElementsByClassName(FIELD_WITH_ERRORS_CLASS_NAME)[0];
+    if (firstFieldWithErrors) {
+      const scrollTop = firstFieldWithErrors.offsetTop - 100;
+      window.scrollTo({ top: scrollTop, behavior: "smooth" });
+    }
+  }, 500);
+}

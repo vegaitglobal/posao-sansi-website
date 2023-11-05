@@ -1,6 +1,7 @@
 import "./select-field.scss";
 import React, { useEffect, useState } from "react";
 import FieldErrors from "@/components/FieldErrors/FieldErrors";
+import { FIELD_WITH_ERRORS_CLASS_NAME } from "@/data/constants";
 
 
 export interface SelectOption {
@@ -71,7 +72,7 @@ const SelectField = (
   if (!selectedOption) return null;
 
   let fieldClassName = "form-field form-field--select";
-  if (errors && errors.length) fieldClassName += " form-field--error";
+  if (errors && errors.length) fieldClassName += ` ${ FIELD_WITH_ERRORS_CLASS_NAME }`;
   if (withReversedColors) fieldClassName += " form-field--reversed-colors";
   if (!label) fieldClassName += " form-field--no-label";
 
@@ -102,3 +103,6 @@ const SelectField = (
 };
 
 export default SelectField;
+
+// TODO: open/close options on click (not hover)!
+// TODO: close options on option click!
