@@ -1,4 +1,4 @@
-export interface CreateJobOffer {
+export interface PostJobOffer {
   job_name: string;
   job_description: string;
   location: string;

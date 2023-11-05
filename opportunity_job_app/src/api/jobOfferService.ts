@@ -1,7 +1,8 @@
 import API from "./baseApi";
 import { JobOffer, jobOfferFlags } from "@/api/models/JobOffer";
 import { Pagination } from "@/api/models/Pagination";
-import { CreateJobOffer } from "@/api/models/CreateJobOffer";
+import { PostJobOffer } from "@/api/models/PostJobOffer";
+import { PatchJobOffer } from "@/api/models/PatchJobOffer";
 
 
 interface JobOfferListResponse {
@@ -35,8 +36,9 @@ export const JobOfferService = {
     return response.data;
   },
 
-  findJobOffer: async (jobOfferID: number): Promise<JobOffer> => {
-    const response = await API.getOne("job-offers", jobOfferID);
+  findJobOffer: async (jobOfferID: number, withRawValues?: boolean): Promise<JobOffer> => {
+    const queryParams = withRawValues ? "raw_values=true" : "";
+    const response = await API.getOne("job-offers", jobOfferID, queryParams);
     return response.data;
   },
 
@@ -44,7 +46,11 @@ export const JobOfferService = {
     return await API.patch(`/job-offers/${ jobOfferId }/`, updatedData);
   },
 
-  createJobOffer: async (jobOffer: CreateJobOffer) => {
+  createJobOffer: async (jobOffer: PostJobOffer) => {
     return await API.post("/job-offers/", jobOffer);
-  }
+  },
+
+  updateJobOffer: async (jobOfferId: number, jobOffer: PatchJobOffer) => {
+    return await API.patch(`/job-offers/${ jobOfferId }/`, jobOffer);
+  },
 };

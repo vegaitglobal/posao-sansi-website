@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.jobs.models import JobOffer
-from apps.jobs.serializers import ReadJobOfferSerializer
+from apps.jobs.serializers import ReadJobOfferSerializer, WriteJobOfferSerializer
 from apps.users.models import ApplicantAccount
 from apps.users.permissions import HasAccount
 
@@ -14,7 +14,9 @@ class JobOfferDetailsAPIView(APIView):
 
     def get(self, request, pk: int, **kwargs) -> Response:
         if job_offer := self._get_job_offer(pk=pk):
-            serializer = ReadJobOfferSerializer(instance=job_offer, request=request)
+            with_raw_values = self.request.query_params.get("raw_values") == "true"
+            serializer_class = WriteJobOfferSerializer if with_raw_values else ReadJobOfferSerializer
+            serializer = serializer_class(instance=job_offer, request=request)
             return Response(data=serializer.data, status=status.HTTP_200_OK)
 
         return Response(data={"message": "Not found"}, status=status.HTTP_404_NOT_FOUND)

@@ -1,3 +1,11 @@
-export default function UpdateJobOfferPage() {
-  return <h1>UPDATE JOB OFFER</h1>;
+import UpdateJobOffer from "@/components/UpdateJobOffer/UpdateJobOffer";
+
+interface UpdateJobOfferPageProps {
+  params: {
+    myJobOfferId: string
+  };
+}
+
+export default function UpdateJobOfferPage({ params }: UpdateJobOfferPageProps) {
+  return <UpdateJobOffer jobOfferID={ parseInt(params.myJobOfferId) }/>;
 }

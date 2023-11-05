@@ -12,17 +12,16 @@ import {
 } from "@/utils";
 import { validateFormData } from "@/utils";
 import { JobOfferFormData } from "@/components/JobOfferForm/types";
-import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 import SelectField from "@/components/SelectField/SelectField";
 import { MY_JOB_OFFERS_LINK } from "@/data/links";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import Popup from "@/components/Popup/Popup";
-import { CreateJobOffer } from "@/api/models/CreateJobOffer";
+import { PostJobOffer } from "@/api/models/PostJobOffer";
 
 interface JobOfferFormProps {
   formData: JobOfferFormData;
 
-  onSubmit(jobOffer: CreateJobOffer): Promise<void>;
+  onSubmit(jobOffer: PostJobOffer): Promise<void>;
 
   setFormData(formData: JobOfferFormData): void;
 }
@@ -50,7 +49,7 @@ const JobOfferForm = ({ onSubmit, formData, setFormData }: JobOfferFormProps) =>
   const doSubmit = async () => {
     setShouldDisplayFormErrors(false);
     try {
-      const jobOffer = mapFormDataToAPIRequestBody<CreateJobOffer>(formData);
+      const jobOffer = mapFormDataToAPIRequestBody<PostJobOffer>(formData);
       await onSubmit(jobOffer);
       setHasOpenedSuccessPopup(true);
       const clearedFormData = clearFormData<JobOfferFormData>(formData);
@@ -82,93 +81,89 @@ const JobOfferForm = ({ onSubmit, formData, setFormData }: JobOfferFormProps) =>
   };
 
   return (
-    <div className="form-page">
-      <div className="form-page__left">
-        <p className="form-page__message">{ dict.jobOfferForm.topText }</p>
-        <form className="form-page__form">
-          <InputField
-            isRequired={ !formData.job_name.isOptional }
-            label={ dict.jobOfferForm.jobNameFieldLabel }
-            placeholder={ dict.jobOfferForm.jobNameFieldPlaceholder }
-            value={ formData.job_name.value }
-            onChange={ (value) => updateFormData(value, "job_name") }
-            errors={ shouldDisplayFormErrors ? formData.job_name.errors : [] }
-          />
-          <InputField
-            isRequired={ !formData.location.isOptional }
-            label={ dict.jobOfferForm.locationFieldLabel }
-            placeholder={ dict.jobOfferForm.locationFieldPlaceholder }
-            value={ formData.location.value }
-            onChange={ (value) => updateFormData(value, "location") }
-            errors={ shouldDisplayFormErrors ? formData.location.errors : [] }
-          />
-          <InputField
-            isRequired={ !formData.application_deadline.isOptional }
-            label={ dict.jobOfferForm.applicationDeadlineFieldLabel }
-            placeholder={ dict.jobOfferForm.applicationDeadlineFieldPlaceholder }
-            value={ formData.application_deadline.value }
-            onChange={ (value) => updateFormData(value, "application_deadline") }
-            errors={ shouldDisplayFormErrors ? formData.application_deadline.errors : [] }
-          />
-          <TextAreaField
-            isRequired={ !formData.job_description.isOptional }
-            label={ dict.jobOfferForm.jobDescriptionFieldLabel }
-            placeholder={ dict.jobOfferForm.jobDescriptionFieldPlaceholder }
-            value={ formData.job_description.value }
-            onChange={ (value) => updateFormData(value, "job_description") }
-            errors={ shouldDisplayFormErrors ? formData.job_description.errors : [] }
-          />
-          <SelectField
-            isRequired={ !formData.category.isOptional }
-            label={ dict.jobOfferForm.categoryFieldLabel }
-            placeholder={ dict.jobOfferForm.categoryFieldPlaceholder }
-            value={ formData.category.value }
-            options={ formData.category.options }
-            onChange={ (value) => updateFormData(value, "category") }
-            errors={ shouldDisplayFormErrors ? formData.category.errors : [] }
-          />
-          <SelectField
-            isRequired={ !formData.engagement.isOptional }
-            label={ dict.jobOfferForm.engagementFieldLabel }
-            placeholder={ dict.jobOfferForm.engagementFieldPlaceholder }
-            value={ formData.engagement.value }
-            options={ formData.engagement.options }
-            onChange={ (value) => updateFormData(value, "engagement") }
-            errors={ shouldDisplayFormErrors ? formData.engagement.errors : [] }
-          />
-          <SelectField
-            isRequired={ !formData.required_education.isOptional }
-            label={ dict.jobOfferForm.requiredEducationFieldLabel }
-            placeholder={ dict.jobOfferForm.requiredEducationFieldPlaceholder }
-            value={ formData.required_education.value }
-            options={ formData.required_education.options }
-            onChange={ (value) => updateFormData(value, "required_education") }
-            errors={ shouldDisplayFormErrors ? formData.required_education.errors : [] }
-          />
-          <SelectField
-            isRequired={ !formData.required_work_experience.isOptional }
-            label={ dict.jobOfferForm.requiredWorkExperienceFieldLabel }
-            placeholder={ dict.jobOfferForm.requiredWorkExperienceFieldPlaceholder }
-            value={ formData.required_work_experience.value }
-            options={ formData.required_work_experience.options }
-            onChange={ (value) => updateFormData(value, "required_work_experience") }
-            errors={ shouldDisplayFormErrors ? formData.required_work_experience.errors : [] }
-          />
-          <TextAreaField
-            isRequired={ !formData.additional_skills.isOptional }
-            label={ dict.jobOfferForm.additionalSkillsFieldLabel }
-            placeholder={ dict.jobOfferForm.additionalSkillsFieldPlaceholder }
-            value={ formData.additional_skills.value }
-            onChange={ (value) => updateFormData(value, "additional_skills") }
-            errors={ shouldDisplayFormErrors ? formData.additional_skills.errors : [] }
-          />
-          { responseError && <p className="form-field__error">{ responseError }</p> }
-          <button className="button" onClick={ handleSubmit }>
-            { dict.jobOfferForm.submitButtonLabel }
-          </button>
-        </form>
-      </div>
-      <FormPageDesktopImage style={ { paddingTop: "140px" } }/>
+    <>
+      <form className="form-page__form">
+        <InputField
+          isRequired={ !formData.job_name.isOptional }
+          label={ dict.jobOfferForm.jobNameFieldLabel }
+          placeholder={ dict.jobOfferForm.jobNameFieldPlaceholder }
+          value={ formData.job_name.value }
+          onChange={ (value) => updateFormData(value, "job_name") }
+          errors={ shouldDisplayFormErrors ? formData.job_name.errors : [] }
+        />
+        <InputField
+          isRequired={ !formData.location.isOptional }
+          label={ dict.jobOfferForm.locationFieldLabel }
+          placeholder={ dict.jobOfferForm.locationFieldPlaceholder }
+          value={ formData.location.value }
+          onChange={ (value) => updateFormData(value, "location") }
+          errors={ shouldDisplayFormErrors ? formData.location.errors : [] }
+        />
+        <InputField
+          isRequired={ !formData.application_deadline.isOptional }
+          label={ dict.jobOfferForm.applicationDeadlineFieldLabel }
+          placeholder={ dict.jobOfferForm.applicationDeadlineFieldPlaceholder }
+          value={ formData.application_deadline.value }
+          onChange={ (value) => updateFormData(value, "application_deadline") }
+          errors={ shouldDisplayFormErrors ? formData.application_deadline.errors : [] }
+        />
+        <TextAreaField
+          isRequired={ !formData.job_description.isOptional }
+          label={ dict.jobOfferForm.jobDescriptionFieldLabel }
+          placeholder={ dict.jobOfferForm.jobDescriptionFieldPlaceholder }
+          value={ formData.job_description.value }
+          onChange={ (value) => updateFormData(value, "job_description") }
+          errors={ shouldDisplayFormErrors ? formData.job_description.errors : [] }
+        />
+        <SelectField
+          isRequired={ !formData.category.isOptional }
+          label={ dict.jobOfferForm.categoryFieldLabel }
+          placeholder={ dict.jobOfferForm.categoryFieldPlaceholder }
+          value={ formData.category.value }
+          options={ formData.category.options }
+          onChange={ (value) => updateFormData(value, "category") }
+          errors={ shouldDisplayFormErrors ? formData.category.errors : [] }
+        />
+        <SelectField
+          isRequired={ !formData.engagement.isOptional }
+          label={ dict.jobOfferForm.engagementFieldLabel }
+          placeholder={ dict.jobOfferForm.engagementFieldPlaceholder }
+          value={ formData.engagement.value }
+          options={ formData.engagement.options }
+          onChange={ (value) => updateFormData(value, "engagement") }
+          errors={ shouldDisplayFormErrors ? formData.engagement.errors : [] }
+        />
+        <SelectField
+          isRequired={ !formData.required_education.isOptional }
+          label={ dict.jobOfferForm.requiredEducationFieldLabel }
+          placeholder={ dict.jobOfferForm.requiredEducationFieldPlaceholder }
+          value={ formData.required_education.value }
+          options={ formData.required_education.options }
+          onChange={ (value) => updateFormData(value, "required_education") }
+          errors={ shouldDisplayFormErrors ? formData.required_education.errors : [] }
+        />
+        <SelectField
+          isRequired={ !formData.required_work_experience.isOptional }
+          label={ dict.jobOfferForm.requiredWorkExperienceFieldLabel }
+          placeholder={ dict.jobOfferForm.requiredWorkExperienceFieldPlaceholder }
+          value={ formData.required_work_experience.value }
+          options={ formData.required_work_experience.options }
+          onChange={ (value) => updateFormData(value, "required_work_experience") }
+          errors={ shouldDisplayFormErrors ? formData.required_work_experience.errors : [] }
+        />
+        <TextAreaField
+          isRequired={ !formData.additional_skills.isOptional }
+          label={ dict.jobOfferForm.additionalSkillsFieldLabel }
+          placeholder={ dict.jobOfferForm.additionalSkillsFieldPlaceholder }
+          value={ formData.additional_skills.value }
+          onChange={ (value) => updateFormData(value, "additional_skills") }
+          errors={ shouldDisplayFormErrors ? formData.additional_skills.errors : [] }
+        />
+        { responseError && <p className="form-field__error">{ responseError }</p> }
+        <button className="button" onClick={ handleSubmit }>
+          { dict.jobOfferForm.submitButtonLabel }
+        </button>
+      </form>
       <Popup
         isOpened={ hasOpenedSuccessPopup }
         primaryText={ dict.jobOfferForm.successPopup.primaryText }
@@ -185,7 +180,7 @@ const JobOfferForm = ({ onSubmit, formData, setFormData }: JobOfferFormProps) =>
         secondaryText={ dict.jobOfferForm.errorPopup.secondaryText }
         onClose={ () => setHasOpenedErrorPopup(false) }
       />
-    </div>
+    </>
   );
 };
 
