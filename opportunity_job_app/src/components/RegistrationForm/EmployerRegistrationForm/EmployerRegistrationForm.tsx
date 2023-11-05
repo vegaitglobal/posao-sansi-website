@@ -10,7 +10,13 @@ import { EmployerFormData } from "@/components/RegistrationForm/types";
 import { initialEmployerFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
-import { applyAPIFormErrors, clearFormData, hasFormErrors, validateFormData } from "@/utils";
+import {
+  applyAPIFormErrors,
+  clearFormData,
+  hasFormErrors,
+  scrollFirstFieldWithErrorsIntoView,
+  validateFormData
+} from "@/utils";
 
 
 interface EmployerRegistrationFormProps {
@@ -23,9 +29,9 @@ interface EmployerRegistrationFormProps {
 
 const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerRegistrationFormProps) => {
   const { dict } = useDictionary();
-  const [shouldDisplayFormErrors, setShouldDisplayFormErrors] = useState<boolean>(false);
-  const [responseError, setResponseError] = useState<string>("");
-  const [formData, setFormData] = useState<EmployerFormData>(() => {
+  const [ shouldDisplayFormErrors, setShouldDisplayFormErrors ] = useState<boolean>(false);
+  const [ responseError, setResponseError ] = useState<string>("");
+  const [ formData, setFormData ] = useState<EmployerFormData>(() => {
     onFormReady();
     return initialEmployerFormData;
   });
@@ -37,11 +43,16 @@ const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerR
     setFormData(validatedFormData);
 
     if (hasFormErrors(validatedFormData)) {
-      setShouldDisplayFormErrors(true);
+      displayFormErrors();
     } else {
       setShouldDisplayFormErrors(false);
       register();
     }
+  };
+
+  const displayFormErrors = () => {
+    setShouldDisplayFormErrors(true);
+    scrollFirstFieldWithErrorsIntoView();
   };
 
   const register = async () => {
@@ -61,7 +72,7 @@ const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerR
       const validatedFormData = applyAPIFormErrors<EmployerFormData>(formData, error.response.data.errors);
       setFormData(validatedFormData);
       setResponseError(error.response.data.errors.non_field_errors);
-      setShouldDisplayFormErrors(true);
+      displayFormErrors();
     } else {
       onError();
     }
