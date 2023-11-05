@@ -72,6 +72,7 @@ const JobOfferForm = () => {
     try {
       const jobOffer = mapFormDataToAPIRequestBody<CreateJobOffer>(formData);
       await JobOfferService.createJobOffer(jobOffer);
+      setHasOpenedSuccessPopup(true);
       const clearedFormData = clearFormData<JobOfferFormData>(formData);
       setFormData(clearedFormData);
     } catch (error: any) {
@@ -85,6 +86,8 @@ const JobOfferForm = () => {
       setFormData(validatedFormData);
       setResponseError(error.response.data.errors.non_field_errors);
       setShouldDisplayFormErrors(true);
+    } else {
+      setHasOpenedErrorPopup(true);
     }
   };
 

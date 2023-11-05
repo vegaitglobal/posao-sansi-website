@@ -1,4 +1,4 @@
-@import '../../scss/style.scss';
+@import "../../scss/style.scss";
 
 .popup {
   position: fixed;
@@ -23,12 +23,19 @@
   background-color: $white;
   position: relative;
   border-radius: 8px;
-  padding: 50px 30px;
+  padding: 75px 35px;
+  min-width: 350px;
   max-width: 450px;
+
+  @include media-breakpoint-down(sm) {
+    min-width: unset;
+    max-width: unset;
+    width: 95%;
+  }
 }
 
 .popup__close {
-  width: 20px;
+  width: 30px;
   position: absolute;
   right: 20px;
   top: 20px;

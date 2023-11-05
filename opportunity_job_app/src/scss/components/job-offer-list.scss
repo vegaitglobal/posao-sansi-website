@@ -7,6 +7,12 @@ $wrapper-max-widths: 1600px;
   justify-content: space-between;
   align-items: center;
   margin: 50px 5% 40px;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    margin: 40px 2.5% 30px;
+  }
 }
 
 .job-offers-header__title {
@@ -19,6 +25,10 @@ $wrapper-max-widths: 1600px;
 
 .job-offers-header__button.job-offers-header__button {
   margin: 0;
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 40px;
+  }
 }
 
 .job-offers {
@@ -37,6 +47,7 @@ $wrapper-max-widths: 1600px;
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 25px;
   }
 }
 
