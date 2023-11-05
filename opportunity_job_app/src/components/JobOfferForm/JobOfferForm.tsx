@@ -115,6 +115,7 @@ const JobOfferForm = () => {
         <p className="form-page__message">{ dict.jobOfferForm.topText }</p>
         <form className="form-page__form">
           <InputField
+            isRequired={ !formData.job_name.isOptional }
             label={ dict.jobOfferForm.jobNameFieldLabel }
             placeholder={ dict.jobOfferForm.jobNameFieldPlaceholder }
             value={ formData.job_name.value }
@@ -122,6 +123,7 @@ const JobOfferForm = () => {
             errors={ shouldDisplayFormErrors ? formData.job_name.errors : [] }
           />
           <InputField
+            isRequired={ !formData.location.isOptional }
             label={ dict.jobOfferForm.locationFieldLabel }
             placeholder={ dict.jobOfferForm.locationFieldPlaceholder }
             value={ formData.location.value }
@@ -129,6 +131,7 @@ const JobOfferForm = () => {
             errors={ shouldDisplayFormErrors ? formData.location.errors : [] }
           />
           <InputField
+            isRequired={ !formData.application_deadline.isOptional }
             label={ dict.jobOfferForm.applicationDeadlineFieldLabel }
             placeholder={ dict.jobOfferForm.applicationDeadlineFieldPlaceholder }
             value={ formData.application_deadline.value }
@@ -136,6 +139,7 @@ const JobOfferForm = () => {
             errors={ shouldDisplayFormErrors ? formData.application_deadline.errors : [] }
           />
           <TextAreaField
+            isRequired={ !formData.job_description.isOptional }
             label={ dict.jobOfferForm.jobDescriptionFieldLabel }
             placeholder={ dict.jobOfferForm.jobDescriptionFieldPlaceholder }
             value={ formData.job_description.value }
@@ -143,6 +147,7 @@ const JobOfferForm = () => {
             errors={ shouldDisplayFormErrors ? formData.job_description.errors : [] }
           />
           <SelectField
+            isRequired={ !formData.category.isOptional }
             label={ dict.jobOfferForm.categoryFieldLabel }
             placeholder={ dict.jobOfferForm.categoryFieldPlaceholder }
             value={ formData.category.value }
@@ -151,6 +156,7 @@ const JobOfferForm = () => {
             errors={ shouldDisplayFormErrors ? formData.category.errors : [] }
           />
           <SelectField
+            isRequired={ !formData.engagement.isOptional }
             label={ dict.jobOfferForm.engagementFieldLabel }
             placeholder={ dict.jobOfferForm.engagementFieldPlaceholder }
             value={ formData.engagement.value }
@@ -159,6 +165,7 @@ const JobOfferForm = () => {
             errors={ shouldDisplayFormErrors ? formData.engagement.errors : [] }
           />
           <SelectField
+            isRequired={ !formData.required_education.isOptional }
             label={ dict.jobOfferForm.requiredEducationFieldLabel }
             placeholder={ dict.jobOfferForm.requiredEducationFieldPlaceholder }
             value={ formData.required_education.value }
@@ -167,6 +174,7 @@ const JobOfferForm = () => {
             errors={ shouldDisplayFormErrors ? formData.required_education.errors : [] }
           />
           <SelectField
+            isRequired={ !formData.required_work_experience.isOptional }
             label={ dict.jobOfferForm.requiredWorkExperienceFieldLabel }
             placeholder={ dict.jobOfferForm.requiredWorkExperienceFieldPlaceholder }
             value={ formData.required_work_experience.value }
@@ -175,6 +183,7 @@ const JobOfferForm = () => {
             errors={ shouldDisplayFormErrors ? formData.required_work_experience.errors : [] }
           />
           <TextAreaField
+            isRequired={ !formData.additional_skills.isOptional }
             label={ dict.jobOfferForm.additionalSkillsFieldLabel }
             placeholder={ dict.jobOfferForm.additionalSkillsFieldPlaceholder }
             value={ formData.additional_skills.value }

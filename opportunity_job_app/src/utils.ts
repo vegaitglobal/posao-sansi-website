@@ -40,7 +40,7 @@ export const validateFormData = <T>(formData: FormData, dict: Dictionary): T => 
   const formDataCopy = deepCopy(formData) as FormData;
   Object.entries(formDataCopy).forEach(([ key, field ]) => {
     formDataCopy[key].errors = [];
-    if (!field.value.trim()) {
+    if (!field.isOptional && !field.value.trim()) {
       formDataCopy[key].errors.push(dict.commonFormErrors.requiredField);
     } else if (field.type === FormFieldType.date && !isValidDateFormat(field.value)) {
       formDataCopy[key].errors.push(dict.commonFormErrors.invalidDateFormat);

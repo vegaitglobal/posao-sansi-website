@@ -2,6 +2,7 @@ import "./select-field.scss";
 import React, { useEffect, useRef, useState } from "react";
 import FieldErrors from "@/components/FieldErrors/FieldErrors";
 import { FIELD_WITH_ERRORS_CLASS_NAME } from "@/data/constants";
+import FieldLabel from "@/components/FieldLabel/FieldLabel";
 
 
 export interface SelectOption {
@@ -102,11 +103,7 @@ const SelectField = (
 
   return (
     <div className={ fieldClassName }>
-      { label && (
-        <span className="form-field-label">
-          { label }{ isRequired && <span className="form-field-label__asterisk">*</span> }
-        </span>
-      ) }
+      { label && <FieldLabel label={ label } isRequired={ isRequired }/> }
       <div className={ selectClassName } onClick={ () => setIsOpened(!isOpened) } ref={ selectRef }>
         { selectedOption.label }
         <img className="select-carrot" src={ selectCarrotImgPath } alt="select carrot"/>

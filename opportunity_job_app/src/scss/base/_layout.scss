@@ -27,21 +27,6 @@ body {
   flex-direction: column;
 }
 
-$form-field-label-height: 24px;
-
-.form-field-label {
-  display: flex;
-  align-items: center;
-  height: $form-field-label-height;
-  font-size: 16px;
-  color: $purple-primary;
-  font-family: $secondary-font;
-}
-
-.form-field-label__asterisk {
-  margin-left: 4px;
-}
-
 .form-field__value::placeholder,
 .form-field__value.form-field__value--placeholder {
   color: darkgrey;
@@ -68,11 +53,6 @@ $field-height: 40px;
 .form-field--error .form-field__value {
   border-color: red;
   background-color: #ffdfdf;
-  font-family: $secondary-font;
-}
-
-.form-field--error .form-field-label__asterisk {
-  color: red;
   font-family: $secondary-font;
 }
 

@@ -43,6 +43,7 @@ export interface InputFieldProps {
   value: string;
   errors: string[];
   type?: FormFieldType;
+  isOptional?: boolean;
 }
 
 export interface SelectFieldProps extends InputFieldProps {

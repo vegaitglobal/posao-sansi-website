@@ -10,5 +10,5 @@ export const initialJobOfferFormData: JobOfferFormData = {
   engagement: { value: "", options: [], errors: [] },
   required_education: { value: "", options: [], errors: [] },
   required_work_experience: { value: "", options: [], errors: [] },
-  additional_skills: { value: "", errors: [] }
+  additional_skills: { value: "", errors: [], isOptional: true }
 };
