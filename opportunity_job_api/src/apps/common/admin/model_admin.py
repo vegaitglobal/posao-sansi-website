@@ -6,30 +6,9 @@ from apps.common.models import BaseModel
 
 
 class ModelAdmin(TimestampableModelAdmin):
-    add_form_fieldsets: tuple = None
-    change_form_fieldsets: tuple = None
-    add_form_fields: tuple = None
-    change_form_fields: tuple = None
-
-    def get_fieldsets(self, request, obj=None):
-        if not obj and self.add_form_fieldsets is not None:
-            return self.add_form_fieldsets
-
-        if obj and self.change_form_fieldsets is not None:
-            return self.change_form_fieldsets
-
-        return super().get_fieldsets(request=request, obj=obj)
 
     def get_fields(self, request, obj=None):
-        if not obj and self.add_form_fields is not None:
-            return self.add_form_fields
-
-        if obj and self.change_form_fields is not None:
-            fields = self.change_form_fields
-        else:
-            fields = super().get_fields(request=request, obj=obj)
-
-        fields = list(fields)
+        fields = list(super().get_fields(request=request, obj=obj))
         if "id" in fields:
             fields.remove("id")
         fields.insert(0, "id")

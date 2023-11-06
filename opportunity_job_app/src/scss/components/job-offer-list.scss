@@ -2,12 +2,38 @@
 
 $wrapper-max-widths: 1600px;
 
-.job-offers-title {
-  margin: 50px 40px 10px;
+.job-offers-header {
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px auto 40px;
+
+  @media only screen and (max-width: 1550px) {
+    max-width: 900px;
+  }
+
+  @include media-breakpoint-down(md) {
+    max-width: 450px;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    margin: 40px auto 30px;
+  }
+}
+
+.job-offers-header__title {
   color: $purple-primary;
 
   @include media-breakpoint-down(sm) {
     width: 90%;
+  }
+}
+
+.job-offers-header__button.job-offers-header__button {
+  margin: 0;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 40px;
   }
 }
 
@@ -19,7 +45,7 @@ $wrapper-max-widths: 1600px;
   max-width: $wrapper-max-widths;
   margin: 0 auto 50px auto;
 
-  @media only screen and (max-width: 1500px) {
+  @media only screen and (max-width: 1550px) {
     grid-template-columns: auto auto;
   }
 
@@ -27,21 +53,14 @@ $wrapper-max-widths: 1600px;
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 25px;
   }
 }
 
-.job-offers-bottom {
+.job-offers-footer {
   width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
   margin: 50px 0;
-}
-
-.load-more-button {
-  background-color: #E99E41;
-  color: white;
-  padding: 18px 50px 10px;
-  border-radius: 4px;
-  font-size: 22px;
 }

@@ -1,6 +1,8 @@
 import "./select-field.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FieldErrors from "@/components/FieldErrors/FieldErrors";
+import { FIELD_WITH_ERRORS_CLASS_NAME } from "@/data/constants";
+import FieldLabel from "@/components/FieldLabel/FieldLabel";
 
 
 export interface SelectOption {
@@ -34,10 +36,23 @@ const SelectField = (
   }: SelectFieldProps
 ) => {
   const [ selectedOption, setSelectedOption ] = useState<SelectOption>();
+  const [ isOpened, setIsOpened ] = useState<boolean>(false);
+  const selectRef = useRef(null);
+  const documentClickRef = useRef(null);
+
 
   useEffect(() => {
     setSelectedOption(getSelectedOption());
+    documentClickRef.current = handleClickOutside as any;
+    document.addEventListener("click", documentClickRef.current);
+    return () => document.removeEventListener("click", documentClickRef.current);
   }, [ value, placeholder ]);
+
+  const handleClickOutside = (event: any) => {
+    if (selectRef.current && !selectRef.current.contains(event.target)) {
+      setIsOpened(false);
+    }
+  };
 
   const getSelectedOption = () => {
     if (value) return options.find(option => option.value === value);
@@ -47,6 +62,7 @@ const SelectField = (
 
   const selectOption = (value: string) => {
     setSelectedOption(options.find(option => option.value === value)!);
+    setIsOpened(!isOpened);
     onChange(value);
   };
 
@@ -71,7 +87,8 @@ const SelectField = (
   if (!selectedOption) return null;
 
   let fieldClassName = "form-field form-field--select";
-  if (errors && errors.length) fieldClassName += " form-field--error";
+  if (isOpened) fieldClassName += " form-field--opened";
+  if (errors && errors.length) fieldClassName += ` ${ FIELD_WITH_ERRORS_CLASS_NAME }`;
   if (withReversedColors) fieldClassName += " form-field--reversed-colors";
   if (!label) fieldClassName += " form-field--no-label";
 
@@ -86,12 +103,8 @@ const SelectField = (
 
   return (
     <div className={ fieldClassName }>
-      { label && (
-        <span className="form-field-label">
-          { label }{ isRequired && <span className="form-field-label__asterisk">*</span> }
-        </span>
-      ) }
-      <div className={ selectClassName }>
+      { label && <FieldLabel label={ label } isRequired={ isRequired }/> }
+      <div className={ selectClassName } onClick={ () => setIsOpened(!isOpened) } ref={ selectRef }>
         { selectedOption.label }
         <img className="select-carrot" src={ selectCarrotImgPath } alt="select carrot"/>
       </div>

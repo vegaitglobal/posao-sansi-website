@@ -18,15 +18,15 @@ import { HOME_LINK } from "@/data/links";
 const RegistrationForm = () => {
   const { dict, locale } = useDictionary();
   const searchParams = useSearchParams();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [hasAccess, setHasAccess] = useState<boolean>(false);
-  const [selectedAccountType, setSelectedAccountType] = useState<AccountTypes>(() => {
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
+  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
+  const [ selectedAccountType, setSelectedAccountType ] = useState<AccountTypes>(() => {
     const accountTypeURLParam = searchParams.get("accountType");
     if (accountTypeURLParam && accountTypeURLParam === AccountTypes.employer) return AccountTypes.employer;
     return AccountTypes.applicant;
   });
-  const [hasOpenedSuccessPopup, setHasOpenedSuccessPopup] = useState<boolean>(false);
-  const [hasOpenedErrorPopup, setHasOpenedErrorPopup] = useState<boolean>(false);
+  const [ hasOpenedSuccessPopup, setHasOpenedSuccessPopup ] = useState<boolean>(false);
+  const [ hasOpenedErrorPopup, setHasOpenedErrorPopup ] = useState<boolean>(false);
 
   const accountTypeOptions: SelectOption[] = [
     { value: AccountTypes.applicant, label: dict.registrationForm.applicantOptionLabel },
@@ -38,7 +38,7 @@ const RegistrationForm = () => {
       checkAccess();
       setIsLoading(false);
     }
-  }, [isLoading]);
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     if (AuthService.isAuthenticated()) {

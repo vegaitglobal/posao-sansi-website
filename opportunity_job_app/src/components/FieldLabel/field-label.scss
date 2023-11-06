@@ -1,0 +1,19 @@
+@import "../../scss/style";
+
+.form-field-label {
+  display: flex;
+  align-items: center;
+  height: $form-field-label-height;
+  font-size: 16px;
+  color: $purple-primary;
+  font-family: $secondary-font;
+}
+
+.form-field-label__asterisk {
+  margin-left: 4px;
+}
+
+.form-field--error .form-field-label__asterisk {
+  color: red;
+  font-family: $secondary-font;
+}

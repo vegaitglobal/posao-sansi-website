@@ -35,9 +35,15 @@ export interface PublicRuntimeConfig {
 export interface EnvironmentVariables extends PublicRuntimeConfig {
 }
 
+export enum FormFieldType {
+  date = "date",
+}
+
 export interface InputFieldProps {
   value: string;
   errors: string[];
+  type?: FormFieldType;
+  isOptional?: boolean;
 }
 
 export interface SelectFieldProps extends InputFieldProps {
@@ -51,7 +57,7 @@ export interface FormData {
 export interface AppLink {
   rawPathname: string;
 
-  getPathname(locale?: string, params?: {}): string;
+  getPathname(locale?: string, params?: {}, variables?: {}): string;
 
   isActive(currentPathname: string): boolean;
 }

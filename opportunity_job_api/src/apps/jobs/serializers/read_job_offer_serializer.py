@@ -1,15 +1,11 @@
 from rest_framework.fields import SerializerMethodField
 
-from apps.common.serializers import ModelSerializer
 from apps.jobs.models import JobEnrollment, JobOffer
+from apps.jobs.serializers import WriteJobOfferSerializer
 from apps.users.models import ApplicantAccount
 
 
-class JobOfferSerializer(ModelSerializer):
-    class Meta:
-        model = JobOffer
-        fields = "__all__"
-
+class ReadJobOfferSerializer(WriteJobOfferSerializer):
     engagement = SerializerMethodField()
     category = SerializerMethodField()
     required_work_experience = SerializerMethodField()

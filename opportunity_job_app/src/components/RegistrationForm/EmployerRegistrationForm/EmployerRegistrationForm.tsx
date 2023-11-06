@@ -5,17 +5,18 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { SyntheticEvent, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import {
-  applyAPIFormErrors,
-  clearFormData,
-  hasFormErrors,
-  mapFormDataToEmployerAccount,
-} from "@/components/RegistrationForm/utils";
+import { mapFormDataToEmployerAccount } from "@/components/RegistrationForm/utils";
 import { EmployerFormData } from "@/components/RegistrationForm/types";
 import { initialEmployerFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
-import { validateFormData } from "@/utils";
+import {
+  applyAPIFormErrors,
+  clearFormData,
+  hasFormErrors,
+  scrollFirstFieldWithErrorsIntoView,
+  validateFormData
+} from "@/utils";
 
 
 interface EmployerRegistrationFormProps {
@@ -42,11 +43,16 @@ const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerR
     setFormData(validatedFormData);
 
     if (hasFormErrors(validatedFormData)) {
-      setShouldDisplayFormErrors(true);
+      displayFormErrors();
     } else {
       setShouldDisplayFormErrors(false);
       register();
     }
+  };
+
+  const displayFormErrors = () => {
+    setShouldDisplayFormErrors(true);
+    scrollFirstFieldWithErrorsIntoView();
   };
 
   const register = async () => {
@@ -66,7 +72,7 @@ const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerR
       const validatedFormData = applyAPIFormErrors<EmployerFormData>(formData, error.response.data.errors);
       setFormData(validatedFormData);
       setResponseError(error.response.data.errors.non_field_errors);
-      setShouldDisplayFormErrors(true);
+      displayFormErrors();
     } else {
       onError();
     }
@@ -128,7 +134,7 @@ const EmployerRegistrationForm = ({ onFormReady, onSuccess, onError }: EmployerR
         errors={ shouldDisplayFormErrors ? formData.about.errors : [] }
       />
       { responseError && <p className="form-field__error">{ responseError }</p> }
-      <button className="form-submit-button" onClick={ handleSubmit }>
+      <button className="button" onClick={ handleSubmit }>
         { dict.registrationForm.submitButtonLabel }
       </button>
     </form>

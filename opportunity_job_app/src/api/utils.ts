@@ -6,6 +6,10 @@ export const prepareRequest = async (config: AxiosRequestConfig): Promise<any> =
   return {
     ...config,
     headers: {
+      // TODO: Active language (the one from URL) and
+      //  local storage language are not always the same
+      //  -> set language to request in middleware instead
+      //    of local storage
       "Accept-Language": localStorage.getItem("locale"),
       ...AuthService.getAuthorizationHeaders()
     }

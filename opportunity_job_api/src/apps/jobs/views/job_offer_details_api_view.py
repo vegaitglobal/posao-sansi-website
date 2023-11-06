@@ -1,56 +1,64 @@
-from django.http import JsonResponse
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.jobs.models import JobOffer
-from apps.jobs.serializers import JobOfferSerializer
+from apps.jobs.serializers import ReadJobOfferSerializer, WriteJobOfferSerializer
+from apps.users.models import ApplicantAccount
+from apps.users.permissions import HasAccount
 
 
 class JobOfferDetailsAPIView(APIView):
-    serializer_class = JobOfferSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [HasAccount]
 
-    @staticmethod
-    def get(request, pk: int, **kwargs):
-        try:
-            job_offer = JobOffer.objects.get(id=pk)
-            serializer = JobOfferSerializer(
-                instance=job_offer,
-                request=request
-            )
-            return JsonResponse(serializer.data, status=status.HTTP_200_OK)
-        except JobOffer.DoesNotExist:
+    def get(self, request, pk: int, **kwargs) -> Response:
+        if job_offer := self._get_job_offer(pk=pk):
+            with_raw_values = self.request.query_params.get("raw_values") == "true"
+            serializer_class = WriteJobOfferSerializer if with_raw_values else ReadJobOfferSerializer
+            serializer = serializer_class(instance=job_offer, request=request)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+        return Response(data={"message": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    def patch(self, request, pk: int, **kwargs) -> Response:
+        job_offer = self._get_job_offer(pk=pk)
+        if not job_offer:
             return Response(
                 data={"message": "Not found"},
                 status=status.HTTP_404_NOT_FOUND
             )
 
-    @staticmethod
-    def patch(request, pk: int, **kwargs):
-        try:
-            job_offer = JobOffer.objects.get(id=pk)
-            new_job_offer = request.data
-            serializer = JobOfferSerializer(
-                instance=job_offer,
-                data=new_job_offer,
-                partial=True,
-                request=request
-            )
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
-        except JobOffer.DoesNotExist:
-            return Response(
-                data={"message": "Not found"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        serializer = WriteJobOfferSerializer(
+            instance=job_offer,
+            data=request.data,
+            partial=True,
+            request=request
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @staticmethod
-    def delete(request, pk: int, **kwargs):
-        if job_offer := JobOffer.objects.filter(id=pk).filter():
+        return Response(data={"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk: int, **kwargs) -> Response:
+        if job_offer := self._get_job_offer(pk=pk):
             job_offer.delete()
             return Response(status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def _get_job_offer(self, pk: int) -> JobOffer | None:
+        try:
+            job_offer = JobOffer.objects.get(id=pk)
+        except JobOffer.DoesNotExist:
+            return None
+        if self._has_access_to_job_offer(job_offer=job_offer):
+            return job_offer
+
+    def _has_access_to_job_offer(self, job_offer: JobOffer) -> bool:
+        account = self.request.user.get_account()
+        return (
+                account.type == ApplicantAccount.type
+                and job_offer.is_active
+                or job_offer.employer == account
+        )

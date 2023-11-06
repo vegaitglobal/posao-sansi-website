@@ -35,7 +35,8 @@
 .mission__content-list {
   background-color: $yellow-primary;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+
   @include media-breakpoint-up(xl) {
     padding: 50px 75px;
   }
@@ -56,24 +57,22 @@
   align-items: center;
   color: $white;
   text-align: left;
-  max-width: 500px;
+  width: 50%;
+  max-width: 800px;
+  margin: 0 30px;
 
   img {
     margin-right: 20px;
   }
 
-  @include media-breakpoint-up(xl) {
-    max-width: 45%;
-  }
   @include media-breakpoint-down(lg) {
     margin-bottom: 40px;
-  }
-  @include media-breakpoint-between(md, lg) {
-    max-width: 800px;
     width: 100%;
   }
   @include media-breakpoint-down(sm) {
     flex-direction: column;
+    margin: 0;
+
     img {
       margin-right: 0;
       margin-bottom: 20px;

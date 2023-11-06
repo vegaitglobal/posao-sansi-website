@@ -1,6 +1,8 @@
 import "./text-area-field.scss";
 import React from "react";
 import FieldErrors from "@/components/FieldErrors/FieldErrors";
+import { FIELD_WITH_ERRORS_CLASS_NAME } from "@/data/constants";
+import FieldLabel from "@/components/FieldLabel/FieldLabel";
 
 
 interface TextAreaFieldProps {
@@ -25,10 +27,8 @@ const TextAreaField = (
   }: TextAreaFieldProps
 ) => {
   return (
-    <label className={ `form-field ${ errors && errors.length ? "form-field--error" : "" }` }>
-      <span className="form-field-label">
-        { label }{ isRequired && <span className="form-field-label__asterisk">*</span> }
-      </span>
+    <label className={ `form-field ${ errors && errors.length ? FIELD_WITH_ERRORS_CLASS_NAME : "" }` }>
+      <FieldLabel label={ label } isRequired={ isRequired }/>
       <textarea
         className="form-field__value form-field__value--text-area"
         value={ value }

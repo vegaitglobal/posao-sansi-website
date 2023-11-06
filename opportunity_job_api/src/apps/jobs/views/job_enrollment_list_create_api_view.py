@@ -1,12 +1,10 @@
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
+from django.db.models import QuerySet
 
 from apps.common.views import ListCreateAPIView
 from apps.jobs.filtersets import JobEnrollmentFilterSet
 from apps.jobs.models import JobEnrollment
 from apps.jobs.serializers import JobEnrollmentSerializer
-from apps.users.models import ApplicantAccount
+from apps.users.permissions import IsApplicant
 
 
 class JobEnrollmentListCreateAPIView(ListCreateAPIView):
@@ -14,10 +12,9 @@ class JobEnrollmentListCreateAPIView(ListCreateAPIView):
     serializer_class = JobEnrollmentSerializer
     filterset_class = JobEnrollmentFilterSet
     model_class = JobEnrollment
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsApplicant]
 
-    def create(self, request, *args, **kwargs):
-        user_account = request.user.get_account()
-        if user_account and isinstance(user_account, ApplicantAccount):
-            return super(JobEnrollmentListCreateAPIView, self).create(request, *args, **kwargs)
-        return Response(status=status.HTTP_403_FORBIDDEN)
+    def filter_queryset(self, queryset: QuerySet) -> QuerySet:
+        queryset = super().filter_queryset(queryset=queryset)
+        account = self.request.user.get_account()
+        return queryset.filter(applicant_account=account)

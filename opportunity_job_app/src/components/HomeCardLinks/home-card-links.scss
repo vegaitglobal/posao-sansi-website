@@ -2,6 +2,8 @@
 
 .cards {
   padding: 80px;
+  max-width: 1650px;
+  margin: 0 auto;
 
   @include media-breakpoint-down(sm) {
     display: flex;

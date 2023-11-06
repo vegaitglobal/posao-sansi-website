@@ -3,7 +3,10 @@ export interface JobOfferDetailsDictionary {
   applicationDeadlineLabel: string;
   companyLabel: string;
   locationLabel: string;
+  websiteLinkLabel: string;
   engagementLabel: string;
   descriptionLabel: string;
-  conditionsLabel: string;
+  requiredWorkExperienceLabel: string;
+  requiredEducationLabel: string;
+  additionalSkillsLabel: string;
 }

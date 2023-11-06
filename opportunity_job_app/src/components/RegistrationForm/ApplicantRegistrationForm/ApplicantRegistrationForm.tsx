@@ -6,18 +6,18 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import SelectField from "@/components/SelectField/SelectField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import {
-  applyAPIFormErrors,
-  clearFormData,
-  getInitialApplicantFormData,
-  hasFormErrors,
-  mapFormDataToApplicantAccount,
-} from "@/components/RegistrationForm/utils";
+import { getInitialApplicantFormData, mapFormDataToApplicantAccount } from "@/components/RegistrationForm/utils";
 import { ApplicantFormData } from "@/components/RegistrationForm/types";
 import { initialApplicantFormData } from "@/components/RegistrationForm/data";
 import CredentialsFields from "@/components/RegistrationForm/CredentialsFields/CredentialsFields";
 import { AuthService } from "@/api/authService";
-import { validateFormData } from "@/utils";
+import {
+  applyAPIFormErrors,
+  clearFormData,
+  hasFormErrors,
+  scrollFirstFieldWithErrorsIntoView,
+  validateFormData
+} from "@/utils";
 
 
 interface ApplicantRegistrationFormProps {
@@ -49,11 +49,16 @@ const ApplicantRegistrationForm = ({ onFormReady, onSuccess, onError }: Applican
     setFormData(validatedFormData);
 
     if (hasFormErrors(validatedFormData)) {
-      setShouldDisplayFormErrors(true);
+      displayFormErrors();
     } else {
       setShouldDisplayFormErrors(false);
       register();
     }
+  };
+
+  const displayFormErrors = () => {
+    setShouldDisplayFormErrors(true);
+    scrollFirstFieldWithErrorsIntoView();
   };
 
   const register = async () => {
@@ -73,7 +78,7 @@ const ApplicantRegistrationForm = ({ onFormReady, onSuccess, onError }: Applican
       const validatedFormData = applyAPIFormErrors<ApplicantFormData>(formData, error.response.data.errors);
       setFormData(validatedFormData);
       setResponseError(error.response.data.errors.non_field_errors);
-      setShouldDisplayFormErrors(true);
+      displayFormErrors();
     } else {
       onError();
     }
@@ -129,7 +134,7 @@ const ApplicantRegistrationForm = ({ onFormReady, onSuccess, onError }: Applican
         errors={ shouldDisplayFormErrors ? formData.about.errors : [] }
       />
       { responseError && <p className="form-field__error">{ responseError }</p> }
-      <button className="form-submit-button" onClick={ handleSubmit }>
+      <button className="button" onClick={ handleSubmit }>
         { dict.registrationForm.submitButtonLabel }
       </button>
     </form>

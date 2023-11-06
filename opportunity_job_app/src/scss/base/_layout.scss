@@ -28,22 +28,22 @@ body {
 }
 
 .form-field__value::placeholder,
-.form-field__value--placeholder {
+.form-field__value.form-field__value--placeholder {
   color: darkgrey;
+  font-family: $secondary-font;
 }
 
-$form-field-label-height: 24px;
+$field-height: 40px;
 
-.form-field-label {
+.form-field__value, .form-field__option {
   display: flex;
   align-items: center;
-  height: $form-field-label-height;
-  font-size: 16px;
-  color: $purple-primary;
-}
-
-.form-field-label__asterisk {
-  margin-left: 4px;
+  height: $field-height;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 100%;
+  color: inherit;
+  font-family: $secondary-font;
 }
 
 .form-field__error-container {
@@ -53,26 +53,37 @@ $form-field-label-height: 24px;
 .form-field--error .form-field__value {
   border-color: red;
   background-color: #ffdfdf;
-}
-
-.form-field--error .form-field-label__asterisk {
-  color: red;
+  font-family: $secondary-font;
 }
 
 .form-field__error {
   color: red;
+  font-family: $secondary-font;
 }
 
-.form-submit-button {
+.button {
   background-color: $purple-primary;
   color: white;
-  padding: 14px 50px 7px 50px;
+  padding: 14px 50px 7px;
   font-size: 16px;
   width: fit-content;
   margin: 10px auto;
   border-radius: 4px;
 }
 
-.form-submit-button:hover {
+.button:hover {
   background-color: $purple-hover;
+}
+
+.button--big {
+  font-size: 22px;
+  padding: 18px 50px 10px;
+}
+
+.button--yellow {
+  background-color: $yellow-primary;
+}
+
+.button--yellow:hover {
+  background-color: $yellow-hover;
 }

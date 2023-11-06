@@ -2,14 +2,13 @@ from django.contrib import admin, messages
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import QuerySet
 from django.utils.translation import gettext_lazy as _
-from modeltranslation.admin import TranslationAdmin
 
-from apps.common.admin import ModelAdmin
+from apps.common.admin import TranslationAdmin
 from apps.emails.models import Email
 from apps.emails.utils import render_colored_email_status_html
 
 
-class AbstractEmailAdmin(ModelAdmin, TranslationAdmin):
+class AbstractEmailAdmin(TranslationAdmin):
     list_filter = (
         "status",
     )

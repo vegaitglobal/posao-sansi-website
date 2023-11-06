@@ -1,0 +1,32 @@
+@import "../../scss/style";
+
+.job-offer__row-field {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.job-offer__column-field {
+  padding: 16px 0;
+}
+
+.job-offer__row-field-label,
+.job-offer__column-field-label {
+  font-family: $font-default;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.job-offer__field-value {
+  font-family: $secondary-font;
+  font-size: 18px;
+}
+
+.job-offer__row-field .job-offer__field-value {
+  margin-left: 4px;
+}
+
+a.job-offer__field-value {
+  color: $purple-primary;
+  font-weight: 600;
+}

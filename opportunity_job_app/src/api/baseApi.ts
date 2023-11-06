@@ -21,8 +21,8 @@ const API = {
   getList: (urlPath: string, queryParams = "") => {
     return axiosInstance.get(`${ urlPath }/?${ queryParams }`);
   },
-  getOne: (urlPath: string, resourceId: number) => {
-    return axiosInstance.get(`${ urlPath }/${ resourceId }/`);
+  getOne: (urlPath: string, resourceId: number, queryParams = "") => {
+    return axiosInstance.get(`${ urlPath }/${ resourceId }/?${ queryParams }`);
   },
   post: (urlPath: string, data: Object) => {
     return axiosInstance.post(urlPath, data);

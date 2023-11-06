@@ -1,12 +1,11 @@
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin
 
-from apps.common.admin import ModelAdmin
+from apps.common.admin import TranslationAdmin
 from apps.jobs.models import FAQ
 
 
 @admin.register(FAQ)
-class FAQAdmin(ModelAdmin, TranslationAdmin):
+class FAQAdmin(TranslationAdmin):
     list_display = (
         "question",
         "display_to_anonymous",

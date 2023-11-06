@@ -81,7 +81,8 @@
   "commonFormErrors": {
     "passwordMinLength": "Password must contain at least 8 characters",
     "passwordsNotMatch": "Passwords do not match",
-    "requiredField": "This field is required"
+    "requiredField": "This field is required",
+    "invalidDateFormat": "Date format must be \"DD.MM.YYYY\""
   },
   "passwordResetForm": {
     "topTextFirstLine": "Enter a new password.",
@@ -150,7 +151,8 @@
   },
   "myJobOfferList": {
     "title": "My job offers:",
-    "loadMoreButtonLabel": "LOAD MORE"
+    "loadMoreButtonLabel": "LOAD MORE",
+    "createJobOfferButtonLabel": "CREATE JOB"
   },
   "jobOfferCard": {
     "activeFlagLabel": "ACTIVE",
@@ -165,9 +167,56 @@
     "applicationDeadlineLabel": "Application deadline:",
     "companyLabel": "COMPANY:",
     "locationLabel": "PLACE OF WORK:",
+    "websiteLinkLabel": "Go to the website:",
     "engagementLabel": "Engagement:",
     "descriptionLabel": "Job description:",
-    "conditionsLabel": "Conditions:"
+    "requiredWorkExperienceLabel": "Required work experience:",
+    "requiredEducationLabel": "Required education level:",
+    "additionalSkillsLabel": "Additional skills:"
+  },
+  "jobOfferForm": {
+    "jobNameFieldLabel": "Job position name:",
+    "jobNameFieldPlaceholder": "Job position name",
+    "locationFieldLabel": "Job location:",
+    "locationFieldPlaceholder": "Job location",
+    "applicationDeadlineFieldLabel": "Application deadline:",
+    "applicationDeadlineFieldPlaceholder": "DD.MM.YYYY",
+    "jobDescriptionFieldLabel": "Job description:",
+    "jobDescriptionFieldPlaceholder": "Job description",
+    "categoryFieldLabel": "Category:",
+    "categoryFieldPlaceholder": "Category",
+    "requiredWorkExperienceFieldLabel": "Work experience:",
+    "requiredWorkExperienceFieldPlaceholder": "Work experience",
+    "engagementFieldLabel": "Engagement type:",
+    "engagementFieldPlaceholder": "Engagement type",
+    "requiredEducationFieldLabel": "Education level:",
+    "requiredEducationFieldPlaceholder": "Education level",
+    "additionalSkillsFieldLabel": "Additional skills:",
+    "additionalSkillsFieldPlaceholder": "Additional skills"
+  },
+  "createJobOfferForm": {
+    "topText": "Fill the necessary form fields in order to create a NEW job offer.",
+    "submitButtonLabel": "CREATE JOB OFFER",
+    "successPopup": {
+      "primaryText": "You have successfully created a new job offer!",
+      "linkButtonLabel": "Back to my jobs"
+    },
+    "errorPopup": {
+      "primaryText": "An error occurred.",
+      "secondaryText": "Please try again later."
+    }
+  },
+  "updateJobOfferForm": {
+    "topText": "Make sure to save changes after you finish editing the job offer.",
+    "submitButtonLabel": "SAVE CHANGES",
+    "successPopup": {
+      "primaryText": "You have successfully updated this job offer!",
+      "linkButtonLabel": "Back to my jobs"
+    },
+    "errorPopup": {
+      "primaryText": "An error occurred.",
+      "secondaryText": "Please try again later."
+    }
   },
   "activeJobOfferDetails": {
     "removeJobEnrollmentButtonLabel": "CANCEL",
@@ -188,6 +237,7 @@
   "myJobOfferDetails": {
     "archiveJobOfferButtonLabel": "ARCHIVE",
     "activateJobOfferButtonLabel": "ACTIVATE",
+    "editJobOfferButtonLabel": "EDIT",
     "activationConfirmationPopup": {
       "primaryText": "You have successfully activated the job!"
     },

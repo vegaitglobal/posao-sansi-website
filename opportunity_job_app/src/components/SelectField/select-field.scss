@@ -1,19 +1,7 @@
 @import "./../../scss/style.scss";
 
-$field-height: 40px;
-
 .form-field--select {
   position: relative;
-}
-
-.form-field__value, .form-field__option {
-  display: flex;
-  align-items: center;
-  height: $field-height;
-  padding: 4px 10px 0;
-  cursor: pointer;
-  font-size: 100%;
-  color: inherit;
 }
 
 .form-field__value, .form-field__options {
@@ -27,7 +15,7 @@ $field-height: 40px;
   right: 14px;
 }
 
-.form-field:hover .select-carrot {
+.form-field--opened .select-carrot {
   transform: rotate(180deg);
 }
 
@@ -41,12 +29,12 @@ $field-height: 40px;
   box-shadow: 0 6px 6px 0 rgba($black, 0.25);
 }
 
-.form-field--no-label .form-field__options {
-  top: $field-height;
+.form-field--opened .form-field__options {
+  visibility: visible;
 }
 
-.form-field:hover .form-field__options {
-  visibility: visible;
+.form-field--no-label .form-field__options {
+  top: $field-height;
 }
 
 .form-field__option:hover {

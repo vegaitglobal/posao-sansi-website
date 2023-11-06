@@ -85,7 +85,9 @@ LANGUAGES = (
 
 LANGUAGE_CODE = ENGLISH_LANG_SLUG
 
-USE_TZ = False
+USE_TZ = True
+
+TIME_ZONE = "Europe/Belgrade"
 
 SECRET_KEY = config("SECRET_KEY")
 
