@@ -37,7 +37,7 @@ const SelectField = (
 ) => {
   const [ selectedOption, setSelectedOption ] = useState<SelectOption>();
   const [ isOpened, setIsOpened ] = useState<boolean>(false);
-  const selectRef = useRef(null);
+  const selectRef = useRef<HTMLDivElement>(null);
   const documentClickRef = useRef(null);
 
 
@@ -49,7 +49,7 @@ const SelectField = (
   }, [ value, placeholder ]);
 
   const handleClickOutside = (event: any) => {
-    if (selectRef.current && !selectRef.current!.contains(event.target)) {
+    if (selectRef.current && !selectRef.current.contains(event.target)) {
       setIsOpened(false);
     }
   };

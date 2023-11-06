@@ -96,7 +96,7 @@ export const createAppLink = (rawPathname: string): AppLink => {
       const urlSearchParamsString = urlSearchParams.size ? `?${ urlSearchParams.toString() }` : "";
       let pathname = `/${ locale || SERBIAN_LOCALE }${ this.rawPathname }${ urlSearchParamsString }`;
       if (variables) {
-        Object.entries(variables).forEach(([ key, value ]) => {
+        Object.entries(variables).forEach(([ key, value ]: [ string, any ]) => {
           pathname = pathname.replace(`{${ key }}`, value.toString());
         });
       }
@@ -126,7 +126,7 @@ export function clearFormData<T>(formData: FormData): T {
 
 export const applyAPIFormErrors = <T>(formData: FormData, formDataErrors: BadRequestResponse): T => {
   const erroneousFields = Object.keys(formDataErrors);
-  const formDataCopy = deepCopy(formData) as T;
+  const formDataCopy = deepCopy(formData) as FormData;
   Object.entries(formDataCopy).forEach(([ key, _ ]) => {
     formDataCopy[key].errors = [];
     if (erroneousFields.includes(key)) {
@@ -136,7 +136,7 @@ export const applyAPIFormErrors = <T>(formData: FormData, formDataErrors: BadReq
       formDataCopy[key].errors = userErrors[key] as string[];
     }
   });
-  return formDataCopy;
+  return formDataCopy as T;
 };
 
 export const hasFormErrors = (formData: FormData) => {
@@ -144,22 +144,22 @@ export const hasFormErrors = (formData: FormData) => {
 };
 
 export const mapFormDataToAPIRequestBody = <T>(formData: FormData, excludeFields: string[] = []): T => {
-  const APIRequestBody = {} as T;
+  const apiRequestBody = {} as any;
   Object.entries(formData).forEach(([ fieldName, field ]) => {
     if (!excludeFields.includes(fieldName)) {
       if (field.type == FormFieldType.date) {
-        APIRequestBody[fieldName] = mapFormDateStringToAPIDateString(field.value);
+        apiRequestBody[fieldName] = mapFormDateStringToAPIDateString(field.value);
       } else {
-        APIRequestBody[fieldName] = formData[fieldName].value as any;
+        apiRequestBody[fieldName] = formData[fieldName].value as any;
       }
     }
   });
-  return APIRequestBody;
+  return apiRequestBody as T;
 };
 
 export function scrollFirstFieldWithErrorsIntoView() {
   setTimeout(function () {
-    const firstFieldWithErrors = document.getElementsByClassName(FIELD_WITH_ERRORS_CLASS_NAME)[0];
+    const firstFieldWithErrors: any = document.getElementsByClassName(FIELD_WITH_ERRORS_CLASS_NAME)[0];
     if (firstFieldWithErrors) {
       const scrollTop = firstFieldWithErrors.offsetTop - 100;
       window.scrollTo({ top: scrollTop, behavior: "smooth" });
