@@ -32,10 +32,13 @@ const Header = () => {
   const [hasOpenedMainMenu, setHasOpenedMainMenu] = useState<boolean>(false);
 
   useEffect(() => {
+
+
+
     if (isLoading) {
       setAuth(AuthService.getAuth());
       setIsLoading(false);
-      if (!localStorage.getItem("locale")) {
+      if (localStorage.getItem("locale") != locale) {
         localStorage.setItem("locale", locale!);
       }
     }

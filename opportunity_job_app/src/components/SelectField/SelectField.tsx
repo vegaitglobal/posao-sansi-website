@@ -44,8 +44,8 @@ const SelectField = (
   useEffect(() => {
     setSelectedOption(getSelectedOption());
     documentClickRef.current = handleClickOutside as any;
-    document.addEventListener("click", documentClickRef.current);
-    return () => document.removeEventListener("click", documentClickRef.current);
+    document.addEventListener("click", documentClickRef.current!);
+    return () => document.removeEventListener("click", documentClickRef.current!);
   }, [ value, placeholder ]);
 
   const handleClickOutside = (event: any) => {
