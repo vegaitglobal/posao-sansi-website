@@ -9,7 +9,6 @@ from apps.users.permissions import HasAccount
 
 
 class JobOfferDetailsAPIView(APIView):
-    serializer_class = ReadJobOfferSerializer
     permission_classes = [HasAccount]
 
     def get(self, request, pk: int, **kwargs) -> Response:
@@ -29,7 +28,7 @@ class JobOfferDetailsAPIView(APIView):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-        serializer = ReadJobOfferSerializer(
+        serializer = WriteJobOfferSerializer(
             instance=job_offer,
             data=request.data,
             partial=True,
@@ -59,7 +58,7 @@ class JobOfferDetailsAPIView(APIView):
     def _has_access_to_job_offer(self, job_offer: JobOffer) -> bool:
         account = self.request.user.get_account()
         return (
-            account.type == ApplicantAccount.type
-            and job_offer.is_active
-            or job_offer.employer == account
+                account.type == ApplicantAccount.type
+                and job_offer.is_active
+                or job_offer.employer == account
         )

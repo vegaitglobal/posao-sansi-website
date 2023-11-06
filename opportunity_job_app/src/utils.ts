@@ -57,7 +57,7 @@ export const validateFormData = <T>(formData: FormData, dict: Dictionary): T => 
  * Valid date format is only "[D]D.[M]M.YYYY[.]"
  */
 const isValidDateFormat = (value: string): boolean => {
-  if (value.length < 8 || value.length > 10) {
+  if (value.length < 8 || value.length > 11) {
     return false;
   }
   if (value.endsWith(".")) {
@@ -91,10 +91,16 @@ export const createAppLink = (rawPathname: string): AppLink => {
   }
 
   return {
-    getPathname(locale?: string, params?: {}): string {
+    getPathname(locale?: string, params?: {}, variables?: {}): string {
       const urlSearchParams = new URLSearchParams(params);
       const urlSearchParamsString = urlSearchParams.size ? `?${ urlSearchParams.toString() }` : "";
-      return `/${ locale || SERBIAN_LOCALE }${ this.rawPathname }${ urlSearchParamsString }`;
+      let pathname = `/${ locale || SERBIAN_LOCALE }${ this.rawPathname }${ urlSearchParamsString }`;
+      if (variables) {
+        Object.entries(variables).forEach(([ key, value ]) => {
+          pathname = pathname.replace(`{${ key }}`, value.toString());
+        });
+      }
+      return pathname;
     },
     isActive(currentRawPathname: string): boolean {
       return this.rawPathname === currentRawPathname;
@@ -142,7 +148,7 @@ export const mapFormDataToAPIRequestBody = <T>(formData: FormData, excludeFields
   Object.entries(formData).forEach(([ fieldName, field ]) => {
     if (!excludeFields.includes(fieldName)) {
       if (field.type == FormFieldType.date) {
-        APIRequestBody[fieldName] = field.value.split(".").reverse().join("-");
+        APIRequestBody[fieldName] = mapFormDateStringToAPIDateString(field.value);
       } else {
         APIRequestBody[fieldName] = formData[fieldName].value as any;
       }
@@ -159,4 +165,14 @@ export function scrollFirstFieldWithErrorsIntoView() {
       window.scrollTo({ top: scrollTop, behavior: "smooth" });
     }
   }, 500);
+}
+
+function mapFormDateStringToAPIDateString(dateString: string): string {
+  if (!isValidDateFormat(dateString)) {
+    throw new Error("Invalid date format");
+  }
+  if (dateString.endsWith(".")) {
+    dateString = dateString.slice(0, dateString.length - 1);
+  }
+  return dateString.split(".").reverse().join("-");
 }

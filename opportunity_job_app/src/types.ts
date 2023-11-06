@@ -57,7 +57,7 @@ export interface FormData {
 export interface AppLink {
   rawPathname: string;
 
-  getPathname(locale?: string, params?: {}): string;
+  getPathname(locale?: string, params?: {}, variables?: {}): string;
 
   isActive(currentPathname: string): boolean;
 }

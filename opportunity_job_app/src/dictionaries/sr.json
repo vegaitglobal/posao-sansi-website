@@ -237,6 +237,7 @@
   "myJobOfferDetails": {
     "archiveJobOfferButtonLabel": "ARHIVIRAJ",
     "activateJobOfferButtonLabel": "AKTIVIRAJ",
+    "editJobOfferButtonLabel": "IZMENI",
     "activationConfirmationPopup": {
       "primaryText": "Uspešno ste aktivirali posao!"
     },

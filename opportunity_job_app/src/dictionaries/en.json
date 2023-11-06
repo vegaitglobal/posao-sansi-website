@@ -237,6 +237,7 @@
   "myJobOfferDetails": {
     "archiveJobOfferButtonLabel": "ARCHIVE",
     "activateJobOfferButtonLabel": "ACTIVATE",
+    "editJobOfferButtonLabel": "EDIT",
     "activationConfirmationPopup": {
       "primaryText": "You have successfully activated the job!"
     },

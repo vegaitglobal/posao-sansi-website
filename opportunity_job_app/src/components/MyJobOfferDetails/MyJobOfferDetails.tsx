@@ -11,7 +11,7 @@ import JobOfferDetails from "@/components/JobOfferDetails/JobOfferDetails";
 import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
 import Spinner from "@/components/Spinner/Spinner";
-import { HOME_LINK, LOGIN_LINK, MY_JOB_OFFERS_LINK } from "@/data/links";
+import { EDIT_JOB_OFFER_LINK, HOME_LINK, LOGIN_LINK, MY_JOB_OFFERS_LINK } from "@/data/links";
 
 
 interface MyJobOfferDetailsProps {
@@ -33,10 +33,10 @@ interface Popups {
 export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps) {
   const router = useRouter();
   const { dict, locale } = useDictionary();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [hasAccess, setHasAccess] = useState<boolean>(false);
-  const [jobOffer, setJobOffer] = useState<JobOffer>();
-  const [popups, setPopups] = useState<Popups>({
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
+  const [ hasAccess, setHasAccess ] = useState<boolean>(false);
+  const [ jobOffer, setJobOffer ] = useState<JobOffer>();
+  const [ popups, setPopups ] = useState<Popups>({
     activationConfirmation: { isOpened: false },
     archivingConfirmation: { isOpened: false },
     error: { isOpened: false },
@@ -54,7 +54,7 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
       checkAccess();
       fetchJobOffer().then(() => setIsLoading(false));
     }
-  }, [isLoading]);
+  }, [ isLoading ]);
 
   const checkAccess = () => {
     const auth = AuthService.getAuth();
@@ -90,6 +90,10 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
     }
   };
 
+  const goToEditJobOfferPage = () => {
+    router.push(EDIT_JOB_OFFER_LINK.getPathname(locale, {}, { id: jobOfferID }));
+  };
+
   if (isLoading) return <Spinner/>;
 
   return hasAccess && jobOffer && (
@@ -105,26 +109,29 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
             { dict.myJobOfferDetails.activateJobOfferButtonLabel }
           </button>
         ) }
-        <Popup
-          isOpened={ popups.activationConfirmation.isOpened }
-          onClose={ () => setPopups({ ...popups, activationConfirmation: { isOpened: false } }) }
-          primaryText={ dict.myJobOfferDetails.activationConfirmationPopup.primaryText }
-          { ...commonPopupProps }
-        />
-        <Popup
-          isOpened={ popups.archivingConfirmation.isOpened }
-          onClose={ () => setPopups({ ...popups, archivingConfirmation: { isOpened: false } }) }
-          primaryText={ dict.myJobOfferDetails.archivingConfirmationPopup.primaryText }
-          { ...commonPopupProps }
-        />
-        <Popup
-          isOpened={ popups.error.isOpened }
-          onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
-          primaryText={ dict.myJobOfferDetails.errorPopup.primaryText }
-          secondaryText={ dict.myJobOfferDetails.errorPopup.secondaryText }
-          { ...commonPopupProps }
-        />
+        <button className="page__button" onClick={ goToEditJobOfferPage }>
+          { dict.myJobOfferDetails.editJobOfferButtonLabel }
+        </button>
       </div>
+      <Popup
+        isOpened={ popups.activationConfirmation.isOpened }
+        onClose={ () => setPopups({ ...popups, activationConfirmation: { isOpened: false } }) }
+        primaryText={ dict.myJobOfferDetails.activationConfirmationPopup.primaryText }
+        { ...commonPopupProps }
+      />
+      <Popup
+        isOpened={ popups.archivingConfirmation.isOpened }
+        onClose={ () => setPopups({ ...popups, archivingConfirmation: { isOpened: false } }) }
+        primaryText={ dict.myJobOfferDetails.archivingConfirmationPopup.primaryText }
+        { ...commonPopupProps }
+      />
+      <Popup
+        isOpened={ popups.error.isOpened }
+        onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
+        primaryText={ dict.myJobOfferDetails.errorPopup.primaryText }
+        secondaryText={ dict.myJobOfferDetails.errorPopup.secondaryText }
+        { ...commonPopupProps }
+      />
     </div>
   );
 }
