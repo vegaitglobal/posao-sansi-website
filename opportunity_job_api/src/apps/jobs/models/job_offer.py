@@ -39,7 +39,7 @@ class JobOffer(BaseModel):
         verbose_name=_("location"),
         max_length=250,
     )
-    application_deadline = models.DateTimeField(
+    application_deadline = models.DateField(
         verbose_name=_("application deadline")
     )
     engagement = models.CharField(

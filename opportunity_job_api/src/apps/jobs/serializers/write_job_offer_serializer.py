@@ -13,7 +13,8 @@ class WriteJobOfferSerializer(ModelSerializer):
 
     def validate(self, attrs) -> dict:
         validated_data = super().validate(attrs=attrs)
-        if (application_deadline := validated_data.get("application_deadline")) and application_deadline < now():
+        application_deadline = validated_data.get("application_deadline")
+        if application_deadline and application_deadline < now().astimezone().date():
             raise ValidationError(
                 {"application_deadline": _("Application deadline must be in the future")}
             )

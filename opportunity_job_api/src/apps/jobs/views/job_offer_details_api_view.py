@@ -39,9 +39,9 @@ class JobOfferDetailsAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
 
-        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data={"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk: int, **kwargs):
+    def delete(self, request, pk: int, **kwargs) -> Response:
         if job_offer := self._get_job_offer(pk=pk):
             job_offer.delete()
             return Response(status=status.HTTP_200_OK)
