@@ -1,22 +1,12 @@
 import { SelectOption } from "@/components/SelectField/SelectField";
 
-export interface BaseSEO {
-  robotsProps: {
-    maxSnippet: number,
-    maxImagePreview: string,
-    maxVideoPreview: number,
-  },
-}
 
 export interface PublicRuntimeConfig {
   baseURL: string,
   baseApiURL: string,
   staticFolder: string,
-  baseSEO: BaseSEO;
   name: string;
   title: string;
-  description: string;
-  author: string;
   logo: string;
   imageShare: string;
   atinaWebsiteURL: string;
@@ -28,8 +18,6 @@ export interface PublicRuntimeConfig {
   address: string;
   city: string;
   postalCode: string;
-  country: string;
-  locale: string;
 }
 
 export interface EnvironmentVariables extends PublicRuntimeConfig {
