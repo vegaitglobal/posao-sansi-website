@@ -54,18 +54,27 @@ export const validateFormData = <T>(formData: FormData, dict: Dictionary): T => 
 };
 
 /**
- * Valid date format is only "DD.MM.YYYY"
+ * Valid date format is only "[D]D.[M]M.YYYY[.]"
  */
 const isValidDateFormat = (value: string): boolean => {
-  if (value.length !== 10) {
+  if (value.length < 8 || value.length > 10) {
     return false;
   }
+  if (value.endsWith(".")) {
+    value = value.slice(0, value.length - 1);
+  }
   const dateParts = value.split(".");
-  if (!dateParts.every(part => isAllDigits(part))) {
+  if (dateParts.length !== 3 || !dateParts.every(part => isAllDigits(part))) {
     return false;
   }
   const [ day, month, year ] = dateParts;
-  return day.length === 2 && month.length === 2 && year.length === 4;
+  if (day.length < 1 || day.length > 2) {
+    return false;
+  }
+  if (month.length < 1 || month.length > 2) {
+    return false;
+  }
+  return year.length === 4;
 };
 
 const isAllDigits = (value: string): boolean => {
@@ -133,20 +142,13 @@ export const mapFormDataToAPIRequestBody = <T>(formData: FormData, excludeFields
   Object.entries(formData).forEach(([ fieldName, field ]) => {
     if (!excludeFields.includes(fieldName)) {
       if (field.type == FormFieldType.date) {
-        APIRequestBody[fieldName] = mapFormDateStringToDate(field.value).toISOString() as any;
+        APIRequestBody[fieldName] = field.value.split(".").reverse().join("-");
       } else {
         APIRequestBody[fieldName] = formData[fieldName].value as any;
       }
     }
   });
   return APIRequestBody;
-};
-
-const mapFormDateStringToDate = (value: string): Date => {
-  if (!isValidDateFormat(value)) {
-    throw new Error("Invalid date format");
-  }
-  return new Date(value.split(".").reverse().join("-"));
 };
 
 export function scrollFirstFieldWithErrorsIntoView() {

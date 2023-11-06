@@ -5,12 +5,13 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { SyntheticEvent, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import {
-  applyAPIFormErrors, clearFormData,
+  applyAPIFormErrors,
+  clearFormData,
   hasFormErrors,
   mapFormDataToAPIRequestBody,
-  scrollFirstFieldWithErrorsIntoView
+  scrollFirstFieldWithErrorsIntoView,
+  validateFormData
 } from "@/utils";
-import { validateFormData } from "@/utils";
 import { JobOfferFormData } from "@/components/JobOfferForm/types";
 import SelectField from "@/components/SelectField/SelectField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
@@ -19,6 +20,7 @@ import { PostJobOffer } from "@/api/models/PostJobOffer";
 interface JobOfferFormProps {
   formData: JobOfferFormData;
   submitButtonLabel: string;
+  clearFormAfterSuccessfulSubmit?: boolean;
 
   onSubmit(jobOffer: PostJobOffer): Promise<void>;
 
@@ -36,7 +38,8 @@ const JobOfferForm = (
     formData,
     setFormData,
     onSuccess,
-    onError
+    onError,
+    clearFormAfterSuccessfulSubmit = true
   }: JobOfferFormProps
 ) => {
   const { dict, locale } = useDictionary();
@@ -62,8 +65,10 @@ const JobOfferForm = (
       const jobOffer = mapFormDataToAPIRequestBody<PostJobOffer>(formData);
       await onSubmit(jobOffer);
       onSuccess();
-      const clearedFormData = clearFormData<JobOfferFormData>(formData);
-      setFormData(clearedFormData);
+      if (clearFormAfterSuccessfulSubmit) {
+        const clearedFormData = clearFormData<JobOfferFormData>(formData);
+        setFormData(clearedFormData);
+      }
     } catch (error: any) {
       handleSubmitError(error);
     }

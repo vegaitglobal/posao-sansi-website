@@ -16,6 +16,7 @@ import { JobOffer } from "@/api/models/JobOffer";
 import { PatchJobOffer } from "@/api/models/PatchJobOffer";
 import FormPageDesktopImage from "@/components/FormPageDesktopImage/FormPageDesktopImage";
 import Popup from "@/components/Popup/Popup";
+import { mapStringToLocalDateString } from "@/utils";
 
 
 interface UpdateJobOfferProps {
@@ -45,8 +46,11 @@ const UpdateJobOffer = ({ jobOfferID }: UpdateJobOfferProps) => {
     checkAccess();
     getInitialJobOfferFormData().then(data => {
       Object.keys(data).forEach(key => {
-        // TODO: IF DATE, MAP TO CORRECT STRING FORMAT (DD.MM.YYYY)
-        data[key].value = jobOffer[key];
+        if (key === "application_deadline") {
+          data[key].value = mapStringToLocalDateString(jobOffer[key]);
+        } else {
+          data[key].value = jobOffer[key as keyof JobOffer] as any;
+        }
       });
       setFormData(data);
       setIsLoading(false);
@@ -81,6 +85,7 @@ const UpdateJobOffer = ({ jobOfferID }: UpdateJobOfferProps) => {
           setFormData={ setFormData }
           onSuccess={ () => setHasOpenedSuccessPopup(true) }
           onError={ () => setHasOpenedErrorPopup(true) }
+          clearFormAfterSuccessfulSubmit={ false }
         />
       </div>
       <FormPageDesktopImage style={ { paddingTop: "140px" } }/>

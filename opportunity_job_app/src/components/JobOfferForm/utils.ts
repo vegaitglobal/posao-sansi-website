@@ -1,6 +1,6 @@
 import { GeneralService } from "@/api/generalService";
 import { SelectOption } from "@/components/SelectField/SelectField";
-import { mapTextChoicesFieldOptionsToSelectOptions } from "@/utils";
+import { deepCopy, mapTextChoicesFieldOptionsToSelectOptions } from "@/utils";
 import { initialJobOfferFormData } from "@/components/JobOfferForm/data";
 import { JobOfferFormData } from "@/components/JobOfferForm/types";
 
@@ -15,22 +15,23 @@ export const getInitialJobOfferFormData = async (): Promise<JobOfferFormData> =>
   const engagementOptions: SelectOption[] = mapTextChoicesFieldOptionsToSelectOptions(job_engagement);
   const requiredEducationOptions: SelectOption[] = mapTextChoicesFieldOptionsToSelectOptions(education);
   const requiredWorkExperienceOptions: SelectOption[] = mapTextChoicesFieldOptionsToSelectOptions(work_experience);
+  const initialJobOfferFormDataCopy = deepCopy(initialJobOfferFormData) as JobOfferFormData;
   return {
-    ...initialJobOfferFormData,
+    ...initialJobOfferFormDataCopy,
     category: {
-      ...initialJobOfferFormData.category,
+      ...initialJobOfferFormDataCopy.category,
       options: categoryOptions
     },
     engagement: {
-      ...initialJobOfferFormData.engagement,
+      ...initialJobOfferFormDataCopy.engagement,
       options: engagementOptions
     },
     required_education: {
-      ...initialJobOfferFormData.required_education,
+      ...initialJobOfferFormDataCopy.required_education,
       options: requiredEducationOptions
     },
     required_work_experience: {
-      ...initialJobOfferFormData.required_work_experience,
+      ...initialJobOfferFormDataCopy.required_work_experience,
       options: requiredWorkExperienceOptions
     },
   };
