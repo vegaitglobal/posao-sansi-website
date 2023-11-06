@@ -49,7 +49,7 @@ const SelectField = (
   }, [ value, placeholder ]);
 
   const handleClickOutside = (event: any) => {
-    if (selectRef.current && !selectRef.current.contains(event.target)) {
+    if (selectRef.current && !selectRef.current!.contains(event.target)) {
       setIsOpened(false);
     }
   };
