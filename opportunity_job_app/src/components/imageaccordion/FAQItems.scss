@@ -90,7 +90,11 @@
 }
 
 .faq__icon {
-  display: inline-block;
+  display: flex;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
 }
 

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { ENV } from "@/data/env";
+import Head from "@/components/Head/Head";
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -11,10 +12,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-    <head>
-      <title>{ ENV.title }</title>
-      <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
-    </head>
+    <Head title={ ENV.title }/>
     <body>
     <Header/>
     <main className="main">
