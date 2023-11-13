@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-05 02:51-0600\n"
+"POT-Creation-Date: 2023-11-13 15:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,7 +275,7 @@ msgstr "dodatne veštine"
 msgid "is active"
 msgstr "aktivan"
 
-#: apps/jobs/serializers/write_job_offer_serializer.py:18
+#: apps/jobs/serializers/write_job_offer_serializer.py:19
 msgid "Application deadline must be in the future"
 msgstr "Rok za prijavu mora da bude u budućnosti"
 
