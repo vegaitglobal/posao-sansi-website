@@ -1,7 +1,7 @@
 "use client";
 
 import "./header.scss";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Auth } from "@/api/models/Auth";
 import { AuthService } from "@/api/authService";
 import { anonymousUserLinks, applicantLinks, employerLinks, HOME_LINK, languageLinks, LOGIN_LINK } from "@/data/links";
@@ -28,13 +28,11 @@ const Header = () => {
   const { locale, dict }: Dictionary = useDictionary();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [auth, setAuth] = useState<Auth | undefined>();
+  const languageMenuRef = useRef(null);
   const [hasOpenedLanguageMenu, setHasOpenedLanguageMenu] = useState<boolean>(false);
   const [hasOpenedMainMenu, setHasOpenedMainMenu] = useState<boolean>(false);
 
   useEffect(() => {
-
-
-
     if (isLoading) {
       setAuth(AuthService.getAuth());
       setIsLoading(false);
@@ -42,7 +40,18 @@ const Header = () => {
         localStorage.setItem("locale", locale!);
       }
     }
-  }, [auth, isLoading]);
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [auth, isLoading, locale]);
+
+  function handleClickOutside(event: any) {
+    if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+      setHasOpenedLanguageMenu(false);
+    }
+  }
 
   const toggleLanguageMenu = () => {
     setHasOpenedLanguageMenu(!hasOpenedLanguageMenu);
@@ -75,25 +84,25 @@ const Header = () => {
 
   const renderLanguageMenu = () => {
     return (
-      <ul className="header__language-list">
-        { languageLinks.map(languageLink => {
-          let className = "header__language-item";
-          if (languageLink.code === locale) {
-            className += " header__language-item--active";
-          }
-          return (
-            <li key={ languageLink.code }
-                className={ className }
-                onClick={ () => changeLanguage(languageLink.code) }
-            >
-              <button className="header__language-btn" type="button">
-                <img className="header__language-flag" src={ languageLink.flagPath } alt="flag"/>
-                { dict.header.languageMenu[languageLink.labelDictKey] }
-              </button>
-            </li>
-          );
-        }) }
-      </ul>
+        <ul className="header__language-list" ref={ languageMenuRef }>
+          { languageLinks.map(languageLink => {
+            let className = "header__language-item";
+            if (languageLink.code === locale) {
+              className += " header__language-item--active";
+            }
+            return (
+                <li key={ languageLink.code }
+                    className={ className }
+                    onClick={ () => changeLanguage(languageLink.code) }
+                >
+                  <button className="header__language-btn" type="button">
+                    <img className="header__language-flag" src={ languageLink.flagPath } alt="flag"/>
+                    { dict.header.languageMenu[languageLink.labelDictKey] }
+                  </button>
+                </li>
+            );
+          }) }
+        </ul>
     );
   };
 
@@ -105,58 +114,58 @@ const Header = () => {
         className += " header__nav-item--active";
       }
       return (
-        <li className={ className } key={ index }>
-          <Link className="header__nav-link" href={ link.getPathname(locale) }>
-            <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
-            <span className="header__nav-link-text">
+          <li className={ className } key={ index }>
+            <Link className="header__nav-link" href={ link.getPathname(locale) }>
+              <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
+              <span className="header__nav-link-text">
               { dict.header.mainMenu[link.labelDictKey] }
           </span>
-          </Link>
-        </li>
+            </Link>
+          </li>
       );
     });
   };
 
   const renderMainMenu = () => {
     return (
-      <>
-        <ul className={ `header__nav-list ${ hasOpenedMainMenu ? "header__nav-list--active" : "" }` }>
-          { auth ? renderMainMenuLinks(mainMenuLinks[auth.account_type]) : renderMainMenuLinks(anonymousUserLinks) }
-          { auth && (
-            <li className="header__nav-item" key="logout-main-menu-item" onClick={ logout }>
-              <div className="header__nav-link">
-                <img className="header__nav-icon" src="/images/sing-out.svg" alt="icon"/>
-                <span className="header__nav-link-text">{ dict.header.mainMenu.logoutLabel }</span>
-              </div>
-            </li>
-          ) }
-        </ul>
-        <button className="header__hamburger-btn" type="button" onClick={ toggleMainMenu }>
-          { auth ? <img src="/images/user.svg" alt="user"/> :
-            <img src="/images/hamburger-btn.svg" alt="hamburger-btn"/> }
-        </button>
-      </>
+        <>
+          <ul className={ `header__nav-list ${ hasOpenedMainMenu ? "header__nav-list--active" : "" }` }>
+            { auth ? renderMainMenuLinks(mainMenuLinks[auth.account_type]) : renderMainMenuLinks(anonymousUserLinks) }
+            { auth && (
+                <li className="header__nav-item" key="logout-main-menu-item" onClick={ logout }>
+                  <div className="header__nav-link">
+                    <img className="header__nav-icon" src="/images/sing-out.svg" alt="icon"/>
+                    <span className="header__nav-link-text">{ dict.header.mainMenu.logoutLabel }</span>
+                  </div>
+                </li>
+            ) }
+          </ul>
+          <button className="header__hamburger-btn" type="button" onClick={ toggleMainMenu }>
+            { auth ? <img src="/images/user.svg" alt="user"/> :
+                <img src="/images/hamburger-btn.svg" alt="hamburger-btn"/> }
+          </button>
+        </>
     );
   };
 
   return (
-    <header className="header">
-      <div className="header__container">
-        <div className="header__logo">
-          <a className="header__logo-link" href={ HOME_LINK.getPathname(locale) }>
-            <img className="header__logo-img" src="/images/logo.png" alt="logo"/>
-            <span className="header__logo-text">{ dict.header.logoText }</span>
-          </a>
+      <header className="header">
+        <div className="header__container">
+          <div className="header__logo">
+            <a className="header__logo-link" href={ HOME_LINK.getPathname(locale) }>
+              <img className="header__logo-img" src="/images/logo.png" alt="logo"/>
+              <span className="header__logo-text">{ dict.header.logoText }</span>
+            </a>
+          </div>
+          <div className="header__language">
+            <button className="header__language-button" type="button" onClick={ toggleLanguageMenu }>
+              <img src="/images/language-icon.svg" alt="icon"/>
+            </button>
+            { hasOpenedLanguageMenu && renderLanguageMenu() }
+          </div>
+          { !isLoading && renderMainMenu() }
         </div>
-        <div className="header__language">
-          <button className="header__language-button" type="button" onClick={ toggleLanguageMenu }>
-            <img src="/images/language-icon.svg" alt="icon"/>
-          </button>
-          { hasOpenedLanguageMenu && renderLanguageMenu() }
-        </div>
-        { !isLoading && renderMainMenu() }
-      </div>
-    </header>
+      </header>
   );
 };
 

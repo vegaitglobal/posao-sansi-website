@@ -14,6 +14,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
 import Spinner from "@/components/Spinner/Spinner";
 import { ACTIVE_JOB_OFFERS_LINK, HOME_LINK, LOGIN_LINK } from "@/data/links";
+import { useTranslatableURL } from "@/hooks/useTranslatableURL";
 
 
 interface ActiveJobOfferDetailsProps {
@@ -44,6 +45,7 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
     cancellationConfirmation: { isOpened: false },
     error: { isOpened: false },
   });
+  const { makeURLPath } = useTranslatableURL();
 
   const commonPopupProps = {
     linkButton: {
@@ -99,39 +101,39 @@ export default function ActiveJobOfferDetails({ jobOfferID }: ActiveJobOfferDeta
   if (isLoading) return <Spinner/>;
 
   return hasAccess && jobOffer && (
-    <div className="page">
-      <JobOfferDetails jobOffer={ jobOffer } backButtonURL="/job-offers"/>
-      <div className="page__action-buttons">
-        { jobOffer.has_enrolled ? (
-          <button className="page__button page__button--secondary" onClick={ removeJobEnrollment }>
-            { dict.activeJobOfferDetails.removeJobEnrollmentButtonLabel }
-          </button>
-        ) : (
-          <button className="page__button" onClick={ addJobEnrollment }>
-            { dict.activeJobOfferDetails.addJobEnrollmentButtonLabel }
-          </button>
-        ) }
-        <Popup
-          isOpened={ popups.enrollmentConfirmation.isOpened }
-          onClose={ () => setPopups({ ...popups, enrollmentConfirmation: { isOpened: false } }) }
-          primaryText={ dict.activeJobOfferDetails.enrollmentConfirmationPopup.primaryText }
-          secondaryText={ dict.activeJobOfferDetails.enrollmentConfirmationPopup.secondaryText }
-          { ...commonPopupProps }
-        />
-        <Popup
-          isOpened={ popups.cancellationConfirmation.isOpened }
-          onClose={ () => setPopups({ ...popups, cancellationConfirmation: { isOpened: false } }) }
-          primaryText={ dict.activeJobOfferDetails.cancellationConfirmationPopup.primaryText }
-          { ...commonPopupProps }
-        />
-        <Popup
-          isOpened={ popups.error.isOpened }
-          onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
-          primaryText={ dict.activeJobOfferDetails.errorPopup.primaryText }
-          secondaryText={ dict.activeJobOfferDetails.errorPopup.secondaryText }
-          { ...commonPopupProps }
-        />
+      <div className="page">
+        <JobOfferDetails jobOffer={ jobOffer } backButtonURL={ makeURLPath("/job-offers") }/>
+        <div className="page__action-buttons">
+          { jobOffer.has_enrolled ? (
+              <button className="page__button page__button--secondary" onClick={ removeJobEnrollment }>
+                { dict.activeJobOfferDetails.removeJobEnrollmentButtonLabel }
+              </button>
+          ) : (
+              <button className="page__button" onClick={ addJobEnrollment }>
+                { dict.activeJobOfferDetails.addJobEnrollmentButtonLabel }
+              </button>
+          ) }
+          <Popup
+              isOpened={ popups.enrollmentConfirmation.isOpened }
+              onClose={ () => setPopups({ ...popups, enrollmentConfirmation: { isOpened: false } }) }
+              primaryText={ dict.activeJobOfferDetails.enrollmentConfirmationPopup.primaryText }
+              secondaryText={ dict.activeJobOfferDetails.enrollmentConfirmationPopup.secondaryText }
+              { ...commonPopupProps }
+          />
+          <Popup
+              isOpened={ popups.cancellationConfirmation.isOpened }
+              onClose={ () => setPopups({ ...popups, cancellationConfirmation: { isOpened: false } }) }
+              primaryText={ dict.activeJobOfferDetails.cancellationConfirmationPopup.primaryText }
+              { ...commonPopupProps }
+          />
+          <Popup
+              isOpened={ popups.error.isOpened }
+              onClose={ () => setPopups({ ...popups, error: { isOpened: false } }) }
+              primaryText={ dict.activeJobOfferDetails.errorPopup.primaryText }
+              secondaryText={ dict.activeJobOfferDetails.errorPopup.secondaryText }
+              { ...commonPopupProps }
+          />
+        </div>
       </div>
-    </div>
   );
 }

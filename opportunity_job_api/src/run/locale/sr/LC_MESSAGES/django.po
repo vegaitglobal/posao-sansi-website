@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-13 15:35+0100\n"
+"POT-Creation-Date: 2024-02-18 12:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,10 @@ msgid ""
 msgstr ""
 "Možete da izaberete najviše 5 e-poruka za slanje odjednom. Smanjite broj "
 "izabranih e-poruka i pokušajte ponovo."
+
+#: apps/emails/apps.py:8
+msgid "Emails"
+msgstr "E-poruke"
 
 #: apps/emails/models.py:21
 msgid "waiting to send email"
@@ -117,6 +121,10 @@ msgstr "naziv kompanije"
 #: apps/jobs/admin/job_enrollment_admin.py:54
 msgid "applicant_email"
 msgstr "adresa_aplikanta"
+
+#: apps/jobs/apps.py:8
+msgid "Jobs"
+msgstr "Poslovi"
 
 #: apps/jobs/enums.py:6
 msgid "Course or internship"
@@ -303,6 +311,10 @@ msgstr "Bitni datumi"
 msgid "account"
 msgstr "nalog"
 
+#: apps/users/apps.py:8 apps/users/models/user.py:39
+msgid "Users"
+msgstr "Korisnici"
+
 #: apps/users/enums.py:6
 msgid "No formal education"
 msgstr "Neformalna edukacija"
@@ -444,10 +456,6 @@ msgstr "Mejl adrese za resetovanje lozinke"
 #: apps/users/models/user.py:38
 msgid "User"
 msgstr "Korisnik"
-
-#: apps/users/models/user.py:39
-msgid "Users"
-msgstr "Korisnici"
 
 #: apps/users/serializers/login_serializer.py:21
 msgid "Invalid credentials"

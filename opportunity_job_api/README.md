@@ -28,7 +28,9 @@ variables.
 
 Run the script:
 
-    docker compose run --rm django sh /app/scripts/entrypoint.sh [option]
+```bash
+docker compose run --rm django sh /app/scripts/entrypoint.sh [option]
+```
 
 ### Available script options:
 
@@ -75,18 +77,24 @@ environment variables.
 
 ### Run tests
 
-    docker compose run --rm django sh -c 'pytest'
+```bash
+docker compose run --rm django sh -c 'pytest'
+```
 
 The above command will run all tests.
 Flag `-t` is optional (it provides additional output coloring when used).
 
 To run the same tests in parallel, append `-n auto` to the `pytest` command:
 
-    docker compose run --rm django sh -c 'pytest -n auto'
+```bash
+docker compose run --rm django sh -c 'pytest -n auto'
+```
 
 ### Run tests with coverage
 
-    docker compose run --rm django sh -c 'pytest --cov -n auto'
+```bash
+docker compose run --rm django sh -c 'pytest --cov -n auto'
+```
 
 This will run all tests in parallel with coverage report.
 Running tests like this is necessary to generate the tests coverage
@@ -94,7 +102,9 @@ report.
 
 ### Generate tests coverage report
 
-    docker compose run --rm django sh -c 'coverage html'
+```bash
+docker compose run --rm django sh -c 'coverage html'
+```
 
 This will generate html for the tests coverage report which is useful when
 trying to find out exactly which code is not covered by tests.
@@ -105,7 +115,9 @@ ignored by tests coverage.
 If you don't want the html, and you just want to see the overall coverage
 report, you can run:
 
-    docker compose run --rm django sh -c 'coverage report'
+```bash
+docker compose run --rm django sh -c 'coverage report'
+```
 
 This will print the coverage report generated the last time tests were run
 with the coverage ([Run tests with coverage](#run-tests-with-coverage)).

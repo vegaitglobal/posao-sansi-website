@@ -249,5 +249,9 @@
       "secondaryText": "Molimo Vas pokušajte kasnije."
     },
     "commonPopupLinkButtonLabel": "Nazad na poslove"
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Stranica nije pronađena"
   }
 }

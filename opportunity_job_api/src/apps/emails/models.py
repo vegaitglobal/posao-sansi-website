@@ -3,8 +3,10 @@ from threading import Thread
 
 from django.conf import settings
 from django.core.mail import send_mail
-from django.db import models
+from django.db import models, transaction
+from django.utils.translation import get_language
 from django.template.loader import get_template
+from django.utils import translation
 from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 
@@ -60,11 +62,14 @@ class Email(BaseModel):
         return f'"{self.subject}" email'
 
     def send(self) -> None:
-        Thread(target=self._send_email).start()
+        Thread(
+            target=self._send_email,
+            kwargs={"lang": get_language()}
+        ).start()
 
-    def _send_email(self) -> None:
+    def _send_email(self, lang: str) -> None:
         try:
-            sent_email_count = self._do_send_email()
+            sent_email_count = self._do_send_email(lang=lang)
         except Exception as error:
             self.update(
                 status=self.Statuses.FAILURE,
@@ -76,15 +81,16 @@ class Email(BaseModel):
                 error="" if sent_email_count else "Email was not sent",
             )
 
-    def _do_send_email(self) -> int:
-        html_message = self._render_html_message()
-        return send_mail(
-            subject=self.subject,
-            message=strip_tags(html_message),
-            from_email=self.email_from,
-            recipient_list=self.get_recipients(),
-            html_message=html_message,
-        )
+    def _do_send_email(self, lang: str) -> int:
+        with translation.override(language=lang):
+            html_message = self._render_html_message()
+            return send_mail(
+                subject=self.subject,
+                message=strip_tags(html_message),
+                from_email=self.email_from,
+                recipient_list=self.get_recipients(),
+                html_message=html_message,
+            )
 
     def _render_html_message(self) -> str:
         template = get_template(self.template_path)

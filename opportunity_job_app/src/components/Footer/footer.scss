@@ -128,6 +128,7 @@
   }
   @include media-breakpoint-down(md) {
     width: 100%;
+    margin-top: 35px;
   }
 
 }
@@ -135,11 +136,16 @@
 .footer__links-link {
   display: block;
   color: $yellow-primary;
-  text-align: center;
+  margin-left: 20px;
 
   &:first-child {
     margin-bottom: 15px;
   }
+
+  @include media-breakpoint-down(md) {
+    margin-left: 0;
+  }
+
 }
 
 .footer__bottom {
