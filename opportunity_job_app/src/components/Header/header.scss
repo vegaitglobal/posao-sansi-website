@@ -79,6 +79,8 @@
 
 .header__nav-list {
   display: flex;
+  margin-left: 40px;
+
   @include media-breakpoint-down(md) {
     display: none;
     position: absolute;
@@ -100,7 +102,7 @@
 }
 
 .header__nav-item {
-  margin-left: 40px;
+  padding: 5px 20px;
   cursor: pointer;
   @include media-breakpoint-down(md) {
     margin-left: 0;
