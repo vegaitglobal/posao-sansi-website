@@ -19,6 +19,7 @@ import { ApplicantRegistrationFormDictionary } from "@/dictionaries/components/A
 import { EmployerRegistrationFormDictionary } from "@/dictionaries/components/EmployerRegistrationFormDictionary";
 import { JobOfferFormDictionary } from "@/dictionaries/components/JobOfferFormDictionary";
 import { ActionSpecificJobOfferFormDictionary } from "@/dictionaries/components/ActionSpecificJobOfferFormDictionary";
+import { NotFoundDictionary } from "@/dictionaries/components/NotFoundDictionary";
 
 export interface Dictionary {
   header: LinksDictionary;
@@ -45,4 +46,5 @@ export interface Dictionary {
   activeJobOfferDetails: ActiveJobOfferDetailsDictionary;
   myJobOfferDetails: MyJobOfferDetailsDictionary;
   commonFormErrors: FormErrorsDictionary;
+  notFound: NotFoundDictionary
 }

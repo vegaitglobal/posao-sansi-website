@@ -249,5 +249,9 @@
       "secondaryText": "Please try again later."
     },
     "commonPopupLinkButtonLabel": "Back to job offers"
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Page not found"
   }
 }
