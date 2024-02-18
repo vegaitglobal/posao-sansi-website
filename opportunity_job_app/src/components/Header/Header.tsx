@@ -28,7 +28,7 @@ const Header = () => {
   const { locale, dict }: Dictionary = useDictionary();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [auth, setAuth] = useState<Auth | undefined>();
-  const languageMenuRef = useRef(null);
+  const languageMenuRef = useRef<HTMLUListElement>(null);
   const [hasOpenedLanguageMenu, setHasOpenedLanguageMenu] = useState<boolean>(false);
   const [hasOpenedMainMenu, setHasOpenedMainMenu] = useState<boolean>(false);
 
