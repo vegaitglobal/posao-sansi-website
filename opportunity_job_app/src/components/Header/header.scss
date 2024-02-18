@@ -68,6 +68,11 @@
   margin-right: 10px;
 }
 
+.header__language-item:hover .header__language-btn,
+.header__language-item--active .header__language-btn {
+  color: $white;
+}
+
 .header__nav {
   position: relative;
 }
