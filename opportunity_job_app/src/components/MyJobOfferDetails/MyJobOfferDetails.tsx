@@ -12,6 +12,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { AccountTypes } from "@/enums";
 import Spinner from "@/components/Spinner/Spinner";
 import { EDIT_JOB_OFFER_LINK, HOME_LINK, LOGIN_LINK, MY_JOB_OFFERS_LINK } from "@/data/links";
+import { useTranslatableURL } from "@/hooks/useTranslatableURL";
 
 
 interface MyJobOfferDetailsProps {
@@ -41,6 +42,7 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
     archivingConfirmation: { isOpened: false },
     error: { isOpened: false },
   });
+  const { makeURLPath } = useTranslatableURL();
 
   const commonPopupProps = {
     linkButton: {
@@ -98,7 +100,7 @@ export default function MyJobOfferDetails({ jobOfferID }: MyJobOfferDetailsProps
 
   return hasAccess && jobOffer && (
     <div className="page">
-      <JobOfferDetails jobOffer={ jobOffer } backButtonURL="/my-job-offers"/>
+      <JobOfferDetails jobOffer={ jobOffer } backButtonURL={ makeURLPath("/my-job-offers") }/>
       <div className="page__action-buttons">
         { jobOffer.is_active ? (
           <button className="page__button page__button--secondary" onClick={ toggleJobStatus }>
