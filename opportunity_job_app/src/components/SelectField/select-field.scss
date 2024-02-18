@@ -44,7 +44,7 @@
 
 .form-field__option--selected {
   background-color: $purple-primary;
-  color: white;
+  color: white !important;
 }
 
 .form-field--reversed-colors .form-field__value {
