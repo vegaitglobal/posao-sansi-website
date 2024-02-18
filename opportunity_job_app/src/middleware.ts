@@ -1,41 +1,89 @@
-import { isPublicFile } from "@/utils";
 import { locales, SERBIAN_LOCALE } from "@/data/locales";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import acceptLanguageParser from "accept-language-parser";
+import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-export function middleware(request: NextRequest): Response | undefined {
-  if (shouldRedirect(request)) {
-    request.nextUrl.pathname = getRedirectResponsePathname(request);
-    return Response.redirect(request.nextUrl);
+
+export function middleware(request: NextRequest): NextResponse | undefined {
+  const { pathname } = request.nextUrl;
+  if (isLanguageAgnosticPathname(pathname)) {
+    return;
   }
+
+  const pathnameLocale = getPathnameLocale(pathname);
+  const requestLocale = getRequestLocale(request);
+  if (pathnameLocale && pathnameLocale === requestLocale) {
+    return;
+  }
+
+  const preferredLocale = pathnameLocale || requestLocale || SERBIAN_LOCALE;
+  if (!pathnameLocale) {
+    request.nextUrl.pathname = `/${ preferredLocale }${ request.nextUrl.pathname }`;
+  }
+  const response = NextResponse.redirect(request.nextUrl);
+
+  setPreferredLanguageCookie(response, preferredLocale);
+  return response;
 }
 
-function shouldRedirect(request: NextRequest): boolean {
-  const { pathname } = request.nextUrl;
-  const validPathnameLocale = locales.find(
-    locale => pathname.startsWith(`/${ locale }/`) || pathname === `/${ locale }`
+function isLanguageAgnosticPathname(pathname: string): boolean {
+  if (isRootPublicFile(pathname)) {
+    return true;
+  }
+
+  return hasLanguageAgnosticParentPath(pathname);
+}
+
+function isRootPublicFile(pathname: string): boolean {
+  const isOnePartPathname = !pathname.slice(1).includes("/");
+  if (!isOnePartPathname) {
+    return false;
+  }
+
+  const rootPublicFilenames = [
+    "favicon.ico",
+  ];
+  return !!rootPublicFilenames.find(filename => {
+    return pathname === `/${ filename }`;
+  });
+}
+
+function hasLanguageAgnosticParentPath(pathname: string): boolean {
+  const languageAgnosticParentPaths: string[] = [
+    "/files",
+    "/fonts",
+    "/images",
+  ];
+  return !!languageAgnosticParentPaths.find(parentPath => {
+    return pathname.startsWith(`${ parentPath }/`);
+  });
+}
+
+function getRequestLocale(request: NextRequest): string | null {
+  const preferredLanguageCookie = request.cookies.get("Preferred-Language");
+  let locale;
+  if (preferredLanguageCookie) {
+    locale = acceptLanguageParser.pick(locales, preferredLanguageCookie.value);
+  }
+  if (!locale) {
+    const acceptLanguage = request.headers.get("accept-language") || "";
+    locale = acceptLanguageParser.pick(locales, acceptLanguage);
+  }
+  return locale;
+}
+
+function getPathnameLocale(pathname: string): string | undefined {
+  return locales.find(
+      locale => pathname.startsWith(`/${ locale }/`) || pathname === `/${ locale }`,
   );
-  return (
-    !validPathnameLocale
-    && !isPublicFile(pathname)
-    && !pathname.endsWith("favicon.ico")
-  );
 }
 
-/**
- * Prepends locale to the request's pathname that
- * (as expected by this function) doesn't have locale
- */
-function getRedirectResponsePathname(request: NextRequest): string {
-  const { pathname } = request.nextUrl;
-  const locale = getRedirectResponseLocale(request);
-  return `/${ locale }${ pathname }`;
-}
-
-function getRedirectResponseLocale(request: NextRequest): string {
-  const acceptLanguage = request.headers.get("accept-language") || "";
-  const validRequestLocale = acceptLanguageParser.pick(locales, acceptLanguage);
-  return validRequestLocale || SERBIAN_LOCALE;
+function setPreferredLanguageCookie(response: NextResponse, locale: string): void {
+  const cookieOptions: Partial<ResponseCookie> = {
+    httpOnly: true,
+    sameSite: "strict",
+  };
+  response.cookies.set("Preferred-Language", locale, cookieOptions);
 }
 
 export const config = {
