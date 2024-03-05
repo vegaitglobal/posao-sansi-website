@@ -1,3 +1,5 @@
+@import "./../scss/style.scss";
+
 .main {
   display: flex;
   flex-direction: column;
@@ -7,4 +9,5 @@
 
 h1, h2 {
   text-align: center;
+  color: $purple-primary;
 }
