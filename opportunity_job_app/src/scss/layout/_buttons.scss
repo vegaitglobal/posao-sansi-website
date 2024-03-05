@@ -8,9 +8,8 @@ input[type='submit'] {
   padding: 0;
 }
 
-a,
-button {
-  font-family: $font-default;
+a, button {
+  font-family: $secondary-font;
   appearance: none;
   outline: none;
 }

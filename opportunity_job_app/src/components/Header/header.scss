@@ -81,7 +81,7 @@
   display: flex;
   margin-left: 40px;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     display: none;
     position: absolute;
     top: 62px;
@@ -102,10 +102,10 @@
 }
 
 .header__nav-item {
-  padding: 5px 20px;
+  margin: 0 3px;
   cursor: pointer;
-  @include media-breakpoint-down(md) {
-    margin-left: 0;
+  @include media-breakpoint-down(lg) {
+    margin: 2px;
   }
 }
 
@@ -121,10 +121,7 @@
   display: flex;
   align-items: center;
   font-family: $font-default;
-  padding: 5px 20px;
-  @include media-breakpoint-down(md) {
-    padding: 12px 20px;
-  }
+  padding: 10px 40px;
 }
 
 .header__nav-icon {
@@ -138,10 +135,10 @@
 }
 
 .header__hamburger-btn {
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     display: none;
   }
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     display: block;
     margin-left: 36px;
   }
