@@ -2,7 +2,7 @@ import { LanguageLink, MainMenuLink } from "@/types";
 import { createAppLink, createMenuLink } from "@/utils";
 
 
-export const HOME_LINK = createMenuLink("/", "homeLabel", "/images/home.svg");
+export const HOME_LINK = createMenuLink("", "homeLabel", "/images/home.svg");
 export const FAQ_LINK = createMenuLink("/faq", "faqLabel", "/images/faq.svg");
 export const LOGIN_LINK = createMenuLink("/login", "loginLabel", "/images/log-in.svg");
 export const REGISTER_LINK = createMenuLink("/register", "registerLabel", "/images/sign-in.svg");
