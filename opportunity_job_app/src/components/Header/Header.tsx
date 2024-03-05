@@ -117,9 +117,9 @@ const Header = () => {
           <li className={ className } key={ index }>
             <Link className="header__nav-link" href={ link.getPathname(locale) }>
               <img className="header__nav-icon" src={ link.iconPath } alt="icon"/>
-              <span className="header__nav-link-text">
-              { dict.header.mainMenu[link.labelDictKey] }
-          </span>
+              <p className="header__nav-link-text">
+                { dict.header.mainMenu[link.labelDictKey] }
+              </p>
             </Link>
           </li>
       );
@@ -135,14 +135,17 @@ const Header = () => {
                 <li className="header__nav-item" key="logout-main-menu-item" onClick={ logout }>
                   <div className="header__nav-link">
                     <img className="header__nav-icon" src="/images/sing-out.svg" alt="icon"/>
-                    <span className="header__nav-link-text">{ dict.header.mainMenu.logoutLabel }</span>
+                    <p className="header__nav-link-text">{ dict.header.mainMenu.logoutLabel }</p>
                   </div>
                 </li>
             ) }
           </ul>
           <button className="header__hamburger-btn" type="button" onClick={ toggleMainMenu }>
-            { auth ? <img src="/images/user.svg" alt="user"/> :
-                <img src="/images/hamburger-btn.svg" alt="hamburger-btn"/> }
+            { auth ? (
+                <img src="/images/user.svg" alt="user"/>
+            ) : (
+                <img src="/images/hamburger-btn.svg" alt="hamburger-btn"/>
+            ) }
           </button>
         </>
     );
